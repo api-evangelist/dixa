@@ -1,0 +1,70 @@
+aid: dixa
+name: Dixa
+description: Dixa is a conversational customer service platform with a REST API for managing conversations, queues, agents, routing, knowledge base articles, and customer satisfaction data. The API enables developers to build automated workflows, integrate external data into routing logic, export conversations and activity logs, manage users and teams, and access omnichannel messaging across phone, email, chat, and social channels.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/dixa/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Customer Service
+  - Conversational
+  - Omnichannel
+  - CX
+  - Help Desk
+  - Chat
+  - Knowledge Base
+apis:
+  - aid: dixa:dixa-api
+    name: Dixa API
+    description: The primary Dixa REST API for managing conversations, users, queues, tags, flows, endpoints, and anonymization requests. Supports bearer token and API key authentication with 10 requests/second rate limiting per token.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.dixa.io/
+    baseURL: https://dev.dixa.io/v1
+    tags:
+      - Conversations
+      - Agents
+      - Queues
+      - Routing
+      - Knowledge Base
+      - Webhooks
+    properties:
+      - type: Documentation
+        url: https://docs.dixa.io/
+      - type: OpenAPI
+        url: https://docs.dixa.io/openapi/dixa-api/beta/overview/
+      - type: RateLimits
+        url: https://docs.dixa.io/docs/api-standards-rules
+    contact:
+      - FN: Dixa Support
+        url: https://support.dixa.help/
+
+common:
+  - type: Website
+    url: https://www.dixa.com
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: GitHubOrg
+    url: https://github.com/dixa
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/dixa
+  - type: Blog
+    url: https://www.dixa.com/blog
+  - type: Pricing
+    url: https://www.dixa.com/pricing
+  - type: StatusPage
+    url: https://status.dixa.io
+  - type: X
+    url: https://twitter.com/dixaapp
+  - type: Changelog
+    url: https://releases.dixa.help/en
+  - type: Plans
+    url: plans/dixa-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/dixa-rate-limits.yml
+  - type: FinOps
+    url: finops/dixa-finops.yml
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

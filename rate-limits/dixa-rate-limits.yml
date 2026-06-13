@@ -1,0 +1,36 @@
+name: Dixa API Rate Limits
+description: Dixa enforces rate limits per API token. Exceeding limits returns HTTP 429 Too Many Requests. Enterprise API limits are available on the Prime plan.
+url: https://docs.dixa.io/docs/api-standards-rules
+
+limits:
+  - name: Requests Per Second
+    value: 10
+    unit: requests/second
+    scope: per API token
+    description: Maximum sustained request rate per API token.
+
+  - name: Burst Allowance
+    value: 4
+    unit: requests
+    scope: per API token
+    description: Additional requests allowed in a burst above the sustained rate.
+
+  - name: Daily Quota
+    value: 864000
+    unit: requests/day
+    scope: per API token
+    description: Maximum total API requests allowed per API token per day (864,000 requests/day).
+
+error_responses:
+  - code: 429
+    description: Too Many Requests — returned when rate limits are exceeded. Clients should implement exponential backoff and retry logic.
+
+authentication:
+  type: Bearer Token
+  description: API tokens are generated through the Dixa interface under Settings > Integrations > API Tokens. Tokens are passed in the Authorization header as a Bearer token or as an API key.
+  header: Authorization
+
+notes:
+  - Rate limits apply per API token, allowing more flexibility when using multiple tokens.
+  - Enterprise API limits on the Prime plan may offer higher thresholds; contact Dixa sales for details.
+  - Overage charges apply when usage exceeds permitted plan API call quotas per the overage price list.

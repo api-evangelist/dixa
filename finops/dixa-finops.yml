@@ -1,0 +1,56 @@
+name: Dixa FinOps
+description: Financial operations guidance for managing Dixa API and platform costs, including plan selection, overage monitoring, and cost optimization strategies.
+url: https://www.dixa.com/pricing
+
+cost_drivers:
+  - name: Agent Seats
+    description: Primary cost driver — all plans are priced per agent per month with a minimum of 7 seats.
+    unit: EUR/agent/month
+    tiers:
+      - plan: Growth
+        price: 89
+      - plan: Ultimate
+        price: 139
+      - plan: Prime
+        price: 179
+
+  - name: API Call Volume
+    description: API calls count against daily quota (864,000 requests/day per token on standard plans). Enterprise API limits on Prime tier may provide higher quotas.
+    monitoring: Track API usage via token-level metrics to avoid overages.
+    overage_url: https://dixa.com/legal/overage-price-list
+
+  - name: Add-On Features
+    description: AI and advanced features are priced separately as add-ons on top of base plan costs.
+    addons:
+      - Mim AI Agent
+      - AI Co-Pilot
+      - Quality Assurance
+      - Advanced Insights
+      - Voice Transcription
+
+cost_optimization:
+  - strategy: Annual Billing
+    description: Commit to annual billing for 20% savings across all plan tiers.
+
+  - strategy: Right-size Plan Tier
+    description: API access is available on all plans but enterprise API limits are only on Prime. Evaluate if standard rate limits (10 req/s, 864K/day) are sufficient before upgrading to Prime.
+
+  - strategy: Monitor API Token Usage
+    description: Rate limits are enforced per API token. Use multiple tokens to distribute load and avoid hitting daily quotas.
+
+  - strategy: Minimize Overage
+    description: Monitor API call volumes against the 864,000 requests/day quota. Implement caching and batching to reduce call frequency and avoid overage charges.
+
+  - strategy: Sandbox Testing
+    description: Use the sandbox environment (available on Ultimate and Prime plans) to test integrations without consuming production API quota.
+
+budget_planning:
+  minimum_spend:
+    description: Minimum viable deployment with 7 agents on Growth plan.
+    monthly: 623
+    annually: 5983
+    currency: EUR
+  notes:
+    - All prices exclusive of VAT.
+    - Add-on pricing requires direct contact with Dixa sales.
+    - Overage charges documented at https://dixa.com/legal/overage-price-list

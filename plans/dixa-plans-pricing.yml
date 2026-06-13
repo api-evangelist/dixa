@@ -1,0 +1,86 @@
+name: Dixa Plans and Pricing
+description: Dixa offers three subscription tiers for teams of all sizes, priced per agent per month. All plans include omnichannel support. Enterprise API limits are available on the Prime plan.
+url: https://www.dixa.com/pricing
+plans:
+  - name: Growth
+    description: Entry-level plan for growing customer service teams with all channels and core features included.
+    price: 89
+    currency: EUR
+    unit: agent/month
+    billing_cycles:
+      - monthly
+      - annually
+    annual_discount: 20%
+    minimum_seats: 7
+    features:
+      - All omnichannel channels (phone, email, chat, social)
+      - Intelligent routing and flow editor
+      - Real-time analytics
+      - Knowledge base
+      - Conversation history
+      - IVR, call recording, voicemail
+      - 35+ native integrations
+      - Webhooks
+    api_access: Standard
+
+  - name: Ultimate
+    description: Mid-tier plan adding AI-powered features, skills-based routing, and advanced automations.
+    price: 139
+    currency: EUR
+    unit: agent/month
+    billing_cycles:
+      - monthly
+      - annually
+    annual_discount: 20%
+    minimum_seats: 7
+    features:
+      - Everything in Growth
+      - Routing with External Data
+      - Knowledge-Centered Service with AI
+      - Standard AI Intent Detection
+      - Skills-based routing
+      - Advanced automations
+      - AI translations
+      - Sandbox access
+
+  - name: Prime
+    description: Enterprise plan with SSO, advanced AI, custom roles, and enterprise-grade API limits.
+    price: 179
+    currency: EUR
+    unit: agent/month
+    billing_cycles:
+      - monthly
+      - annually
+    annual_discount: 20%
+    minimum_seats: 7
+    features:
+      - Everything in Ultimate
+      - Single Sign-On (SSO)
+      - Advanced AI Intent Detection
+      - Advanced Insights (AI-powered)
+      - Custom user roles
+      - Multiple organizations
+      - Queue/claim restrictions
+      - Enterprise API limits
+    api_access: Enterprise
+
+addons:
+  - name: Mim AI Agent
+    description: Autonomous AI agent for handling customer conversations.
+    pricing: Contact sales
+  - name: AI Co-Pilot
+    description: AI assistant for human agents to improve response quality and speed.
+    pricing: Contact sales
+  - name: Quality Assurance
+    description: Automated QA scoring and conversation review tools.
+    pricing: Contact sales
+  - name: Advanced Insights
+    description: AI-powered analytics for deeper business intelligence.
+    pricing: Contact sales
+  - name: Voice Transcription
+    description: Automatic transcription of voice calls.
+    pricing: Contact sales
+
+overage:
+  url: https://dixa.com/legal/overage-price-list
+  description: Overage charges apply when usage exceeds permitted plan limits including API call quotas.
