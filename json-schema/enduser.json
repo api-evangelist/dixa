@@ -1,0 +1,79 @@
+{
+  "title": "EndUser",
+  "type": "object",
+  "required": [
+    "id",
+    "createdAt"
+  ],
+  "properties": {
+    "id": {
+      "description": "Unique identifier for the contact",
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdAt": {
+      "description": "Time when the contact was created",
+      "type": "string",
+      "format": "date-time"
+    },
+    "displayName": {
+      "description": "The contact's display name",
+      "type": "string"
+    },
+    "email": {
+      "description": "The contact's primary email address",
+      "type": "string"
+    },
+    "phoneNumber": {
+      "description": "The contact's primary phone number",
+      "type": "string"
+    },
+    "additionalEmails": {
+      "description": "Additional email addresses for the contact",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "additionalPhoneNumbers": {
+      "description": "Additional phone numbers for the contact",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "firstName": {
+      "description": "The contact's first name",
+      "type": "string"
+    },
+    "lastName": {
+      "description": "The contact's last name",
+      "type": "string"
+    },
+    "middleNames": {
+      "description": "The contact's middle names",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "avatarUrl": {
+      "description": "The url from which to load the contact's avatar",
+      "type": "string"
+    },
+    "externalId": {
+      "description": "Custom external identifier for the contact",
+      "type": "string"
+    },
+    "customAttributes": {
+      "description": "Custom attributes for the contact",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CustomAttribute"
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

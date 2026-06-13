@@ -1,0 +1,26 @@
+{
+  "operationId": "getConversationsConversationid",
+  "method": "GET",
+  "path": "/beta/conversations/{conversationId}",
+  "summary": "Get conversation",
+  "description": "Get a conversation by id.",
+  "parameters": [
+    {
+      "name": "conversationId",
+      "in": "path",
+      "required": true,
+      "schema": {
+        "type": "integer",
+        "format": "int64"
+      }
+    }
+  ],
+  "example_request": {
+    "method": "GET",
+    "url": "https://dev.dixa.io/beta/conversations/{conversationId}",
+    "headers": {
+      "Authorization": "Bearer ${API_TOKEN}",
+      "Content-Type": "application/json"
+    }
+  }
+}

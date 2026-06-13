@@ -1,0 +1,78 @@
+{
+  "title": "Agent",
+  "type": "object",
+  "required": [
+    "id",
+    "createdAt",
+    "displayName",
+    "email"
+  ],
+  "properties": {
+    "id": {
+      "description": "Unique identifier for the agent",
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdAt": {
+      "description": "Time when the agent was created",
+      "type": "string",
+      "format": "date-time"
+    },
+    "displayName": {
+      "description": "The agent's display name",
+      "type": "string"
+    },
+    "email": {
+      "description": "The agent's primary email address",
+      "type": "string"
+    },
+    "avatarUrl": {
+      "description": "The url from which to load the agent's avatar",
+      "type": "string"
+    },
+    "phoneNumber": {
+      "description": "The agent's primary phone number",
+      "type": "string"
+    },
+    "additionalEmails": {
+      "description": "Additional email addresses for the agent",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "additionalPhoneNumbers": {
+      "description": "Additional phone numbers for the agent",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "firstName": {
+      "description": "The agent's first name",
+      "type": "string"
+    },
+    "lastName": {
+      "description": "The agent's last name",
+      "type": "string"
+    },
+    "middleNames": {
+      "description": "The agent's middle names",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "roles": {
+      "description": "The agent's roles",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

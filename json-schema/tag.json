@@ -1,0 +1,26 @@
+{
+  "title": "Tag",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "state"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "state": {
+      "description": "values: [Active, Inactive]",
+      "type": "string"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -1,0 +1,43 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "dixa": "https://docs.dixa.io/vocab#",
+    "api": "https://www.iana.org/assignments/media-types/application/",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "identifier": "schema:identifier",
+    "Conversation": "dixa:Conversation",
+    "Agent": "dixa:Agent",
+    "EndUser": "dixa:EndUser",
+    "Message": "dixa:Message",
+    "Queue": "dixa:Queue",
+    "Team": "dixa:Team",
+    "Tag": "dixa:Tag",
+    "Article": "dixa:Article",
+    "WebhookSubscription": "dixa:WebhookSubscription",
+    "CustomAttribute": "dixa:CustomAttribute",
+    "ContactEndpoint": "dixa:ContactEndpoint",
+    "BusinessHour": "dixa:BusinessHour",
+    "Rating": "dixa:Rating",
+    "AnonymizationRequest": "dixa:AnonymizationRequest"
+  },
+  "@graph": [
+    {
+      "@id": "https://docs.dixa.io/",
+      "@type": "schema:WebAPI",
+      "name": "Dixa API",
+      "description": "Dixa is a conversational customer service platform with a REST API for managing conversations, queues, agents, routing, knowledge base articles, and customer satisfaction data.",
+      "url": "https://docs.dixa.io/",
+      "schema:version": "beta",
+      "schema:provider": {
+        "@type": "schema:Organization",
+        "name": "Dixa",
+        "url": "https://www.dixa.com"
+      },
+      "schema:documentation": "https://docs.dixa.io/",
+      "schema:termsOfService": "https://www.dixa.com/privacy-policy/",
+      "schema:license": "https://www.dixa.com/terms-of-service/"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "operationId": "getTags",
+  "method": "GET",
+  "path": "/beta/tags",
+  "summary": "List tags",
+  "description": "List all tags in an organization. Only active tags are returned by default. To include deactivated tags use `?includeDeactivated=true`.",
+  "parameters": [
+    {
+      "name": "includeDeactivated",
+      "in": "query",
+      "description": "Whether to include deactivated tags in the response. If not provided, only active tags are listed.",
+      "required": false,
+      "schema": {
+        "default": false,
+        "type": "boolean"
+      }
+    }
+  ],
+  "example_request": {
+    "method": "GET",
+    "url": "https://dev.dixa.io/beta/tags",
+    "headers": {
+      "Authorization": "Bearer ${API_TOKEN}",
+      "Content-Type": "application/json"
+    }
+  }
+}

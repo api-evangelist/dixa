@@ -1,0 +1,16 @@
+{
+  "operationId": "getQueues",
+  "method": "GET",
+  "path": "/beta/queues",
+  "summary": "List queues",
+  "description": "List all queues in an organization.",
+  "parameters": [],
+  "example_request": {
+    "method": "GET",
+    "url": "https://dev.dixa.io/beta/queues",
+    "headers": {
+      "Authorization": "Bearer ${API_TOKEN}",
+      "Content-Type": "application/json"
+    }
+  }
+}

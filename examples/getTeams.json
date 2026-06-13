@@ -1,0 +1,16 @@
+{
+  "operationId": "getTeams",
+  "method": "GET",
+  "path": "/beta/teams",
+  "summary": "List teams",
+  "description": "Lists all teams in an organization.",
+  "parameters": [],
+  "example_request": {
+    "method": "GET",
+    "url": "https://dev.dixa.io/beta/teams",
+    "headers": {
+      "Authorization": "Bearer ${API_TOKEN}",
+      "Content-Type": "application/json"
+    }
+  }
+}

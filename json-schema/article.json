@@ -1,0 +1,64 @@
+{
+  "title": "Article",
+  "type": "object",
+  "required": [
+    "id",
+    "createdAt",
+    "updatedAt",
+    "restrictions"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "isDefaultLocation": {
+      "type": "boolean"
+    },
+    "translation": {
+      "$ref": "#/components/schemas/Translation1"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "indexedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "updatedBy": {
+      "type": "string"
+    },
+    "ownedBy": {
+      "type": "string"
+    },
+    "indexedBy": {
+      "type": "string"
+    },
+    "restrictions": {
+      "$ref": "#/components/schemas/Restrictions"
+    },
+    "parentCategory": {
+      "type": "string"
+    },
+    "parentCollections": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

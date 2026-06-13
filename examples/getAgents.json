@@ -1,0 +1,54 @@
+{
+  "operationId": "getAgents",
+  "method": "GET",
+  "path": "/beta/agents",
+  "summary": "List agents",
+  "description": "Lists all agents/admins in an organization. It is possible to filter by one of the mutually exclusive parameters: email or phone number. In case both are provided, an error is returned.",
+  "parameters": [
+    {
+      "name": "pageLimit",
+      "in": "query",
+      "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+      "required": false,
+      "schema": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    {
+      "name": "pageKey",
+      "in": "query",
+      "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+      "required": false,
+      "schema": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "email",
+      "in": "query",
+      "description": "The agent/admin email filter",
+      "required": false,
+      "schema": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "phone",
+      "in": "query",
+      "description": "The agent/admin phone number filter",
+      "required": false,
+      "schema": {
+        "type": "string"
+      }
+    }
+  ],
+  "example_request": {
+    "method": "GET",
+    "url": "https://dev.dixa.io/beta/agents",
+    "headers": {
+      "Authorization": "Bearer ${API_TOKEN}",
+      "Content-Type": "application/json"
+    }
+  }
+}

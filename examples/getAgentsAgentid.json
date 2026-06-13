@@ -1,0 +1,27 @@
+{
+  "operationId": "getAgentsAgentid",
+  "method": "GET",
+  "path": "/beta/agents/{agentId}",
+  "summary": "Get agent",
+  "description": "Get an agent/admin by id.",
+  "parameters": [
+    {
+      "name": "agentId",
+      "in": "path",
+      "description": "The agent/admin id",
+      "required": true,
+      "schema": {
+        "type": "string",
+        "format": "uuid"
+      }
+    }
+  ],
+  "example_request": {
+    "method": "GET",
+    "url": "https://dev.dixa.io/beta/agents/{agentId}",
+    "headers": {
+      "Authorization": "Bearer ${API_TOKEN}",
+      "Content-Type": "application/json"
+    }
+  }
+}

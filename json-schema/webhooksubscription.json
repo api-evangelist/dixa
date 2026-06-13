@@ -1,0 +1,76 @@
+{
+  "title": "WebhookSubscription",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "url",
+    "headers",
+    "secretKey",
+    "enabled",
+    "createdAt",
+    "createdBy",
+    "updatedAt",
+    "updatedBy"
+  ],
+  "properties": {
+    "id": {
+      "description": "The Webhook Subscription ID",
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "description": "The Webhook Subscription name",
+      "type": "string"
+    },
+    "subscribedEvents": {
+      "description": "The set of events this Webhook Subscription is subscribed to",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "description": "values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]",
+        "type": "string"
+      }
+    },
+    "url": {
+      "description": "URL of the server that the webhook request should be sent to",
+      "type": "string"
+    },
+    "headers": {
+      "$ref": "#/components/schemas/Webhook_Headers_Map_String_String"
+    },
+    "secretKey": {
+      "description": "Dixa generated secret key, used to sign the requests",
+      "type": "string"
+    },
+    "enabled": {
+      "description": "Defines whether this Webhook Subscription is enabled or disabled",
+      "type": "boolean"
+    },
+    "createdAt": {
+      "description": "Date when this Webhook Subscription was created",
+      "type": "string",
+      "format": "date-time"
+    },
+    "createdBy": {
+      "description": "The ID of the user who created this Webhook Subscription",
+      "type": "string",
+      "format": "uuid"
+    },
+    "updatedAt": {
+      "description": "Date when this Webhook Subscription was last updated",
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedBy": {
+      "description": "The ID of the user who last updated this Webhook Subscription",
+      "type": "string",
+      "format": "uuid"
+    },
+    "filters": {
+      "$ref": "#/components/schemas/Map_WebhookEventType_Filters",
+      "description": "Filters to be applied to the events that are sent to this Webhook Subscription"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

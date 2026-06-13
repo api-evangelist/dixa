@@ -1,0 +1,31 @@
+{
+  "title": "Message",
+  "type": "object",
+  "required": [
+    "id",
+    "authorId",
+    "createdAt",
+    "attributes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "authorId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "externalId": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "attributes": {
+      "$ref": "#/components/schemas/Attributes"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
