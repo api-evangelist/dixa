@@ -56,7 +56,7 @@ common:
     url: https://status.dixa.io
   - type: X
     url: https://twitter.com/dixaapp
-  - type: Changelog
+  - type: ChangeLog
     url: https://releases.dixa.help/en
   - type: Plans
     url: plans/dixa-plans-pricing.yml
