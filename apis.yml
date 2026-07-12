@@ -40,6 +40,10 @@ apis:
         url: https://support.dixa.help/
 
 common:
+  - type: DomainSecurity
+    url: security/dixa-domain-security.yml
+  - type: Authentication
+    url: authentication/dixa-authentication.yml
   - type: Website
     url: https://www.dixa.com
   - type: Documentation
