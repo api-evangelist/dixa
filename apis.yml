@@ -40,6 +40,8 @@ apis:
         url: https://support.dixa.help/
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/dixa-agentic-access.yml
   - type: DomainSecurity
     url: security/dixa-domain-security.yml
   - type: Authentication
