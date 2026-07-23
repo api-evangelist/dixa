@@ -1,0 +1,622 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Ratings API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Ratings
+paths:
+  /beta/conversations/{conversationId}/ratings/{ratingId}/submit:
+    post:
+      tags:
+      - Ratings
+      summary: Create conversation rating result
+      description: Create a rating result for a specific conversation.
+      operationId: postConversationsConversationidRatingsRatingidSubmit
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: ratingId
+        in: path
+        description: The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The rating result to be created for a conversation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRatingResultInput'
+            example:
+              userId: d3cf6f15-1497-4e71-92f2-9b3b228352bd
+              ratingResult:
+                value: 4
+                _type: Csat
+              comment: Best customer service ever!
+              submittedAt: '2024-03-11T16:39:30Z'
+        required: true
+      responses:
+        '201':
+          description: The created conversation rating result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRatingResultOutput'
+              example:
+                data:
+                  ratingId: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                  userId: 4c5f7efa-0822-4b75-bdf5-907fa7336e0c
+                  ratingResult:
+                    value: 5
+                    _type: Csat
+                  comment: Excellent customer service!
+                  submittedAt: '2024-03-11T16:39:30Z'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations/{conversationId}/ratings/offer:
+    post:
+      tags:
+      - Ratings
+      summary: Create conversation rating offer
+      description: Create a rating offer for a specific conversation.
+      operationId: postConversationsConversationidRatingsOffer
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The rating offer to be created for a conversation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRatingOfferInput'
+            example:
+              userId: b0323b42-c428-4afa-970e-20bf5bdeeec4
+              agentId: eeb3bbe5-0355-4ac1-8af5-20d42a3db24b
+              ratingType: Csat
+              offeredAt: '2024-03-11T16:39:30Z'
+        required: true
+      responses:
+        '201':
+          description: The created conversation rating offer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRatingOfferOutput'
+              example:
+                data:
+                  id: 2f0122db-0824-44d7-b39a-e1f722b8c38c
+                  userId: 7a65c963-b3ca-4bd4-996e-bdbcaa620219
+                  agentId: db7f0b41-b779-4726-a673-07b2a59a550d
+                  ratingType: Csat
+                  offeredAt: '2024-03-11T16:39:30Z'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations/{conversationId}/rating:
+    get:
+      tags:
+      - Ratings
+      summary: List rating
+      description: Deprecated rating endpoint. Use '/ratings'.
+      operationId: getConversationsConversationidRating
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: List of ratings for a conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConversationRatingsOutput'
+              example:
+                data:
+                - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                  ratingScore: 4
+                  ratingType: Csat
+                  ratingComment: Super good!
+                  conversationChannel: PstnPhone
+                  agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                  userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                  ratingStatus: Offered
+                  language: English
+                  timestamps: {}
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+      deprecated: true
+  /beta/conversations/{conversationId}/ratings:
+    get:
+      tags:
+      - Ratings
+      summary: List ratings for a conversation
+      description: Lists latest ratings statuses for a particular conversation by providing the conversation ID. For surveys with multiple questions, rating status will be reported for each individual question of the survey. For example, a response for a 3 question survey that was answered will be 3 elements with status "Rated". Additionally, a multiple question survey can be partially answered, therefore a response of such case will be a mix of "Offered" and "Rated" statuses. Note that the IDs of multiple questions response elements will be the same, because they are part of the same survey.
+      operationId: getConversationsConversationidRatings
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: List of ratings for a conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConversationRatingsOutput'
+              examples:
+                Response when a single question (CSAT) survey was offered:
+                  value:
+                    data:
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingScore: 5
+                      ratingType: Csat
+                      ratingComment: Super good!
+                      conversationChannel: PstnPhone
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Offered
+                      language: en
+                      timestamps:
+                        offered_at: '2025-09-25T14:35:53Z'
+                        modified_at: '2025-09-25T14:36:27Z'
+                        scheduled_for: '2025-09-25T14:35:52Z'
+                        created_at: '2025-09-25T14:34:52Z'
+                        scheduled_at: '2025-09-25T14:34:52Z'
+                Response when a multiple question survey was offered:
+                  value:
+                    data:
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingType: Nps
+                      conversationChannel: Email
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Offered
+                      language: en
+                      timestamps:
+                        offered_at: '2025-10-10T10:46:40Z'
+                        modified_at: '2025-10-10T10:46:40Z'
+                        scheduled_for: '2025-10-10T10:46:40Z'
+                        created_at: '2025-10-10T10:46:40Z'
+                        scheduled_at: '2025-10-10T10:46:40Z'
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingType: Csat
+                      conversationChannel: Email
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Offered
+                      language: en
+                      timestamps:
+                        offered_at: '2025-10-10T10:46:40Z'
+                        modified_at: '2025-10-10T10:46:40Z'
+                        scheduled_for: '2025-10-10T10:46:40Z'
+                        created_at: '2025-10-10T10:46:40Z'
+                        scheduled_at: '2025-10-10T10:46:40Z'
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingType: ThumbsUpOrDown
+                      conversationChannel: Email
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Offered
+                      language: en
+                      timestamps:
+                        offered_at: '2025-10-10T10:46:40Z'
+                        modified_at: '2025-10-10T10:46:40Z'
+                        scheduled_for: '2025-10-10T10:46:40Z'
+                        created_at: '2025-10-10T10:46:40Z'
+                        scheduled_at: '2025-10-10T10:46:40Z'
+                Response when a multiple question survey was answered:
+                  value:
+                    data:
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingScore: 8
+                      ratingType: Nps
+                      conversationChannel: Email
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Rated
+                      language: da
+                      timestamps:
+                        offered_at: '2025-10-10T10:46:40Z'
+                        modified_at: '2025-10-10T10:46:40Z'
+                        created_at: '2025-10-10T10:46:40Z'
+                        scheduled_at: '2025-10-10T10:46:40Z'
+                        scheduled_for: '2025-10-10T10:46:40Z'
+                        rated_at: '2025-10-10T10:46:40Z'
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingScore: 5
+                      ratingType: Csat
+                      ratingComment: Super good!
+                      conversationChannel: Email
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Rated
+                      language: da
+                      timestamps:
+                        offered_at: '2025-10-10T10:46:40Z'
+                        modified_at: '2025-10-10T10:46:40Z'
+                        created_at: '2025-10-10T10:46:40Z'
+                        scheduled_at: '2025-10-10T10:46:40Z'
+                        scheduled_for: '2025-10-10T10:46:40Z'
+                        rated_at: '2025-10-10T10:46:40Z'
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingScore: 1
+                      ratingType: ThumbsUpOrDown
+                      ratingComment: Nice!
+                      conversationChannel: Email
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Rated
+                      language: da
+                      timestamps:
+                        offered_at: '2025-10-10T10:46:40Z'
+                        modified_at: '2025-10-10T10:46:40Z'
+                        created_at: '2025-10-10T10:46:40Z'
+                        scheduled_at: '2025-10-10T10:46:40Z'
+                        scheduled_for: '2025-10-10T10:46:40Z'
+                        rated_at: '2025-10-10T10:46:40Z'
+                Response when a multiple question survey was partially answered:
+                  value:
+                    data:
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingScore: 8
+                      ratingType: Nps
+                      conversationChannel: Email
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Rated
+                      language: en
+                      timestamps:
+                        offered_at: '2025-10-10T10:46:40Z'
+                        modified_at: '2025-10-10T10:46:40Z'
+                        created_at: '2025-10-10T10:46:40Z'
+                        scheduled_at: '2025-10-10T10:46:40Z'
+                        scheduled_for: '2025-10-10T10:46:40Z'
+                        rated_at: '2025-10-12T12:46:40Z'
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingScore: 5
+                      ratingType: Csat
+                      ratingComment: Super good!
+                      conversationChannel: Email
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Offered
+                      language: en
+                      timestamps:
+                        offered_at: '2025-10-10T10:46:40Z'
+                        modified_at: '2025-10-10T10:46:40Z'
+                        scheduled_for: '2025-10-10T10:46:40Z'
+                        created_at: '2025-10-10T10:46:40Z'
+                        scheduled_at: '2025-10-10T10:46:40Z'
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingScore: 1
+                      ratingType: ThumbsUpOrDown
+                      ratingComment: Nice!
+                      conversationChannel: Email
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Rated
+                      language: en
+                      timestamps:
+                        offered_at: '2025-10-10T10:46:40Z'
+                        modified_at: '2025-10-10T10:46:40Z'
+                        created_at: '2025-10-10T10:46:40Z'
+                        scheduled_at: '2025-10-10T10:46:40Z'
+                        scheduled_for: '2025-10-10T10:46:40Z'
+                        rated_at: '2025-10-12T12:46:40Z'
+                Response when offer and score was submitted via Dev API:
+                  value:
+                    data:
+                    - id: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                      ratingScore: 1
+                      ratingType: ThumbsUpOrDown
+                      ratingComment: Nice!
+                      conversationChannel: Email
+                      agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                      userId: 6d0c5791-e40a-46d4-bba1-1364ce4578ed
+                      ratingStatus: Rated
+                      timestamps:
+                        rated_at: '2025-10-10T10:46:40Z'
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    Nps:
+      title: Nps
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: Numeric value between 0 and 10 representing the net promoter score.
+          type: integer
+          format: int32
+    CreateRatingOfferOutput:
+      title: CreateRatingOfferOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RatingOffer'
+    Map_String:
+      title: Map_String
+      type: object
+      additionalProperties:
+        type: string
+    RatingResult:
+      title: RatingResult
+      type: object
+      required:
+      - ratingId
+      - ratingResult
+      properties:
+        ratingId:
+          type: string
+        userId:
+          type: string
+        ratingResult:
+          $ref: '#/components/schemas/SubmittedRatingResult'
+        comment:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+    ThumbsUpOrDown:
+      title: ThumbsUpOrDown
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: One of the the numeric values 0 (thumbs down) and 1 (thumbs up).
+          type: integer
+          format: int32
+    CreateRatingResultInput:
+      title: CreateRatingResultInput
+      type: object
+      required:
+      - ratingResult
+      properties:
+        userId:
+          description: The userId property is no longer used so it's made optional to keep backwards compatibility. A null value can be provided instead of an actual ID.
+          deprecated: true
+          type: string
+        ratingResult:
+          $ref: '#/components/schemas/SubmittedRatingResult'
+        comment:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+    SubmittedRatingResult:
+      title: SubmittedRatingResult
+      oneOf:
+      - $ref: '#/components/schemas/Csat'
+      - $ref: '#/components/schemas/Nps'
+      - $ref: '#/components/schemas/ThumbsUpOrDown'
+    ConversationRating:
+      title: ConversationRating
+      type: object
+      required:
+      - id
+      - ratingType
+      - conversationChannel
+      - userId
+      - ratingStatus
+      - timestamps
+      properties:
+        id:
+          type: string
+        ratingScore:
+          type: integer
+          format: int32
+        ratingType:
+          description: 'values: [Csat, Nps, ThumbsUpOrDown]'
+          type: string
+        ratingComment:
+          type: string
+        conversationChannel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        agentId:
+          type: string
+        userId:
+          type: string
+        ratingStatus:
+          description: 'values: [Unscheduled, Offered, Rated, Scheduled, Cancelled]'
+          type: string
+        language:
+          type: string
+        timestamps:
+          $ref: '#/components/schemas/Map_String'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CreateRatingOfferInput:
+      title: CreateRatingOfferInput
+      type: object
+      required:
+      - ratingType
+      properties:
+        userId:
+          description: If userId is not provided, the conversation requester will be picked.
+          type: string
+        agentId:
+          description: If an agentId is not provided, the agent that is most likely to be the target will be picked. Please note that providing an agentId that is not part of the conversation may skew metrics in Intelligence.
+          type: string
+        ratingType:
+          description: 'The type of numeric rating. E.g.: ''Csat'', ''ThumbsUpOrDown'', ''Nps''.'
+          type: string
+        offeredAt:
+          type: string
+          format: date-time
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    RatingOffer:
+      title: RatingOffer
+      type: object
+      required:
+      - id
+      - userId
+      - agentId
+      - ratingType
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        agentId:
+          type: string
+        ratingType:
+          description: 'values: [Csat, Nps, ThumbsUpOrDown]'
+          type: string
+        offeredAt:
+          type: string
+          format: date-time
+    ListConversationRatingsOutput:
+      title: ListConversationRatingsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationRating'
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Csat:
+      title: Csat
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: Numeric value between 1 and 5 representing the customer's satisfaction level.
+          type: integer
+          format: int32
+    CreateRatingResultOutput:
+      title: CreateRatingResultOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RatingResult'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

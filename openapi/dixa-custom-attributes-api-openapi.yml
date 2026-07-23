@@ -1,0 +1,524 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Custom Attributes API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Custom Attributes
+paths:
+  /beta/endusers/{userId}/custom-attributes:
+    patch:
+      tags:
+      - Custom Attributes
+      summary: Patch end user custom attributes
+      description: Patch custom attributes of an end user
+      operationId: patchEndusersUseridCustom-attributes
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: 'The custom attributes of an end user to be patched. This should map the custom attribute id to the desired attribute value. Format: Map[UUID, Option[AttributeValue].'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Map_UUID_Option_AttributeValue'
+            example:
+              274e5a2c-be0d-42c0-b725-3dd533729f68: abcdef
+              befae0d9-9679-42b9-af76-e76f64e28429:
+              - example1
+              - example2
+        required: true
+      responses:
+        '200':
+          description: The patched end user attributes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchEndUserCustomAttributesOutput'
+              example:
+                data:
+                - id: 274e5a2c-be0d-42c0-b725-3dd533729f68
+                  name: End user attribute
+                  identifier: end_user_attribute
+                  value: abcdef
+                - id: befae0d9-9679-42b9-af76-e76f64e28429
+                  name: End user attribute 2
+                  identifier: end_user_attribute_2
+                  value:
+                  - example1
+                  - example2
+        '400':
+          description: 'Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: body, Invalid input for patching'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '401':
+          description: The user who issued the access token used in the request is not authorized to perform the operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+              example:
+                message: User is unauthorized to perform an underlying operation
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+  /beta/conversations/{conversationId}/custom-attributes:
+    patch:
+      tags:
+      - Custom Attributes
+      summary: Patch conversation custom attributes
+      description: Patch custom attributes of a conversation
+      operationId: patchConversationsConversationidCustom-attributes
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: 'The custom attributes of an conversation to be patched. This should map the custom attribute id to the desired attribute value. Format: Map[UUID, Option[AttributeValue].'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Map_UUID_Option_AttributeValue'
+            example:
+              2f5515b6-7e98-4f4d-9010-bfd2a27d4f35: '012345'
+              e14708a6-eed9-495c-9d88-c72331e9e247:
+              - str1
+              - str2
+        required: true
+      responses:
+        '200':
+          description: The patched conversation attributes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchConversationCustomAttributesOutput'
+              example:
+                data:
+                - id: 2f5515b6-7e98-4f4d-9010-bfd2a27d4f35
+                  name: Conversation attribute
+                  identifier: conversation_attribute
+                  value: '012345'
+                - id: e14708a6-eed9-495c-9d88-c72331e9e247
+                  name: Conversation attribute 2
+                  identifier: conversation_attribute_2
+                  value:
+                  - str1
+                  - str2
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, Invalid input for patching'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '401':
+          description: The user who issued the access token used in the request is not authorized to perform the operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+              example:
+                message: User is unauthorized to perform an underlying operation
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+  /beta/custom-attributes/{customAttributeId}:
+    get:
+      tags:
+      - Custom Attributes
+      summary: Get custom attribute definition by id
+      description: Get custom attribute in an organization by id.
+      operationId: getCustom-attributesCustomattributeid
+      parameters:
+      - name: customAttributeId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The configured custom attribute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCustomAttributesDefinitionsOutput'
+              example:
+                data:
+                  id: db5f673b-1c40-41e7-b71f-caab342f0607
+                  entityType: Conversation
+                  identifier: contact_reason
+                  label: Contact Reason
+                  inputDefinition:
+                    options:
+                    - id: 5e2be744-cc2b-4bda-8c76-feb7b28f2970
+                      label: Payment
+                      value: payment
+                      nestedOptions:
+                      - id: 666de4d5-0c6e-421c-a25e-d53073070af4
+                        label: Card
+                        value: card
+                        nestedOptions: []
+                        isDeactivated: false
+                        orderIndex: 2
+                      - id: db26964a-5a88-4689-ad34-8a5f21cd9cd6
+                        label: Bank Transfer
+                        value: bank_transfer
+                        nestedOptions: []
+                        isDeactivated: false
+                        orderIndex: 3
+                      isDeactivated: false
+                      orderIndex: 1
+                    - id: 05d43b25-32a4-49e2-97c0-8723dc73f7bb
+                      label: Access
+                      value: access
+                      nestedOptions: []
+                      isDeactivated: false
+                      orderIndex: 4
+                    _type: Select
+                  description: Reason for contacting
+                  createdAt: 2023-01-05T06:42:31.532Z[GMT]
+                  isRequired: true
+                  isArchived: false
+                  isDeactivated: false
+        '400':
+          description: Invalid value extracted from request context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/custom-attributes:
+    get:
+      tags:
+      - Custom Attributes
+      summary: List custom attributes definitions
+      description: List all custom attributes in an organization.
+      operationId: getCustom-attributes
+      responses:
+        '200':
+          description: The list of configured custom attributes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCustomAttributesDefinitionsOutput'
+              example:
+                data:
+                - id: c43fc767-f89b-443a-9c98-90f53f940bd7
+                  entityType: Conversation
+                  identifier: parcel_id
+                  label: Parcel ID
+                  inputDefinition:
+                    placeholder: '1234'
+                    _type: Text
+                  description: Id of the parcel
+                  createdAt: 2023-01-01T08:23:54.246Z[GMT]
+                  updatedAt: 2023-01-11T12:25:23.837Z[GMT]
+                  isRequired: false
+                  isArchived: false
+                  isDeactivated: false
+                - id: db5f673b-1c40-41e7-b71f-caab342f0607
+                  entityType: Conversation
+                  identifier: contact_reason
+                  label: Contact Reason
+                  inputDefinition:
+                    options:
+                    - id: 5e2be744-cc2b-4bda-8c76-feb7b28f2970
+                      label: Payment
+                      value: payment
+                      nestedOptions:
+                      - id: 666de4d5-0c6e-421c-a25e-d53073070af4
+                        label: Card
+                        value: card
+                        nestedOptions: []
+                        isDeactivated: false
+                        orderIndex: 2
+                      - id: db26964a-5a88-4689-ad34-8a5f21cd9cd6
+                        label: Bank Transfer
+                        value: bank_transfer
+                        nestedOptions: []
+                        isDeactivated: false
+                        orderIndex: 3
+                      isDeactivated: false
+                      orderIndex: 1
+                    - id: 05d43b25-32a4-49e2-97c0-8723dc73f7bb
+                      label: Access
+                      value: access
+                      nestedOptions: []
+                      isDeactivated: false
+                      orderIndex: 4
+                    _type: Select
+                  description: Reason for contacting
+                  createdAt: 2023-01-05T06:42:31.532Z[GMT]
+                  isRequired: true
+                  isArchived: false
+                  isDeactivated: false
+                - id: 66121f54-98ee-4727-a4e7-1a373d411ccf
+                  entityType: Contact
+                  identifier: location
+                  label: Location
+                  inputDefinition:
+                    options:
+                    - id: 6c5efa22-8b49-4205-bb7c-52e86af3a369
+                      label: Denmark
+                      value: denmark
+                      nestedOptions:
+                      - id: ac4e65ea-7b84-4889-a3b5-b957926178c6
+                        label: Copenhagen
+                        value: copenhagen
+                        nestedOptions: []
+                        isDeactivated: false
+                        orderIndex: 6
+                      - id: 35fa047e-c1f2-4d8d-be54-2adb7d326781
+                        label: Aarhus
+                        value: aarhus
+                        nestedOptions: []
+                        isDeactivated: false
+                        orderIndex: 7
+                      isDeactivated: false
+                      orderIndex: 5
+                    _type: Select
+                  description: End user's known city
+                  createdAt: 2023-01-01T08:25:50.246Z[GMT]
+                  updatedAt: 2023-02-01T09:01:52.2Z[GMT]
+                  isRequired: false
+                  isArchived: false
+                  isDeactivated: false
+        '400':
+          description: Invalid value extracted from request context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    Text2:
+      title: Text
+      type: object
+      properties:
+        placeholder:
+          type: string
+    PatchConversationCustomAttributesOutput:
+      title: PatchConversationCustomAttributesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+    CustomAttributeInputDefinition:
+      title: CustomAttributeInputDefinition
+      oneOf:
+      - $ref: '#/components/schemas/Select1'
+      - $ref: '#/components/schemas/Text2'
+    Select1:
+      title: Select
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectOption'
+    CustomAttribute:
+      title: CustomAttribute
+      type: object
+      required:
+      - id
+      - name
+      - identifier
+      - value
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        identifier:
+          type: string
+        value:
+          description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+          oneOf:
+          - type: array
+            items:
+              type: string
+          - type: string
+    PatchEndUserCustomAttributesOutput:
+      title: PatchEndUserCustomAttributesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+    ListCustomAttributesDefinitionsOutput:
+      title: ListCustomAttributesDefinitionsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeDefinition'
+    Map_UUID_Option_AttributeValue:
+      title: Map_UUID_Option_AttributeValue
+      type: object
+      additionalProperties:
+        description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+        oneOf:
+        - type: array
+          items:
+            type: string
+        - type: string
+    GetCustomAttributesDefinitionsOutput:
+      title: GetCustomAttributesDefinitionsOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomAttributeDefinition'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CustomAttributeDefinition:
+      title: CustomAttributeDefinition
+      type: object
+      required:
+      - id
+      - entityType
+      - identifier
+      - label
+      - inputDefinition
+      - createdAt
+      - isRequired
+      - isArchived
+      - isDeactivated
+      properties:
+        id:
+          type: string
+          format: uuid
+        entityType:
+          description: 'values: [Contact, Conversation]'
+          type: string
+        identifier:
+          type: string
+        label:
+          type: string
+        inputDefinition:
+          $ref: '#/components/schemas/CustomAttributeInputDefinition'
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        isRequired:
+          type: boolean
+        isArchived:
+          type: boolean
+        isDeactivated:
+          type: boolean
+    SelectOption:
+      title: SelectOption
+      type: object
+      required:
+      - id
+      - label
+      - value
+      - isDeactivated
+      - orderIndex
+      properties:
+        id:
+          type: string
+          format: uuid
+        label:
+          type: string
+        value:
+          type: string
+        nestedOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectOption'
+        isDeactivated:
+          type: boolean
+        orderIndex:
+          type: integer
+          format: int32
+    Unauthorized:
+      title: Unauthorized
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

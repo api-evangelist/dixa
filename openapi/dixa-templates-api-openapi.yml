@@ -1,0 +1,325 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Templates API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Templates
+paths:
+  /beta/templates:
+    get:
+      tags:
+      - Templates
+      summary: List templates
+      description: Lists all templates belonging to an organization.
+      operationId: getTemplates
+      parameters:
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Filter by template type
+        required: false
+        schema:
+          type: string
+          enum:
+          - EmailAutoReply
+          - QuickResponse
+        example: QuickResponse
+      responses:
+        '200':
+          description: The list of templates in an organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTemplatesOutput'
+              example:
+                data:
+                - id: f8e20c27-c63c-4877-b95a-09a367660578
+                  name: 30-days return policyy
+                  content: 'Hi {{requester_firstname}},
+
+
+                    When you shop at Company Name we offer a 30 day no-hassle return policy
+
+
+                    You''re welcome!!!!
+
+
+                    {{csid}}
+
+
+                    regards,
+
+                    {{agent_firstname}}'
+                  createdBy: 80466b45-2de8-4693-a62e-6ebacaac58d0
+                  createdAt: '2017-09-27T14:27:54.371+00:00'
+                  lastEditedBy: 5e8e95e3-60d3-4350-b6d7-b750728af080
+                  lastEditedAt: '2024-06-21T11:43:29.877+00:00'
+                  translations:
+                  - locale: da
+                    content: 'Hej {{requester_firstname}},
+
+
+                      Når du handler hos Company Name, tilbyder vi en 30 dages returpolitik uden besvær
+
+
+                      Du er velkommen!!!!
+
+
+                      {{csid}}
+
+
+                      venlig hilsen,
+
+                      {{agent_firstname}}'
+                    isDeactivated: false
+                    subject: 30-dages returpolitik hos Company Name csid:{{csid}} agent_firstname:{{agent_firstname}} requester_firstname:{{requester_firstname}}
+                  - locale: de-AT
+                    content: 'Hallo {{requester_firstname}},
+
+
+                      Wenn Sie bei Company Name einkaufen, bieten wir Ihnen ein 30-tägiges Rückgaberecht ohne Aufwand
+
+
+                      Willkommen!!!!
+
+
+                      {{csid}}
+
+
+                      mit freundlichen Grüßen,
+
+                      {{agent_firstname}}'
+                    isDeactivated: false
+                    subject: 30-Tage-Rückgaberecht bei Company Name csid:{{csid}} agent_firstname:{{agent_firstname}} requester_firstname:{{requester_firstname}}
+                  - locale: uz-Arab-AF
+                    content: ياخشى {{requester_firstname}},\n\nسزنىڭ دوكانىمىزدا سودا قلگانىڭىز ئۈچۈن، 30 كۇنلىك قىينىقسىز قايتارىش سىياسىتى تەقدىم قىلامىز\n\nخۇش كەپسىز!!!!\n\n{{csid}}\n\nھۆرمەت بىلەن,\n{{agent_firstname}}
+                    isDeactivated: false
+                    subject: 30-روزه قايتارىش سىياسىتى بۇلادى Company Name csid:{{csid}} agent_firstname:{{agent_firstname}} requester_firstname:{{requester_firstname}}
+                  subject: 30-days return policy at Company Name csid:{{csid}} agent_firstname:{{agent_firstname}} requester_firstname:{{requester_firstname}}
+                  _type: QuickResponse
+                - id: 08ee5fe1-11c8-4365-87c8-70da0ffd6fb4
+                  name: Welcome message
+                  content: 'Hi {{requester_firstname}},
+
+
+                    Welcome to Company Name! We''re excited to have you as a customer
+
+
+                    {{csid}}
+
+
+                    Best,
+
+                    {{agent_firstname}}'
+                  createdBy: 80466b45-2de8-4693-a62e-6ebacaac58d0
+                  createdAt: '2017-09-27T14:27:54.371+00:00'
+                  _type: EmailAutoReply
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: query parameter type'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/templates/{templateId}:
+    delete:
+      tags:
+      - Templates
+      summary: Delete template
+      description: Deletes the template. Please make sure the template is not used in flows and automations as this operation is irreversible.
+      operationId: deleteTemplatesTemplateid
+      parameters:
+      - name: templateId
+        in: path
+        description: The template id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: The template was successfully deleted
+        '400':
+          description: 'Invalid value for: path parameter templateId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    Template:
+      title: Template
+      oneOf:
+      - $ref: '#/components/schemas/EmailAutoReply'
+      - $ref: '#/components/schemas/QuickResponse'
+    ListTemplatesOutput:
+      title: ListTemplatesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Translation:
+      title: Translation
+      type: object
+      required:
+      - locale
+      - content
+      - isDeactivated
+      properties:
+        locale:
+          description: Format for locale is {language}-{script}-{country}, e.g. "en-US", "uz-Arab-AF", "da"
+          type: string
+        content:
+          type: string
+        isDeactivated:
+          type: boolean
+        subject:
+          type: string
+    QuickResponse:
+      title: QuickResponse
+      type: object
+      required:
+      - id
+      - name
+      - content
+      - createdBy
+      - createdAt
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        content:
+          type: string
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+        lastEditedBy:
+          type: string
+        lastEditedAt:
+          type: string
+        translations:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/Translation'
+        subject:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    EmailAutoReply:
+      title: EmailAutoReply
+      type: object
+      required:
+      - id
+      - name
+      - content
+      - createdBy
+      - createdAt
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        content:
+          type: string
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+        lastEditedBy:
+          type: string
+        lastEditedAt:
+          type: string
+        translations:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/Translation'
+        subject:
+          type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

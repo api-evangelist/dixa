@@ -1,0 +1,114 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Organization API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Organization
+paths:
+  /beta/organization:
+    get:
+      tags:
+      - Organization
+      summary: Get organization details
+      description: Retrieves information about the organization associated with the provided API token
+      operationId: getOrganization
+      responses:
+        '200':
+          description: The organization details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrganizationOutput'
+              example:
+                data:
+                  id: e9609fa9-efff-4fdc-a7ef-dd335f33c5f6
+                  name: Example Organization
+                  subdomain: example-org
+                  status: Active
+        '400':
+          description: Invalid value extracted from request context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    GetOrganizationOutput:
+      title: GetOrganizationOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/OrganizationDetails'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    OrganizationDetails:
+      title: OrganizationDetails
+      type: object
+      required:
+      - id
+      - name
+      - subdomain
+      - status
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        subdomain:
+          type: string
+        status:
+          description: 'values: [Active, Suspended]'
+          type: string
+        avatarUrl:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

@@ -1,0 +1,429 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Anonymization API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Anonymization
+paths:
+  /beta/endusers/{userId}/anonymize:
+    patch:
+      tags:
+      - Anonymization
+      summary: Anonymize end user
+      description: Request the anonymization of an end user.
+      operationId: patchEndusersUseridAnonymize
+      parameters:
+      - name: userId
+        in: path
+        description: The id of the end user to anonymize
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: force
+        in: query
+        description: Whether to force close all the conversations initiated by the end user, if any are found in a non closed state.
+        required: false
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '202':
+          description: The end user's anonymization request status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymizeEntityOutput'
+              example:
+                data:
+                  id: 6bf55369-a670-4e6b-9f70-ecdb9913549f
+                  entityType: UserAnonymizationType
+                  _type: User
+                  initiatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  targetEntityId: f28fafd6-2e42-4441-943c-388a8e0ef433
+                  requestedBy: 2b01e4c9-0c3a-47d4-9462-cd5a1a4687f5
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /beta/conversations/{conversationId}/anonymize:
+    patch:
+      tags:
+      - Anonymization
+      summary: Anonymize conversation
+      description: Request the anonymization of a conversation.
+      operationId: patchConversationsConversationidAnonymize
+      parameters:
+      - name: conversationId
+        in: path
+        description: the id of the conversation to anonymize
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: force
+        in: query
+        description: Whether to force close the conversation if it is found in a non closed state.
+        required: false
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '202':
+          description: The conversation's anonymization request status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymizeEntityOutput'
+              example:
+                data:
+                  id: 87bac308-e49f-4134-84cc-96b868f1e1e4
+                  entityType: ConversationAnonymizationType
+                  _type: Conversation
+                  initiatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  targetEntityId: '10749'
+                  requestedBy: b165fdaa-51d6-44b0-bfcd-5f431d623fa7
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: query parameter force'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /beta/conversations/{conversationId}/messages/{messageId}/anonymize:
+    patch:
+      tags:
+      - Anonymization
+      summary: Anonymize message
+      description: Request the anonymization of a single message in a conversation.
+      operationId: patchConversationsConversationidMessagesMessageidAnonymize
+      parameters:
+      - name: conversationId
+        in: path
+        description: the id of the conversation in which the message belongs
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: messageId
+        in: path
+        description: the id of the message to anonymize
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: The message's anonymization request status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymizeEntityOutput'
+              example:
+                data:
+                  id: b165fdaa-51d6-44b0-bfcd-5f431d623fa7
+                  entityType: MessageAnonymizationType
+                  _type: Message
+                  initiatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  targetEntityId: 10749_1b9adc49-62f7-4056-a9c0-c18c1f25afdb
+                  requestedBy: 4c7af391-b7fd-4560-9d82-b3464eef8776
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value for: path parameter messageId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /beta/anonymization/request/{requestId}:
+    get:
+      tags:
+      - Anonymization
+      summary: Get anonymization status
+      description: Retrieve an anonymization request submitted earlier (user or conversation).
+      operationId: getAnonymizationRequestRequestid
+      parameters:
+      - name: requestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The anonymization request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymizeEntityOutput'
+              example:
+                data:
+                  id: 062f0b37-4de0-40f2-95a4-641435cb2869
+                  entityType: UserAnonymizationType
+                  _type: User
+                  initiatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  targetEntityId: da9db703-4a7a-4f44-8a6a-c03b179b8ae2
+                  requestedBy: bac5a02c-15b3-44da-ae1e-ab7b9db4aa89
+        '400':
+          description: 'Invalid value for: path parameter requestId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '401':
+          description: The user who issued the access token used in the request is not authorized to perform the operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+              example:
+                message: User is unauthorized to perform an underlying operation
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/anonymization:
+    post:
+      tags:
+      - Anonymization
+      summary: Anonymize entity
+      description: 'Anonymize the requested entity (user or conversation). For a conversation to be successfully anonymized, it should be in the status `closed`. Otherwise, it requires `forceAnonymization` parameter set to `true` in the input body. NOTE: This endpoint is deprecated. Prefer using the anonymization endpoints of specific resources instead.'
+      operationId: postAnonymization
+      requestBody:
+        description: A request to anonymize an entity in the system (user or conversation).
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnonymizeEntityInput'
+            example:
+              entityId: a53b25da-f676-4c52-acac-58c9280aa23d
+              _type: User
+        required: true
+      responses:
+        '200':
+          description: The anonymization request status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymizeEntityOutput'
+              example:
+                data:
+                  id: a53b25da-f676-4c52-acac-58c9280aa23d
+                  entityType: UserAnonymizationType
+                  _type: User
+                  initiatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  targetEntityId: 6292b720-9dbd-4ff7-8942-f4e917cc1520
+                  requestedBy: 062f0b37-4de0-40f2-95a4-641435cb2869
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body, The entityId doesn''t match the expected format for the specified type, The entity type is missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+      deprecated: true
+components:
+  schemas:
+    AnonymizeEntityInput:
+      title: AnonymizeEntityInput
+      type: object
+      required:
+      - entityId
+      properties:
+        entityId:
+          type: string
+        entityType:
+          $ref: '#/components/schemas/DeprecatedAnonymizationType'
+        forceAnonymization:
+          type: boolean
+        _type:
+          description: 'values: [Conversation, Message, User]'
+          type: string
+    ConversationAnonymizationType:
+      title: ConversationAnonymizationType
+      type: object
+    AnonymizeEntityOutput:
+      title: AnonymizeEntityOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/AnonymizationRequestStatus'
+    AnonymizationRequestStatus:
+      title: AnonymizationRequestStatus
+      type: object
+      required:
+      - id
+      - entityType
+      - _type
+      - initiatedAt
+      - targetEntityId
+      - requestedBy
+      properties:
+        id:
+          type: string
+          format: uuid
+        entityType:
+          $ref: '#/components/schemas/DeprecatedAnonymizationType'
+        _type:
+          description: 'values: [Conversation, Message, User]'
+          type: string
+        initiatedAt:
+          type: string
+          format: date-time
+        targetEntityId:
+          type: string
+        requestedBy:
+          type: string
+          format: uuid
+        processedAt:
+          type: string
+          format: date-time
+    DeprecatedAnonymizationType:
+      title: DeprecatedAnonymizationType
+      description: Replaced by _type field
+      deprecated: true
+      oneOf:
+      - $ref: '#/components/schemas/ConversationAnonymizationType'
+      - $ref: '#/components/schemas/MessageAnonymizationType'
+      - $ref: '#/components/schemas/UnknownAnonymizationType'
+      - $ref: '#/components/schemas/UserAnonymizationType'
+    UserAnonymizationType:
+      title: UserAnonymizationType
+      type: object
+    Conflict:
+      title: Conflict
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    MessageAnonymizationType:
+      title: MessageAnonymizationType
+      type: object
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Unauthorized:
+      title: Unauthorized
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    UnknownAnonymizationType:
+      title: UnknownAnonymizationType
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

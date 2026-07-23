@@ -1,0 +1,891 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Search API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Search
+paths:
+  /beta/search/conversations:
+    get:
+      tags:
+      - Search
+      summary: Search conversations
+      description: 'NOTE: This endpoint is deprecated and is replaced with POST /search/conversations. Search for conversations containing a particular text.'
+      operationId: getSearchConversations
+      parameters:
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: The text by which to search conversations
+        required: true
+        schema:
+          type: string
+          minLength: 1
+        example: cancel my order
+      - name: exactMatch
+        in: query
+        description: Return only exact matches. This value is false by default.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: The search results for the searched parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchOutput'
+              example:
+                data:
+                - id: 1234
+                  highlights:
+                    subject:
+                    - <em class="highlight">Cancel my order</em>
+                  innerHits:
+                  - id: dadcaea0-4135-4e8a-a5bf-05d4658facba
+                    highlight:
+                      text: I want to <em class="highlight">cancel my order</em> as soon as possible
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: query parameter query, Invalid value for: query parameter exactMatch'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '401':
+          description: The user who issued the access token used in the request is not authorized to perform the operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+              example:
+                message: User is unauthorized to perform an underlying operation
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+      deprecated: true
+    post:
+      tags:
+      - Search
+      summary: Search conversations with filters
+      description: Search for conversations containing a particular text or by filter or combine them both
+      operationId: postSearchConversations
+      parameters:
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      requestBody:
+        description: The filters to apply to the search
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchParametersInput'
+            examples:
+              Find conversations that include one of two tags:
+                value:
+                  filters:
+                    strategy: All
+                    conditions:
+                    - field:
+                        operator:
+                          values:
+                          - 177e7564-6434-4177-a25a-8530089196ad
+                          - 7729e7564-9876-a637-b46b-8530038196b3
+                          _type: IncludesOne
+                        _type: TagId
+              Find conversations that contain any tags:
+                value:
+                  query:
+                    value: order 12345
+                    exactMatch: true
+                  filters:
+                    strategy: All
+                    conditions:
+                    - field:
+                        operator:
+                          _type: IsNotEmpty
+                        _type: TagId
+              Find conversations that contain all specified tags and contains specific text:
+                value:
+                  query:
+                    value: order 12345
+                    exactMatch: true
+                  filters:
+                    strategy: All
+                    conditions:
+                    - field:
+                        operator:
+                          values:
+                          - 177e7564-6434-4177-a25a-8530089196ad
+                          - 7729e7564-9876-a637-b46b-8530038196b3
+                          _type: IncludesAll
+                        _type: TagId
+              Find conversations with custom attribute of type Text:
+                value:
+                  query:
+                    value: delivery
+                    exactMatch: true
+                  filters:
+                    strategy: All
+                    conditions:
+                    - field:
+                        operator:
+                          values:
+                          - - PK461926232
+                          - - PK461926233
+                          - - PK461926234
+                          _type: IsOneOf
+                        attributeId: 1fba54c0-3ef6-48c8-bf00-912c5c9890fd
+                        _type: CustomAttribute
+              Find conversations with custom attribute of type Select:
+                value:
+                  filters:
+                    strategy: All
+                    conditions:
+                    - field:
+                        operator:
+                          values:
+                          - - cookies
+                          - - chocolate
+                            - chocolate_bar
+                            - with_nuts
+                            - peanuts
+                          - - tart
+                            - nut_tart
+                            - hazelnuts
+                          _type: IsOneOf
+                        attributeId: 30cd8aa4-3b58-4d70-a716-887dd6f348b4
+                        _type: CustomAttribute
+              Find conversations where custom attribute is not set:
+                value:
+                  filters:
+                    strategy: All
+                    conditions:
+                    - field:
+                        operator:
+                          _type: IsEmpty
+                        attributeId: 1fba54c0-3ef6-48c8-bf00-912c5c9890fd
+                        _type: CustomAttribute
+              Find conversations with duration between 10 and 20 seconds:
+                value:
+                  filters:
+                    strategy: All
+                    conditions:
+                    - field:
+                        operator:
+                          min: 10000
+                          max: 20000
+                          _type: Between
+                        _type: Duration
+              Find conversations with last message since specified time:
+                value:
+                  filters:
+                    strategy: All
+                    conditions:
+                    - field:
+                        operator:
+                          timestamp: '2023-02-11T22:59:59.999Z'
+                          _type: Since
+                        _type: LastMessage
+              Find conversations in a specific queue and with last activity until certain date:
+                value:
+                  filters:
+                    strategy: All
+                    conditions:
+                    - field:
+                        operator:
+                          values:
+                          - 6f2e0d7f-d7e2-408e-93df-3c43f0a070c3
+                          _type: IsOneOf
+                        _type: QueueId
+                    - field:
+                        operator:
+                          timestamp: '2023-02-11T22:59:59.999Z'
+                          _type: Until
+                        _type: LastActivity
+              Find conversations with creation date between two timestamps or closed date between two timestamps:
+                value:
+                  filters:
+                    strategy: Any
+                    conditions:
+                    - field:
+                        operator:
+                          timestampFrom: '2023-02-11T22:59:59.999Z'
+                          timestampTo: '2023-02-11T23:59:59.999Z'
+                          _type: Between
+                        _type: CreationDate
+                    - field:
+                        operator:
+                          timestampFrom: '2023-02-11T22:59:59.999Z'
+                          timestampTo: '2023-02-11T23:59:59.999Z'
+                          _type: Between
+                        _type: ClosedDate
+              Find conversations with direction Inbound and channel Phone or SMS:
+                value:
+                  filters:
+                    strategy: All
+                    conditions:
+                    - field:
+                        operator:
+                          values:
+                          - inbound
+                          _type: IsOneOf
+                        _type: Direction
+                    - field:
+                        operator:
+                          values:
+                          - phone
+                          - sms
+                          _type: IsOneOf
+                        _type: Channel
+        required: false
+      responses:
+        '200':
+          description: The search results for the searched parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchConversationsWithFiltersOutput'
+              examples:
+                Results when query was not provided and next page is available:
+                  value:
+                    data:
+                    - id: 1234
+                      highlights: {}
+                    - id: 2345
+                      highlights: {}
+                    - id: 3456
+                      highlights: {}
+                    meta:
+                      next: '/<api-version>/search/conversations/?pageKey=cGFnZUxpbWl0PTUwJnBhZ2U9MQ%3D%3D:'
+                Results when query was provided and no more pages are available:
+                  value:
+                    data:
+                    - id: 1212
+                      highlights:
+                        subject:
+                        - <em class="highlight">Cancel my order</em>
+                    - id: 1234
+                      highlights:
+                        subject:
+                        - <em class="highlight">Cancel my order</em>
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '401':
+          description: The user who issued the access token used in the request is not authorized to perform the operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+              example:
+                message: User is unauthorized to perform an underlying operation
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    IsNotOneOf2:
+      title: IsNotOneOf
+      type: object
+      properties:
+        values:
+          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+    Between:
+      title: Between
+      description: 'Timestamps in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+      type: object
+      required:
+      - timestampFrom
+      - timestampTo
+      properties:
+        timestampFrom:
+          type: string
+          format: date-time
+        timestampTo:
+          type: string
+          format: date-time
+    LongerThanOrEqualTo:
+      title: LongerThanOrEqualTo
+      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - duration
+      properties:
+        duration:
+          type: integer
+          format: int64
+    Filters:
+      title: Filters
+      type: object
+      required:
+      - strategy
+      properties:
+        strategy:
+          description: 'values: [All, Any]'
+          type: string
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+    CreationDate:
+      title: CreationDate
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    SearchField:
+      title: SearchField
+      oneOf:
+      - $ref: '#/components/schemas/AgentId'
+      - $ref: '#/components/schemas/AssignedDate'
+      - $ref: '#/components/schemas/Channel'
+      - $ref: '#/components/schemas/ClosedDate'
+      - $ref: '#/components/schemas/ContactId'
+      - $ref: '#/components/schemas/ConversationId'
+      - $ref: '#/components/schemas/CreationDate'
+      - $ref: '#/components/schemas/CustomAttribute1'
+      - $ref: '#/components/schemas/Direction'
+      - $ref: '#/components/schemas/Duration'
+      - $ref: '#/components/schemas/LastActivity'
+      - $ref: '#/components/schemas/LastMessage'
+      - $ref: '#/components/schemas/QueueId'
+      - $ref: '#/components/schemas/Status1'
+      - $ref: '#/components/schemas/TagId'
+    IsEmpty:
+      title: IsEmpty
+      type: object
+    ConversationId:
+      title: ConversationId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldHasSingleValueOperator'
+    IsOneOf4:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [open, closed, pending]'
+          type: array
+          items:
+            type: string
+    IncludesAll:
+      title: IncludesAll
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    ConversationSearchWithFiltersHit:
+      title: ConversationSearchWithFiltersHit
+      type: object
+      required:
+      - id
+      - highlights
+      properties:
+        id:
+          description: Identifier of a Conversation where a match was found
+          type: integer
+          format: int64
+        highlights:
+          $ref: '#/components/schemas/Map_Vector_String'
+    Duration:
+      title: Duration
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/DurationOperator'
+    IsNotEmpty:
+      title: IsNotEmpty
+      type: object
+    IsOneOf3:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [inbound, outbound, internal]'
+          type: array
+          items:
+            type: string
+    SearchParametersInput:
+      title: SearchParametersInput
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/Query'
+        filters:
+          $ref: '#/components/schemas/Filters'
+    ExcludesOne:
+      title: ExcludesOne
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    Status1:
+      title: Status
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/StatusOperator'
+    QueueId:
+      title: QueueId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
+    Query:
+      title: Query
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+        exactMatch:
+          type: boolean
+    CustomAttribute1:
+      title: CustomAttribute
+      type: object
+      required:
+      - operator
+      - attributeId
+      properties:
+        operator:
+          $ref: '#/components/schemas/CustomAttributeOperator'
+        attributeId:
+          type: string
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Map_Vector_String:
+      title: Map_Vector_String
+      description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags.
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
+    SearchOutput:
+      title: SearchOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationSearchHit'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    ContactId:
+      title: ContactId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldHasSingleValueOperator'
+    CustomAttributeOperator:
+      title: CustomAttributeOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
+      - $ref: '#/components/schemas/IsNotOneOf2'
+      - $ref: '#/components/schemas/IsOneOf2'
+    AgentId:
+      title: AgentId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
+    StatusOperator:
+      title: StatusOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf4'
+      - $ref: '#/components/schemas/IsOneOf4'
+    ShorterThanOrEqualTo:
+      title: ShorterThanOrEqualTo
+      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - duration
+      properties:
+        duration:
+          type: integer
+          format: int64
+    Between1:
+      title: Between
+      description: 'min and max in milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - min
+      - max
+      properties:
+        min:
+          type: integer
+          format: int64
+        max:
+          type: integer
+          format: int64
+    TimestampOperator:
+      title: TimestampOperator
+      oneOf:
+      - $ref: '#/components/schemas/Between'
+      - $ref: '#/components/schemas/Since'
+      - $ref: '#/components/schemas/Until'
+    ConversationSearchInnerHit:
+      title: ConversationSearchInnerHit
+      type: object
+      required:
+      - id
+      - highlight
+      properties:
+        id:
+          description: Identifier of a sub-entity (such as a Message) where a match was found
+          type: string
+        highlight:
+          $ref: '#/components/schemas/Map_String'
+          description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags
+    AssignedDate:
+      title: AssignedDate
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    Map_String:
+      title: Map_String
+      type: object
+      additionalProperties:
+        type: string
+    IsNotOneOf1:
+      title: IsNotOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [email, contactform, chat, dixamessenger, phone, voicemail, callback, sms, facebookmessenger, whatsapp, adachat, digitalgeniuschat, kindlychat, genericapimessaging, trustpilot, yotpo]'
+          type: array
+          items:
+            type: string
+    IsNotOneOf4:
+      title: IsNotOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [open, closed, pending]'
+          type: array
+          items:
+            type: string
+    LastActivity:
+      title: LastActivity
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    Condition:
+      title: Condition
+      type: object
+      required:
+      - field
+      properties:
+        field:
+          $ref: '#/components/schemas/SearchField'
+    Since:
+      title: Since
+      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+      type: object
+      required:
+      - timestamp
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+    Direction:
+      title: Direction
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/DirectionOperator'
+    ExcludesAll:
+      title: ExcludesAll
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    SearchConversationsWithFiltersOutput:
+      title: SearchConversationsWithFiltersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationSearchWithFiltersHit'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    IsOneOf:
+      title: IsOneOf
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    Unauthorized:
+      title: Unauthorized
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    FieldCanHaveSingleValueOrBeEmptyOperator:
+      title: FieldCanHaveSingleValueOrBeEmptyOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
+      - $ref: '#/components/schemas/IsNotOneOf'
+      - $ref: '#/components/schemas/IsOneOf'
+    ChannelOperator:
+      title: ChannelOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf1'
+      - $ref: '#/components/schemas/IsOneOf1'
+    FieldCanHaveMultipleValuesOrBeEmptyOperator:
+      title: FieldCanHaveMultipleValuesOrBeEmptyOperator
+      oneOf:
+      - $ref: '#/components/schemas/ExcludesAll'
+      - $ref: '#/components/schemas/ExcludesOne'
+      - $ref: '#/components/schemas/IncludesAll'
+      - $ref: '#/components/schemas/IncludesOne'
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
+    IsOneOf2:
+      title: IsOneOf
+      type: object
+      properties:
+        values:
+          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+    IncludesOne:
+      title: IncludesOne
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    IsOneOf1:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [email, contactform, chat, dixamessenger, phone, voicemail, callback, sms, facebookmessenger, whatsapp, adachat, digitalgeniuschat, kindlychat, genericapimessaging, trustpilot, yotpo]'
+          type: array
+          items:
+            type: string
+    Channel:
+      title: Channel
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/ChannelOperator'
+    TagId:
+      title: TagId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveMultipleValuesOrBeEmptyOperator'
+    DurationOperator:
+      title: DurationOperator
+      oneOf:
+      - $ref: '#/components/schemas/Between1'
+      - $ref: '#/components/schemas/LongerThanOrEqualTo'
+      - $ref: '#/components/schemas/ShorterThanOrEqualTo'
+    DirectionOperator:
+      title: DirectionOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf3'
+      - $ref: '#/components/schemas/IsOneOf3'
+    Until:
+      title: Until
+      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+      type: object
+      required:
+      - timestamp
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+    IsNotOneOf3:
+      title: IsNotOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [inbound, outbound, internal]'
+          type: array
+          items:
+            type: string
+    ConversationSearchHit:
+      title: ConversationSearchHit
+      type: object
+      required:
+      - id
+      - highlights
+      properties:
+        id:
+          description: Identifier of a Conversation where a match was found
+          type: integer
+          format: int64
+        highlights:
+          $ref: '#/components/schemas/Map_Vector_String'
+        innerHits:
+          description: List of sub-entities (such as Messages) where a match was found
+          deprecated: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationSearchInnerHit'
+    ClosedDate:
+      title: ClosedDate
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    IsNotOneOf:
+      title: IsNotOneOf
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    LastMessage:
+      title: LastMessage
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    FieldHasSingleValueOperator:
+      title: FieldHasSingleValueOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf'
+      - $ref: '#/components/schemas/IsOneOf'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

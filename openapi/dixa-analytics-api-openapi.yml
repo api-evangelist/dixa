@@ -1,0 +1,1160 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Analytics API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Analytics
+paths:
+  /beta/analytics/metrics:
+    get:
+      tags:
+      - Analytics
+      summary: Metrics Catalogue
+      description: This endpoint lists all available metric IDs that can be used to fetch data in Get Metric Data
+      operationId: getAnalyticsMetrics
+      parameters:
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The catalogue of metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricsOutput'
+              example:
+                data:
+                - id: csat
+                  description: (Number of satisfied customers (4 and 5)/ Number of survey responses) x 100 = % of satisfied customers
+                  filters:
+                  - filterAttribute: agent_id
+                    description: Used to filter by the agent_id
+                  - filterAttribute: queue_id
+                    description: Used to filter by the queue_id
+                  - filterAttribute: channel
+                    description: Used to filter by the channel
+                  - filterAttribute: initial_direction
+                    description: Used to filter by the initial_direction
+                  - filterAttribute: tag_id
+                    description: Used to filter by the tag_id
+                  - filterAttribute: contact_point
+                    description: Used to filter by the contact_point
+                  aggregations:
+                  - measure: Percentage
+                    description: Calculated Percentage
+                  relatedRecordIds:
+                  - ratings
+                - id: closed_conversations
+                  description: Closed conversation data
+                  filters:
+                  - filterAttribute: queue_id
+                    description: Used to filter by the queue_id
+                  - filterAttribute: channel
+                    description: Used to filter by the channel
+                  - filterAttribute: initial_direction
+                    description: Used to filter by the initial_direction
+                  - filterAttribute: tag_id
+                    description: Used to filter by the tag_id
+                  - filterAttribute: contact_point
+                    description: Used to filter by the contact_point
+                  aggregations:
+                  - measure: Count
+                    description: Conversation closed count
+                  relatedRecordIds:
+                  - closed_conversations
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    post:
+      tags:
+      - Analytics
+      summary: Get Metric Data
+      description: Get data of a specific metric (aggregated)
+      operationId: postAnalyticsMetrics
+      requestBody:
+        description: The available request filters and aggregations for fetching the metric data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMetricDataInput'
+            examples:
+              Example0:
+                value:
+                  id: closed_conversations
+                  periodFilter:
+                    value:
+                      _type: PreviousWeek
+                    _type: Preset
+                  filters:
+                  - attribute: channel
+                    values:
+                    - email
+                  aggregations:
+                  - Count
+                  timezone: Europe/Copenhagen
+              Example1:
+                value:
+                  id: closed_conversations
+                  csidFilter:
+                  - 42
+                  - 43
+                  - 44
+                  filters:
+                  - attribute: channel
+                    values:
+                    - email
+                  aggregations:
+                  - Count
+                  timezone: Europe/Copenhagen
+        required: true
+      responses:
+        '200':
+          description: The metric data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricDataOutput'
+              example:
+                data:
+                  id: closed_conversations
+                  aggregates:
+                  - value: 42
+                    measure: Count
+                    _type: LongAggregateValue
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/analytics/metrics/{metricId}:
+    get:
+      tags:
+      - Analytics
+      summary: Metric Description
+      description: This endpoint lists all available properties of a metric to use for querying its data
+      operationId: getAnalyticsMetricsMetricid
+      parameters:
+      - name: metricId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The metric properties
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricOutput'
+              example:
+                data:
+                  id: csat
+                  description: (Number of satisfied customers (4 and 5)/ Number of survey responses) x 100 = % of satisfied customers
+                  filters:
+                  - filterAttribute: agent_id
+                    description: Used to filter by the agent_id
+                  - filterAttribute: queue_id
+                    description: Used to filter by the queue_id
+                  - filterAttribute: channel
+                    description: Used to filter by the channel
+                  - filterAttribute: initial_direction
+                    description: Used to filter by the initial_direction
+                  - filterAttribute: tag_id
+                    description: Used to filter by the tag_id
+                  - filterAttribute: contact_point
+                    description: Used to filter by the contact_point
+                  aggregations:
+                  - measure: Percentage
+                    description: Calculated Percentage
+                  relatedRecordIds:
+                  - ratings
+        '400':
+          description: Invalid value extracted from request context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/analytics/filter/{filterAttribute}:
+    get:
+      tags:
+      - Analytics
+      summary: Filter values
+      description: Get possible values to be used with a given filter attribute. Filter attributes are not metric or record specific, so one filter attribute can be used with multiple metrics/records. When a filter value is not relevant for a specific metric/record, it is simply ignored.
+      operationId: getAnalyticsFilterFilterattribute
+      parameters:
+      - name: filterAttribute
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The possible filter values to be used when fetching metrics or records
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFilterValuesOutput'
+              example:
+                data:
+                - value: CALLBACK
+                  label: Callback
+                - value: CONTACT_FORM
+                  label: Contact Form
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/analytics/records:
+    get:
+      tags:
+      - Analytics
+      summary: Metric Records Catalogue
+      description: This endpoint lists all available record IDs that can be used to fetch data in Get Metric Records Data
+      operationId: getAnalyticsRecords
+      parameters:
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The catalogue of metric records
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricRecordsOutput'
+              example:
+                data:
+                - id: ratings
+                  description: Conversation Ratings
+                  filters:
+                  - filterAttribute: agent_id
+                    description: Used to filter by the agent_id
+                  - filterAttribute: queue_id
+                    description: Used to filter by the queue_id
+                  - filterAttribute: channel
+                    description: Used to filter by the channel
+                  - filterAttribute: initial_direction
+                    description: Used to filter by the initial_direction
+                  - filterAttribute: tag_id
+                    description: Used to filter by the tag_id
+                  - filterAttribute: contact_point
+                    description: Used to filter by the contact_point
+                  relatedMetricIds:
+                  - csat
+                  fieldsMetadata:
+                  - field: conversation_id
+                    description: Conversation ID
+                    nullable: false
+                  - field: agent_id
+                    description: The agent assigned to the conversation
+                    nullable: true
+                  - field: queue_id
+                    description: The queue which the conversation was part of when the conversation was offered
+                    nullable: true
+                - id: closed_conversations
+                  description: Closed conversation data
+                  filters:
+                  - filterAttribute: queue_id
+                    description: Used to filter by the queue_id
+                  - filterAttribute: channel
+                    description: Used to filter by the channel
+                  - filterAttribute: initial_direction
+                    description: Used to filter by the initial_direction
+                  - filterAttribute: tag_id
+                    description: Used to filter by the tag_id
+                  - filterAttribute: contact_point
+                    description: Used to filter by the contact_point
+                  relatedMetricIds:
+                  - closed_conversations
+                  fieldsMetadata:
+                  - field: closed_at
+                    description: Timestamp of when the conversation was closed
+                    nullable: false
+                  - field: conversation_id
+                    description: Conversation ID
+                    nullable: false
+                  - field: agent_id
+                    description: The agent closing the conversation
+                    nullable: true
+                  - field: queue_id
+                    description: The queue which the conversation was part of when the conversation was closed
+                    nullable: true
+                  - field: closed_by
+                    description: User closing the conversation (Agent, Enduser or Unknown)
+                    nullable: false
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    post:
+      tags:
+      - Analytics
+      summary: Get Metric Records Data
+      description: Get data of specific metric records (unaggregated)
+      operationId: postAnalyticsRecords
+      parameters:
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      requestBody:
+        description: The available request filters for fetching the metric records data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMetricRecordsDataInput'
+            examples:
+              Example0:
+                value:
+                  id: closed_conversations
+                  periodFilter:
+                    value:
+                      _type: PreviousWeek
+                    _type: Preset
+                  filters:
+                  - attribute: initial_direction
+                    values:
+                    - INBOUND
+                  timezone: Europe/Copenhagen
+              Example1:
+                value:
+                  id: closed_conversations
+                  csidFilter:
+                  - 42
+                  - 43
+                  - 44
+                  filters:
+                  - attribute: initial_direction
+                    values:
+                    - INBOUND
+                  timezone: Europe/Copenhagen
+        required: true
+      responses:
+        '200':
+          description: The metric records data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricRecordsDataOutput'
+              examples:
+                No Value Metric Records Data Example:
+                  value:
+                    data:
+                    - primaryTimestampField:
+                        name: created_at
+                        timestamp: '2023-04-21T10:23:14.293Z'
+                      fields:
+                      - name: csid
+                        field:
+                          value: 184472
+                          _type: LongField
+                      - name: initial_direction
+                        field:
+                          value: INBOUND
+                          label: Inbound
+                          _type: StringField
+                      - name: initial_channel
+                        field:
+                          value: PSTN_PHONE
+                          label: Phone
+                          _type: StringField
+                      - name: contact_point
+                        field:
+                          value: '+4511223344'
+                          label: '+4511223344'
+                          _type: StringField
+                    - primaryTimestampField:
+                        name: created_at
+                        timestamp: '2023-04-21T10:24:04.259Z'
+                      fields:
+                      - name: csid
+                        field:
+                          value: 184473
+                          _type: LongField
+                      - name: initial_direction
+                        field:
+                          value: INBOUND
+                          label: Inbound
+                          _type: StringField
+                      - name: initial_channel
+                        field:
+                          value: EMAIL
+                          label: Email
+                          _type: StringField
+                      - name: contact_point
+                        field:
+                          value: dixa@email.com
+                          label: dixa@email.com
+                          _type: StringField
+                Metric Records Data Example:
+                  value:
+                    data:
+                    - primaryTimestampField:
+                        name: created_at
+                        timestamp: '2023-04-21T10:23:01.293Z'
+                      value:
+                        value: 4
+                        _type: LongField
+                      fields:
+                      - name: csid
+                        field:
+                          value: 184474
+                          _type: LongField
+                      - name: current_channel
+                        field:
+                          value: EMAIL
+                          label: Email
+                          _type: StringField
+                      - name: queue
+                        field:
+                          value: 220ffe6a-3040-4ece-ae3a-c4c6d63ff3cc
+                          label: Example queue
+                          _type: UUIDField
+                    - primaryTimestampField:
+                        name: created_at
+                        timestamp: '2023-04-21T10:23:04.930Z'
+                      value:
+                        value: 5
+                        _type: LongField
+                      fields:
+                      - name: csid
+                        field:
+                          value: 184475
+                          _type: LongField
+                      - name: current_channel
+                        field:
+                          value: CONTACT_FORM
+                          label: Contact form
+                          _type: StringField
+                      - name: queue
+                        field:
+                          value: 57582f31-4fce-4435-b489-e1c7f190a92f
+                          label: Example queue 2
+                          _type: UUIDField
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/analytics/records/{recordId}:
+    get:
+      tags:
+      - Analytics
+      summary: Metric Record Description
+      description: This endpoint lists all available properties of a record to use for querying its data
+      operationId: getAnalyticsRecordsRecordid
+      parameters:
+      - name: recordId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The metric record properties
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricRecordOutput'
+              example:
+                data:
+                  id: ratings
+                  description: Conversation Ratings
+                  filters:
+                  - filterAttribute: agent_id
+                    description: Used to filter by the agent_id
+                  - filterAttribute: queue_id
+                    description: Used to filter by the queue_id
+                  - filterAttribute: channel
+                    description: Used to filter by the channel
+                  - filterAttribute: initial_direction
+                    description: Used to filter by the initial_direction
+                  - filterAttribute: tag_id
+                    description: Used to filter by the tag_id
+                  - filterAttribute: contact_point
+                    description: Used to filter by the contact_point
+                  relatedMetricIds:
+                  - csat
+                  fieldsMetadata:
+                  - field: conversation_id
+                    description: Conversation ID
+                    nullable: false
+                  - field: agent_id
+                    description: The agent assigned to the conversation
+                    nullable: true
+                  - field: queue_id
+                    description: The queue which the conversation was part of when the conversation was offered
+                    nullable: true
+        '400':
+          description: Invalid value extracted from request context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    FieldMetadata:
+      title: FieldMetadata
+      type: object
+      required:
+      - field
+      - description
+      - nullable
+      properties:
+        field:
+          type: string
+        description:
+          type: string
+        nullable:
+          type: boolean
+    Filter:
+      title: Filter
+      type: object
+      required:
+      - attribute
+      properties:
+        attribute:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    GetMetricRecordsDataInputPeriodFilter:
+      title: GetMetricRecordsDataInputPeriodFilter
+      type: object
+      required:
+      - id
+      - periodFilter
+      - timezone
+      properties:
+        id:
+          type: string
+        periodFilter:
+          $ref: '#/components/schemas/PeriodFilter'
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        timezone:
+          type: string
+    PeriodFilter:
+      title: PeriodFilter
+      oneOf:
+      - $ref: '#/components/schemas/Interval'
+      - $ref: '#/components/schemas/Preset'
+    GetMetricRecordsDataInputCsidFilter:
+      title: GetMetricRecordsDataInputCsidFilter
+      type: object
+      required:
+      - id
+      - timezone
+      properties:
+        id:
+          type: string
+        csidFilter:
+          type: array
+          minItems: 1
+          items:
+            type: integer
+            format: int64
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        timezone:
+          type: string
+    Field:
+      title: Field
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        field:
+          $ref: '#/components/schemas/FieldType'
+    BooleanField:
+      title: BooleanField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: boolean
+    InstantField:
+      title: InstantField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+          format: date-time
+    GetMetricRecordsDataInput:
+      title: GetMetricRecordsDataInput
+      oneOf:
+      - $ref: '#/components/schemas/GetMetricRecordsDataInputCsidFilter'
+      - $ref: '#/components/schemas/GetMetricRecordsDataInputPeriodFilter'
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    MetricRecordMetadata:
+      title: MetricRecordMetadata
+      type: object
+      required:
+      - id
+      - description
+      properties:
+        id:
+          description: The record ID
+          type: string
+        description:
+          description: Relevant information about the record
+          type: string
+        filters:
+          description: List of available filters that can be used when fetching record data
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterMetadata'
+        relatedMetricIds:
+          description: List of metric IDs that make use of this record
+          type: array
+          items:
+            type: string
+        fieldsMetadata:
+          description: Information about the individual record fields
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldMetadata'
+    GetMetricOutput:
+      title: GetMetricOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricMetadata'
+    GetMetricsOutput:
+      title: GetMetricsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricMetadata'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    PrimitiveField:
+      title: PrimitiveField
+      oneOf:
+      - $ref: '#/components/schemas/BooleanField'
+      - $ref: '#/components/schemas/DoubleField'
+      - $ref: '#/components/schemas/InstantField'
+      - $ref: '#/components/schemas/IntField'
+      - $ref: '#/components/schemas/LongField'
+      - $ref: '#/components/schemas/StringField'
+      - $ref: '#/components/schemas/UUIDField'
+    DoubleAggregateValue:
+      title: DoubleAggregateValue
+      type: object
+      required:
+      - value
+      - measure
+      properties:
+        value:
+          type: number
+          format: double
+        measure:
+          description: 'values: [Min, Max, Sum, Percentage, AgentPresenceDuration, StdDev, Average]'
+          type: string
+    DoubleField:
+      title: DoubleField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: number
+          format: double
+    AggregateMetadata:
+      title: AggregateMetadata
+      type: object
+      required:
+      - measure
+      properties:
+        measure:
+          description: 'values: [Min, Max, Sum, Count, Percentage, AgentPresenceDuration, StdDev, Average]'
+          type: string
+        description:
+          type: string
+    FilterMetadata:
+      title: FilterMetadata
+      type: object
+      required:
+      - filterAttribute
+      properties:
+        filterAttribute:
+          type: string
+        description:
+          type: string
+    ListField:
+      title: ListField
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrimitiveField'
+    IntField:
+      title: IntField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: integer
+          format: int32
+    GetMetricRecordsOutput:
+      title: GetMetricRecordsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricRecordMetadata'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    AggregateValue:
+      title: AggregateValue
+      oneOf:
+      - $ref: '#/components/schemas/AgentPresenceDurationValue'
+      - $ref: '#/components/schemas/DoubleAggregateValue'
+      - $ref: '#/components/schemas/LongAggregateValue'
+    GetMetricDataInput:
+      title: GetMetricDataInput
+      oneOf:
+      - $ref: '#/components/schemas/GetMetricDataInputCsidFilter'
+      - $ref: '#/components/schemas/GetMetricDataInputPeriodFilter'
+    MetricData:
+      title: MetricData
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        aggregates:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregateValue'
+    Interval:
+      title: Interval
+      type: object
+      required:
+      - start
+      - end
+      properties:
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+    GetMetricDataInputCsidFilter:
+      title: GetMetricDataInputCsidFilter
+      type: object
+      required:
+      - id
+      - timezone
+      properties:
+        id:
+          type: string
+        csidFilter:
+          type: array
+          minItems: 1
+          items:
+            type: integer
+            format: int64
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        aggregations:
+          type: array
+          items:
+            description: 'values: [Min, Max, Sum, Count, Percentage, AgentPresenceDuration, StdDev, Average]'
+            type: string
+        timezone:
+          type: string
+    AgentPresenceDurationValue:
+      title: AgentPresenceDurationValue
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PresenceDuration'
+        description:
+          type: string
+    MetricMetadata:
+      title: MetricMetadata
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          description: The metric ID
+          type: string
+        description:
+          description: Relevant information about the metric
+          type: string
+        filters:
+          description: List of available filters that can be used when fetching metric data
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterMetadata'
+        aggregations:
+          description: List of available aggregations that can be used when fetching metric data
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregateMetadata'
+        relatedRecordIds:
+          description: List of record IDs used to compose the metric
+          type: array
+          items:
+            type: string
+    LongAggregateValue:
+      title: LongAggregateValue
+      type: object
+      required:
+      - value
+      - measure
+      properties:
+        value:
+          type: integer
+          format: int64
+        measure:
+          description: 'values: [Count]'
+          type: string
+    MetricRecord:
+      title: MetricRecord
+      type: object
+      required:
+      - primaryTimestampField
+      properties:
+        primaryTimestampField:
+          $ref: '#/components/schemas/TimestampField'
+        value:
+          $ref: '#/components/schemas/FieldType'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+    GetMetricDataOutput:
+      title: GetMetricDataOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricData'
+    PresenceDuration:
+      title: PresenceDuration
+      type: object
+      required:
+      - value
+      - status
+      properties:
+        value:
+          type: number
+          format: double
+        status:
+          $ref: '#/components/schemas/Status'
+    FieldType:
+      title: FieldType
+      oneOf:
+      - $ref: '#/components/schemas/BooleanField'
+      - $ref: '#/components/schemas/DoubleField'
+      - $ref: '#/components/schemas/InstantField'
+      - $ref: '#/components/schemas/IntField'
+      - $ref: '#/components/schemas/ListField'
+      - $ref: '#/components/schemas/LongField'
+      - $ref: '#/components/schemas/StringField'
+      - $ref: '#/components/schemas/TimestampField'
+      - $ref: '#/components/schemas/UUIDField'
+    LongField:
+      title: LongField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: integer
+          format: int64
+    FilterValue:
+      title: FilterValue
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+        label:
+          type: string
+    GetMetricRecordsDataOutput:
+      title: GetMetricRecordsDataOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricRecord'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    UUIDField:
+      title: UUIDField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+          format: uuid
+        label:
+          type: string
+    GetMetricDataInputPeriodFilter:
+      title: GetMetricDataInputPeriodFilter
+      type: object
+      required:
+      - id
+      - periodFilter
+      - timezone
+      properties:
+        id:
+          type: string
+        periodFilter:
+          $ref: '#/components/schemas/PeriodFilter'
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        aggregations:
+          type: array
+          items:
+            description: 'values: [Min, Max, Sum, Count, Percentage, AgentPresenceDuration, StdDev, Average]'
+            type: string
+        timezone:
+          type: string
+    StringField:
+      title: StringField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+        label:
+          type: string
+    TimestampField:
+      title: TimestampField
+      type: object
+      required:
+      - name
+      - timestamp
+      properties:
+        name:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    Preset:
+      title: Preset
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: 'values: [PreviousQuarter, ThisWeek, PreviousWeek, Yesterday, Today, ThisMonth, PreviousMonth, ThisQuarter, ThisYear]'
+          type: string
+    GetFilterValuesOutput:
+      title: GetFilterValuesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterValue'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    Status:
+      title: Status
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          type: string
+        description:
+          type: string
+    GetMetricRecordOutput:
+      title: GetMetricRecordOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricRecordMetadata'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

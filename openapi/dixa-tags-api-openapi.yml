@@ -1,0 +1,596 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Tags API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Tags
+paths:
+  /beta/conversations/{conversationId}/tags/{tagId}:
+    put:
+      tags:
+      - Tags
+      summary: Tag conversation
+      description: Tag a conversation. You may only use active tags to tag conversations.
+      operationId: putConversationsConversationidTagsTagid
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: tagId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: The conversation was successfully tagged
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value for: path parameter tagId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    delete:
+      tags:
+      - Tags
+      summary: Untag conversation
+      description: Untag a conversation. You may remove active or inactive tags from a conversation.
+      operationId: deleteConversationsConversationidTagsTagid
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: tagId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: The conversation was successfully untagged
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value for: path parameter tagId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations/{conversationId}/tags/bulk:
+    post:
+      tags:
+      - Tags
+      summary: Bulk tag conversation
+      description: Initiate bulk tag of a conversation and process it asynchronously. If a tag with corresponding name does not exist it will be created.
+      operationId: postConversationsConversationidTagsBulk
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The list of tags to add to a conversation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkTagConversationInput'
+            example:
+              data:
+              - name: 'Example #1'
+              - name: 'Example #2'
+        required: true
+      responses:
+        '202':
+          description: The conversation bulk tag was initiated
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations/{conversationId}/tags:
+    get:
+      tags:
+      - Tags
+      summary: List tags
+      description: Get the tags for a particular conversation by providing the conversation id.
+      operationId: getConversationsConversationidTags
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: List of tags for a conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationTagsOutput'
+              example:
+                data:
+                - id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+                - id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+                - id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+                - id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/tags:
+    get:
+      tags:
+      - Tags
+      summary: List tags
+      description: List all tags in an organization. Only active tags are returned by default. To include deactivated tags use `?includeDeactivated=true`.
+      operationId: getTags
+      parameters:
+      - name: includeDeactivated
+        in: query
+        description: Whether to include deactivated tags in the response. If not provided, only active tags are listed.
+        required: false
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '200':
+          description: The list of all tags in an organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsOutput'
+              example:
+                data:
+                - id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+                - id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+                - id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+                - id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+                - id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter includeDeactivated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    post:
+      tags:
+      - Tags
+      summary: Create tag
+      description: Create a tag.
+      operationId: postTags
+      requestBody:
+        description: The tag details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTagInput'
+            example:
+              name: test
+              color: '#000000'
+        required: true
+      responses:
+        '200':
+          description: The created tag or an existing tag with the same name. Note that the tag is not updated to match the input in case it already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTagOutput'
+              example:
+                data:
+                  id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/tags/{tagId}:
+    get:
+      tags:
+      - Tags
+      summary: Get tag
+      description: Get a tag by id.
+      operationId: getTagsTagid
+      parameters:
+      - name: tagId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The tag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTagOutput'
+              example:
+                data:
+                  id: b794a74a-625b-4303-8237-9b11668a9605
+                  name: example
+                  state: Active
+        '400':
+          description: 'Invalid value for: path parameter tagId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    delete:
+      tags:
+      - Tags
+      summary: Delete tag
+      description: Deletes the tag and all its associations. Note that this operation is irreversible.
+      operationId: deleteTagsTagid
+      parameters:
+      - name: tagId
+        in: path
+        description: The tag id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: The tag was successfully deleted
+        '400':
+          description: 'Invalid value for: path parameter tagId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/tags/{tagId}/deactivate:
+    patch:
+      tags:
+      - Tags
+      summary: Deactivate tag
+      description: Deactivate a tag.
+      operationId: patchTagsTagidDeactivate
+      parameters:
+      - name: tagId
+        in: path
+        description: The tag id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: The tag was successfully deactivated
+        '400':
+          description: 'Invalid value for: path parameter tagId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/tags/{tagId}/activate:
+    patch:
+      tags:
+      - Tags
+      summary: Activate tag
+      description: Activate a tag.
+      operationId: patchTagsTagidActivate
+      parameters:
+      - name: tagId
+        in: path
+        description: The tag id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: The tag was successfully activated
+        '400':
+          description: 'Invalid value for: path parameter tagId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    TagConversationInput:
+      title: TagConversationInput
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    Tag:
+      title: Tag
+      type: object
+      required:
+      - id
+      - name
+      - state
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        color:
+          type: string
+        state:
+          description: 'values: [Active, Inactive]'
+          type: string
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CreateTagOutput:
+      title: CreateTagOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Tag'
+    BulkTagConversationInput:
+      title: BulkTagConversationInput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagConversationInput'
+    GetTagOutput:
+      title: GetTagOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Tag'
+    ConversationTagsOutput:
+      title: ConversationTagsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    CreateTagInput:
+      title: CreateTagInput
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    ListTagsOutput:
+      title: ListTagsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

@@ -1,0 +1,1376 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Agents
+paths:
+  /beta/agents/presence:
+    get:
+      tags:
+      - Agents
+      summary: List presence
+      description: List the presence status for all agents/admins in an organization.
+      operationId: getAgentsPresence
+      responses:
+        '200':
+          description: The list of presence status for all agents/admins
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserPresence'
+              example:
+              - userId: d31a73fc-d67b-49ec-9534-1f36a0c4c906
+                requestTime: '2021-12-01T12:46:35.935'
+                lastSeen: '2021-12-01T12:46:35.935'
+                presenceStatus: Working
+                connectionStatus: Online
+                activeChannels:
+                - Email
+                - FacebookMessenger
+              - userId: 8026cb51-184b-424f-8686-c6bc7bcf88eb
+                requestTime: '2021-12-01T12:46:35.935'
+                lastSeen: '2021-12-01T12:46:35.935'
+                presenceStatus: Working
+                connectionStatus: Online
+                activeChannels:
+                - Email
+                - FacebookMessenger
+                - PstnPhone
+        '400':
+          description: Invalid value extracted from request context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/agents:
+    get:
+      tags:
+      - Agents
+      summary: List agents
+      description: 'Lists all agents/admins in an organization. It is possible to filter by one of the mutually exclusive parameters: email or phone number. In case both are provided, an error is returned.'
+      operationId: getAgents
+      parameters:
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: The agent/admin email filter
+        required: false
+        schema:
+          type: string
+      - name: phone
+        in: query
+        description: The agent/admin phone number filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The list of agents/admins
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAgentsOutput'
+              example:
+                data:
+                - id: 93b885ad-fe0d-3089-8df6-34904fd59f71
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Agent 0
+                  email: agent.0@example.org
+                  avatarUrl: https://files.dixa.io/public/image_0_id
+                  additionalEmails: []
+                  additionalPhoneNumbers: []
+                  middleNames: []
+                  roles:
+                  - Agent
+                - id: 55a54008-ad1b-3589-aa21-0d2629c1df41
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Agent 1
+                  email: agent.1@example.org
+                  avatarUrl: https://files.dixa.io/public/image_1_id
+                  additionalEmails: []
+                  additionalPhoneNumbers: []
+                  middleNames: []
+                  roles:
+                  - Agent
+                - id: 9e688c58-a548-3b8e-af69-c9e1005ad0bf
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Agent 2
+                  email: agent.2@example.org
+                  avatarUrl: https://files.dixa.io/public/image_2_id
+                  additionalEmails: []
+                  additionalPhoneNumbers: []
+                  middleNames: []
+                  roles:
+                  - Agent
+                - id: 86666835-06aa-3d90-8bbd-5a74ac4edf68
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Agent 3
+                  email: agent.3@example.org
+                  avatarUrl: https://files.dixa.io/public/image_3_id
+                  additionalEmails: []
+                  additionalPhoneNumbers: []
+                  middleNames: []
+                  roles:
+                  - Agent
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: query parameter email, Invalid value for: query parameter phone, Duplicate phone number, Duplicate email address, Invalid filters: Cannot provide both phone number and email address'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    put:
+      tags:
+      - Agents
+      summary: Update agents
+      description: Bulk update agents/admins.
+      operationId: putAgents
+      requestBody:
+        description: The list of agent/admin update actions
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/BulkUpdateAgentInput'
+            example:
+            - id: 434ce9f5-14c8-4be1-a0a8-f755010deb9b
+              displayName: Alice Brown
+              phoneNumber: '+551155256325'
+              additionalEmails: []
+              additionalPhoneNumbers: []
+              firstName: Alice
+              lastName: Brown
+              middleNames: []
+              avatarUrl: http://avatar.url
+        required: false
+      responses:
+        '200':
+          description: The list of update action outcomes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUpdateAgentOutput'
+              example:
+                data:
+                - data:
+                    id: 4d2ab456-8510-4a35-b266-e502160d5177
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Alice Brown
+                    email: alice@brown.com
+                    avatarUrl: https://files.dixa.io/public/image_id
+                    phoneNumber: '+551155256325'
+                    additionalEmails:
+                    - alice@secondary.email
+                    additionalPhoneNumbers:
+                    - '+5566778899'
+                    firstName: Alice
+                    lastName: Brown
+                    middleNames: []
+                    roles:
+                    - Agent
+                  _type: BulkActionSuccess
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    post:
+      tags:
+      - Agents
+      summary: Create agent
+      description: Create an agent.
+      operationId: postAgents
+      requestBody:
+        description: The agent's details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAgentInput'
+            example:
+              displayName: Alice Brown
+              email: alice@brown.com
+              phoneNumber: '+551155256325'
+              additionalEmails:
+              - alice@secondary.email
+              additionalPhoneNumbers:
+              - '+5566778899'
+              firstName: Alice
+              lastName: Brown
+              middleNames: []
+              avatarUrl: http://avatar.url
+        required: true
+      responses:
+        '201':
+          description: The created agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentOutput'
+              example:
+                data:
+                  id: 4d2ab456-8510-4a35-b266-e502160d5177
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Alice Brown
+                  email: alice@brown.com
+                  avatarUrl: https://files.dixa.io/public/image_id
+                  phoneNumber: '+551155256325'
+                  additionalEmails:
+                  - alice@secondary.email
+                  additionalPhoneNumbers:
+                  - '+5566778899'
+                  firstName: Alice
+                  lastName: Brown
+                  middleNames: []
+                  roles:
+                  - Agent
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body, Validation failure during agent creation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    patch:
+      tags:
+      - Agents
+      summary: Patch agents
+      description: Bulk patch agents/admins.
+      operationId: patchAgents
+      requestBody:
+        description: List of agent/admin patch actions
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/BulkPatchAgentInput'
+            example:
+            - id: 434ce9f5-14c8-4be1-a0a8-f755010deb9b
+              displayName: AB
+              additionalEmails: []
+              additionalPhoneNumbers: []
+              middleNames: []
+            - id: 434ce9f5-14c8-4be1-a0a8-f755010deb9c
+              displayName: JB
+              additionalEmails: []
+              additionalPhoneNumbers: []
+              middleNames: []
+        required: false
+      responses:
+        '200':
+          description: The list of patch action outcomes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUpdateAgentOutput'
+              example:
+                data:
+                - data:
+                    id: 4d2ab456-8510-4a35-b266-e502160d5177
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: AB
+                    email: jb@example.org
+                    avatarUrl: https://files.dixa.io/public/image_id
+                    additionalEmails: []
+                    additionalPhoneNumbers: []
+                    middleNames: []
+                    roles:
+                    - Agent
+                  _type: BulkActionSuccess
+                - error:
+                    id: 434ce9f5-14c8-4be1-a0a8-f755010deb9c
+                    message: Agent not found
+                    _type: NotFound
+                  _type: BulkActionFailure
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/agents/{agentId}/teams:
+    get:
+      tags:
+      - Agents
+      summary: List teams
+      description: List the teams in which the agent/admin is a member.
+      operationId: getAgentsAgentidTeams
+      parameters:
+      - name: agentId
+        in: path
+        description: The agent/admin id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The list of teams in which the agent/admin is a member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTeamsOutput'
+              example:
+                data:
+                - id: e8ecd53b-2f6c-4471-a3a0-34d94caff8c8
+                - id: 4d2ab456-8510-4a35-b266-e502160d5177
+        '400':
+          description: 'Invalid value for: path parameter agentId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/agents/{agentId}/presence:
+    get:
+      tags:
+      - Agents
+      summary: Get presence
+      description: Get the presence status for an agent/admin.
+      operationId: getAgentsAgentidPresence
+      parameters:
+      - name: agentId
+        in: path
+        description: The agent/admin id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The agent/admin presence status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPresenceOutput'
+              example:
+                data:
+                  userId: ec7f7e7b-b437-32ce-8681-45f71d37b53c
+                  requestTime: '2021-12-01T12:46:35.935'
+                  lastSeen: '2021-12-01T12:46:35.935'
+                  presenceStatus: Working
+                  connectionStatus: Online
+                  activeChannels:
+                  - Email
+                  - FacebookMessenger
+        '400':
+          description: 'Invalid value for: path parameter agentId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/agents/bulk:
+    post:
+      tags:
+      - Agents
+      summary: Create agents
+      description: Create agents in bulk.
+      operationId: postAgentsBulk
+      requestBody:
+        description: The list of agent's details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAgentsInput'
+            example:
+              data:
+              - displayName: Alice Brown
+                email: alice@brown.com
+                phoneNumber: '+551155256325'
+                additionalEmails: []
+                additionalPhoneNumbers: []
+                firstName: Alice
+                lastName: Brown
+                middleNames: []
+                avatarUrl: http://avatar.url
+        required: true
+      responses:
+        '201':
+          description: The created agents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAgentsOutput'
+              example:
+                data:
+                - data:
+                    id: 93b885ad-fe0d-3089-8df6-34904fd59f71
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Agent 0
+                    email: agent.0@example.org
+                    avatarUrl: https://files.dixa.io/public/image_0_id
+                    additionalEmails: []
+                    additionalPhoneNumbers: []
+                    middleNames: []
+                    roles:
+                    - Agent
+                  _type: BulkActionSuccess
+                - data:
+                    id: 55a54008-ad1b-3589-aa21-0d2629c1df41
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Agent 1
+                    email: agent.1@example.org
+                    avatarUrl: https://files.dixa.io/public/image_1_id
+                    additionalEmails: []
+                    additionalPhoneNumbers: []
+                    middleNames: []
+                    roles:
+                    - Agent
+                  _type: BulkActionSuccess
+                - data:
+                    id: 9e688c58-a548-3b8e-af69-c9e1005ad0bf
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Agent 2
+                    email: agent.2@example.org
+                    avatarUrl: https://files.dixa.io/public/image_2_id
+                    additionalEmails: []
+                    additionalPhoneNumbers: []
+                    middleNames: []
+                    roles:
+                    - Agent
+                  _type: BulkActionSuccess
+                - data:
+                    id: 86666835-06aa-3d90-8bbd-5a74ac4edf68
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Agent 3
+                    email: agent.3@example.org
+                    avatarUrl: https://files.dixa.io/public/image_3_id
+                    additionalEmails: []
+                    additionalPhoneNumbers: []
+                    middleNames: []
+                    roles:
+                    - Agent
+                  _type: BulkActionSuccess
+                - error:
+                    id: e8ecd53b-2f6c-4471-a3a0-34d94caff8c8
+                    message: Create Agent [userId=...] in [orgId=...] failed with [errors=...]
+                    _type: Validation
+                  _type: BulkActionFailure
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/agents/{agentId}:
+    get:
+      tags:
+      - Agents
+      summary: Get agent
+      description: Get an agent/admin by id.
+      operationId: getAgentsAgentid
+      parameters:
+      - name: agentId
+        in: path
+        description: The agent/admin id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The agent/admin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentOutput'
+              example:
+                data:
+                  id: 4d2ab456-8510-4a35-b266-e502160d5177
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Alice Brown
+                  email: alice@brown.com
+                  avatarUrl: https://files.dixa.io/public/image_id
+                  phoneNumber: '+551155256325'
+                  additionalEmails:
+                  - alice@secondary.email
+                  additionalPhoneNumbers:
+                  - '+5566778899'
+                  firstName: Alice
+                  lastName: Brown
+                  middleNames: []
+                  roles:
+                  - Agent
+        '400':
+          description: 'Invalid value for: path parameter agentId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    put:
+      tags:
+      - Agents
+      summary: Update agent
+      description: Update an agent/admin.
+      operationId: putAgentsAgentid
+      parameters:
+      - name: agentId
+        in: path
+        description: The agent id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The updated details for an agent/admin
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAgentInput'
+            example:
+              displayName: Alice Brown
+              phoneNumber: '+551155256325'
+              additionalEmails: []
+              additionalPhoneNumbers: []
+              firstName: Alice
+              lastName: Brown
+              middleNames:
+              - Julia
+              avatarUrl: http://avatar.url
+        required: true
+      responses:
+        '200':
+          description: The updated agent/admin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentOutput'
+              example:
+                data:
+                  id: 4d2ab456-8510-4a35-b266-e502160d5177
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Alice Brown
+                  email: alice@brown.com
+                  avatarUrl: https://files.dixa.io/public/image_id
+                  phoneNumber: '+551155256325'
+                  additionalEmails:
+                  - alice@secondary.email
+                  additionalPhoneNumbers:
+                  - '+5566778899'
+                  firstName: Alice
+                  lastName: Brown
+                  middleNames:
+                  - Julia
+                  roles:
+                  - Agent
+        '400':
+          description: 'Invalid value for: path parameter agentId, Invalid value extracted from request context, Invalid value for: body, Validation failure during update'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    delete:
+      tags:
+      - Agents
+      summary: Delete agent
+      description: Downgrade an agent/admin to become an end user.
+      operationId: deleteAgentsAgentid
+      parameters:
+      - name: agentId
+        in: path
+        description: The agent/admin id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: The agent/admin was successfully downgraded to end user
+        '400':
+          description: 'Invalid value for: path parameter agentId, Invalid value extracted from request context, Validation failure during delete processing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+    patch:
+      tags:
+      - Agents
+      summary: Patch agent
+      description: Patch an agent/admin.
+      operationId: patchAgentsAgentid
+      parameters:
+      - name: agentId
+        in: path
+        description: The agent/admin id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The agent/admin patch
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchAgentInput'
+            example:
+              displayName: Alice Brown
+              additionalEmails: []
+              additionalPhoneNumbers: []
+              firstName: Alice
+              lastName: Brown
+              middleNames: []
+              avatarUrl: http://avatar.url
+        required: true
+      responses:
+        '200':
+          description: The patched agent/admin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentOutput'
+              example:
+                data:
+                  id: 4d2ab456-8510-4a35-b266-e502160d5177
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Alice Brown
+                  email: alice@brown.com
+                  avatarUrl: https://files.dixa.io/public/image_id
+                  phoneNumber: '+551155256325'
+                  additionalEmails:
+                  - alice@secondary.email
+                  additionalPhoneNumbers:
+                  - '+5566778899'
+                  firstName: Alice
+                  lastName: Brown
+                  middleNames: []
+                  roles:
+                  - Agent
+        '400':
+          description: 'Invalid value for: path parameter agentId, Invalid value extracted from request context, Invalid value for: body, Validation failure during update'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/agents/{agentId}/presence/working-channel:
+    put:
+      tags:
+      - Agents
+      summary: Updates the working channel of an agent
+      description: Updates the working channel of an agent
+      operationId: putAgentsAgentidPresenceWorking-channel
+      parameters:
+      - name: agentId
+        in: path
+        description: The agent id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The state of the agent presence channel
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAgentPresenceChannelInput'
+            example:
+              channel: Speak
+              working: false
+        required: true
+      responses:
+        '204':
+          description: The working channel of the agent was successfully updated
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    Integrity:
+      title: Integrity
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    UpdateAgentInput:
+      title: UpdateAgentInput
+      type: object
+      required:
+      - displayName
+      properties:
+        displayName:
+          description: The agent's display name
+          type: string
+        phoneNumber:
+          description: The agent's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The agent's first name
+          type: string
+        lastName:
+          description: The agent's last name
+          type: string
+        middleNames:
+          description: The agent's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the agent's avatar
+          type: string
+    BulkActionOutcome_BulkError_Agent:
+      title: BulkActionOutcome_BulkError_Agent
+      oneOf:
+      - $ref: '#/components/schemas/BulkActionFailure_BulkError_Agent'
+      - $ref: '#/components/schemas/BulkActionSuccess_BulkError_Agent'
+    Validation:
+      title: Validation
+      type: object
+      required:
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    UserPresence:
+      title: UserPresence
+      type: object
+      required:
+      - userId
+      - requestTime
+      - connectionStatus
+      properties:
+        userId:
+          type: string
+        requestTime:
+          type: string
+        lastSeen:
+          type: string
+        presenceStatus:
+          description: 'values: [Away, Working]'
+          type: string
+        connectionStatus:
+          description: 'values: [Offline, Online]'
+          type: string
+        activeChannels:
+          type: array
+          items:
+            description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+            type: string
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    UpdateAgentPresenceChannelInput:
+      title: UpdateAgentPresenceChannelInput
+      type: object
+      required:
+      - channel
+      - working
+      properties:
+        channel:
+          description: 'values: [Email, InteractiveChat, Messaging, Speak]'
+          type: string
+        working:
+          type: boolean
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    AgentTeamsOutput:
+      title: AgentTeamsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Team:
+      title: Team
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+    BulkActionFailure_BulkError_Agent:
+      title: BulkActionFailure_BulkError_Agent
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/BulkError'
+    AgentOutput:
+      title: AgentOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Agent'
+    UserPresenceOutput:
+      title: UserPresenceOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/UserPresence'
+    Infrastructure:
+      title: Infrastructure
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    PatchAgentInput:
+      title: PatchAgentInput
+      type: object
+      properties:
+        displayName:
+          description: The agent's display name
+          type: string
+        phoneNumber:
+          description: The agent's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The agent's first name
+          type: string
+        lastName:
+          description: The agent's last name
+          type: string
+        middleNames:
+          description: The agent's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the agent's avatar
+          type: string
+    InvalidArgument:
+      title: InvalidArgument
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Agent:
+      title: Agent
+      type: object
+      required:
+      - id
+      - createdAt
+      - displayName
+      - email
+      properties:
+        id:
+          description: Unique identifier for the agent
+          type: string
+          format: uuid
+        createdAt:
+          description: Time when the agent was created
+          type: string
+          format: date-time
+        displayName:
+          description: The agent's display name
+          type: string
+        email:
+          description: The agent's primary email address
+          type: string
+        avatarUrl:
+          description: The url from which to load the agent's avatar
+          type: string
+        phoneNumber:
+          description: The agent's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The agent's first name
+          type: string
+        lastName:
+          description: The agent's last name
+          type: string
+        middleNames:
+          description: The agent's middle names
+          type: array
+          items:
+            type: string
+        roles:
+          description: The agent's roles
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+    CreateAgentsOutput:
+      title: CreateAgentsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_BulkError_Agent'
+    BulkUpdateAgentOutput:
+      title: BulkUpdateAgentOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_BulkError_Agent'
+    BulkPatchAgentInput:
+      title: BulkPatchAgentInput
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          description: Unique identifier for the agent
+          type: string
+        displayName:
+          description: The agent's display name
+          type: string
+        phoneNumber:
+          description: The agent's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The agent's first name
+          type: string
+        lastName:
+          description: The agent's last name
+          type: string
+        middleNames:
+          description: The agent's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the agent's avatar
+          type: string
+    CreateAgentInput:
+      title: CreateAgentInput
+      type: object
+      required:
+      - displayName
+      - email
+      properties:
+        displayName:
+          description: The agent's display name
+          type: string
+        email:
+          description: The agent's primary email address
+          type: string
+        phoneNumber:
+          description: The agent's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The agent's first name
+          type: string
+        lastName:
+          description: The agent's last name
+          type: string
+        middleNames:
+          description: The agent's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the agent's avatar
+          type: string
+    BulkUpdateAgentInput:
+      title: BulkUpdateAgentInput
+      type: object
+      required:
+      - id
+      - displayName
+      properties:
+        id:
+          description: Unique identifier for the agent
+          type: string
+        displayName:
+          description: The agent's display name
+          type: string
+        phoneNumber:
+          description: The agent's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The agent's first name
+          type: string
+        lastName:
+          description: The agent's last name
+          type: string
+        middleNames:
+          description: The agent's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the agent's avatar
+          type: string
+    BulkError:
+      title: BulkError
+      oneOf:
+      - $ref: '#/components/schemas/EmptyPatchSet'
+      - $ref: '#/components/schemas/ErrorResponse'
+      - $ref: '#/components/schemas/Infrastructure'
+      - $ref: '#/components/schemas/Integrity'
+      - $ref: '#/components/schemas/InvalidArgument'
+      - $ref: '#/components/schemas/NotFound1'
+      - $ref: '#/components/schemas/Validation'
+    CreateAgentsInput:
+      title: CreateAgentsInput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateAgentInput'
+    NotFound1:
+      title: NotFound
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    BulkActionSuccess_BulkError_Agent:
+      title: BulkActionSuccess_BulkError_Agent
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Agent'
+    EmptyPatchSet:
+      title: EmptyPatchSet
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    ListAgentsOutput:
+      title: ListAgentsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Agent'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

@@ -1,0 +1,2109 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents End Users API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: End Users
+paths:
+  /beta/endusers:
+    get:
+      tags:
+      - End Users
+      summary: List end users
+      description: 'Lists all end users in an organization. It is possible to filter by one of the mutually exclusive parameters: email or phone number. In case both are provided, an error is returned.<br/> <b>Note:</b> Custom attributes are not part of the response at this point. If you need to get custom attributes for a user use the [GET /endusers/{userId}](../End-Users/#tag/End-Users/operation/getEndusersUserid) endpoint'
+      operationId: getEndusers
+      parameters:
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: Filter by the contact's email
+        required: false
+        schema:
+          type: string
+      - name: phone
+        in: query
+        description: Filter by the contact's phone number
+        required: false
+        schema:
+          type: string
+      - name: externalId
+        in: query
+        description: Filter by the contact's external id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The list of end users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEndUsersOutput'
+              example:
+                data:
+                - id: 93b885ad-fe0d-3089-8df6-34904fd59f71
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Enduser 0
+                  email: enduser.0@example.org
+                  additionalEmails: []
+                  additionalPhoneNumbers: []
+                  middleNames: []
+                  avatarUrl: https://files.dixa.io/public/image_0_id
+                  externalId: '#12345678'
+                - id: 55a54008-ad1b-3589-aa21-0d2629c1df41
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Enduser 1
+                  email: enduser.1@example.org
+                  additionalEmails: []
+                  additionalPhoneNumbers: []
+                  middleNames: []
+                  avatarUrl: https://files.dixa.io/public/image_1_id
+                  externalId: '#12345678'
+                - id: 9e688c58-a548-3b8e-af69-c9e1005ad0bf
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Enduser 2
+                  email: enduser.2@example.org
+                  additionalEmails: []
+                  additionalPhoneNumbers: []
+                  middleNames: []
+                  avatarUrl: https://files.dixa.io/public/image_2_id
+                  externalId: '#12345678'
+                - id: 86666835-06aa-3d90-8bbd-5a74ac4edf68
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Enduser 3
+                  email: enduser.3@example.org
+                  additionalEmails: []
+                  additionalPhoneNumbers: []
+                  middleNames: []
+                  avatarUrl: https://files.dixa.io/public/image_3_id
+                  externalId: '#12345678'
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: query parameter email, Invalid value for: query parameter phone, Invalid value for: query parameter externalId, Duplicate phone number, Duplicate email address, Invalid filters: Cannot provide more than one filter'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    put:
+      tags:
+      - End Users
+      summary: Update end users
+      description: Bulk update end users.
+      operationId: putEndusers
+      requestBody:
+        description: List of end user update actions
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUpdateEndUsersInput'
+            example:
+              data:
+              - id: d4826125-559f-496f-ad71-a0340f0cae06
+                displayName: Alice Brown
+                email: alice@brown.com
+                phoneNumber: '+551155256325'
+                additionalEmails:
+                - alice@secondary.email
+                additionalPhoneNumbers:
+                - '+5566778899'
+                firstName: Alice
+                lastName: Brown
+                middleNames:
+                - J.
+                avatarUrl: http://avatar.url
+                externalId: '#12345678'
+        required: true
+      responses:
+        '200':
+          description: The updated end users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUpdateEndUsersOutput'
+              example:
+                data:
+                - data:
+                    id: 434ce9f5-14c8-4be1-a0a8-f755010deb9b
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Alice Brown
+                    email: alice@brown.com
+                    phoneNumber: '+551155256325'
+                    additionalEmails:
+                    - alice@secondary.email
+                    additionalPhoneNumbers:
+                    - '+5566778899'
+                    firstName: Alice
+                    lastName: Brown
+                    middleNames:
+                    - J.
+                    avatarUrl: https://files.dixa.io/public/image_id
+                    externalId: '#12345678'
+                    customAttributes:
+                    - id: 4baa78bc-4815-4122-9c99-f71cd742d37b
+                      name: My Attribute
+                      identifier: my_attribute
+                      value: My Attribute Value
+                  _type: BulkActionSuccess
+                - error:
+                    id: 8fe8f4c3-7bc6-4767-924a-d9afa7ac7009
+                    message: Updating EndUser [id:8fe8f4c3-7bc6-4767-924a-d9afa7ac7009] failed with [errors:PhoneNumberExists]
+                    _type: Validation
+                  _type: BulkActionFailure
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    post:
+      tags:
+      - End Users
+      summary: Create end user
+      description: Create an end user.
+      operationId: postEndusers
+      requestBody:
+        description: The end user's details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEndUserInput'
+            example:
+              displayName: Alice Brown
+              email: alice@brown.com
+              phoneNumber: '+551155256325'
+              additionalEmails:
+              - alice@secondary.email
+              additionalPhoneNumbers:
+              - '+5566778899'
+              firstName: Alice
+              lastName: Brown
+              middleNames: []
+              avatarUrl: http://avatar.url
+              externalId: '#12345678'
+        required: true
+      responses:
+        '201':
+          description: The created end user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEndUserOutput'
+              example:
+                data:
+                  id: 434ce9f5-14c8-4be1-a0a8-f755010deb9b
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Alice Brown
+                  email: alice@brown.com
+                  phoneNumber: '+551155256325'
+                  additionalEmails:
+                  - alice@secondary.email
+                  additionalPhoneNumbers:
+                  - '+5566778899'
+                  firstName: Alice
+                  lastName: Brown
+                  middleNames: []
+                  avatarUrl: https://files.dixa.io/public/image_id
+                  externalId: '#12345678'
+                  customAttributes:
+                  - id: 4baa78bc-4815-4122-9c99-f71cd742d37b
+                    name: My Attribute
+                    identifier: my_attribute
+                    value: My Attribute Value
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body, Validation failure during enduser creation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    patch:
+      tags:
+      - End Users
+      summary: Patch end users
+      description: Bulk patch end users.
+      operationId: patchEndusers
+      requestBody:
+        description: List of end user patch actions
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPatchEndUsersInput'
+            example:
+              data:
+              - id: 43b1fe06-a7c4-4f34-8e48-b0559e6acdb9
+                displayName: Alice Brown
+                email: alice@brown.com
+                phoneNumber: '+551155256325'
+                additionalEmails:
+                - alice@secondary.email
+                additionalPhoneNumbers:
+                - '+5566778899'
+                firstName: Alice
+                lastName: Brown
+                middleNames: []
+                avatarUrl: http://avatar.url
+                externalId: '#12345678'
+        required: true
+      responses:
+        '200':
+          description: The patched end users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkPatchEndUsersOutput'
+              example:
+                data:
+                - data:
+                    id: 434ce9f5-14c8-4be1-a0a8-f755010deb9b
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Alice Brown
+                    email: alice@brown.com
+                    phoneNumber: '+551155256325'
+                    additionalEmails:
+                    - alice@secondary.email
+                    additionalPhoneNumbers:
+                    - '+5566778899'
+                    firstName: Alice
+                    lastName: Brown
+                    middleNames: []
+                    avatarUrl: https://files.dixa.io/public/image_id
+                    externalId: '#12345678'
+                    customAttributes:
+                    - id: 4baa78bc-4815-4122-9c99-f71cd742d37b
+                      name: My Attribute
+                      identifier: my_attribute
+                      value: My Attribute Value
+                  _type: BulkActionSuccess
+                - error:
+                    id: ace11abb-4ed0-42bd-9e3b-4ef6db58e0aa
+                    message: Updating EndUser [id=ace11abb-4ed0-42bd-9e3b-4ef6db58e0aa] in [org=b86a1842-437c-4c55-ac4b-0a9cd2f44dfb] failed with [errors=PhoneNumberExists]
+                    _type: Validation
+                  _type: BulkActionFailure
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/endusers/bulk:
+    post:
+      tags:
+      - End Users
+      summary: Create end users
+      description: Create multiple end users in a single bulk action
+      operationId: postEndusersBulk
+      requestBody:
+        description: The list of end user details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEndUsersInput'
+            example:
+              data:
+              - displayName: Alice Brown
+                email: alice@brown.com
+                phoneNumber: '+551155256325'
+                additionalEmails: []
+                additionalPhoneNumbers: []
+                firstName: Alice
+                lastName: Brown
+                middleNames: []
+                avatarUrl: http://avatar.url
+                externalId: '#12345678'
+        required: true
+      responses:
+        '201':
+          description: The created end users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEndUsersOutput'
+              example:
+                data:
+                - data:
+                    id: 93b885ad-fe0d-3089-8df6-34904fd59f71
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Enduser 0
+                    email: enduser.0@example.org
+                    additionalEmails: []
+                    additionalPhoneNumbers: []
+                    middleNames: []
+                    avatarUrl: https://files.dixa.io/public/image_0_id
+                    externalId: '#12345678'
+                  _type: BulkActionSuccess
+                - data:
+                    id: 55a54008-ad1b-3589-aa21-0d2629c1df41
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Enduser 1
+                    email: enduser.1@example.org
+                    additionalEmails: []
+                    additionalPhoneNumbers: []
+                    middleNames: []
+                    avatarUrl: https://files.dixa.io/public/image_1_id
+                    externalId: '#12345678'
+                  _type: BulkActionSuccess
+                - data:
+                    id: 9e688c58-a548-3b8e-af69-c9e1005ad0bf
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Enduser 2
+                    email: enduser.2@example.org
+                    additionalEmails: []
+                    additionalPhoneNumbers: []
+                    middleNames: []
+                    avatarUrl: https://files.dixa.io/public/image_2_id
+                    externalId: '#12345678'
+                  _type: BulkActionSuccess
+                - data:
+                    id: 86666835-06aa-3d90-8bbd-5a74ac4edf68
+                    createdAt: '2020-12-16T09:41:43Z'
+                    displayName: Enduser 3
+                    email: enduser.3@example.org
+                    additionalEmails: []
+                    additionalPhoneNumbers: []
+                    middleNames: []
+                    avatarUrl: https://files.dixa.io/public/image_3_id
+                    externalId: '#12345678'
+                  _type: BulkActionSuccess
+                - error:
+                    id: 1b6d1e11-0626-414e-906a-b80a384cfef0
+                    message: Create EndUser [userId=...] in [orgId=...] failed with [errors=...]
+                    _type: Validation
+                  _type: BulkActionFailure
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/endusers/{userId}:
+    get:
+      tags:
+      - End Users
+      summary: Get end user
+      description: Get an end user by id.
+      operationId: getEndusersUserid
+      parameters:
+      - name: userId
+        in: path
+        description: The end user id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The end user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEndUserOutput'
+              example:
+                data:
+                  id: 434ce9f5-14c8-4be1-a0a8-f755010deb9b
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Alice Brown
+                  email: alice@brown.com
+                  phoneNumber: '+551155256325'
+                  additionalEmails:
+                  - alice@secondary.email
+                  additionalPhoneNumbers:
+                  - '+5566778899'
+                  firstName: Alice
+                  lastName: Brown
+                  middleNames: []
+                  avatarUrl: https://files.dixa.io/public/image_id
+                  externalId: '#12345678'
+                  customAttributes:
+                  - id: 4baa78bc-4815-4122-9c99-f71cd742d37b
+                    name: My Attribute
+                    identifier: my_attribute
+                    value: My Attribute Value
+        '400':
+          description: 'Invalid value for: path parameter userId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    put:
+      tags:
+      - End Users
+      summary: Update end user
+      description: Update an end user.
+      operationId: putEndusersUserid
+      parameters:
+      - name: userId
+        in: path
+        description: The end user id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The updated details for an end user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEndUserInput'
+            example:
+              displayName: Alice Brown
+              email: alice@brown.com
+              phoneNumber: '+551155256325'
+              additionalEmails:
+              - alice@secondary.email
+              additionalPhoneNumbers:
+              - '+5566778899'
+              firstName: Alice
+              lastName: Brown
+              middleNames:
+              - J.
+              avatarUrl: http://avatar.url
+              externalId: '#12345678'
+        required: true
+      responses:
+        '200':
+          description: The updated end user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEndUserOutput'
+              example:
+                data:
+                  id: 434ce9f5-14c8-4be1-a0a8-f755010deb9b
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Alice Brown
+                  email: alice@brown.com
+                  phoneNumber: '+551155256325'
+                  additionalEmails:
+                  - alice@secondary.email
+                  additionalPhoneNumbers:
+                  - '+5566778899'
+                  firstName: Alice
+                  lastName: Brown
+                  middleNames:
+                  - J.
+                  avatarUrl: https://files.dixa.io/public/image_id
+                  externalId: '#12345678'
+                  customAttributes:
+                  - id: 4baa78bc-4815-4122-9c99-f71cd742d37b
+                    name: My Attribute
+                    identifier: my_attribute
+                    value: My Attribute Value
+        '400':
+          description: 'Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: body, Validation failure during update'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    patch:
+      tags:
+      - End Users
+      summary: Patch end user
+      description: Patch an end user.
+      operationId: patchEndusersUserid
+      parameters:
+      - name: userId
+        in: path
+        description: The end user id to be patched
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The end user patch
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchEndUserInput'
+            example:
+              displayName: Alice Brown
+              email: alice@brown.com
+              phoneNumber: '+551155256325'
+              additionalEmails:
+              - alice@secondary.email
+              additionalPhoneNumbers:
+              - '+5566778899'
+              firstName: Alice
+              lastName: Brown
+              middleNames: []
+              avatarUrl: http://avatar.url
+              externalId: '#12345678'
+        required: true
+      responses:
+        '200':
+          description: The patched end user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchEndUserOutput'
+              example:
+                data:
+                  id: 434ce9f5-14c8-4be1-a0a8-f755010deb9b
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Alice Brown
+                  email: alice@brown.com
+                  phoneNumber: '+551155256325'
+                  additionalEmails:
+                  - alice@secondary.email
+                  additionalPhoneNumbers:
+                  - '+5566778899'
+                  firstName: Alice
+                  lastName: Brown
+                  middleNames: []
+                  avatarUrl: https://files.dixa.io/public/image_id
+                  externalId: '#12345678'
+                  customAttributes:
+                  - id: 4baa78bc-4815-4122-9c99-f71cd742d37b
+                    name: My Attribute
+                    identifier: my_attribute
+                    value: My Attribute Value
+        '400':
+          description: 'Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: body, Validation failure during update'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/endusers/{userId}/anonymize:
+    patch:
+      tags:
+      - End Users
+      summary: Anonymize end user
+      description: Request the anonymization of an end user.
+      operationId: patchEndusersUseridAnonymize
+      parameters:
+      - name: userId
+        in: path
+        description: The id of the end user to anonymize
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: force
+        in: query
+        description: Whether to force close all the conversations initiated by the end user, if any are found in a non closed state.
+        required: false
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '202':
+          description: The end user's anonymization request status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymizeEntityOutput'
+              example:
+                data:
+                  id: 6bf55369-a670-4e6b-9f70-ecdb9913549f
+                  entityType: UserAnonymizationType
+                  _type: User
+                  initiatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  targetEntityId: f28fafd6-2e42-4441-943c-388a8e0ef433
+                  requestedBy: 2b01e4c9-0c3a-47d4-9462-cd5a1a4687f5
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /beta/endusers/{userId}/custom-attributes:
+    patch:
+      tags:
+      - End Users
+      summary: Patch end user custom attributes
+      description: Patch custom attributes of an end user
+      operationId: patchEndusersUseridCustom-attributes
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: 'The custom attributes of an end user to be patched. This should map the custom attribute id to the desired attribute value. Format: Map[UUID, Option[AttributeValue].'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Map_UUID_Option_AttributeValue'
+            example:
+              274e5a2c-be0d-42c0-b725-3dd533729f68: abcdef
+              befae0d9-9679-42b9-af76-e76f64e28429:
+              - example1
+              - example2
+        required: true
+      responses:
+        '200':
+          description: The patched end user attributes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchEndUserCustomAttributesOutput'
+              example:
+                data:
+                - id: 274e5a2c-be0d-42c0-b725-3dd533729f68
+                  name: End user attribute
+                  identifier: end_user_attribute
+                  value: abcdef
+                - id: befae0d9-9679-42b9-af76-e76f64e28429
+                  name: End user attribute 2
+                  identifier: end_user_attribute_2
+                  value:
+                  - example1
+                  - example2
+        '400':
+          description: 'Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: body, Invalid input for patching'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '401':
+          description: The user who issued the access token used in the request is not authorized to perform the operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+              example:
+                message: User is unauthorized to perform an underlying operation
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+  /beta/endusers/{userId}/conversations:
+    get:
+      tags:
+      - End Users
+      summary: List end user conversations
+      description: 'Lists conversations requested by an end user. <br/> Note: Custom attributes are not part of the response at this point. If you need to get custom attributes for a conversation use the [GET /conversations/{conversationId}](../Conversations/#tag/Conversations/operation/getConversationsConversationid) endpoint'
+      operationId: getEndusersUseridConversations
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The list of conversations requested by an EndUser
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEndUserConversationsOutput'
+              example:
+                data:
+                - id: 1
+                  requesterId: 9deb936b-52e5-4c44-828d-4c8d48fe0c7e
+                  channel: WidgetChat
+                  createdAt: '2020-12-16T09:41:43Z'
+                  direction: Outbound
+                  state: Open
+                  stateUpdatedAt: '2020-12-16T09:41:43Z'
+                  assignment:
+                    agentId: 0e4d0ead-dc69-470a-9b3a-e7eb16a56453
+                    assignedAt: '2020-12-16T11:00:34Z'
+                  queue:
+                    id: cd87b232-64c8-4ad5-b81a-6f9233352d97
+                    queuedAt: '2020-12-16T10:40:40Z'
+                  browserInfo:
+                    name: Chrome 9
+                    version: 91.0.4472.114
+                    ipAddress: 127.0.0.1
+                    originatingUrl: http://localhost:3000/
+                  language: en
+                  link:
+                    parentId: 1234
+                    _type: SideConversation
+                  _type: ChatConversation
+        '400':
+          description: 'Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    FollowUp:
+      title: FollowUp
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
+    ListEndUserConversationsOutput:
+      title: ListEndUserConversationsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    Queue:
+      title: Queue
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+        queuedAt:
+          type: string
+          format: date-time
+    MessengerConversation:
+      title: MessengerConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+        language:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    DeprecatedAnonymizationType:
+      title: DeprecatedAnonymizationType
+      description: Replaced by _type field
+      deprecated: true
+      oneOf:
+      - $ref: '#/components/schemas/ConversationAnonymizationType'
+      - $ref: '#/components/schemas/MessageAnonymizationType'
+      - $ref: '#/components/schemas/UnknownAnonymizationType'
+      - $ref: '#/components/schemas/UserAnonymizationType'
+    BulkPatchEndUsersInput:
+      title: BulkPatchEndUsersInput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkPatchEndUserInput'
+    Integrity:
+      title: Integrity
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    PatchEndUserInput:
+      title: PatchEndUserInput
+      type: object
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        additionalEmails:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleNames:
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          type: string
+        externalId:
+          type: string
+    CreateEndUserInput:
+      title: CreateEndUserInput
+      type: object
+      properties:
+        displayName:
+          description: The contact's display name
+          type: string
+        email:
+          description: The contact's primary email address
+          type: string
+        phoneNumber:
+          description: The contact's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the contact
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the contact
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The contact's first name
+          type: string
+        lastName:
+          description: The contact's last name
+          type: string
+        middleNames:
+          description: The contact's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the contact's avatar
+          type: string
+        externalId:
+          description: Custom external identifier for the contact
+          type: string
+    BulkUpdateEndUsersInput:
+      title: BulkUpdateEndUsersInput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUpdateEndUserInput'
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Validation:
+      title: Validation
+      type: object
+      required:
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    BrowserInfo:
+      title: BrowserInfo
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        ipAddress:
+          type: string
+        originatingUrl:
+          type: string
+    BulkActionFailure_BulkError_EndUser:
+      title: BulkActionFailure_BulkError_EndUser
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/BulkError'
+    UserAnonymizationType:
+      title: UserAnonymizationType
+      type: object
+    AnonymizeEntityOutput:
+      title: AnonymizeEntityOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/AnonymizationRequestStatus'
+    ListEndUsersOutput:
+      title: ListEndUsersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EndUser'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    EmailConversation:
+      title: EmailConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - toEmail
+      - fromEmail
+      - integrationEmail
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        toEmail:
+          type: string
+        fromEmail:
+          type: string
+        integrationEmail:
+          type: string
+        language:
+          type: string
+        subject:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Conversation:
+      title: Conversation
+      oneOf:
+      - $ref: '#/components/schemas/AnonymizedConversation'
+      - $ref: '#/components/schemas/ChatConversation'
+      - $ref: '#/components/schemas/ContactFormConversation'
+      - $ref: '#/components/schemas/EmailConversation'
+      - $ref: '#/components/schemas/FacebookMessengerConversation'
+      - $ref: '#/components/schemas/GenericConversation'
+      - $ref: '#/components/schemas/MessengerConversation'
+      - $ref: '#/components/schemas/PstnPhoneConversation'
+      - $ref: '#/components/schemas/SmsConversation'
+      - $ref: '#/components/schemas/TwitterConversation'
+      - $ref: '#/components/schemas/WhatsAppConversation'
+    GetEndUserOutput:
+      title: GetEndUserOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    ChatConversation:
+      title: ChatConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+        language:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    SideConversation:
+      title: SideConversation
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
+    PatchEndUserOutput:
+      title: PatchEndUserOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    BulkUpdateEndUserInput:
+      title: BulkUpdateEndUserInput
+      type: object
+      required:
+      - id
+      - displayName
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        additionalEmails:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleNames:
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          type: string
+        externalId:
+          type: string
+    TwitterConversation:
+      title: TwitterConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - conversationType
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        conversationType:
+          description: 'values: [DirectMessage, Tweet]'
+          type: string
+        contactPointTwitterId:
+          type: string
+        endUserTwitterId:
+          type: string
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    Infrastructure:
+      title: Infrastructure
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    ConversationAnonymizationType:
+      title: ConversationAnonymizationType
+      type: object
+    SmsConversation:
+      title: SmsConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        fromNumber:
+          type: string
+        toNumber:
+          type: string
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    GenericConversation:
+      title: GenericConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        fromContactPointId:
+          type: string
+        toContactPointId:
+          type: string
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    CreateEndUsersOutput:
+      title: CreateEndUsersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_BulkError_EndUser'
+    EmailForward:
+      title: EmailForward
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
+    PatchEndUserCustomAttributesOutput:
+      title: PatchEndUserCustomAttributesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+    Conflict:
+      title: Conflict
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    AnonymizationRequestStatus:
+      title: AnonymizationRequestStatus
+      type: object
+      required:
+      - id
+      - entityType
+      - _type
+      - initiatedAt
+      - targetEntityId
+      - requestedBy
+      properties:
+        id:
+          type: string
+          format: uuid
+        entityType:
+          $ref: '#/components/schemas/DeprecatedAnonymizationType'
+        _type:
+          description: 'values: [Conversation, Message, User]'
+          type: string
+        initiatedAt:
+          type: string
+          format: date-time
+        targetEntityId:
+          type: string
+        requestedBy:
+          type: string
+          format: uuid
+        processedAt:
+          type: string
+          format: date-time
+    PstnPhoneConversation:
+      title: PstnPhoneConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    Map_UUID_Option_AttributeValue:
+      title: Map_UUID_Option_AttributeValue
+      type: object
+      additionalProperties:
+        description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+        oneOf:
+        - type: array
+          items:
+            type: string
+        - type: string
+    BulkPatchEndUserInput:
+      title: BulkPatchEndUserInput
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        additionalEmails:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleNames:
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          type: string
+        externalId:
+          type: string
+    InvalidArgument:
+      title: InvalidArgument
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BulkActionOutcome_BulkError_EndUser:
+      title: BulkActionOutcome_BulkError_EndUser
+      oneOf:
+      - $ref: '#/components/schemas/BulkActionFailure_BulkError_EndUser'
+      - $ref: '#/components/schemas/BulkActionSuccess_BulkError_EndUser'
+    WhatsAppConversation:
+      title: WhatsAppConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    ConversationLink:
+      title: ConversationLink
+      oneOf:
+      - $ref: '#/components/schemas/EmailForward'
+      - $ref: '#/components/schemas/FollowUp'
+      - $ref: '#/components/schemas/SideConversation'
+    FacebookMessengerConversation:
+      title: FacebookMessengerConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    BulkActionSuccess_BulkError_EndUser:
+      title: BulkActionSuccess_BulkError_EndUser
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    Unauthorized:
+      title: Unauthorized
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    UpdateEndUserInput:
+      title: UpdateEndUserInput
+      type: object
+      required:
+      - displayName
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        additionalEmails:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleNames:
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          type: string
+        externalId:
+          type: string
+    UnknownAnonymizationType:
+      title: UnknownAnonymizationType
+      type: object
+    CustomAttribute:
+      title: CustomAttribute
+      type: object
+      required:
+      - id
+      - name
+      - identifier
+      - value
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        identifier:
+          type: string
+        value:
+          description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+          oneOf:
+          - type: array
+            items:
+              type: string
+          - type: string
+    UpdateEndUserOutput:
+      title: UpdateEndUserOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    CreateEndUsersInput:
+      title: CreateEndUsersInput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateEndUserInput'
+    BulkUpdateEndUsersOutput:
+      title: BulkUpdateEndUsersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_BulkError_EndUser'
+    BulkError:
+      title: BulkError
+      oneOf:
+      - $ref: '#/components/schemas/EmptyPatchSet'
+      - $ref: '#/components/schemas/ErrorResponse'
+      - $ref: '#/components/schemas/Infrastructure'
+      - $ref: '#/components/schemas/Integrity'
+      - $ref: '#/components/schemas/InvalidArgument'
+      - $ref: '#/components/schemas/NotFound1'
+      - $ref: '#/components/schemas/Validation'
+    EndUser:
+      title: EndUser
+      type: object
+      required:
+      - id
+      - createdAt
+      properties:
+        id:
+          description: Unique identifier for the contact
+          type: string
+          format: uuid
+        createdAt:
+          description: Time when the contact was created
+          type: string
+          format: date-time
+        displayName:
+          description: The contact's display name
+          type: string
+        email:
+          description: The contact's primary email address
+          type: string
+        phoneNumber:
+          description: The contact's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the contact
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the contact
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The contact's first name
+          type: string
+        lastName:
+          description: The contact's last name
+          type: string
+        middleNames:
+          description: The contact's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the contact's avatar
+          type: string
+        externalId:
+          description: Custom external identifier for the contact
+          type: string
+        customAttributes:
+          description: Custom attributes for the contact
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+    BulkPatchEndUsersOutput:
+      title: BulkPatchEndUsersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_BulkError_EndUser'
+    MessageAnonymizationType:
+      title: MessageAnonymizationType
+      type: object
+    ContactFormConversation:
+      title: ContactFormConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - fromEmail
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        fromEmail:
+          type: string
+        toEmail:
+          type: string
+        integrationEmail:
+          type: string
+        language:
+          type: string
+        subject:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    NotFound1:
+      title: NotFound
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    Assignment:
+      title: Assignment
+      type: object
+      required:
+      - agentId
+      - assignedAt
+      properties:
+        agentId:
+          type: string
+          format: uuid
+        assignedAt:
+          type: string
+          format: date-time
+    AnonymizedConversation:
+      title: AnonymizedConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - anonymizedAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        anonymizedAt:
+          type: string
+          format: date-time
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    CreateEndUserOutput:
+      title: CreateEndUserOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    EmptyPatchSet:
+      title: EmptyPatchSet
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

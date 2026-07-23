@@ -1,0 +1,870 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Webhooks API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Webhooks
+paths:
+  /beta/webhooks/{webhookSubscriptionId}:
+    get:
+      tags:
+      - Webhooks
+      summary: Webhook Subscription
+      description: Get a Webhook Subscription by ID.
+      operationId: getWebhooksWebhooksubscriptionid
+      parameters:
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The Webhook Subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWebhookSubscriptionOutput'
+              example:
+                data:
+                  id: cb452b81-6748-40ab-af85-6559b371bc5d
+                  name: Dashboard Integration
+                  subscribedEvents:
+                  - ConversationCreated
+                  - ConversationClosed
+                  url: https://example.webhook/dashboard_integration
+                  headers:
+                    Authorization: Basic d2ViaG9va191c2VyOndlYmhvb2tfcGFzc3dvcmQ=
+                  secretKey: 4g4h988p468g785965b780684bde5546c52gge658d76b4q33fb69c526ea4bdbc
+                  enabled: true
+                  createdAt: '2023-08-01T09:30:15Z'
+                  createdBy: e979cc3b-17b2-4850-b049-13c758763d1c
+                  updatedAt: '2023-08-02T15:09:30Z'
+                  updatedBy: 64b777c3-eb82-49fb-bb3e-294afb5d840c
+                  filters:
+                    Conversation:
+                      strategy: All
+                      conditions:
+                      - field: InitialChannel
+                        values:
+                        - email
+                        - pstn_phone
+                        _type: IsOneOf
+                      - field: QueueId
+                        values:
+                        - f0475e4c-64ae-4c8e-8644-4ed10dc8d752
+                        _type: IsNotOneOf
+                      - field: OperationOrigin
+                        values:
+                        - ApiImport
+                        _type: IsNotOneOf
+                      _type: CombinedFilters
+        '400':
+          description: 'Invalid value for: path parameter webhookSubscriptionId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    delete:
+      tags:
+      - Webhooks
+      summary: Delete Webhook Subscription
+      description: Delete a Webhook Subscription.
+      operationId: deleteWebhooksWebhooksubscriptionid
+      parameters:
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: The Webhook Subscription was successfully deleted
+        '400':
+          description: 'Invalid value for: path parameter webhookSubscriptionId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    patch:
+      tags:
+      - Webhooks
+      summary: Patch Webhook Subscription
+      description: Patch a Webhook Subscription.
+      operationId: patchWebhooksWebhooksubscriptionid
+      parameters:
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The Webhook Subscription fields to be patched
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchWebhookSubscriptionInput'
+            example:
+              name: New name
+              events:
+              - ConversationNoteAdded
+              authorization:
+                value: eyDoiGciOqGYUzI1NiJ4.eyJ0eQJRUapoYXBpIiwib4JxA5lkIjoiNTVmMmE6MmItYjU4NF33MDMxLTk2NTktOTE2M.qPoOZoQYDn4rn-akaLmVFka15JAV7TF6QT8UHOUTIy0
+                _type: TokenAuth
+              customHeaders:
+                X-Automation-Webhook-Token: <TOKEN>
+                X-Example-Header: ExampleValue
+              filters:
+                Conversation:
+                  strategy: All
+                  conditions:
+                  - field: InitialChannel
+                    values:
+                    - email
+                    - pstn_phone
+                    _type: IsOneOf
+                  - field: QueueId
+                    values:
+                    - f0475e4c-64ae-4c8e-8644-4ed10dc8d752
+                    _type: IsNotOneOf
+                  - field: OperationOrigin
+                    values:
+                    - ApiImport
+                    _type: IsNotOneOf
+                  _type: CombinedFilters
+        required: true
+      responses:
+        '200':
+          description: The patched Webhook Subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchWebhookSubscriptionOutput'
+              example:
+                data:
+                  id: cb452b81-6748-40ab-af85-6559b371bc5d
+                  name: New name
+                  subscribedEvents:
+                  - ConversationNoteAdded
+                  url: https://example.webhook/dashboard_integration
+                  headers:
+                    Authorization: Bearer eyDoiGciOqGYUzI1NiJ4.eyJ0eQJRUapoYXBpIiwib4JxA5lkIjoiNTVmMmE6MmItYjU4NF33MDMxLTk2NTktOTE2M.qPoOZoQYDn4rn-akaLmVFka15JAV7TF6QT8UHOUTIy0
+                  secretKey: 4g4h988p468g785965b780684bde5546c52gge658d76b4q33fb69c526ea4bdbc
+                  enabled: true
+                  createdAt: '2023-08-01T09:30:15Z'
+                  createdBy: e979cc3b-17b2-4850-b049-13c758763d1c
+                  updatedAt: '2023-08-02T15:09:30Z'
+                  updatedBy: 64b777c3-eb82-49fb-bb3e-294afb5d840c
+                  filters:
+                    Conversation:
+                      strategy: All
+                      conditions:
+                      - field: InitialChannel
+                        values:
+                        - email
+                        - pstn_phone
+                        _type: IsOneOf
+                      - field: QueueId
+                        values:
+                        - f0475e4c-64ae-4c8e-8644-4ed10dc8d752
+                        _type: IsNotOneOf
+                      - field: OperationOrigin
+                        values:
+                        - ApiImport
+                        _type: IsNotOneOf
+                      _type: CombinedFilters
+        '400':
+          description: 'Invalid value for: path parameter webhookSubscriptionId, Invalid value extracted from request context, Invalid value for: body, Validation failure during Webhook Subscription patching'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/webhooks:
+    get:
+      tags:
+      - Webhooks
+      summary: List all Webhook Subscriptions
+      description: List of all Webhook Subscriptions in an organization.
+      operationId: getWebhooks
+      responses:
+        '200':
+          description: The List of Webhook Subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWebhookSubscriptionsEndpointOutput'
+              example:
+                data:
+                - id: cb452b81-6748-40ab-af85-6559b371bc5d
+                  name: Dashboard Integration
+                  subscribedEvents:
+                  - ConversationCreated
+                  - ConversationClosed
+                  url: https://example.webhook/dashboard_integration
+                  headers:
+                    Authorization: Basic d2ViaG9va191c2VyOndlYmhvb2tfcGFzc3dvcmQ=
+                  secretKey: 4g4h988p468g785965b780684bde5546c52gge658d76b4q33fb69c526ea4bdbc
+                  enabled: true
+                  createdAt: '2023-08-01T09:30:15Z'
+                  createdBy: e979cc3b-17b2-4850-b049-13c758763d1c
+                  updatedAt: '2023-08-02T15:09:30Z'
+                  updatedBy: 64b777c3-eb82-49fb-bb3e-294afb5d840c
+                  filters:
+                    Conversation:
+                      strategy: All
+                      conditions:
+                      - field: InitialChannel
+                        values:
+                        - email
+                        - pstn_phone
+                        _type: IsOneOf
+                      - field: QueueId
+                        values:
+                        - f0475e4c-64ae-4c8e-8644-4ed10dc8d752
+                        _type: IsNotOneOf
+                      - field: OperationOrigin
+                        values:
+                        - ApiImport
+                        _type: IsNotOneOf
+                      _type: CombinedFilters
+        '400':
+          description: Invalid value extracted from request context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    post:
+      tags:
+      - Webhooks
+      summary: Create Webhook Subscription
+      description: Create a Webhook Subscription.
+      operationId: postWebhooks
+      requestBody:
+        description: The Webhook Subscription to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookSubscriptionInput'
+            example:
+              name: Dashboard Integration
+              events:
+              - ConversationCreated
+              - ConversationClosed
+              url: https://example.webhook/dashboard_integration
+              authorization:
+                username: webhook_user
+                password: webhook_password
+                _type: BasicAuth
+              customHeaders:
+                X-Automation-Webhook-Token: <TOKEN>
+                X-Example-Header: ExampleValue
+              enabled: true
+              filters:
+                Conversation:
+                  strategy: All
+                  conditions:
+                  - field: InitialChannel
+                    values:
+                    - email
+                    - pstn_phone
+                    _type: IsOneOf
+                  - field: QueueId
+                    values:
+                    - f0475e4c-64ae-4c8e-8644-4ed10dc8d752
+                    _type: IsNotOneOf
+                  - field: OperationOrigin
+                    values:
+                    - ApiImport
+                    _type: IsNotOneOf
+                  _type: CombinedFilters
+        required: true
+      responses:
+        '201':
+          description: The created Webhook Subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWebhookSubscriptionOutput'
+              example:
+                data:
+                  id: cb452b81-6748-40ab-af85-6559b371bc5d
+                  name: Dashboard Integration
+                  subscribedEvents:
+                  - ConversationCreated
+                  - ConversationClosed
+                  url: https://example.webhook/dashboard_integration
+                  headers:
+                    Authorization: Basic d2ViaG9va191c2VyOndlYmhvb2tfcGFzc3dvcmQ=
+                  secretKey: 4g4h988p468g785965b780684bde5546c52gge658d76b4q33fb69c526ea4bdbc
+                  enabled: true
+                  createdAt: '2023-08-01T09:30:15Z'
+                  createdBy: e979cc3b-17b2-4850-b049-13c758763d1c
+                  updatedAt: '2023-08-02T15:09:30Z'
+                  updatedBy: 64b777c3-eb82-49fb-bb3e-294afb5d840c
+                  filters:
+                    Conversation:
+                      strategy: All
+                      conditions:
+                      - field: InitialChannel
+                        values:
+                        - email
+                        - pstn_phone
+                        _type: IsOneOf
+                      - field: QueueId
+                        values:
+                        - f0475e4c-64ae-4c8e-8644-4ed10dc8d752
+                        _type: IsNotOneOf
+                      - field: OperationOrigin
+                        values:
+                        - ApiImport
+                        _type: IsNotOneOf
+                      _type: CombinedFilters
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body, Validation failure during Webhook Subscription creation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/webhooks/{webhookSubscriptionId}/delivery-status:
+    get:
+      tags:
+      - Webhooks
+      summary: Webhook Subscription Last Delivery Statuses
+      description: Get the latest delivery statuses of a Webhook Subscription.
+      operationId: getWebhooksWebhooksubscriptionidDelivery-status
+      parameters:
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The Latest Delivery Statuses of a Webhook Subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWebhookLastDeliveryStatusOutput'
+              example:
+                data:
+                - event: ConversationCreated
+                  deliveryStatus:
+                    deliveryTimestamp: '2023-09-15T12:00:00.000Z'
+                    success: true
+                    responseCode: 200
+                    responseText: OK
+                    _type: DeliveryDetail
+                - event: ConversationClosed
+                  deliveryStatus:
+                    _type: NoRecentDelivery
+        '400':
+          description: 'Invalid value for: path parameter webhookSubscriptionId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/webhooks/{webhookSubscriptionId}/delivery-status/logs/{event}:
+    get:
+      tags:
+      - Webhooks
+      summary: Webhook Subscription Event Logs
+      description: Get the latest Webhook Subscription Event logs.
+      operationId: getWebhooksWebhooksubscriptionidDelivery-statusLogsEvent
+      parameters:
+      - name: webhookSubscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: event
+        in: path
+        description: 'The set of events this Webhook Subscription subscribes to. Allowed values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The Webhook Subscription Event Logs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWebhookEventDeliveryLogsOutput'
+              example:
+                data:
+                - deliveryDetail:
+                    deliveryTimestamp: '2023-09-15T12:00:00.000Z'
+                    success: true
+                    responseCode: 200
+                    responseText: OK
+                  payload: '{ "event_id": "8967e0c6-fe64-4105-bf71-14ae0c256gg4", "event_fqn": "CONVERSATION_NOTE_ADDED", "event_version": "1", "event_timestamp": "2023-09-15T12:00:00.000Z", "organization": { "id": "g1b15dq2-bba8-48a8-a92e-852014a166r9", "name": "Your Org Name" }, "data": { "conversation": { "csid": 1234, "channel": "WIDGET_CHAT", "status": "OPEN", "direction": "INBOUND", "queue": { "id": "b5b10483-7d28-4dea-bf8d-0d88cc3bd7cc", "name": "Your Queue" }, "contact_point": "Your Contact Point", "requester": { "id": "ec4a2b65-0403-42b3-b054-8998325fd8ac", "name": "Test Requester", "email": "test@example.com", "phone": null, "roles": [ "Enduser" ] }, "assignee": { "id": "cccb8520-e24f-43bf-8344-49d07665d854", "name": "An Agent", "email": "agent@yourcompany.com", "phone": "+4511223344", "roles": [ "Admin", "TeamLead", "SystemAdmin", "Agent" ] }, "subject": null, "tags": [], "created_at": "2023-09-01T12:00:00.000Z" }, "note_id": "ac951357-5189-4707-add7-616af55698q7", "text": "Some Note Added", "created_at": "2023-09-15T12:00:00.000Z", "author": { "id": "cccb8520-e24f-43bf-8344-49d07665d854", "name": "An Agent", "email": "agent@yourcompany.com", "phone": "+4511223344", "roles": [ "Admin", "TeamLead", "SystemAdmin", "Agent" ] } } }'
+                - deliveryDetail:
+                    deliveryTimestamp: '2023-09-15T08:00:00.000Z'
+                    success: true
+                    responseCode: 200
+                    responseText: OK
+                  payload: '{ "event_id": "9963e0c6-fe64-4105-bf71-14ae0c123hh5", "event_fqn": "CONVERSATION_NOTE_ADDED", "event_version": "1", "event_timestamp": "2023-09-15T08:00:00.000Z", "organization": { "id": "g1b15dq2-bba8-48a8-a92e-852014a166r9", "name": "Your Org Name" }, "data": { "conversation": { "csid": 1234, "channel": "WIDGET_CHAT", "status": "OPEN", "direction": "INBOUND", "queue": { "id": "b5b10483-7d28-4dea-bf8d-0d88cc3bd7cc", "name": "Your Queue" }, "contact_point": "Your Contact Point", "requester": { "id": "ec4a2b65-0403-42b3-b054-8998325fd8ac", "name": "Test Requester", "email": "test@example.com", "phone": null, "roles": [ "Enduser" ] }, "assignee": { "id": "cccb8520-e24f-43bf-8344-49d07665d854", "name": "An Agent", "email": "agent@yourcompany.com", "phone": "+4511223344", "roles": [ "Admin", "TeamLead", "SystemAdmin", "Agent" ] }, "subject": null, "tags": [], "created_at": "2023-09-01T12:00:00.000Z" }, "note_id": "ac951357-5189-4707-add7-616af55698q7", "text": "First Note", "created_at": "2023-09-15T08:00:00.000Z", "author": { "id": "cccb8520-e24f-43bf-8344-49d07665d854", "name": "An Agent", "email": "agent@yourcompany.com", "phone": "+4511223344", "roles": [ "Admin", "TeamLead", "SystemAdmin", "Agent" ] } } }'
+        '400':
+          description: 'Invalid value for: path parameter webhookSubscriptionId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    ListWebhookSubscriptionsEndpointOutput:
+      title: ListWebhookSubscriptionsEndpointOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookSubscription'
+    Webhook_Headers_Map_String_String:
+      title: Webhook_Headers_Map_String_String
+      description: The headers that will be added to the webhook request
+      type: object
+      additionalProperties:
+        type: string
+    IsNotOneOf5:
+      title: IsNotOneOf
+      type: object
+      required:
+      - field
+      - values
+      properties:
+        field:
+          description: 'values: [InitialChannel, OperationOrigin, QueueId]'
+          type: string
+        values:
+          type: array
+          minItems: 1
+          items:
+            type: string
+    Condition1:
+      title: Condition
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf5'
+      - $ref: '#/components/schemas/IsOneOf5'
+    CreateWebhookSubscriptionInput:
+      title: CreateWebhookSubscriptionInput
+      type: object
+      required:
+      - name
+      - url
+      - authorization
+      - customHeaders
+      properties:
+        name:
+          description: The Webhook Subscription name
+          type: string
+        events:
+          description: 'The set of events this Webhook Subscription subscribes to. Allowed values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]'
+          type: array
+          uniqueItems: true
+          items:
+            description: 'values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]'
+            type: string
+        url:
+          description: URL of the server that the webhook request should be sent to
+          type: string
+        authorization:
+          $ref: '#/components/schemas/WebhookAuthorization'
+        customHeaders:
+          $ref: '#/components/schemas/Map_String'
+          description: Custom headers that will be added to the webhook request
+        enabled:
+          description: Defines whether this Webhook Subscription is enabled or disabled. Default is `true`
+          type: boolean
+        filters:
+          $ref: '#/components/schemas/Map_WebhookEventType_Filters'
+          description: Filters to be applied to the events of the Webhook Subscription, only filtered events will be sent out. Filters can target a conversation channel, queue...
+    PatchWebhookSubscriptionInput:
+      title: PatchWebhookSubscriptionInput
+      type: object
+      properties:
+        name:
+          description: The Webhook Subscription name
+          type: string
+        events:
+          description: 'The set of events this Webhook Subscription subscribes to. Allowed values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]'
+          type: array
+          uniqueItems: true
+          items:
+            description: 'values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]'
+            type: string
+        url:
+          description: URL of the server that the webhook request should be sent to
+          type: string
+        authorization:
+          $ref: '#/components/schemas/WebhookAuthorization'
+        customHeaders:
+          $ref: '#/components/schemas/Map_String'
+          description: Custom headers that will be added to the webhook request
+        enabled:
+          description: Defines whether this Webhook Subscription is enabled or disabled
+          type: boolean
+        filters:
+          $ref: '#/components/schemas/Map_WebhookEventType_Filters'
+          description: Filters to be applied to the events of the Webhook Subscription, only filtered events will be sent out. Filters can target a conversation channel, queue...
+    CombinedFilters:
+      title: CombinedFilters
+      type: object
+      required:
+      - strategy
+      - conditions
+      properties:
+        strategy:
+          description: 'values: [All, Any]'
+          type: string
+        conditions:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Condition1'
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Map_WebhookEventType_Filters:
+      title: Map_WebhookEventType_Filters
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Filters1'
+    BasicAuth:
+      title: BasicAuth
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    DeliveryDetail:
+      title: DeliveryDetail
+      type: object
+      required:
+      - deliveryTimestamp
+      - success
+      - responseCode
+      - responseText
+      properties:
+        deliveryTimestamp:
+          type: string
+        success:
+          type: boolean
+        responseCode:
+          type: integer
+          format: int32
+        responseText:
+          type: string
+    GetWebhookLastDeliveryStatusOutput:
+      title: GetWebhookLastDeliveryStatusOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventDeliveryStatus'
+    IsOneOf5:
+      title: IsOneOf
+      type: object
+      required:
+      - field
+      - values
+      properties:
+        field:
+          description: 'values: [InitialChannel, OperationOrigin, QueueId]'
+          type: string
+        values:
+          type: array
+          minItems: 1
+          items:
+            type: string
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    WebhookAuthorization:
+      title: WebhookAuthorization
+      description: Authorization to be added as a header in the webhook request. Can be either, Basic auth, added as 'Basic base64encoded(\<username\>:\<password\>)', Token auth, added as 'Bearer \<token value\>', or no auth
+      oneOf:
+      - $ref: '#/components/schemas/BasicAuth'
+      - $ref: '#/components/schemas/NoAuth'
+      - $ref: '#/components/schemas/TokenAuth'
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    EventDeliveryLog:
+      title: EventDeliveryLog
+      type: object
+      required:
+      - deliveryDetail
+      - payload
+      properties:
+        deliveryDetail:
+          $ref: '#/components/schemas/DeliveryDetail'
+        payload:
+          type: string
+    CreateWebhookSubscriptionOutput:
+      title: CreateWebhookSubscriptionOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/WebhookSubscription'
+    Map_String:
+      title: Map_String
+      type: object
+      additionalProperties:
+        type: string
+    NoAuth:
+      title: NoAuth
+      type: object
+    NoRecentDelivery:
+      title: NoRecentDelivery
+      type: object
+    GetWebhookSubscriptionOutput:
+      title: GetWebhookSubscriptionOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/WebhookSubscription'
+    EventDeliveryStatus:
+      title: EventDeliveryStatus
+      type: object
+      required:
+      - event
+      - deliveryStatus
+      properties:
+        event:
+          description: 'values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]'
+          type: string
+        deliveryStatus:
+          $ref: '#/components/schemas/DeliveryStatus'
+    DeliveryStatus:
+      title: DeliveryStatus
+      oneOf:
+      - $ref: '#/components/schemas/DeliveryDetail'
+      - $ref: '#/components/schemas/NoRecentDelivery'
+    WebhookSubscription:
+      title: WebhookSubscription
+      type: object
+      required:
+      - id
+      - name
+      - url
+      - headers
+      - secretKey
+      - enabled
+      - createdAt
+      - createdBy
+      - updatedAt
+      - updatedBy
+      properties:
+        id:
+          description: The Webhook Subscription ID
+          type: string
+          format: uuid
+        name:
+          description: The Webhook Subscription name
+          type: string
+        subscribedEvents:
+          description: The set of events this Webhook Subscription is subscribed to
+          type: array
+          uniqueItems: true
+          items:
+            description: 'values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]'
+            type: string
+        url:
+          description: URL of the server that the webhook request should be sent to
+          type: string
+        headers:
+          $ref: '#/components/schemas/Webhook_Headers_Map_String_String'
+        secretKey:
+          description: Dixa generated secret key, used to sign the requests
+          type: string
+        enabled:
+          description: Defines whether this Webhook Subscription is enabled or disabled
+          type: boolean
+        createdAt:
+          description: Date when this Webhook Subscription was created
+          type: string
+          format: date-time
+        createdBy:
+          description: The ID of the user who created this Webhook Subscription
+          type: string
+          format: uuid
+        updatedAt:
+          description: Date when this Webhook Subscription was last updated
+          type: string
+          format: date-time
+        updatedBy:
+          description: The ID of the user who last updated this Webhook Subscription
+          type: string
+          format: uuid
+        filters:
+          $ref: '#/components/schemas/Map_WebhookEventType_Filters'
+          description: Filters to be applied to the events that are sent to this Webhook Subscription
+    Filters1:
+      title: Filters
+      oneOf:
+      - $ref: '#/components/schemas/CombinedFilters'
+    PatchWebhookSubscriptionOutput:
+      title: PatchWebhookSubscriptionOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/WebhookSubscription'
+    TokenAuth:
+      title: TokenAuth
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: 'Token value. It will be added in the headers of the request as: ''Authorization'': ''Bearer \<value\>'''
+          type: string
+    GetWebhookEventDeliveryLogsOutput:
+      title: GetWebhookEventDeliveryLogsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventDeliveryLog'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

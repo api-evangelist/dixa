@@ -1,0 +1,526 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Teams API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Teams
+paths:
+  /beta/teams:
+    get:
+      tags:
+      - Teams
+      summary: List teams
+      description: Lists all teams in an organization.
+      operationId: getTeams
+      responses:
+        '200':
+          description: The list of teams in an organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTeamsOutput'
+              example:
+                data:
+                - id: 005e7108-c85c-41d1-a945-4a8dc58c4399
+                  name: Team A
+                - id: 83cc3c21-9d28-4250-b6ea-b3a6333c5c73
+                  name: Team B
+        '400':
+          description: Invalid value extracted from request context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    post:
+      tags:
+      - Teams
+      summary: Create team
+      description: Create a team.
+      operationId: postTeams
+      requestBody:
+        description: The team name
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTeamInput'
+            example:
+              name: Team A
+        required: true
+      responses:
+        '201':
+          description: The created team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTeamOutput'
+              example:
+                data:
+                  id: 005e7108-c85c-41d1-a945-4a8dc58c4399
+                  name: Team A
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/teams/{teamId}/agents:
+    get:
+      tags:
+      - Teams
+      summary: List members
+      description: Lists all agents/admins in a team.
+      operationId: getTeamsTeamidAgents
+      parameters:
+      - name: teamId
+        in: path
+        description: The team id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: List of agents/admins in the specified team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTeamMembersOutput'
+              example:
+                data:
+                - id: e8333378-62ed-4062-93b5-fadae6f41175
+                  name: Agent A
+                  email: aa@example.org
+                - id: 40735745-9fde-4b6d-8941-e82e4e6d5001
+                  name: Agent B
+                  email: ab@example.org
+        '400':
+          description: 'Invalid value for: path parameter teamId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    delete:
+      tags:
+      - Teams
+      summary: Remove members
+      description: Remove agents/admins from a team.
+      operationId: deleteTeamsTeamidAgents
+      parameters:
+      - name: teamId
+        in: path
+        description: The team id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: List of agent/admin ids to remove from the specified team
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAgentsFromTeamInput'
+            example:
+              agentIds:
+              - a8080cf3-9d55-41dd-a8ef-b02414399e7a
+              - d53dbec1-e79c-4736-b9a1-15f6dce71ed4
+        required: true
+      responses:
+        '204':
+          description: The agents/admins were successfully removed from the team
+        '400':
+          description: 'Invalid value for: path parameter teamId, Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    patch:
+      tags:
+      - Teams
+      summary: Add members
+      description: Add agents/admins to a team.
+      operationId: patchTeamsTeamidAgents
+      parameters:
+      - name: teamId
+        in: path
+        description: The team id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: List of agent/admin ids to add to the specified team
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentsToTeamInput'
+            example:
+              agentIds:
+              - 912d5148-6918-4420-b23a-8584b896c8ae
+              - a8080cf3-9d55-41dd-a8ef-b02414399e7a
+        required: true
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: 'Invalid value for: path parameter teamId, Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/teams/{teamId}/presence:
+    get:
+      tags:
+      - Teams
+      summary: List presence
+      description: List the presence status of all agents/admins in a team.
+      operationId: getTeamsTeamidPresence
+      parameters:
+      - name: teamId
+        in: path
+        description: The team id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of agents/admins presence status in the specified team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPresenceOutput'
+              example:
+                data:
+                - userId: d53dbec1-e79c-4736-b9a1-15f6dce71ed4
+                  requestTime: '2021-12-01T12:46:35.935'
+                  lastSeen: '2021-12-01T12:46:35.935'
+                  presenceStatus: Working
+                  connectionStatus: Online
+                  activeChannels:
+                  - Email
+                  - FacebookMessenger
+                - userId: e8ecd53b-2f6c-4471-a3a0-34d94caff8c8
+                  requestTime: '2021-12-01T12:46:35.935'
+                  lastSeen: '2021-12-01T12:46:35.935'
+                  presenceStatus: Working
+                  connectionStatus: Online
+                  activeChannels:
+                  - Email
+                  - FacebookMessenger
+        '400':
+          description: 'Invalid value for: path parameter teamId, Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/teams/{teamId}:
+    get:
+      tags:
+      - Teams
+      summary: Get team
+      description: Get a team by id.
+      operationId: getTeamsTeamid
+      parameters:
+      - name: teamId
+        in: path
+        description: The team id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTeamOutput'
+              example:
+                data:
+                  id: 005e7108-c85c-41d1-a945-4a8dc58c4399
+                  name: Team A
+        '400':
+          description: 'Invalid value for: path parameter teamId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+    delete:
+      tags:
+      - Teams
+      summary: Delete team
+      description: Delete a team.
+      operationId: deleteTeamsTeamid
+      parameters:
+      - name: teamId
+        in: path
+        description: The team id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: The team was successfully deleted
+        '400':
+          description: 'Invalid value for: path parameter teamId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    ListPresenceOutput:
+      title: ListPresenceOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserPresence'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    CreateTeamInput:
+      title: CreateTeamInput
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    TeamMember:
+      title: TeamMember
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+    UserPresence:
+      title: UserPresence
+      type: object
+      required:
+      - userId
+      - requestTime
+      - connectionStatus
+      properties:
+        userId:
+          type: string
+        requestTime:
+          type: string
+        lastSeen:
+          type: string
+        presenceStatus:
+          description: 'values: [Away, Working]'
+          type: string
+        connectionStatus:
+          description: 'values: [Offline, Online]'
+          type: string
+        activeChannels:
+          type: array
+          items:
+            description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+            type: string
+    Team1:
+      title: Team
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    DeleteAgentsFromTeamInput:
+      title: DeleteAgentsFromTeamInput
+      type: object
+      properties:
+        agentIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    ListTeamMembersOutput:
+      title: ListTeamMembersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamMember'
+    ListTeamsOutput:
+      title: ListTeamsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team1'
+    AgentsToTeamInput:
+      title: AgentsToTeamInput
+      type: object
+      properties:
+        agentIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+    CreateTeamOutput:
+      title: CreateTeamOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Team1'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

@@ -1,0 +1,2251 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Chatbots API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Chatbots
+paths:
+  /beta/endusers:
+    post:
+      tags:
+      - Chatbots
+      summary: Create end user
+      description: Create an end user.
+      operationId: postEndusers
+      requestBody:
+        description: The end user's details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEndUserInput'
+            example:
+              displayName: Alice Brown
+              email: alice@brown.com
+              phoneNumber: '+551155256325'
+              additionalEmails:
+              - alice@secondary.email
+              additionalPhoneNumbers:
+              - '+5566778899'
+              firstName: Alice
+              lastName: Brown
+              middleNames: []
+              avatarUrl: http://avatar.url
+              externalId: '#12345678'
+        required: true
+      responses:
+        '201':
+          description: The created end user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEndUserOutput'
+              example:
+                data:
+                  id: 434ce9f5-14c8-4be1-a0a8-f755010deb9b
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Alice Brown
+                  email: alice@brown.com
+                  phoneNumber: '+551155256325'
+                  additionalEmails:
+                  - alice@secondary.email
+                  additionalPhoneNumbers:
+                  - '+5566778899'
+                  firstName: Alice
+                  lastName: Brown
+                  middleNames: []
+                  avatarUrl: https://files.dixa.io/public/image_id
+                  externalId: '#12345678'
+                  customAttributes:
+                  - id: 4baa78bc-4815-4122-9c99-f71cd742d37b
+                    name: My Attribute
+                    identifier: my_attribute
+                    value: My Attribute Value
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body, Validation failure during enduser creation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/endusers/{userId}:
+    get:
+      tags:
+      - Chatbots
+      summary: Get end user
+      description: Get an end user by id.
+      operationId: getEndusersUserid
+      parameters:
+      - name: userId
+        in: path
+        description: The end user id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The end user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEndUserOutput'
+              example:
+                data:
+                  id: 434ce9f5-14c8-4be1-a0a8-f755010deb9b
+                  createdAt: '2020-12-16T09:41:43Z'
+                  displayName: Alice Brown
+                  email: alice@brown.com
+                  phoneNumber: '+551155256325'
+                  additionalEmails:
+                  - alice@secondary.email
+                  additionalPhoneNumbers:
+                  - '+5566778899'
+                  firstName: Alice
+                  lastName: Brown
+                  middleNames: []
+                  avatarUrl: https://files.dixa.io/public/image_id
+                  externalId: '#12345678'
+                  customAttributes:
+                  - id: 4baa78bc-4815-4122-9c99-f71cd742d37b
+                    name: My Attribute
+                    identifier: my_attribute
+                    value: My Attribute Value
+        '400':
+          description: 'Invalid value for: path parameter userId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/endusers/{userId}/conversations:
+    get:
+      tags:
+      - Chatbots
+      summary: List end user conversations
+      description: 'Lists conversations requested by an end user. <br/> Note: Custom attributes are not part of the response at this point. If you need to get custom attributes for a conversation use the [GET /conversations/{conversationId}](../Conversations/#tag/Conversations/operation/getConversationsConversationid) endpoint'
+      operationId: getEndusersUseridConversations
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The list of conversations requested by an EndUser
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEndUserConversationsOutput'
+              example:
+                data:
+                - id: 1
+                  requesterId: 9deb936b-52e5-4c44-828d-4c8d48fe0c7e
+                  channel: WidgetChat
+                  createdAt: '2020-12-16T09:41:43Z'
+                  direction: Outbound
+                  state: Open
+                  stateUpdatedAt: '2020-12-16T09:41:43Z'
+                  assignment:
+                    agentId: 0e4d0ead-dc69-470a-9b3a-e7eb16a56453
+                    assignedAt: '2020-12-16T11:00:34Z'
+                  queue:
+                    id: cd87b232-64c8-4ad5-b81a-6f9233352d97
+                    queuedAt: '2020-12-16T10:40:40Z'
+                  browserInfo:
+                    name: Chrome 9
+                    version: 91.0.4472.114
+                    ipAddress: 127.0.0.1
+                    originatingUrl: http://localhost:3000/
+                  language: en
+                  link:
+                    parentId: 1234
+                    _type: SideConversation
+                  _type: ChatConversation
+        '400':
+          description: 'Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations/{conversationId}/close:
+    put:
+      tags:
+      - Chatbots
+      summary: Close conversation
+      description: Mark a conversation as closed by providing its id.
+      operationId: putConversationsConversationidClose
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: An optional agent/admin to close the conversation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloseConversationInput'
+            example:
+              userId: 5a556159-9c21-4f3e-a44f-d323deb80d16
+        required: false
+      responses:
+        '204':
+          description: The conversation was successfully closed
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, User not found, User is not agent/admin'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+  /beta/conversations/{conversationId}/followup:
+    put:
+      tags:
+      - Chatbots
+      summary: Followup conversation
+      description: Follow up a conversation by providing its id and expiration timestamp.
+      operationId: putConversationsConversationidFollowup
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: A request to followup the conversation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FollowupConversationInput'
+            example:
+              timestamp: '2025-01-08T08:31:25Z'
+              userId: 5a556159-9c21-4f3e-a44f-d323deb80d16
+        required: true
+      responses:
+        '204':
+          description: The conversation was successfully followed up
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, User not found, User is not agent/admin'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+  /beta/conversations/{conversationId}/transfer/queue:
+    put:
+      tags:
+      - Chatbots
+      summary: Transfer conversation
+      description: Transfer a conversation to a target queue.
+      operationId: putConversationsConversationidTransferQueue
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Transfer conversation request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferConversationInput'
+            example:
+              queueId: 92f8d193-b26f-4a62-86a3-bb03ee0915e9
+              userId: a53b25da-f676-4c52-acac-58c9280aa23d
+        required: true
+      responses:
+        '204':
+          description: The conversation was successfully transferred to the target queue
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, User not found, User is not agent/admin, Queue does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations/{conversationId}/ratings/{ratingId}/submit:
+    post:
+      tags:
+      - Chatbots
+      summary: Create conversation rating result
+      description: Create a rating result for a specific conversation.
+      operationId: postConversationsConversationidRatingsRatingidSubmit
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: ratingId
+        in: path
+        description: The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The rating result to be created for a conversation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRatingResultInput'
+            example:
+              userId: d3cf6f15-1497-4e71-92f2-9b3b228352bd
+              ratingResult:
+                value: 4
+                _type: Csat
+              comment: Best customer service ever!
+              submittedAt: '2024-03-11T16:39:30Z'
+        required: true
+      responses:
+        '201':
+          description: The created conversation rating result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRatingResultOutput'
+              example:
+                data:
+                  ratingId: 33cf4e5e-9ce9-461c-b668-be9b712b717c
+                  userId: 4c5f7efa-0822-4b75-bdf5-907fa7336e0c
+                  ratingResult:
+                    value: 5
+                    _type: Csat
+                  comment: Excellent customer service!
+                  submittedAt: '2024-03-11T16:39:30Z'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations/{conversationId}/ratings/offer:
+    post:
+      tags:
+      - Chatbots
+      summary: Create conversation rating offer
+      description: Create a rating offer for a specific conversation.
+      operationId: postConversationsConversationidRatingsOffer
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The rating offer to be created for a conversation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRatingOfferInput'
+            example:
+              userId: b0323b42-c428-4afa-970e-20bf5bdeeec4
+              agentId: eeb3bbe5-0355-4ac1-8af5-20d42a3db24b
+              ratingType: Csat
+              offeredAt: '2024-03-11T16:39:30Z'
+        required: true
+      responses:
+        '201':
+          description: The created conversation rating offer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRatingOfferOutput'
+              example:
+                data:
+                  id: 2f0122db-0824-44d7-b39a-e1f722b8c38c
+                  userId: 7a65c963-b3ca-4bd4-996e-bdbcaa620219
+                  agentId: db7f0b41-b779-4726-a673-07b2a59a550d
+                  ratingType: Csat
+                  offeredAt: '2024-03-11T16:39:30Z'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations:
+    post:
+      tags:
+      - Chatbots
+      summary: Create conversation
+      description: Create a conversation. For inbound messages the author is assumed to be the requester of the conversation (end user). For outbound messages the author is specified using the agentId field.
+      operationId: postConversations
+      requestBody:
+        description: The conversation to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConversationInput'
+            example:
+              requesterId: 9c2a2cce-699f-4a72-89d9-fda5bc8dec8b
+              emailIntegrationId: my-integration@email.dixa.io
+              subject: 'order #123'
+              message:
+                content:
+                  value: My order hasn't shipped
+                  _type: Text
+                attachments: []
+                _type: Inbound
+              language: en
+              _type: Email
+        required: true
+      responses:
+        '201':
+          description: The id of the created conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConversationOutput'
+              example:
+                data:
+                  id: 100
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body, Invalid input for Message, Failure to download attachment, Duplicate externalId, Unsupported ConversationChannel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations/import:
+    post:
+      tags:
+      - Chatbots
+      summary: Import conversation
+      description: Import a previously created conversation into Dixa. For inbound messages the author is assumed to be the requester of the conversation (end user), unless the specific channel supports overriding the message author through its attributes. For outbound messages the author is specified using the agentId field.
+      operationId: postConversationsImport
+      requestBody:
+        description: The type of conversation to import
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericConversationImport'
+            examples:
+              Generic API messaging conversation example:
+                summary: Generic API messaging conversation example
+                description: The following example demonstrates how to import a conversation for the **genericapimessaging** channel. The key part is setting **genericChannelName** to **genericapimessaging**. This channel does not require any channel-specific **attributes**.
+                value:
+                  genericChannelName: genericapimessaging
+                  requesterId: 9c2a2cce-699f-4a72-89d9-fda5bc8dec8b
+                  requesterConnectionStatus: Connected
+                  direction: Inbound
+                  messages:
+                  - content:
+                      value: Hi, I need help with my order
+                      _type: Text
+                    attachments: []
+                    createdAt: '2021-12-01T13:00:00.003Z'
+                    _type: InboundImport
+                  - content:
+                      value: Sure — what seems to be the problem?
+                      _type: Text
+                    agentId: cd4ceb58-bb3a-443c-9cd8-4f088feafe5b
+                    attachments: []
+                    createdAt: '2021-12-01T14:00:00.004Z'
+                    _type: OutboundImport
+                  createdAt: '2021-12-01T11:00:00.001Z'
+                  assignment:
+                    agentId: cd4ceb58-bb3a-443c-9cd8-4f088feafe5b
+                    assignedAt: '2021-12-01T12:00:00.002Z'
+                  _type: GenericConversationImport
+              Email conversation example:
+                summary: Email conversation example
+                description: The following example demonstrates how to import an email conversation. The key parts is the **genericChannelName** and the **attributes** fields. Please note that the **cc**, **bcc** and **requesterId** fields are optional. **cc** and **bcc** are only relevant for outbound messages, while **requesterId** message attribute is only relevant for inbound messages.
+                value:
+                  genericChannelName: email
+                  requesterId: 9c2a2cce-699f-4a72-89d9-fda5bc8dec8b
+                  requesterConnectionStatus: Connected
+                  direction: Inbound
+                  messages:
+                  - content:
+                      value: My order hasn't shipped
+                      _type: Text
+                    attachments: []
+                    createdAt: '2021-12-01T13:00:00.003Z'
+                    attributes:
+                      emailIntegrationId: sample-integration@email.dixa.io
+                    _type: InboundImport
+                  - content:
+                      value: Our bad, sorry
+                      _type: Text
+                    agentId: cd4ceb58-bb3a-443c-9cd8-4f088feafe5b
+                    attachments:
+                    - url: https://en.wikipedia.org/wiki/Shipwreck#/media/File:Titanic_wreck_bow.jpg
+                      prettyName: shipwreck
+                    createdAt: '2021-12-01T14:00:00.004Z'
+                    attributes:
+                      emailIntegrationId: sample-integration@email.dixa.io
+                      cc:
+                      - a@b.com
+                      - b@c.com
+                      bcc: []
+                    _type: OutboundImport
+                  - content:
+                      value: Thank you!
+                      _type: Text
+                    attachments: []
+                    createdAt: '2021-12-01T15:00:00.005Z'
+                    attributes:
+                      emailIntegrationId: sample-integration@email.dixa.io
+                      requesterId: 4f1f3a86-6b90-411a-9a3b-cf2e4c4cd7cd
+                    _type: InboundImport
+                  createdAt: '2021-12-01T11:00:00.001Z'
+                  assignment:
+                    agentId: cd4ceb58-bb3a-443c-9cd8-4f088feafe5b
+                    assignedAt: '2021-12-01T12:00:00.002Z'
+                  closing:
+                    closedAt: '2021-12-01T15:00:00.005Z'
+                    closedBy: cd4ceb58-bb3a-443c-9cd8-4f088feafe5b
+                  attributes:
+                    emailIntegrationId: sample-integration@email.dixa.io
+                    subject: email subject
+                  _type: GenericConversationImport
+        required: true
+      responses:
+        '201':
+          description: The id of the imported conversation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportConversationOutput'
+              example:
+                data:
+                  id: 100
+                  partialErrors:
+                  - message: The conversation could not be assigned
+                  - message: 'Invalid attachment url in message. externalId: 42'
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: body, Invalid input for Message, Failure to download attachment, Unsupported ConversationChannel, Requester does not exist, Agent does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations/{conversationId}/claim:
+    put:
+      tags:
+      - Chatbots
+      summary: Claim conversation
+      description: Claim a conversation for a given agent. To avoid taking over assigned conversations, set the `force` paremeter to false
+      operationId: putConversationsConversationidClaim
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimConversationInput'
+            example:
+              agentId: 5a556159-9c21-4f3e-a44f-d323deb80d16
+              force: false
+        required: true
+      responses:
+        '204':
+          description: The conversation was successfully claimed
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+  /beta/queues/{queueId}/availability:
+    get:
+      tags:
+      - Chatbots
+      summary: Get queue availability
+      description: Get availability of supported channels for a given queue. Currently supported channels are adachat, kindlychat, digitalgeniuschat, genericapimessaging.
+      operationId: getQueuesQueueidAvailability
+      parameters:
+      - name: queueId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The availability of supported channels for a given queue
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueAvailabilityOutput'
+              example:
+                data:
+                - channelAvailability:
+                    genericChannelName: adachat
+                    availability: NotAvailable
+                    queueSize: 10
+                    _type: GenericChannel
+                  _type: Success
+                - error:
+                    channel: kindlychat
+                    message: Could not get availability for channel
+                    _type: UnexpectedError
+                  _type: Failure
+        '400':
+          description: 'Invalid value for: path parameter queueId, Invalid value extracted from request context ,queue does not exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '409':
+          description: The request could not be completed due to no supported channels configured for this organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/queues/conversation-position/{csid}:
+    get:
+      tags:
+      - Chatbots
+      summary: Get the position of the conversation in its current queue
+      description: Get the approximate position of a given conversation in its current queue.
+      operationId: getQueuesConversation-positionCsid
+      parameters:
+      - name: csid
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: The position of the conversation in the queue
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQueuedConversationPositionOutput'
+              example:
+                data:
+                  position: 10
+                  queuedAt: '2021-12-01T13:00:00.003Z'
+        '400':
+          description: 'Invalid value for: path parameter csid, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    Closing:
+      title: Closing
+      description: Triggers the closing of the conversation
+      type: object
+      required:
+      - closedAt
+      - closedBy
+      properties:
+        closedAt:
+          type: string
+          format: date-time
+        closedBy:
+          type: string
+          format: uuid
+    Callback:
+      title: Callback
+      type: object
+      required:
+      - requesterId
+      - direction
+      - contactEndpointId
+      - queueId
+      properties:
+        requesterId:
+          type: string
+          format: uuid
+        direction:
+          description: 'values: [Inbound, Outbound]'
+          type: string
+        contactEndpointId:
+          type: string
+        queueId:
+          type: string
+          format: uuid
+    CreateEndUserInput:
+      title: CreateEndUserInput
+      type: object
+      properties:
+        displayName:
+          description: The contact's display name
+          type: string
+        email:
+          description: The contact's primary email address
+          type: string
+        phoneNumber:
+          description: The contact's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the contact
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the contact
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The contact's first name
+          type: string
+        lastName:
+          description: The contact's last name
+          type: string
+        middleNames:
+          description: The contact's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the contact's avatar
+          type: string
+        externalId:
+          description: Custom external identifier for the contact
+          type: string
+    TransferConversationInput:
+      title: TransferConversationInput
+      type: object
+      required:
+      - queueId
+      properties:
+        queueId:
+          description: The target queue for the conversation transfer
+          type: string
+          format: uuid
+        userId:
+          description: An optional agent/admin to originate the transfer of the conversation
+          type: string
+          format: uuid
+    FollowupConversationInput:
+      title: FollowupConversationInput
+      type: object
+      required:
+      - timestamp
+      properties:
+        timestamp:
+          description: A timestamp for when the followup should expire
+          type: string
+          format: date-time
+        userId:
+          description: An optional agent/admin to followup the conversation
+          type: string
+          format: uuid
+    TwitterConversation:
+      title: TwitterConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - conversationType
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        conversationType:
+          description: 'values: [DirectMessage, Tweet]'
+          type: string
+        contactPointTwitterId:
+          type: string
+        endUserTwitterId:
+          type: string
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    QueueAvailabilityOutput:
+      title: QueueAvailabilityOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelAvailabilityOutcome'
+    ImportConversationOutput:
+      title: ImportConversationOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ImportConversationResponse'
+    WhatsAppConversation:
+      title: WhatsAppConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    ConversationLink:
+      title: ConversationLink
+      oneOf:
+      - $ref: '#/components/schemas/EmailForward'
+      - $ref: '#/components/schemas/FollowUp'
+      - $ref: '#/components/schemas/SideConversation'
+    Success:
+      title: Success
+      type: object
+      required:
+      - channelAvailability
+      properties:
+        channelAvailability:
+          $ref: '#/components/schemas/ChannelAvailability'
+    Content:
+      title: Content
+      oneOf:
+      - $ref: '#/components/schemas/Html'
+      - $ref: '#/components/schemas/Markdown'
+      - $ref: '#/components/schemas/Text'
+    ContactForm:
+      title: ContactForm
+      type: object
+      required:
+      - requesterId
+      - emailIntegrationId
+      - subject
+      - message
+      properties:
+        requesterId:
+          type: string
+          format: uuid
+        emailIntegrationId:
+          type: string
+        subject:
+          type: string
+        message:
+          $ref: '#/components/schemas/CreateMessageInput'
+        language:
+          type: string
+    Html:
+      title: Html
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    EndUser:
+      title: EndUser
+      type: object
+      required:
+      - id
+      - createdAt
+      properties:
+        id:
+          description: Unique identifier for the contact
+          type: string
+          format: uuid
+        createdAt:
+          description: Time when the contact was created
+          type: string
+          format: date-time
+        displayName:
+          description: The contact's display name
+          type: string
+        email:
+          description: The contact's primary email address
+          type: string
+        phoneNumber:
+          description: The contact's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the contact
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the contact
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The contact's first name
+          type: string
+        lastName:
+          description: The contact's last name
+          type: string
+        middleNames:
+          description: The contact's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the contact's avatar
+          type: string
+        externalId:
+          description: Custom external identifier for the contact
+          type: string
+        customAttributes:
+          description: Custom attributes for the contact
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+    Markdown:
+      title: Markdown
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    Assignment:
+      title: Assignment
+      type: object
+      required:
+      - agentId
+      - assignedAt
+      properties:
+        agentId:
+          type: string
+          format: uuid
+        assignedAt:
+          type: string
+          format: date-time
+    CreateEndUserOutput:
+      title: CreateEndUserOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    Failure:
+      title: Failure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ChannelAvailabilityError'
+    Queue:
+      title: Queue
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+        queuedAt:
+          type: string
+          format: date-time
+    Chat:
+      title: Chat
+      type: object
+      required:
+      - requesterId
+      - widgetId
+      - message
+      properties:
+        requesterId:
+          type: string
+          format: uuid
+        widgetId:
+          type: string
+          format: uuid
+        message:
+          $ref: '#/components/schemas/CreateMessageInput'
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+        language:
+          type: string
+    GetQueuedConversationPositionOutput:
+      title: GetQueuedConversationPositionOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/QueuedConversation'
+    BrowserInfo:
+      title: BrowserInfo
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        ipAddress:
+          type: string
+        originatingUrl:
+          type: string
+    RatingResult:
+      title: RatingResult
+      type: object
+      required:
+      - ratingId
+      - ratingResult
+      properties:
+        ratingId:
+          type: string
+        userId:
+          type: string
+        ratingResult:
+          $ref: '#/components/schemas/SubmittedRatingResult'
+        comment:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Conversation:
+      title: Conversation
+      oneOf:
+      - $ref: '#/components/schemas/AnonymizedConversation'
+      - $ref: '#/components/schemas/ChatConversation'
+      - $ref: '#/components/schemas/ContactFormConversation'
+      - $ref: '#/components/schemas/EmailConversation'
+      - $ref: '#/components/schemas/FacebookMessengerConversation'
+      - $ref: '#/components/schemas/GenericConversation'
+      - $ref: '#/components/schemas/MessengerConversation'
+      - $ref: '#/components/schemas/PstnPhoneConversation'
+      - $ref: '#/components/schemas/SmsConversation'
+      - $ref: '#/components/schemas/TwitterConversation'
+      - $ref: '#/components/schemas/WhatsAppConversation'
+    ChatConversation:
+      title: ChatConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+        language:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    ImportConversationResponse:
+      title: ImportConversationResponse
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          description: The id of the newly imported conversation
+          type: integer
+          format: int64
+        partialErrors:
+          description: List of errors that do not prevent the conversation from being created
+          type: array
+          items:
+            $ref: '#/components/schemas/PartialError'
+    Email:
+      title: Email
+      type: object
+      required:
+      - requesterId
+      - emailIntegrationId
+      - subject
+      - message
+      properties:
+        requesterId:
+          type: string
+          format: uuid
+        emailIntegrationId:
+          type: string
+        subject:
+          type: string
+        message:
+          $ref: '#/components/schemas/CreateMessageInput'
+        language:
+          type: string
+    ConversationResponse:
+      title: ConversationResponse
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int64
+    OutboundImport:
+      title: OutboundImport
+      type: object
+      required:
+      - content
+      - agentId
+      - createdAt
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        agentId:
+          type: string
+          format: uuid
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        externalId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        attributes:
+          description: A set of dynamic attributes that are specific to the conversation channel, but not limited to it. See channel specific examples for your use case.
+    EmailForward:
+      title: EmailForward
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
+    PstnPhoneConversation:
+      title: PstnPhoneConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    CreateRatingOfferInput:
+      title: CreateRatingOfferInput
+      type: object
+      required:
+      - ratingType
+      properties:
+        userId:
+          description: If userId is not provided, the conversation requester will be picked.
+          type: string
+        agentId:
+          description: If an agentId is not provided, the agent that is most likely to be the target will be picked. Please note that providing an agentId that is not part of the conversation may skew metrics in Intelligence.
+          type: string
+        ratingType:
+          description: 'The type of numeric rating. E.g.: ''Csat'', ''ThumbsUpOrDown'', ''Nps''.'
+          type: string
+        offeredAt:
+          type: string
+          format: date-time
+    RatingOffer:
+      title: RatingOffer
+      type: object
+      required:
+      - id
+      - userId
+      - agentId
+      - ratingType
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        agentId:
+          type: string
+        ratingType:
+          description: 'values: [Csat, Nps, ThumbsUpOrDown]'
+          type: string
+        offeredAt:
+          type: string
+          format: date-time
+    Sms:
+      title: Sms
+      type: object
+      required:
+      - requesterId
+      - contactEndpointId
+      - message
+      properties:
+        requesterId:
+          type: string
+          format: uuid
+        contactEndpointId:
+          description: SMS enabled provisioned phone number in valid E.164 format
+          type: string
+        message:
+          $ref: '#/components/schemas/CreateMessageInput'
+    ClaimConversationInput:
+      title: ClaimConversationInput
+      type: object
+      required:
+      - agentId
+      properties:
+        agentId:
+          description: The id of the agent who is claiming the conversation
+          type: string
+          format: uuid
+        force:
+          description: Set as false to avoid taking over the conversation if it is already assigned to an agent
+          type: boolean
+    InboundImport:
+      title: InboundImport
+      type: object
+      required:
+      - content
+      - createdAt
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        externalId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        attributes:
+          description: A set of dynamic attributes that are specific to the conversation channel, but not limited to it. See channel specific examples for your use case.
+    CreateRatingResultInput:
+      title: CreateRatingResultInput
+      type: object
+      required:
+      - ratingResult
+      properties:
+        userId:
+          description: The userId property is no longer used so it's made optional to keep backwards compatibility. A null value can be provided instead of an actual ID.
+          deprecated: true
+          type: string
+        ratingResult:
+          $ref: '#/components/schemas/SubmittedRatingResult'
+        comment:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+    AnonymizedConversation:
+      title: AnonymizedConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - anonymizedAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        anonymizedAt:
+          type: string
+          format: date-time
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    ListEndUserConversationsOutput:
+      title: ListEndUserConversationsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    GenericChannel:
+      title: GenericChannel
+      type: object
+      required:
+      - genericChannelName
+      - availability
+      properties:
+        genericChannelName:
+          type: string
+        availability:
+          description: 'values: [Available, NotAvailable]'
+          type: string
+        queueSize:
+          description: The number of conversations currently waiting in the queue. This field will only be present if the queue availability is NotAvailable.
+          type: integer
+          format: int32
+    Outbound:
+      title: Outbound
+      type: object
+      required:
+      - agentId
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        agentId:
+          type: string
+          format: uuid
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        integrationEmail:
+          type: string
+        externalId:
+          type: string
+        cc:
+          type: array
+          items:
+            type: string
+            format: uuid
+        bcc:
+          type: array
+          items:
+            type: string
+            format: uuid
+    Text:
+      title: Text
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    UnexpectedError:
+      title: UnexpectedError
+      type: object
+      required:
+      - channel
+      - message
+      properties:
+        channel:
+          type: string
+        message:
+          type: string
+    SideConversation:
+      title: SideConversation
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
+    PartialError:
+      title: PartialError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CreateConversationInput:
+      title: CreateConversationInput
+      oneOf:
+      - $ref: '#/components/schemas/Callback'
+      - $ref: '#/components/schemas/Chat'
+      - $ref: '#/components/schemas/ContactForm'
+      - $ref: '#/components/schemas/Email'
+      - $ref: '#/components/schemas/Sms'
+    SmsConversation:
+      title: SmsConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        fromNumber:
+          type: string
+        toNumber:
+          type: string
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    ThumbsUpOrDown:
+      title: ThumbsUpOrDown
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: One of the the numeric values 0 (thumbs down) and 1 (thumbs up).
+          type: integer
+          format: int32
+    Conflict:
+      title: Conflict
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    FacebookMessengerConversation:
+      title: FacebookMessengerConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    GenericConversationImport:
+      title: GenericConversationImport
+      type: object
+      required:
+      - genericChannelName
+      - requesterId
+      - direction
+      - createdAt
+      properties:
+        genericChannelName:
+          description: The conversation channel. Currently supported values are 'email' and 'genericapimessaging'. See payload examples for each case.
+          type: string
+        requesterId:
+          type: string
+          format: uuid
+        requesterConnectionStatus:
+          description: 'values: [Connected, Disconnected]'
+          type: string
+        direction:
+          description: 'values: [Inbound, Outbound]'
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportMessageInput'
+        createdAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        externalId:
+          type: string
+        closing:
+          $ref: '#/components/schemas/Closing'
+        attributes:
+          description: A set of dynamic attributes that are specific to the conversation channel, but not limited to it. See channel specific examples for your use case.
+    SubmittedRatingResult:
+      title: SubmittedRatingResult
+      oneOf:
+      - $ref: '#/components/schemas/Csat'
+      - $ref: '#/components/schemas/Nps'
+      - $ref: '#/components/schemas/ThumbsUpOrDown'
+    ImportMessageInput:
+      title: ImportMessageInput
+      oneOf:
+      - $ref: '#/components/schemas/InboundImport'
+      - $ref: '#/components/schemas/OutboundImport'
+    FollowUp:
+      title: FollowUp
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
+    CreateRatingOfferOutput:
+      title: CreateRatingOfferOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RatingOffer'
+    MessengerConversation:
+      title: MessengerConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+        language:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    CloseConversationInput:
+      title: CloseConversationInput
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Inbound:
+      title: Inbound
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        integrationEmail:
+          description: 'Internal email address registered for the integration with format: \<email-address\>@email.dixa.io'
+          type: string
+        externalId:
+          description: Client generated identifier for external reference
+          type: string
+    CreateConversationOutput:
+      title: CreateConversationOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ConversationResponse'
+    ChannelAvailability:
+      title: ChannelAvailability
+      oneOf:
+      - $ref: '#/components/schemas/GenericChannel'
+    CreateMessageInput:
+      title: CreateMessageInput
+      description: Only Outbound messages are supported for Sms and Whatsapp.
+      oneOf:
+      - $ref: '#/components/schemas/Inbound'
+      - $ref: '#/components/schemas/Outbound'
+    EmailConversation:
+      title: EmailConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - toEmail
+      - fromEmail
+      - integrationEmail
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        toEmail:
+          type: string
+        fromEmail:
+          type: string
+        integrationEmail:
+          type: string
+        language:
+          type: string
+        subject:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    GetEndUserOutput:
+      title: GetEndUserOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    ChannelAvailabilityError:
+      title: ChannelAvailabilityError
+      oneOf:
+      - $ref: '#/components/schemas/UnexpectedError'
+    CreateRatingResultOutput:
+      title: CreateRatingResultOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RatingResult'
+    GenericConversation:
+      title: GenericConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        fromContactPointId:
+          type: string
+        toContactPointId:
+          type: string
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    Nps:
+      title: Nps
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: Numeric value between 0 and 10 representing the net promoter score.
+          type: integer
+          format: int32
+    File:
+      title: File
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          description: url
+          type: string
+        prettyName:
+          type: string
+    QueuedConversation:
+      title: QueuedConversation
+      type: object
+      required:
+      - queuedAt
+      properties:
+        position:
+          description: Approximate position of the conversation in the current queue
+          type: integer
+          format: int32
+        queuedAt:
+          type: string
+          format: date-time
+    CustomAttribute:
+      title: CustomAttribute
+      type: object
+      required:
+      - id
+      - name
+      - identifier
+      - value
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        identifier:
+          type: string
+        value:
+          description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+          oneOf:
+          - type: array
+            items:
+              type: string
+          - type: string
+    ContactFormConversation:
+      title: ContactFormConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - fromEmail
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        fromEmail:
+          type: string
+        toEmail:
+          type: string
+        integrationEmail:
+          type: string
+        language:
+          type: string
+        subject:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    Csat:
+      title: Csat
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: Numeric value between 1 and 5 representing the customer's satisfaction level.
+          type: integer
+          format: int32
+    ChannelAvailabilityOutcome:
+      title: ChannelAvailabilityOutcome
+      oneOf:
+      - $ref: '#/components/schemas/Failure'
+      - $ref: '#/components/schemas/Success'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

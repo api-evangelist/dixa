@@ -1,0 +1,1743 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Knowledge API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Knowledge
+paths:
+  /beta/knowledge/collections/{collectionId}:
+    get:
+      tags:
+      - Knowledge
+      summary: Get collection
+      description: Get a knowledge collection by id
+      operationId: getKnowledgeCollectionsCollectionid
+      parameters:
+      - name: collectionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The knowledge collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKnowledgeCollectionOutput'
+              example:
+                data:
+                  id: 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+                  title: Test Collection
+                  description: This is a test collection
+                  internalKbEnabled: true
+                  restrictions:
+                    isRestricted: true
+                    inheritedRestrictions:
+                    - fromCollection: 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/collections/{collectionId}/catalog:
+    get:
+      tags:
+      - Knowledge
+      summary: Get collection catalog
+      description: Get collection catalog, including all categories and articles
+      operationId: getKnowledgeCollectionsCollectionidCatalog
+      parameters:
+      - name: collectionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: language
+        in: query
+        description: Language in which the article translations will be returned. If not provided, the default language will be used.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The knowledge collection catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKnowledgeCollectionCatalogOutput'
+              example:
+                data:
+                  categories:
+                  - id: 123e4567-e89b-12d3-a456-426614174000
+                    title:
+                      languageId: en
+                      title: Getting Started
+                    categories:
+                    - id: 123e4567-e89b-12d3-a456-426614174000
+                      title:
+                        languageId: en
+                        title: Getting Started
+                      categories: []
+                      articles:
+                      - id: 5f2640d8-631c-4472-8d48-3de0cfd21cd0
+                        title:
+                          languageId: en
+                          title: Getting Started
+                    articles:
+                    - id: 5f2640d8-631c-4472-8d48-3de0cfd21cd0
+                      title:
+                        languageId: en
+                        title: Getting Started
+                  articles:
+                  - id: 5f2640d8-631c-4472-8d48-3de0cfd21cd0
+                    title:
+                      languageId: en
+                      title: Getting Started
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/categories/{categoryId}:
+    get:
+      tags:
+      - Knowledge
+      summary: Get category
+      description: Get a knowledge category by id
+      operationId: getKnowledgeCategoriesCategoryid
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: language
+        in: query
+        description: Language in which the article translations will be returned. If not provided, the default language will be used.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKnowledgeCategoryOutput'
+              example:
+                data:
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                  title:
+                    languageId: en
+                    title: Getting Started
+                  isDefaultLocation: true
+                  isLocked: false
+                  restrictions:
+                    isRestricted: true
+                    inheritedRestrictions:
+                    - fromCollection: 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+                  parentCategory: 222e4567-e89b-12d3-a456-426614174111
+                  parentCollections:
+                  - 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/categories/{categoryId}/translations:
+    get:
+      tags:
+      - Knowledge
+      summary: Get category translations
+      description: Get the knowledge category translations
+      operationId: getKnowledgeCategoriesCategoryidTranslations
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The category translations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKnowledgeCategoryTranslationsOutput'
+              example:
+                data:
+                  titles:
+                  - languageId: en
+                    title: Getting Started
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles/{articleId}:
+    get:
+      tags:
+      - Knowledge
+      summary: Get article
+      description: Get a knowledge article by id
+      operationId: getKnowledgeArticlesArticleid
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: language
+        in: query
+        description: Language in which the article translations will be returned. If not provided, the default language will be used.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The knowledge article
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKnowledgeArticleOutput'
+              example:
+                data:
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                  isDefaultLocation: true
+                  translation:
+                    draft:
+                      language: en
+                      title: Getting Started
+                      isIndexedVersion: true
+                      contents:
+                        html: <p>HTML content</p>
+                        plaintext: plaintext content
+                      availableAt:
+                        helpCenterLinks:
+                        - id: 112b5b9c-926a-4338-8963-0dc73d29dec7
+                          name: Dixa Help Center
+                          url: https://help.dixa.com
+                      createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                      updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                      createdBy: 123e4567-e89b-12d3-a456-426614174000
+                      updatedBy: 123e4567-e89b-12d3-a456-426614174000
+                    published:
+                      language: en
+                      title: Getting Started
+                      isIndexedVersion: true
+                      contents:
+                        html: <p>HTML content</p>
+                        plaintext: plaintext content
+                      availableAt:
+                        helpCenterLinks:
+                        - id: 112b5b9c-926a-4338-8963-0dc73d29dec7
+                          name: Dixa Help Center
+                          url: https://help.dixa.com
+                      createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                      updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                      createdBy: 123e4567-e89b-12d3-a456-426614174000
+                      updatedBy: 123e4567-e89b-12d3-a456-426614174000
+                  tags:
+                  - f6020a03-5a7a-4d9e-81e6-f1b76a855a5e
+                  createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                  updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  indexedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  createdBy: 123e4567-e89b-12d3-a456-426614174000
+                  updatedBy: 123e4567-e89b-12d3-a456-426614174000
+                  ownedBy: 123e4567-e89b-12d3-a456-426614174000
+                  indexedBy: 123e4567-e89b-12d3-a456-426614174000
+                  restrictions:
+                    isRestricted: true
+                    inheritedRestrictions:
+                    - fromCollection: 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+                  parentCategory: 123e4567-e89b-12d3-a456-426614174000
+                  parentCollections:
+                  - 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    delete:
+      tags:
+      - Knowledge
+      summary: Delete article
+      description: Delete a knowledge article
+      operationId: deleteKnowledgeArticlesArticleid
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    patch:
+      tags:
+      - Knowledge
+      summary: Update article
+      description: Update a knowledge article
+      operationId: patchKnowledgeArticlesArticleid
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The knowledge article fields to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateKnowledgeArticleInput'
+            example:
+              ownedBy: 123e4567-e89b-12d3-a456-426614174000
+              tags:
+                add:
+                - tag-id-1
+              preRelease: false
+        required: true
+      responses:
+        '200':
+          description: The updated knowledge article
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateKnowledgeArticleOutput'
+              example:
+                data:
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                  isDefaultLocation: true
+                  translation:
+                    draft:
+                      language: en
+                      title: Getting Started
+                      isIndexedVersion: true
+                      contents:
+                        html: <p>HTML content</p>
+                        plaintext: plaintext content
+                      availableAt:
+                        helpCenterLinks:
+                        - id: 112b5b9c-926a-4338-8963-0dc73d29dec7
+                          name: Dixa Help Center
+                          url: https://help.dixa.com
+                      createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                      updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                      createdBy: 123e4567-e89b-12d3-a456-426614174000
+                      updatedBy: 123e4567-e89b-12d3-a456-426614174000
+                    published:
+                      language: en
+                      title: Getting Started
+                      isIndexedVersion: true
+                      contents:
+                        html: <p>HTML content</p>
+                        plaintext: plaintext content
+                      availableAt:
+                        helpCenterLinks:
+                        - id: 112b5b9c-926a-4338-8963-0dc73d29dec7
+                          name: Dixa Help Center
+                          url: https://help.dixa.com
+                      createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                      updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                      createdBy: 123e4567-e89b-12d3-a456-426614174000
+                      updatedBy: 123e4567-e89b-12d3-a456-426614174000
+                  tags:
+                  - f6020a03-5a7a-4d9e-81e6-f1b76a855a5e
+                  createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                  updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  indexedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  createdBy: 123e4567-e89b-12d3-a456-426614174000
+                  updatedBy: 123e4567-e89b-12d3-a456-426614174000
+                  ownedBy: 123e4567-e89b-12d3-a456-426614174000
+                  indexedBy: 123e4567-e89b-12d3-a456-426614174000
+                  restrictions:
+                    isRestricted: true
+                    inheritedRestrictions:
+                    - fromCollection: 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+                  parentCategory: 123e4567-e89b-12d3-a456-426614174000
+                  parentCollections:
+                  - 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles/{articleId}/translations:
+    get:
+      tags:
+      - Knowledge
+      summary: Get article translations
+      description: Get a knowledge article translations
+      operationId: getKnowledgeArticlesArticleidTranslations
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The article translations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKnowledgeArticleTranslationsOutput'
+              example:
+                data:
+                  translations:
+                    draft:
+                    - language: en
+                      title: Getting Started
+                      isIndexedVersion: true
+                      contents:
+                        html: <p>HTML content</p>
+                        plaintext: plaintext content
+                      availableAt:
+                        helpCenterLinks:
+                        - id: 112b5b9c-926a-4338-8963-0dc73d29dec7
+                          name: Dixa Help Center
+                          url: https://help.dixa.com
+                      createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                      updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                      createdBy: 123e4567-e89b-12d3-a456-426614174000
+                      updatedBy: 123e4567-e89b-12d3-a456-426614174000
+                    published:
+                    - language: en
+                      title: Getting Started
+                      isIndexedVersion: true
+                      contents:
+                        html: <p>HTML content</p>
+                        plaintext: plaintext content
+                      availableAt:
+                        helpCenterLinks:
+                        - id: 112b5b9c-926a-4338-8963-0dc73d29dec7
+                          name: Dixa Help Center
+                          url: https://help.dixa.com
+                      createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                      updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                      createdBy: 123e4567-e89b-12d3-a456-426614174000
+                      updatedBy: 123e4567-e89b-12d3-a456-426614174000
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    patch:
+      tags:
+      - Knowledge
+      summary: Update article translations
+      description: Update translations for a knowledge article. Supports partial success.
+      operationId: patchKnowledgeArticlesArticleidTranslations
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The translations to update for the article
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTranslationsInput'
+            example:
+              translations:
+              - languageId: en
+                title: My Article
+                content: <p>Hello world</p>
+        required: true
+      responses:
+        '200':
+          description: The updated translations, with partial errors if any
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTranslationsOutput'
+              example:
+                data:
+                - language: en
+                  title: Getting Started
+                  isIndexedVersion: true
+                  contents:
+                    html: <p>HTML content</p>
+                    plaintext: plaintext content
+                  availableAt:
+                    helpCenterLinks:
+                    - id: 112b5b9c-926a-4338-8963-0dc73d29dec7
+                      name: Dixa Help Center
+                      url: https://help.dixa.com
+                  createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                  updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  createdBy: 123e4567-e89b-12d3-a456-426614174000
+                  updatedBy: 123e4567-e89b-12d3-a456-426614174000
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles:
+    post:
+      tags:
+      - Knowledge
+      summary: Create article
+      description: Create a knowledge article
+      operationId: postKnowledgeArticles
+      requestBody:
+        description: The knowledge article to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKnowledgeArticleInput'
+            example:
+              translations:
+              - languageId: en
+                title: My Article
+                content: <p>Content</p>
+              parentId: 123e4567-e89b-12d3-a456-426614174000
+              tags:
+              - f6020a03-5a7a-4d9e-81e6-f1b76a855a5e
+              preRelease: false
+        required: true
+      responses:
+        '200':
+          description: The created knowledge article
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateKnowledgeArticleOutput'
+              example:
+                data:
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                  isDefaultLocation: true
+                  translation:
+                    draft:
+                      language: en
+                      title: Getting Started
+                      isIndexedVersion: true
+                      contents:
+                        html: <p>HTML content</p>
+                        plaintext: plaintext content
+                      availableAt:
+                        helpCenterLinks:
+                        - id: 112b5b9c-926a-4338-8963-0dc73d29dec7
+                          name: Dixa Help Center
+                          url: https://help.dixa.com
+                      createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                      updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                      createdBy: 123e4567-e89b-12d3-a456-426614174000
+                      updatedBy: 123e4567-e89b-12d3-a456-426614174000
+                    published:
+                      language: en
+                      title: Getting Started
+                      isIndexedVersion: true
+                      contents:
+                        html: <p>HTML content</p>
+                        plaintext: plaintext content
+                      availableAt:
+                        helpCenterLinks:
+                        - id: 112b5b9c-926a-4338-8963-0dc73d29dec7
+                          name: Dixa Help Center
+                          url: https://help.dixa.com
+                      createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                      updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                      createdBy: 123e4567-e89b-12d3-a456-426614174000
+                      updatedBy: 123e4567-e89b-12d3-a456-426614174000
+                  tags:
+                  - f6020a03-5a7a-4d9e-81e6-f1b76a855a5e
+                  createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                  updatedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  indexedAt: 2021-12-01T12:46:36.581Z[GMT]
+                  createdBy: 123e4567-e89b-12d3-a456-426614174000
+                  updatedBy: 123e4567-e89b-12d3-a456-426614174000
+                  ownedBy: 123e4567-e89b-12d3-a456-426614174000
+                  indexedBy: 123e4567-e89b-12d3-a456-426614174000
+                  restrictions:
+                    isRestricted: true
+                    inheritedRestrictions:
+                    - fromCollection: 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+                  parentCategory: 123e4567-e89b-12d3-a456-426614174000
+                  parentCollections:
+                  - 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles/{articleId}/translations/{languageId}/publish:
+    post:
+      tags:
+      - Knowledge
+      summary: Publish translation
+      description: Publish a specific translation for search
+      operationId: postKnowledgeArticlesArticleidTranslationsLanguageidPublish
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: languageId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles/{articleId}/translations/{languageId}/unpublish:
+    post:
+      tags:
+      - Knowledge
+      summary: Unpublish translation
+      description: Mark a specific translation as unpublished
+      operationId: postKnowledgeArticlesArticleidTranslationsLanguageidUnpublish
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: languageId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles/{articleId}/translations/{languageId}:
+    delete:
+      tags:
+      - Knowledge
+      summary: Delete article translation
+      description: Delete all versions of a knowledge article translation
+      operationId: deleteKnowledgeArticlesArticleidTranslationsLanguageid
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: languageId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles/{articleId}/publish:
+    post:
+      tags:
+      - Knowledge
+      summary: Publish article
+      description: Publish a new version of all translations for a knowledge article
+      operationId: postKnowledgeArticlesArticleidPublish
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles/{articleId}/unpublish:
+    post:
+      tags:
+      - Knowledge
+      summary: Unpublish article
+      description: Remove all translations of a knowledge article from search
+      operationId: postKnowledgeArticlesArticleidUnpublish
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles/{articleId}/parent/{parentId}:
+    patch:
+      tags:
+      - Knowledge
+      summary: Move article
+      description: Move a knowledge article to a new parent
+      operationId: patchKnowledgeArticlesArticleidParentParentid
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: parentId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles/{articleId}/parent:
+    delete:
+      tags:
+      - Knowledge
+      summary: Remove article parent
+      description: Remove a parent from a knowledge article
+      operationId: deleteKnowledgeArticlesArticleidParent
+      parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/collections:
+    get:
+      tags:
+      - Knowledge
+      summary: List collections
+      description: Paginated list knowledge collections
+      operationId: getKnowledgeCollections
+      parameters:
+      - name: pageLimit
+        in: query
+        description: Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageKey
+        in: query
+        description: Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of knowledge collections
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListKnowledgeCollectionsOutput'
+              example:
+                data:
+                - id: 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+                  title: Test Collection
+                  description: This is a test collection
+                  internalKbEnabled: true
+                  restrictions:
+                    isRestricted: true
+                    inheritedRestrictions:
+                    - fromCollection: 78dfb531-2e1e-4ffc-bd18-fdad68cd2419
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/knowledge/articles/attachments:
+    post:
+      tags:
+      - Knowledge
+      summary: Upload article attachments
+      description: 'Upload one or more image files to be used as attachments in knowledge articles. Supported formats: image/png, image/jpeg, image/gif, image/webp. Maximum 5 files per request, 4 MB per file, with a total request payload limit of 10 MB. Supports partial success.'
+      operationId: postKnowledgeArticlesAttachments
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadAttachmentsInput'
+        required: true
+      responses:
+        '200':
+          description: The uploaded attachments, with partial errors if any
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadAttachmentsOutput'
+              examples:
+                All succeeded:
+                  summary: Every uploaded file was accepted
+                  value:
+                    data:
+                    - originalFilename: logo.png
+                      url: https://cdn.example.com/images/org-id/uuid.png
+                    - originalFilename: banner.jpg
+                      url: https://cdn.example.com/images/org-id/uuid2.jpg
+                    partialErrors: []
+                Partial success:
+                  summary: Some files succeeded; others failed validation (400) or upload (500)
+                  value:
+                    data:
+                    - originalFilename: logo.png
+                      url: https://cdn.example.com/images/org-id/uuid.png
+                    partialErrors:
+                    - originalFilename: note.txt
+                      message: 'Unsupported MIME type ''text/plain''. Allowed: image/gif, image/jpeg, image/png, image/webp'
+                      code: 400
+                    - originalFilename: huge.png
+                      message: File exceeds 4 MB size limit
+                      code: 400
+                    - originalFilename: hero.png
+                      message: Upload failed due to unexpected error
+                      code: 500
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    TranslationTitle:
+      title: TranslationTitle
+      type: object
+      required:
+      - languageId
+      - title
+      properties:
+        languageId:
+          type: string
+        title:
+          type: string
+    HelpCenterLink:
+      title: HelpCenterLink
+      type: object
+      required:
+      - id
+      - name
+      - url
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+    GetKnowledgeArticleTranslationsOutput:
+      title: GetKnowledgeArticleTranslationsOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ArticleTranslations'
+    Collection:
+      title: Collection
+      type: object
+      required:
+      - id
+      - title
+      - internalKbEnabled
+      - restrictions
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        internalKbEnabled:
+          type: boolean
+        restrictions:
+          $ref: '#/components/schemas/Restrictions'
+    ArticleTranslations:
+      title: ArticleTranslations
+      type: object
+      required:
+      - translations
+      properties:
+        translations:
+          $ref: '#/components/schemas/TranslationList'
+    AttachmentResult:
+      title: AttachmentResult
+      type: object
+      required:
+      - originalFilename
+      - url
+      properties:
+        originalFilename:
+          description: Original filename of the uploaded file
+          type: string
+        url:
+          description: Public URL of the uploaded file
+          type: string
+    ListKnowledgeCollectionsOutput:
+      title: ListKnowledgeCollectionsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+    GetKnowledgeCollectionOutput:
+      title: GetKnowledgeCollectionOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Collection'
+    ArticleTranslation:
+      title: ArticleTranslation
+      type: object
+      required:
+      - language
+      - title
+      - isIndexedVersion
+      - contents
+      - availableAt
+      - createdAt
+      - updatedAt
+      properties:
+        language:
+          type: string
+        title:
+          type: string
+        isIndexedVersion:
+          type: boolean
+        contents:
+          $ref: '#/components/schemas/ArticleContent'
+        availableAt:
+          $ref: '#/components/schemas/AvailableAt'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+    TranslationList:
+      title: TranslationList
+      type: object
+      properties:
+        draft:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleTranslation'
+        published:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleTranslation'
+    UpdateTranslationsInput:
+      title: UpdateTranslationsInput
+      type: object
+      properties:
+        translations:
+          description: List of translations to create or update
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslationInput1'
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    TagsUpdateInput:
+      title: TagsUpdateInput
+      description: Tags to add or remove
+      type: object
+      properties:
+        add:
+          description: Tag IDs to add
+          type: array
+          items:
+            type: string
+        remove:
+          description: Tag IDs to remove
+          type: array
+          items:
+            type: string
+    Category:
+      title: Category
+      type: object
+      required:
+      - id
+      - isLocked
+      - restrictions
+      properties:
+        id:
+          type: string
+        title:
+          $ref: '#/components/schemas/TranslationTitle'
+        isDefaultLocation:
+          type: boolean
+        isLocked:
+          type: boolean
+        restrictions:
+          $ref: '#/components/schemas/Restrictions'
+        parentCategory:
+          type: string
+        parentCollections:
+          type: array
+          items:
+            type: string
+    ArticleCatalogItem:
+      title: ArticleCatalogItem
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        title:
+          $ref: '#/components/schemas/TranslationTitle'
+    CollectionCatalogItem:
+      title: CollectionCatalogItem
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryCatalogItem'
+        articles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleCatalogItem'
+    Translation1:
+      title: Translation
+      type: object
+      required:
+      - draft
+      properties:
+        draft:
+          $ref: '#/components/schemas/ArticleTranslation'
+        published:
+          $ref: '#/components/schemas/ArticleTranslation'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    UploadAttachmentsInput:
+      title: UploadAttachmentsInput
+      type: object
+      properties:
+        files:
+          description: One or more image files to upload as article attachments. Each part must be a supported image format.
+          type: array
+          items:
+            type: string
+            format: binary
+    CreateKnowledgeArticleInput:
+      title: CreateKnowledgeArticleInput
+      type: object
+      properties:
+        translations:
+          description: Initial translations for the article
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslationInput'
+        parentId:
+          description: ID of the parent category
+          type: string
+        tags:
+          description: List of tag IDs to assign to the article
+          type: array
+          items:
+            type: string
+        preRelease:
+          description: Whether the article is only available in pre-release mode
+          type: boolean
+    Article:
+      title: Article
+      type: object
+      required:
+      - id
+      - createdAt
+      - updatedAt
+      - restrictions
+      properties:
+        id:
+          type: string
+        isDefaultLocation:
+          type: boolean
+        translation:
+          $ref: '#/components/schemas/Translation1'
+        tags:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        indexedAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+        ownedBy:
+          type: string
+        indexedBy:
+          type: string
+        restrictions:
+          $ref: '#/components/schemas/Restrictions'
+        parentCategory:
+          type: string
+        parentCollections:
+          type: array
+          items:
+            type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Restrictions:
+      title: Restrictions
+      type: object
+      required:
+      - isRestricted
+      properties:
+        isRestricted:
+          type: boolean
+        inheritedRestrictions:
+          type: array
+          items:
+            $ref: '#/components/schemas/InheritedRestriction'
+    AttachmentError:
+      title: AttachmentError
+      type: object
+      required:
+      - originalFilename
+      - message
+      - code
+      properties:
+        originalFilename:
+          description: Original filename of the failed file
+          type: string
+        message:
+          description: Error message describing the failure
+          type: string
+        code:
+          description: 'HTTP-style status code: 400 for client-side errors, 500 for server-side errors'
+          type: integer
+          format: int32
+    CategoryCatalogItem:
+      title: CategoryCatalogItem
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        title:
+          $ref: '#/components/schemas/TranslationTitle'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryCatalogItem'
+        articles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleCatalogItem'
+    GetKnowledgeCategoryOutput:
+      title: GetKnowledgeCategoryOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Category'
+    GetKnowledgeArticleOutput:
+      title: GetKnowledgeArticleOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Article'
+    UpdateKnowledgeArticleInput:
+      title: UpdateKnowledgeArticleInput
+      type: object
+      properties:
+        ownedBy:
+          description: ID of the user who owns the article
+          type: string
+        tags:
+          $ref: '#/components/schemas/TagsUpdateInput'
+        preRelease:
+          description: Whether the article is only available in pre-release mode
+          type: boolean
+    UploadAttachmentsOutput:
+      title: UploadAttachmentsOutput
+      type: object
+      properties:
+        data:
+          description: Successfully uploaded attachments
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentResult'
+        partialErrors:
+          description: Errors for attachments that failed
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentError'
+    CategoryTranslations:
+      title: CategoryTranslations
+      type: object
+      properties:
+        titles:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslationTitle'
+    TranslationInput:
+      title: TranslationInput
+      type: object
+      required:
+      - languageId
+      - title
+      properties:
+        languageId:
+          description: ISO language code (e.g. en, da, de)
+          type: string
+        title:
+          description: Title of the translation
+          type: string
+        content:
+          description: HTML content of the translation
+          type: string
+    TranslationInput1:
+      title: TranslationInput
+      type: object
+      required:
+      - languageId
+      - title
+      properties:
+        languageId:
+          description: ISO language code (e.g. en, da, de)
+          type: string
+        title:
+          description: Title of the translation
+          type: string
+        content:
+          description: HTML content of the translation
+          type: string
+    InheritedRestriction:
+      title: InheritedRestriction
+      type: object
+      properties:
+        fromCollection:
+          type: string
+        fromCategory:
+          type: string
+    AvailableAt:
+      title: AvailableAt
+      type: object
+      properties:
+        helpCenterLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/HelpCenterLink'
+    ArticleContent:
+      title: ArticleContent
+      type: object
+      required:
+      - html
+      - plaintext
+      properties:
+        html:
+          type: string
+        plaintext:
+          type: string
+    GetKnowledgeCategoryTranslationsOutput:
+      title: GetKnowledgeCategoryTranslationsOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CategoryTranslations'
+    UpdateTranslationsOutput:
+      title: UpdateTranslationsOutput
+      type: object
+      properties:
+        data:
+          description: Successfully upserted translations
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleTranslation'
+        partialErrors:
+          description: Errors for translations that failed
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslationError'
+    UpdateKnowledgeArticleOutput:
+      title: UpdateKnowledgeArticleOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Article'
+          description: The updated article
+    TranslationError:
+      title: TranslationError
+      type: object
+      required:
+      - languageId
+      - message
+      properties:
+        languageId:
+          description: Language code of the failed translation
+          type: string
+        message:
+          description: Error message describing the failure
+          type: string
+    GetKnowledgeCollectionCatalogOutput:
+      title: GetKnowledgeCollectionCatalogOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CollectionCatalogItem'
+    CreateKnowledgeArticleOutput:
+      title: CreateKnowledgeArticleOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Article'
+          description: The created article
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

@@ -1,0 +1,181 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Contact Endpoints API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Contact Endpoints
+paths:
+  /beta/contact-endpoints/{contactEndpointId}:
+    get:
+      tags:
+      - Contact Endpoints
+      summary: Get contact endpoint
+      description: Get contact endpoint by id (email or phone number).
+      operationId: getContact-endpointsContactendpointid
+      parameters:
+      - name: contactEndpointId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested contact endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContactPointByIdOutput'
+              example:
+                data:
+                  address: some@email.com
+                  senderOverride: otheremail@mail.dk
+                  name: Special email flow
+                  _type: EmailEndpoint
+        '400':
+          description: Invalid value extracted from request context, The contactEndpointId is neither a valid email nor a valid E.164 phone number
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+  /beta/contact-endpoints:
+    get:
+      tags:
+      - Contact Endpoints
+      summary: List contact endpoints
+      description: List all available contact endpoints in an organization.
+      operationId: getContact-endpoints
+      parameters:
+      - name: _type
+        in: query
+        description: 'An optional contact type can be specified to filter the contact endpoints. If not provided, all types are listed. Possible values: [EmailEndpoint, TelephonyEndpoint]'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The list of available contact endpoints
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContactPointsOutput'
+              example:
+                data:
+                - number: '+4531434343'
+                  functionality:
+                  - VoiceInbound
+                  - VoiceOutbound
+                  name: DK Sms
+                  _type: TelephonyEndpoint
+                - address: some@email.com
+                  senderOverride: otheremail@mail.dk
+                  name: Special email flow
+                  _type: EmailEndpoint
+        '400':
+          description: 'Invalid value extracted from request context, Invalid value for: query parameter _type'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    EmailEndpoint:
+      title: EmailEndpoint
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+        senderOverride:
+          type: string
+        name:
+          type: string
+    ListContactPointsOutput:
+      title: ListContactPointsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactEndpoint'
+    ContactEndpoint:
+      title: ContactEndpoint
+      oneOf:
+      - $ref: '#/components/schemas/EmailEndpoint'
+      - $ref: '#/components/schemas/TelephonyEndpoint'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    GetContactPointByIdOutput:
+      title: GetContactPointByIdOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ContactEndpoint'
+    TelephonyEndpoint:
+      title: TelephonyEndpoint
+      type: object
+      required:
+      - number
+      properties:
+        number:
+          type: string
+        functionality:
+          type: array
+          items:
+            description: 'values: [Sms, VoiceInbound, VoiceOutbound]'
+            type: string
+        name:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header

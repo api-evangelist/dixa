@@ -1,0 +1,341 @@
+openapi: 3.0.3
+info:
+  title: Dixa Agents Internal Notes API
+  version: beta
+servers:
+- url: https://dev.dixa.io
+security:
+- ApiKeyAuth: []
+tags:
+- name: Internal Notes
+paths:
+  /beta/conversations/{conversationId}/notes/bulk:
+    post:
+      tags:
+      - Internal Notes
+      summary: Add internal notes
+      description: Create internal notes in a conversation by providing the conversation id.
+      operationId: postConversationsConversationidNotesBulk
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The list of internal notes to create for a conversation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkCreateInternalNoteInput'
+            examples:
+              Input with two internal notes created for the same conversation:
+                value:
+                  data:
+                  - message: A sample note
+                    agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                    createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                  - message: Another sample note
+        required: true
+      responses:
+        '200':
+          description: The created internal notes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkCreateNoteOutput'
+              examples:
+                A list of internal notes created successfully and error message for others which failed:
+                  value:
+                    data:
+                    - data:
+                        id: eb31acbb-13f9-4ce7-abd3-44dd86266741
+                        authorId: 5e8a300e-787e-47cd-af53-fc1ccc37933d
+                        createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                        csid: 9456
+                        message: A sample note
+                      _type: BulkActionSuccess
+                    - error:
+                        message: An agent with id:... cannot be found in org.
+                      _type: BulkActionFailure
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+  /beta/conversations/{conversationId}/notes:
+    get:
+      tags:
+      - Internal Notes
+      summary: List internal notes
+      description: Get all internal notes for a particular conversation by providing the conversation id.
+      operationId: getConversationsConversationidNotes
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: List of internal notes for a conversation sorted from oldest to newest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInternalNotesOutput'
+              example:
+                data:
+                - id: 3346b99c-8128-4276-ac40-5f30c959e5e7
+                  authorId: c68f42a5-1453-497a-940f-ff36ed4f1631
+                  createdAt: '2021-01-20T09:00:00Z'
+                  csid: 7392
+                  message: A note to remember
+                - id: 22b8e6b6-4576-4dc0-ab05-60f81e8b0708
+                  authorId: 124d54bb-92d6-41c9-a675-788d6a8c821e
+                  createdAt: '2021-01-22T12:00:00Z'
+                  csid: 7392
+                  message: A note to forget
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Invalid value in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+    post:
+      tags:
+      - Internal Notes
+      summary: Add internal note
+      description: Create an internal note in a conversation by providing the conversation id.
+      operationId: postConversationsConversationidNotes
+      parameters:
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The internal note to create for a conversation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInternalNoteInput'
+            examples:
+              Input with createdAt:
+                value:
+                  message: A sample note
+                  agentId: a53b25da-f676-4c52-acac-58c9280aa23d
+                  createdAt: 2021-12-01T12:46:36.581Z[GMT]
+              Input without createdAt:
+                value:
+                  message: Another sample note
+        required: true
+      responses:
+        '200':
+          description: The created internal note
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateNoteOutput'
+              examples:
+                created internal note:
+                  value:
+                    data:
+                      id: eb31acbb-13f9-4ce7-abd3-44dd86266741
+                      authorId: 5e8a300e-787e-47cd-af53-fc1ccc37933d
+                      createdAt: 2021-12-01T12:46:36.581Z[GMT]
+                      csid: 9456
+                      message: A sample note
+        '400':
+          description: 'Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, Agent was not found, Invalid date format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                message: Decoding failure in request
+        '404':
+          description: An entity in this request could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                message: The requested resource could not be found
+        '500':
+          description: Internal failure during request processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+              example:
+                message: There was an internal server error while processing the request
+components:
+  schemas:
+    BulkActionOutcome_ErrorResponse_InternalNoteData:
+      title: BulkActionOutcome_ErrorResponse_InternalNoteData
+      oneOf:
+      - $ref: '#/components/schemas/BulkActionFailure_ErrorResponse_InternalNoteData'
+      - $ref: '#/components/schemas/BulkActionSuccess_ErrorResponse_InternalNoteData'
+    BulkActionSuccess_ErrorResponse_InternalNoteData:
+      title: BulkActionSuccess_ErrorResponse_InternalNoteData
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/InternalNoteData'
+    InternalNoteData:
+      title: InternalNoteData
+      type: object
+      required:
+      - id
+      - authorId
+      - createdAt
+      - csid
+      - message
+      properties:
+        id:
+          type: string
+          format: uuid
+        authorId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        csid:
+          type: integer
+          format: int64
+        message:
+          type: string
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BulkCreateNoteOutput:
+      title: BulkCreateNoteOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_ErrorResponse_InternalNoteData'
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    ListInternalNotesOutput:
+      title: ListInternalNotesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InternalNoteData'
+    CreateNoteOutput:
+      title: CreateNoteOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/InternalNoteData'
+    BulkActionFailure_ErrorResponse_InternalNoteData:
+      title: BulkActionFailure_ErrorResponse_InternalNoteData
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    CreateInternalNoteInput:
+      title: CreateInternalNoteInput
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+        agentId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+    BulkCreateInternalNoteInput:
+      title: BulkCreateInternalNoteInput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateInternalNoteInput'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header
