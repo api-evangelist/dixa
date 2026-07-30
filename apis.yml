@@ -1,7 +1,20 @@
 aid: dixa
 name: Dixa
 description: Dixa is a conversational customer service platform with a REST API for managing conversations, queues, agents, routing, knowledge base articles, and customer satisfaction data. The API enables developers to build automated workflows, integrate external data into routing logic, export conversations and activity logs, manage users and teams, and access omnichannel messaging across phone, email, chat, and social channels.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dixa.png
 url: https://raw.githubusercontent.com/api-evangelist/dixa/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -15,30 +28,286 @@ tags:
   - Chat
   - Knowledge Base
 apis:
-  - aid: dixa:dixa-api
-    name: Dixa API
-    description: The primary Dixa REST API for managing conversations, users, queues, tags, flows, endpoints, and anonymization requests. Supports bearer token and API key authentication with 10 requests/second rate limiting per token.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.dixa.io/
-    baseURL: https://dev.dixa.io/v1
-    tags:
-      - Conversations
-      - Agents
-      - Queues
-      - Routing
-      - Knowledge Base
-      - Webhooks
-    properties:
-      - type: Documentation
-        url: https://docs.dixa.io/
-      - type: OpenAPI
-        url: https://docs.dixa.io/openapi/dixa-api/beta/overview/
-      - type: RateLimits
-        url: https://docs.dixa.io/docs/api-standards-rules
-    contact:
-      - FN: Dixa Support
-        url: https://support.dixa.help/
-
+- aid: dixa:dixa-agents-api
+  name: Dixa Agents API
+  description: The Agents API from Dixa — 7 operation(s) for agents.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-agents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-analytics-api
+  name: Dixa Analytics API
+  description: The Analytics API from Dixa — 5 operation(s) for analytics.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-anonymization-api
+  name: Dixa Anonymization API
+  description: The Anonymization API from Dixa — 5 operation(s) for anonymization.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Anonymization
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-anonymization-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-business-hours-api
+  name: Dixa Business Hours API
+  description: The Business Hours API from Dixa — 4 operation(s) for business hours.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Business Hours
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-business-hours-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-chatbots-api
+  name: Dixa Chatbots API
+  description: The Chatbots API from Dixa — 13 operation(s) for chatbots.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Chatbots
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-chatbots-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-contact-endpoints-api
+  name: Dixa Contact Endpoints API
+  description: The Contact Endpoints API from Dixa — 2 operation(s) for contact endpoints.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Contact Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-contact-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-conversations-api
+  name: Dixa Conversations API
+  description: The Conversations API from Dixa — 27 operation(s) for conversations.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Conversations
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-conversations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-custom-attributes-api
+  name: Dixa Custom Attributes API
+  description: The Custom Attributes API from Dixa — 4 operation(s) for custom attributes.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Custom Attributes
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-custom-attributes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-end-users-api
+  name: Dixa End Users API
+  description: The End Users API from Dixa — 6 operation(s) for end users.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - End Users
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-end-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-internal-notes-api
+  name: Dixa Internal Notes API
+  description: The Internal Notes API from Dixa — 2 operation(s) for internal notes.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Internal Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-internal-notes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-knowledge-api
+  name: Dixa Knowledge API
+  description: The Knowledge API from Dixa — 16 operation(s) for knowledge.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Knowledge
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-knowledge-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-messages-api
+  name: Dixa Messages API
+  description: The Messages API from Dixa — 2 operation(s) for messages.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-messages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-organization-api
+  name: Dixa Organization API
+  description: The Organization API from Dixa — 1 operation(s) for organization.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-organization-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-queues-api
+  name: Dixa Queues API
+  description: The Queues API from Dixa — 5 operation(s) for queues.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Queues
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-queues-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-ratings-api
+  name: Dixa Ratings API
+  description: The Ratings API from Dixa — 4 operation(s) for ratings.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Ratings
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-ratings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-search-api
+  name: Dixa Search API
+  description: The Search API from Dixa — 1 operation(s) for search.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-tags-api
+  name: Dixa Tags API
+  description: The Tags API from Dixa — 7 operation(s) for tags.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-tags-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-teams-api
+  name: Dixa Teams API
+  description: The Teams API from Dixa — 4 operation(s) for teams.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-teams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-templates-api
+  name: Dixa Templates API
+  description: The Templates API from Dixa — 2 operation(s) for templates.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-templates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
+- aid: dixa:dixa-webhooks-api
+  name: Dixa Webhooks API
+  description: The Webhooks API from Dixa — 4 operation(s) for webhooks.
+  humanURL: https://docs.dixa.io/
+  baseURL: https://dev.dixa.io/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/dixa-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dixa.io/
+  - type: RateLimits
+    url: https://docs.dixa.io/docs/api-standards-rules
 common:
   - type: AgenticAccess
     url: agentic-access/dixa-agentic-access.yml
