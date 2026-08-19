@@ -1,0 +1,3179 @@
+{
+  "item": [
+    {
+      "id": "3048bd40-b723-4ad0-b8e7-0ebd6e665356",
+      "name": "Agents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5cee4e0f-26e1-4a00-aa3c-4b6dc2b6e845",
+          "name": "List presence",
+          "request": {
+            "name": "List presence",
+            "description": {
+              "content": "List the presence status for all agents/admins in an organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents",
+                "presence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cdd55adb-c1c5-425b-96fe-30be1c121b0d",
+              "name": "The list of presence status for all agents/admins",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    "presence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"userId\": \"d31a73fc-d67b-49ec-9534-1f36a0c4c906\",\n    \"requestTime\": \"2021-12-01T12:46:35.935\",\n    \"lastSeen\": \"2021-12-01T12:46:35.935\",\n    \"presenceStatus\": \"Working\",\n    \"connectionStatus\": \"Online\",\n    \"activeChannels\": [\n      \"Email\",\n      \"FacebookMessenger\"\n    ]\n  },\n  {\n    \"userId\": \"8026cb51-184b-424f-8686-c6bc7bcf88eb\",\n    \"requestTime\": \"2021-12-01T12:46:35.935\",\n    \"lastSeen\": \"2021-12-01T12:46:35.935\",\n    \"presenceStatus\": \"Working\",\n    \"connectionStatus\": \"Online\",\n    \"activeChannels\": [\n      \"Email\",\n      \"FacebookMessenger\",\n      \"PstnPhone\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1fe4496-1614-429f-bcf9-4dc3727d733d",
+              "name": "Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    "presence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "498b6439-aaf7-4d72-b23e-dc77f51b5bb8",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    "presence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f8f775d-af4d-4a8f-9d93-c832f99414f9",
+          "name": "List agents",
+          "request": {
+            "name": "List agents",
+            "description": {
+              "content": "Lists all agents/admins in an organization. It is possible to filter by one of the mutually exclusive parameters: email or phone number. In case both are provided, an error is returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageLimit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>",
+                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "The agent/admin email filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "phone",
+                  "value": "<string>",
+                  "description": "The agent/admin phone number filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67bdcba2-98cf-4420-8093-02e98f4b665c",
+              "name": "The list of agents/admins",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"93b885ad-fe0d-3089-8df6-34904fd59f71\",\n      \"createdAt\": \"2020-12-16T09:41:43Z\",\n      \"displayName\": \"Agent 0\",\n      \"email\": \"agent.0@example.org\",\n      \"avatarUrl\": \"https://files.dixa.io/public/image_0_id\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"middleNames\": [],\n      \"roles\": [\n        \"Agent\"\n      ]\n    },\n    {\n      \"id\": \"55a54008-ad1b-3589-aa21-0d2629c1df41\",\n      \"createdAt\": \"2020-12-16T09:41:43Z\",\n      \"displayName\": \"Agent 1\",\n      \"email\": \"agent.1@example.org\",\n      \"avatarUrl\": \"https://files.dixa.io/public/image_1_id\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"middleNames\": [],\n      \"roles\": [\n        \"Agent\"\n      ]\n    },\n    {\n      \"id\": \"9e688c58-a548-3b8e-af69-c9e1005ad0bf\",\n      \"createdAt\": \"2020-12-16T09:41:43Z\",\n      \"displayName\": \"Agent 2\",\n      \"email\": \"agent.2@example.org\",\n      \"avatarUrl\": \"https://files.dixa.io/public/image_2_id\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"middleNames\": [],\n      \"roles\": [\n        \"Agent\"\n      ]\n    },\n    {\n      \"id\": \"86666835-06aa-3d90-8bbd-5a74ac4edf68\",\n      \"createdAt\": \"2020-12-16T09:41:43Z\",\n      \"displayName\": \"Agent 3\",\n      \"email\": \"agent.3@example.org\",\n      \"avatarUrl\": \"https://files.dixa.io/public/image_3_id\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"middleNames\": [],\n      \"roles\": [\n        \"Agent\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3614b77f-0005-4efe-85f3-6f5afe294bfa",
+              "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: query parameter email, Invalid value for: query parameter phone, Duplicate phone number, Duplicate email address, Invalid filters: Cannot provide both phone number and email address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61a0365c-70bb-4a5b-b5bb-8b0f2173417c",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d5f1f89-dbb5-4b12-b063-36a9f0ba7e31",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1b70114-af47-4176-8ab0-b11a37c5eed5",
+          "name": "Update agents",
+          "request": {
+            "name": "Update agents",
+            "description": {
+              "content": "Bulk update agents/admins.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"additionalEmails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"middleNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"avatarUrl\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"additionalEmails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"middleNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"avatarUrl\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6dcb6856-87df-4e9c-ba29-21511ff6ca9a",
+              "name": "The list of update action outcomes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"displayName\": \"Alice Brown\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [],\n    \"additionalPhoneNumbers\": [],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"avatarUrl\": \"http://avatar.url\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"data\": {\n        \"id\": \"4d2ab456-8510-4a35-b266-e502160d5177\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Alice Brown\",\n        \"email\": \"alice@brown.com\",\n        \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n        \"phoneNumber\": \"+551155256325\",\n        \"additionalEmails\": [\n          \"alice@secondary.email\"\n        ],\n        \"additionalPhoneNumbers\": [\n          \"+5566778899\"\n        ],\n        \"firstName\": \"Alice\",\n        \"lastName\": \"Brown\",\n        \"middleNames\": [],\n        \"roles\": [\n          \"Agent\"\n        ]\n      },\n      \"_type\": \"BulkActionSuccess\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4dbf815-c60a-41db-a2ab-41d922dae465",
+              "name": "Invalid value extracted from request context, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"displayName\": \"Alice Brown\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [],\n    \"additionalPhoneNumbers\": [],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"avatarUrl\": \"http://avatar.url\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5a1ec91-4803-4a14-9f37-27e722e62418",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"displayName\": \"Alice Brown\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [],\n    \"additionalPhoneNumbers\": [],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"avatarUrl\": \"http://avatar.url\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e49adab3-cf2c-4eb4-8bb1-99e2554a79a9",
+          "name": "Create agent",
+          "request": {
+            "name": "Create agent",
+            "description": {
+              "content": "Create an agent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"additionalEmails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"middleNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"avatarUrl\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "40c61113-7aa7-45f3-a569-1b01e9668a56",
+              "name": "The created agent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"4d2ab456-8510-4a35-b266-e502160d5177\",\n    \"createdAt\": \"2020-12-16T09:41:43Z\",\n    \"displayName\": \"Alice Brown\",\n    \"email\": \"alice@brown.com\",\n    \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [\n      \"alice@secondary.email\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"+5566778899\"\n    ],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"roles\": [\n      \"Agent\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e4a15db-75fb-436a-b14d-aee88fb988db",
+              "name": "Invalid value extracted from request context, Invalid value for: body, Validation failure during agent creation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e80b230-e1d3-4a0a-b809-945f41f6759a",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7c4089d-9ca9-402d-b7d7-b8d15020219f",
+          "name": "Patch agents",
+          "request": {
+            "name": "Patch agents",
+            "description": {
+              "content": "Bulk patch agents/admins.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"additionalEmails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"middleNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"avatarUrl\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"additionalEmails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"middleNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"avatarUrl\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "993096d8-60d9-47a0-9e4f-68060e627ddc",
+              "name": "The list of patch action outcomes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"displayName\": \"AB\",\n    \"additionalEmails\": [],\n    \"additionalPhoneNumbers\": [],\n    \"middleNames\": []\n  },\n  {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9c\",\n    \"displayName\": \"JB\",\n    \"additionalEmails\": [],\n    \"additionalPhoneNumbers\": [],\n    \"middleNames\": []\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"data\": {\n        \"id\": \"4d2ab456-8510-4a35-b266-e502160d5177\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"AB\",\n        \"email\": \"jb@example.org\",\n        \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n        \"additionalEmails\": [],\n        \"additionalPhoneNumbers\": [],\n        \"middleNames\": [],\n        \"roles\": [\n          \"Agent\"\n        ]\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"error\": {\n        \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9c\",\n        \"message\": \"Agent not found\",\n        \"_type\": \"NotFound\"\n      },\n      \"_type\": \"BulkActionFailure\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16b962e6-ad3b-41f4-8cb7-e92221f1513d",
+              "name": "Invalid value extracted from request context, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"displayName\": \"AB\",\n    \"additionalEmails\": [],\n    \"additionalPhoneNumbers\": [],\n    \"middleNames\": []\n  },\n  {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9c\",\n    \"displayName\": \"JB\",\n    \"additionalEmails\": [],\n    \"additionalPhoneNumbers\": [],\n    \"middleNames\": []\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ea0d817-68e4-4e47-9a10-9fd0c1204adf",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"displayName\": \"AB\",\n    \"additionalEmails\": [],\n    \"additionalPhoneNumbers\": [],\n    \"middleNames\": []\n  },\n  {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9c\",\n    \"displayName\": \"JB\",\n    \"additionalEmails\": [],\n    \"additionalPhoneNumbers\": [],\n    \"middleNames\": []\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb10e517-f122-4de2-bc7d-02b17c909ed0",
+          "name": "List teams",
+          "request": {
+            "name": "List teams",
+            "description": {
+              "content": "List the teams in which the agent/admin is a member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents",
+                ":agentId",
+                "teams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) The agent/admin id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d282b79-139d-49a9-bc13-250bca0fa68a",
+              "name": "The list of teams in which the agent/admin is a member",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"e8ecd53b-2f6c-4471-a3a0-34d94caff8c8\"\n    },\n    {\n      \"id\": \"4d2ab456-8510-4a35-b266-e502160d5177\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7ce0268-2079-436e-a75e-595de26b1156",
+              "name": "Invalid value for: path parameter agentId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b735809c-9951-44f3-8843-d773a5b986eb",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06b41ad4-4be2-4647-9eec-74642e4e20f4",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e890b2f-5949-4813-9d16-87e8bf61f91c",
+          "name": "Get presence",
+          "request": {
+            "name": "Get presence",
+            "description": {
+              "content": "Get the presence status for an agent/admin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents",
+                ":agentId",
+                "presence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) The agent/admin id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb0becb6-4800-4d19-916d-2d4ccc684146",
+              "name": "The agent/admin presence status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "presence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"userId\": \"ec7f7e7b-b437-32ce-8681-45f71d37b53c\",\n    \"requestTime\": \"2021-12-01T12:46:35.935\",\n    \"lastSeen\": \"2021-12-01T12:46:35.935\",\n    \"presenceStatus\": \"Working\",\n    \"connectionStatus\": \"Online\",\n    \"activeChannels\": [\n      \"Email\",\n      \"FacebookMessenger\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e64df51-5ee2-4853-a882-e03baea162a1",
+              "name": "Invalid value for: path parameter agentId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "presence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85a57739-ad28-4b6b-a810-4b5ab8a72629",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "presence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "806ee6a8-975e-4728-a8e3-6821ea0527f3",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "presence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a3ffb37-1b69-41eb-a916-3f49769f0639",
+          "name": "Create agents",
+          "request": {
+            "name": "Create agents",
+            "description": {
+              "content": "Create agents in bulk.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"displayName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"middleNames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"avatarUrl\": \"<string>\"\n    },\n    {\n      \"displayName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"middleNames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"avatarUrl\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "28f5e83c-fdb2-4bf0-a3da-37f8b7edc168",
+              "name": "The created agents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [],\n      \"avatarUrl\": \"http://avatar.url\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"data\": {\n        \"id\": \"93b885ad-fe0d-3089-8df6-34904fd59f71\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Agent 0\",\n        \"email\": \"agent.0@example.org\",\n        \"avatarUrl\": \"https://files.dixa.io/public/image_0_id\",\n        \"additionalEmails\": [],\n        \"additionalPhoneNumbers\": [],\n        \"middleNames\": [],\n        \"roles\": [\n          \"Agent\"\n        ]\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"data\": {\n        \"id\": \"55a54008-ad1b-3589-aa21-0d2629c1df41\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Agent 1\",\n        \"email\": \"agent.1@example.org\",\n        \"avatarUrl\": \"https://files.dixa.io/public/image_1_id\",\n        \"additionalEmails\": [],\n        \"additionalPhoneNumbers\": [],\n        \"middleNames\": [],\n        \"roles\": [\n          \"Agent\"\n        ]\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"data\": {\n        \"id\": \"9e688c58-a548-3b8e-af69-c9e1005ad0bf\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Agent 2\",\n        \"email\": \"agent.2@example.org\",\n        \"avatarUrl\": \"https://files.dixa.io/public/image_2_id\",\n        \"additionalEmails\": [],\n        \"additionalPhoneNumbers\": [],\n        \"middleNames\": [],\n        \"roles\": [\n          \"Agent\"\n        ]\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"data\": {\n        \"id\": \"86666835-06aa-3d90-8bbd-5a74ac4edf68\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Agent 3\",\n        \"email\": \"agent.3@example.org\",\n        \"avatarUrl\": \"https://files.dixa.io/public/image_3_id\",\n        \"additionalEmails\": [],\n        \"additionalPhoneNumbers\": [],\n        \"middleNames\": [],\n        \"roles\": [\n          \"Agent\"\n        ]\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"error\": {\n        \"id\": \"e8ecd53b-2f6c-4471-a3a0-34d94caff8c8\",\n        \"message\": \"Create Agent [userId=...] in [orgId=...] failed with [errors=...]\",\n        \"_type\": \"Validation\"\n      },\n      \"_type\": \"BulkActionFailure\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f563dde5-981d-4a34-a7e9-7a0a1acc9f3c",
+              "name": "Invalid value extracted from request context, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [],\n      \"avatarUrl\": \"http://avatar.url\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d826edc-4dc3-4f72-828d-6bae5312cd5d",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [],\n      \"avatarUrl\": \"http://avatar.url\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46f878d7-7dc5-43a8-923f-1776850017b5",
+          "name": "Get agent",
+          "request": {
+            "name": "Get agent",
+            "description": {
+              "content": "Get an agent/admin by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents",
+                ":agentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) The agent/admin id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2952439a-c8c5-4aac-b8b5-1b83bee76fda",
+              "name": "The agent/admin",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"4d2ab456-8510-4a35-b266-e502160d5177\",\n    \"createdAt\": \"2020-12-16T09:41:43Z\",\n    \"displayName\": \"Alice Brown\",\n    \"email\": \"alice@brown.com\",\n    \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [\n      \"alice@secondary.email\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"+5566778899\"\n    ],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"roles\": [\n      \"Agent\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84fbcb5a-d312-4552-81be-b345c6dea620",
+              "name": "Invalid value for: path parameter agentId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1f1890d-e2f3-46e8-85c7-d66f0f95f87a",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a82fadd-b423-4cc3-b0e9-cc489a9f7758",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1dc67c28-f6bc-4ff2-af9e-69ddf4fe6252",
+          "name": "Update agent",
+          "request": {
+            "name": "Update agent",
+            "description": {
+              "content": "Update an agent/admin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents",
+                ":agentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) The agent id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"additionalEmails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"middleNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"avatarUrl\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14c69dfa-9f06-43f3-8cc6-66ae8587e49c",
+              "name": "The updated agent/admin",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [],\n  \"additionalPhoneNumbers\": [],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [\n    \"Julia\"\n  ],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"4d2ab456-8510-4a35-b266-e502160d5177\",\n    \"createdAt\": \"2020-12-16T09:41:43Z\",\n    \"displayName\": \"Alice Brown\",\n    \"email\": \"alice@brown.com\",\n    \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [\n      \"alice@secondary.email\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"+5566778899\"\n    ],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [\n      \"Julia\"\n    ],\n    \"roles\": [\n      \"Agent\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac562302-e37b-47e5-a286-6c4490c51c14",
+              "name": "Invalid value for: path parameter agentId, Invalid value extracted from request context, Invalid value for: body, Validation failure during update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [],\n  \"additionalPhoneNumbers\": [],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [\n    \"Julia\"\n  ],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de7bb72b-8314-4a6d-af0f-15d5c5fa58e4",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [],\n  \"additionalPhoneNumbers\": [],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [\n    \"Julia\"\n  ],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e59909a1-b16e-46cc-a58e-d35f570b2b07",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [],\n  \"additionalPhoneNumbers\": [],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [\n    \"Julia\"\n  ],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ee30ea2-c072-417f-bb5b-98da6ca57a19",
+          "name": "Delete agent",
+          "request": {
+            "name": "Delete agent",
+            "description": {
+              "content": "Downgrade an agent/admin to become an end user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents",
+                ":agentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) The agent/admin id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "589f5ebc-1b66-4183-8d6f-95fc072075c9",
+              "name": "The agent/admin was successfully downgraded to end user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9e75cd9-a2c6-4571-b21e-5eaa86542acf",
+              "name": "Invalid value for: path parameter agentId, Invalid value extracted from request context, Validation failure during delete processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3784c92-3a38-4c16-a738-e400d4685fde",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7984bff-8f5b-4e4d-b12d-170202a46927",
+          "name": "Patch agent",
+          "request": {
+            "name": "Patch agent",
+            "description": {
+              "content": "Patch an agent/admin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents",
+                ":agentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) The agent/admin id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"additionalEmails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"middleNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"avatarUrl\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "935b87c5-e483-45d0-8369-0fb2bfb30966",
+              "name": "The patched agent/admin",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"additionalEmails\": [],\n  \"additionalPhoneNumbers\": [],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"4d2ab456-8510-4a35-b266-e502160d5177\",\n    \"createdAt\": \"2020-12-16T09:41:43Z\",\n    \"displayName\": \"Alice Brown\",\n    \"email\": \"alice@brown.com\",\n    \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [\n      \"alice@secondary.email\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"+5566778899\"\n    ],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"roles\": [\n      \"Agent\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b454456-71a5-48de-b741-6542ea151170",
+              "name": "Invalid value for: path parameter agentId, Invalid value extracted from request context, Invalid value for: body, Validation failure during update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"additionalEmails\": [],\n  \"additionalPhoneNumbers\": [],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c9c08c4-10ca-4d72-b96c-e17da3a90551",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"additionalEmails\": [],\n  \"additionalPhoneNumbers\": [],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dc13107-ecff-470d-8cde-b5554b7e94cc",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent/admin id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"additionalEmails\": [],\n  \"additionalPhoneNumbers\": [],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60daa00c-b533-419d-9792-2fd3c132c820",
+          "name": "Updates the working channel of an agent",
+          "request": {
+            "name": "Updates the working channel of an agent",
+            "description": {
+              "content": "Updates the working channel of an agent",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "agents",
+                ":agentId",
+                "presence",
+                "working-channel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) The agent id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"<string>\",\n  \"working\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3d9c3b76-f82c-4b36-ae9a-d763bfe58d32",
+              "name": "The working channel of the agent was successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "presence",
+                    "working-channel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"Speak\",\n  \"working\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1573b659-5b23-48b8-abcd-87169f6194c3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "presence",
+                    "working-channel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"Speak\",\n  \"working\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8e757ac-38c1-46c6-ada7-ab9e6191df43",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "agents",
+                    ":agentId",
+                    "presence",
+                    "working-channel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) The agent id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"Speak\",\n  \"working\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dev.dixa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3732ecfe-d26d-4a31-b16c-b675434b6725",
+    "name": "Dixa Agents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

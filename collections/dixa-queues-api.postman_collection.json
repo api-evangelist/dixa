@@ -1,0 +1,2075 @@
+{
+  "item": [
+    {
+      "id": "c4dfdd63-a3d1-4824-898b-59092b868d65",
+      "name": "Queues",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2108cf3e-0837-4b9a-bed3-f6fd5c81adb3",
+          "name": "List queues",
+          "request": {
+            "name": "List queues",
+            "description": {
+              "content": "List all queues in an organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "queues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3fdafa2-0099-4686-899e-f413d69ddb51",
+              "name": "The list of queues in an organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"497d2cb4-6b48-4fa2-99d2-21c2a5bad79f\",\n      \"name\": \"MyCorp main queue\",\n      \"isDefault\": true,\n      \"organizationId\": \"927d4b48-966b-45a3-8d7c-c6ad64f877b0\",\n      \"queueThresholds\": {\n        \"SlaPercentage\": 10\n      },\n      \"slaCalculationMethod\": \"AbandonedIgnored\",\n      \"offerTimeout\": 10,\n      \"offeringAlgorithm\": \"OneAtATimeRandom\",\n      \"memberListType\": \"SkillBased\",\n      \"usages\": {\n        \"queueId\": \"497d2cb4-6b48-4fa2-99d2-21c2a5bad79f\",\n        \"usages\": {\n          \"WidgetChat\": [\n            \"c6f50127-7f0a-418f-943e-c62b96d8a742\",\n            \"b2ac94ac-379a-4f24-995a-6473809eef6b\"\n          ],\n          \"PstnPhone\": [\n            \"+4589977790\"\n          ],\n          \"Email\": [\n            \"info@mycorp.dixa.io\"\n          ]\n        }\n      },\n      \"wrapupTimeout\": 10,\n      \"priority\": 1,\n      \"offerAbandonedConversations\": false,\n      \"doNotOfferTimeouts\": {\n        \"WidgetChat\": 1\n      },\n      \"isDoNotOfferEnabled\": true,\n      \"isPreferredAgentEnabled\": false,\n      \"preferredAgentTimeouts\": {\n        \"WhatsApp\": 300,\n        \"Voicemail\": 300,\n        \"WidgetChat\": 300,\n        \"FacebookMessenger\": 300,\n        \"Email\": 43200,\n        \"ContactForm\": 43200,\n        \"Callback\": 300,\n        \"PstnPhone\": 300\n      },\n      \"preferredAgentOfflineTimeout\": 500,\n      \"personalAgentOfflineTimeout\": 500,\n      \"isRestricted\": false\n    },\n    {\n      \"id\": \"921a6e00-0845-417e-9c67-f7cb872d45f0\",\n      \"name\": \"MyCorp email queue\",\n      \"isDefault\": true,\n      \"organizationId\": \"927d4b48-966b-45a3-8d7c-c6ad64f877b0\",\n      \"queueThresholds\": {\n        \"SlaPercentage\": 10\n      },\n      \"slaCalculationMethod\": \"AbandonedIgnored\",\n      \"offerTimeout\": 10,\n      \"offeringAlgorithm\": \"OneAtATimeRandom\",\n      \"memberListType\": \"SkillBased\",\n      \"usages\": {\n        \"queueId\": \"921a6e00-0845-417e-9c67-f7cb872d45f0\",\n        \"usages\": {\n          \"Email\": [\n            \"info@mycorp.dixa.io\"\n          ]\n        }\n      },\n      \"wrapupTimeout\": 10,\n      \"priority\": 1,\n      \"offerAbandonedConversations\": false,\n      \"doNotOfferTimeouts\": {\n        \"WidgetChat\": 1\n      },\n      \"isDoNotOfferEnabled\": true,\n      \"isPreferredAgentEnabled\": false,\n      \"preferredAgentOfflineTimeout\": 500,\n      \"personalAgentOfflineTimeout\": 500,\n      \"isRestricted\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb5cf8a6-aa7c-4f29-8490-aa8f463f25a2",
+              "name": "Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c78245f1-cb14-4070-b19b-ac1bf25ef4af",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99e33d2d-2686-4392-b91f-688e83225556",
+          "name": "Create queue",
+          "request": {
+            "name": "Create queue",
+            "description": {
+              "content": "Create a queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "queues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request\": {\n    \"name\": \"<string>\",\n    \"callFunctionality\": \"<boolean>\",\n    \"isDefault\": \"<boolean>\",\n    \"isDoNotOfferEnabled\": \"<boolean>\",\n    \"queueThresholds\": {\n      \"key_0\": \"<integer>\"\n    },\n    \"offerTimeout\": \"<integer>\",\n    \"offerAlgorithm\": \"<string>\",\n    \"wrapupTimeout\": \"<integer>\",\n    \"priority\": \"<integer>\",\n    \"offerAbandonedConversations\": \"<boolean>\",\n    \"doNotOfferTimeouts\": {\n      \"key_0\": \"<integer>\",\n      \"key_1\": \"<integer>\",\n      \"key_2\": \"<integer>\"\n    },\n    \"preferredAgentTimeouts\": {\n      \"key_0\": \"<integer>\",\n      \"key_1\": \"<integer>\",\n      \"key_2\": \"<integer>\"\n    },\n    \"isPreferredAgentEnabled\": \"<boolean>\",\n    \"preferredAgentOfflineTimeout\": \"<integer>\",\n    \"personalAgentOfflineTimeout\": \"<integer>\",\n    \"isRestricted\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d7a3c255-c2e4-41bd-98dc-f2097e91c655",
+              "name": "The created queue",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request\": {\n    \"name\": \"MyCorp main queue\",\n    \"callFunctionality\": false,\n    \"isDefault\": true,\n    \"queueThresholds\": {\n      \"WaitingConversations\": 10\n    },\n    \"offerTimeout\": 10,\n    \"offerAlgorithm\": \"AllAtOnce\",\n    \"wrapupTimeout\": 10,\n    \"priority\": 1,\n    \"offerAbandonedConversations\": false,\n    \"doNotOfferTimeouts\": {\n      \"WidgetChat\": 1\n    },\n    \"isDoNotOfferEnabled\": true,\n    \"preferredAgentTimeouts\": {\n      \"WhatsApp\": 300,\n      \"Voicemail\": 300,\n      \"WidgetChat\": 300,\n      \"FacebookMessenger\": 300,\n      \"Email\": 43200,\n      \"ContactForm\": 43200,\n      \"Callback\": 300,\n      \"PstnPhone\": 300\n    },\n    \"isPreferredAgentEnabled\": false,\n    \"preferredAgentOfflineTimeout\": 500,\n    \"personalAgentOfflineTimeout\": 500,\n    \"isRestricted\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"isDefault\": false,\n    \"organizationId\": \"string\",\n    \"queueThresholds\": {\n      \"key_0\": \"<integer>\",\n      \"key_1\": \"<integer>\",\n      \"key_2\": \"<integer>\",\n      \"key_3\": \"<integer>\"\n    },\n    \"slaCalculationMethod\": \"string\",\n    \"doNotOfferTimeouts\": {\n      \"key_0\": \"<integer>\",\n      \"key_1\": \"<integer>\"\n    },\n    \"isDoNotOfferEnabled\": false,\n    \"offerTimeout\": 5274,\n    \"offeringAlgorithm\": \"string\",\n    \"memberListType\": \"string\",\n    \"usages\": {\n      \"queueId\": \"string\",\n      \"usages\": {\n        \"key_0\": [\n          \"string\"\n        ]\n      }\n    },\n    \"wrapupTimeout\": 4158,\n    \"priority\": 402,\n    \"offerAbandonedConversations\": false,\n    \"isPreferredAgentEnabled\": true,\n    \"preferredAgentTimeouts\": {\n      \"key_0\": \"<integer>\",\n      \"key_1\": \"<integer>\"\n    },\n    \"preferredAgentOfflineTimeout\": 2637,\n    \"personalAgentOfflineTimeout\": 7861,\n    \"isRestricted\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40455e0c-e027-49ea-b1b3-107c9ae26f37",
+              "name": "Invalid value extracted from request context, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request\": {\n    \"name\": \"MyCorp main queue\",\n    \"callFunctionality\": false,\n    \"isDefault\": true,\n    \"queueThresholds\": {\n      \"WaitingConversations\": 10\n    },\n    \"offerTimeout\": 10,\n    \"offerAlgorithm\": \"AllAtOnce\",\n    \"wrapupTimeout\": 10,\n    \"priority\": 1,\n    \"offerAbandonedConversations\": false,\n    \"doNotOfferTimeouts\": {\n      \"WidgetChat\": 1\n    },\n    \"isDoNotOfferEnabled\": true,\n    \"preferredAgentTimeouts\": {\n      \"WhatsApp\": 300,\n      \"Voicemail\": 300,\n      \"WidgetChat\": 300,\n      \"FacebookMessenger\": 300,\n      \"Email\": 43200,\n      \"ContactForm\": 43200,\n      \"Callback\": 300,\n      \"PstnPhone\": 300\n    },\n    \"isPreferredAgentEnabled\": false,\n    \"preferredAgentOfflineTimeout\": 500,\n    \"personalAgentOfflineTimeout\": 500,\n    \"isRestricted\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2f5523e-5762-4c8c-ae54-d704459b4d82",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request\": {\n    \"name\": \"MyCorp main queue\",\n    \"callFunctionality\": false,\n    \"isDefault\": true,\n    \"queueThresholds\": {\n      \"WaitingConversations\": 10\n    },\n    \"offerTimeout\": 10,\n    \"offerAlgorithm\": \"AllAtOnce\",\n    \"wrapupTimeout\": 10,\n    \"priority\": 1,\n    \"offerAbandonedConversations\": false,\n    \"doNotOfferTimeouts\": {\n      \"WidgetChat\": 1\n    },\n    \"isDoNotOfferEnabled\": true,\n    \"preferredAgentTimeouts\": {\n      \"WhatsApp\": 300,\n      \"Voicemail\": 300,\n      \"WidgetChat\": 300,\n      \"FacebookMessenger\": 300,\n      \"Email\": 43200,\n      \"ContactForm\": 43200,\n      \"Callback\": 300,\n      \"PstnPhone\": 300\n    },\n    \"isPreferredAgentEnabled\": false,\n    \"preferredAgentOfflineTimeout\": 500,\n    \"personalAgentOfflineTimeout\": 500,\n    \"isRestricted\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44011f71-8529-4699-b08a-3890fa7a891f",
+          "name": "List agents",
+          "request": {
+            "name": "List agents",
+            "description": {
+              "content": "List all agents/admins that are members of a queue by providing the queue id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "queues",
+                ":queueId",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "queueId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f43612e-b865-44b4-aeb9-e3cad41e7554",
+              "name": "List of the agents/admins that are members of a queue",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"agentId\": \"e96647c1-f697-4328-868a-19f828a6ee46\",\n      \"priority\": 1\n    },\n    {\n      \"agentId\": \"95dfa97e-dbf5-4bfc-be64-1f834baebd4e\",\n      \"priority\": 2\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1720c0a-ee63-4373-9249-3d660445c94a",
+              "name": "Invalid value for: path parameter queueId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2386d93f-d37d-436c-a93b-c7226f5e557e",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0e3a3a8-aae5-4b95-afee-cc6c42cf34da",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70465482-73bf-4705-b5f0-be5658970493",
+          "name": "Remove agents",
+          "request": {
+            "name": "Remove agents",
+            "description": {
+              "content": "Bulk remove agents/admins from the specified queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "queues",
+                ":queueId",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "queueId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "390bf952-0d78-4ca6-a6a7-3ac153eb3160",
+              "name": "The bulk operation succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentIds\": [\n    \"743c3781-c882-4352-a1fa-fe5d7a673cfd\",\n    \"cad2f234-8cec-4cd8-96e9-a6491a0176da\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ffc01ad2-9924-4320-9fe2-226386af8b2c",
+              "name": "Invalid value for: path parameter queueId, Invalid value extracted from request context, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentIds\": [\n    \"743c3781-c882-4352-a1fa-fe5d7a673cfd\",\n    \"cad2f234-8cec-4cd8-96e9-a6491a0176da\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ac930ea-57ba-4ccb-acc3-4b3210558b08",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentIds\": [\n    \"743c3781-c882-4352-a1fa-fe5d7a673cfd\",\n    \"cad2f234-8cec-4cd8-96e9-a6491a0176da\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f49485c-4a21-4975-b9de-3397ab4fb2f4",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentIds\": [\n    \"743c3781-c882-4352-a1fa-fe5d7a673cfd\",\n    \"cad2f234-8cec-4cd8-96e9-a6491a0176da\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a37d920b-e77a-440c-94d1-9cc1678bf8b0",
+          "name": "Assign agents",
+          "request": {
+            "name": "Assign agents",
+            "description": {
+              "content": "Assign one or more agents/admins to a given queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "queues",
+                ":queueId",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "queueId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b2dbae9-faba-4945-8d3b-142e957df1e2",
+              "name": "The list of patch action outcomes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentIds\": [\n    \"c31e5e3f-1d5f-4442-83df-fd7bddd59da4\",\n    \"26ae145b-8644-4fa5-aa56-7b3dcacbe2d4\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"data\": \"b41558f2-3807-44ef-8abf-a73d5ef68ff6\",\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"error\": {\n        \"id\": \"914a6e19-cab7-41a7-b41b-517e0ed56161\",\n        \"message\": \"User not found\",\n        \"_type\": \"NotFound\"\n      },\n      \"_type\": \"BulkActionFailure\"\n    },\n    {\n      \"error\": {\n        \"id\": \"7fecdb7e-9e37-45ef-be5e-0c14d6687aa0\",\n        \"message\": \"Member is neither Agent or Admin\",\n        \"_type\": \"Validation\"\n      },\n      \"_type\": \"BulkActionFailure\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1ffbc31-b47a-4c79-b139-d3ce478bb8fa",
+              "name": "Invalid value for: path parameter queueId, Invalid value extracted from request context, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentIds\": [\n    \"c31e5e3f-1d5f-4442-83df-fd7bddd59da4\",\n    \"26ae145b-8644-4fa5-aa56-7b3dcacbe2d4\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44ce29e3-3c49-4cc4-898f-12c0a6200187",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentIds\": [\n    \"c31e5e3f-1d5f-4442-83df-fd7bddd59da4\",\n    \"26ae145b-8644-4fa5-aa56-7b3dcacbe2d4\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d18bbe1-c0b4-4225-996f-589cc7f05937",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentIds\": [\n    \"c31e5e3f-1d5f-4442-83df-fd7bddd59da4\",\n    \"26ae145b-8644-4fa5-aa56-7b3dcacbe2d4\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d0a233d-4ce5-4620-9a95-29146f5a564f",
+          "name": "Get queue availability",
+          "request": {
+            "name": "Get queue availability",
+            "description": {
+              "content": "Get availability of supported channels for a given queue. Currently supported channels are adachat, kindlychat, digitalgeniuschat, genericapimessaging.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "queues",
+                ":queueId",
+                "availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "queueId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cef909ca-11b8-4251-9535-b97cde80cff3",
+              "name": "The availability of supported channels for a given queue",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"channelAvailability\": {\n        \"genericChannelName\": \"adachat\",\n        \"availability\": \"NotAvailable\",\n        \"queueSize\": 10,\n        \"_type\": \"GenericChannel\"\n      },\n      \"_type\": \"Success\"\n    },\n    {\n      \"error\": {\n        \"channel\": \"kindlychat\",\n        \"message\": \"Could not get availability for channel\",\n        \"_type\": \"UnexpectedError\"\n      },\n      \"_type\": \"Failure\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efe289fe-d293-4cbe-931d-7bdeef6d2c1a",
+              "name": "Invalid value for: path parameter queueId, Invalid value extracted from request context ,queue does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2190fc25-cfaa-4775-9d79-871309efa8ed",
+              "name": "The request could not be completed due to no supported channels configured for this organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6eb74b1-5f1e-4a62-ab95-5616dfbec473",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6675a621-1cc5-4d9d-8072-19aa81615782",
+          "name": "Get queue",
+          "request": {
+            "name": "Get queue",
+            "description": {
+              "content": "Get a queue by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "queues",
+                ":queueId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "queueId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a828504b-9804-4085-ab67-51f7f06af8d4",
+              "name": "The queue",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"0bf82493-ae46-4c49-aa29-0422136269be\",\n    \"name\": \"MyCorp main queue\",\n    \"isDefault\": true,\n    \"organizationId\": \"3de6c0f1-5e84-4d29-9ce9-84033983d4e6\",\n    \"queueThresholds\": {\n      \"SlaPercentage\": 10\n    },\n    \"slaCalculationMethod\": \"AbandonedIgnored\",\n    \"offerTimeout\": 10,\n    \"offeringAlgorithm\": \"OneAtATimeRandom\",\n    \"memberListType\": \"SkillBased\",\n    \"usages\": {\n      \"queueId\": \"0bf82493-ae46-4c49-aa29-0422136269be\",\n      \"usages\": {\n        \"WidgetChat\": [\n          \"c6f50127-7f0a-418f-943e-c62b96d8a742\",\n          \"b2ac94ac-379a-4f24-995a-6473809eef6b\"\n        ],\n        \"PstnPhone\": [\n          \"+4589977790\"\n        ],\n        \"Email\": [\n          \"info@mycorp.dixa.io\"\n        ]\n      }\n    },\n    \"wrapupTimeout\": 10,\n    \"priority\": 1,\n    \"offerAbandonedConversations\": false,\n    \"doNotOfferTimeouts\": {\n      \"WidgetChat\": 1\n    },\n    \"isDoNotOfferEnabled\": true,\n    \"isPreferredAgentEnabled\": false,\n    \"preferredAgentTimeouts\": {\n      \"WhatsApp\": 300,\n      \"Voicemail\": 300,\n      \"WidgetChat\": 300,\n      \"FacebookMessenger\": 300,\n      \"Email\": 43200,\n      \"ContactForm\": 43200,\n      \"Callback\": 300,\n      \"PstnPhone\": 300\n    },\n    \"preferredAgentOfflineTimeout\": 500,\n    \"personalAgentOfflineTimeout\": 500,\n    \"isRestricted\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f9914c3-5b76-4caf-972e-ecf13bb60fa1",
+              "name": "Invalid value for: path parameter queueId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3330658-7cdd-4020-af5e-740388461100",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a345880-f2b3-4742-84de-1aa8ebc4f0e0",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ca116b8-9e21-487e-bf36-032935c8a6eb",
+          "name": "Get the position of the conversation in its current queue",
+          "request": {
+            "name": "Get the position of the conversation in its current queue",
+            "description": {
+              "content": "Get the approximate position of a given conversation in its current queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "queues",
+                "conversation-position",
+                ":csid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "csid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5750ed9b-acbd-439b-8bdc-24f76f3bee38",
+              "name": "The position of the conversation in the queue",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    "conversation-position",
+                    ":csid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "csid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"position\": 10,\n    \"queuedAt\": \"2021-12-01T13:00:00.003Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "469d61a5-5c5c-4738-9697-82959ec88637",
+              "name": "Invalid value for: path parameter csid, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    "conversation-position",
+                    ":csid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "csid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4350e12d-7790-4bdb-916e-94dfbf3d62cd",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    "conversation-position",
+                    ":csid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "csid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c919e599-31bc-4112-8961-2fa95afc9a68",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    "conversation-position",
+                    ":csid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "csid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dev.dixa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "306d219c-6642-4561-8e29-6e94c2a4a201",
+    "name": "Dixa Agents Queues API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

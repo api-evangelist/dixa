@@ -1,0 +1,670 @@
+{
+  "item": [
+    {
+      "id": "a244097a-39d9-42cf-82bd-8677050329c7",
+      "name": "Search",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc6327db-067b-457c-9def-af42af63035c",
+          "name": "Search conversations",
+          "request": {
+            "name": "Search conversations",
+            "description": {
+              "content": "NOTE: This endpoint is deprecated and is replaced with POST /search/conversations. Search for conversations containing a particular text.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "search",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageLimit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>",
+                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) The text by which to search conversations"
+                },
+                {
+                  "disabled": false,
+                  "key": "exactMatch",
+                  "value": "<boolean>",
+                  "description": "Return only exact matches. This value is false by default."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2eaa83c4-c5ec-48ba-8143-59cf816723b4",
+              "name": "The search results for the searched parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "search",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "cancel my order"
+                    },
+                    {
+                      "key": "exactMatch",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1234,\n      \"highlights\": {\n        \"subject\": [\n          \"<em class=\\\"highlight\\\">Cancel my order</em>\"\n        ]\n      },\n      \"innerHits\": [\n        {\n          \"id\": \"dadcaea0-4135-4e8a-a5bf-05d4658facba\",\n          \"highlight\": {\n            \"text\": \"I want to <em class=\\\"highlight\\\">cancel my order</em> as soon as possible\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8769952d-cd72-4cbf-8225-41fe64c3f5ae",
+              "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: query parameter query, Invalid value for: query parameter exactMatch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "search",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "cancel my order"
+                    },
+                    {
+                      "key": "exactMatch",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "027cf34b-99b3-4bcb-a83e-91c550ddaa3b",
+              "name": "The user who issued the access token used in the request is not authorized to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "search",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "cancel my order"
+                    },
+                    {
+                      "key": "exactMatch",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"User is unauthorized to perform an underlying operation\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28107f9d-0da3-4d55-89ca-c850ef9993b7",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "search",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "cancel my order"
+                    },
+                    {
+                      "key": "exactMatch",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70eee472-46f7-4667-8dd7-4aacf4ff1c48",
+          "name": "Search conversations with filters",
+          "request": {
+            "name": "Search conversations with filters",
+            "description": {
+              "content": "Search for conversations containing a particular text or by filter or combine them both",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "search",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageLimit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>",
+                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": {\n    \"value\": \"<string>\",\n    \"exactMatch\": \"<boolean>\"\n  },\n  \"filters\": {\n    \"strategy\": \"<string>\",\n    \"conditions\": [\n      {\n        \"field\": {\n          \"operator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"field\": {\n          \"operator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "97445ca9-bc61-4931-b2c1-0b9118a1d236",
+              "name": "The search results for the searched parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "search",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"strategy\": \"All\",\n    \"conditions\": [\n      {\n        \"field\": {\n          \"operator\": {\n            \"values\": [\n              \"177e7564-6434-4177-a25a-8530089196ad\",\n              \"7729e7564-9876-a637-b46b-8530038196b3\"\n            ],\n            \"_type\": \"IncludesOne\"\n          },\n          \"_type\": \"TagId\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1234,\n      \"highlights\": {}\n    },\n    {\n      \"id\": 2345,\n      \"highlights\": {}\n    },\n    {\n      \"id\": 3456,\n      \"highlights\": {}\n    }\n  ],\n  \"meta\": {\n    \"next\": \"/<api-version>/search/conversations/?pageKey=cGFnZUxpbWl0PTUwJnBhZ2U9MQ%3D%3D:\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8634fcc-31d3-458b-94bd-d131edaba42a",
+              "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "search",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"strategy\": \"All\",\n    \"conditions\": [\n      {\n        \"field\": {\n          \"operator\": {\n            \"values\": [\n              \"177e7564-6434-4177-a25a-8530089196ad\",\n              \"7729e7564-9876-a637-b46b-8530038196b3\"\n            ],\n            \"_type\": \"IncludesOne\"\n          },\n          \"_type\": \"TagId\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15be66a9-a667-495d-92be-f928b6de32fe",
+              "name": "The user who issued the access token used in the request is not authorized to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "search",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"strategy\": \"All\",\n    \"conditions\": [\n      {\n        \"field\": {\n          \"operator\": {\n            \"values\": [\n              \"177e7564-6434-4177-a25a-8530089196ad\",\n              \"7729e7564-9876-a637-b46b-8530038196b3\"\n            ],\n            \"_type\": \"IncludesOne\"\n          },\n          \"_type\": \"TagId\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"User is unauthorized to perform an underlying operation\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fff1df0-a91e-42dd-bf04-b5dc20283aa3",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "search",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"strategy\": \"All\",\n    \"conditions\": [\n      {\n        \"field\": {\n          \"operator\": {\n            \"values\": [\n              \"177e7564-6434-4177-a25a-8530089196ad\",\n              \"7729e7564-9876-a637-b46b-8530038196b3\"\n            ],\n            \"_type\": \"IncludesOne\"\n          },\n          \"_type\": \"TagId\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dev.dixa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dc457e16-340a-4d61-adf1-7b8727212020",
+    "name": "Dixa Agents Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,279 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List presence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/agents/presence"
+          },
+          "docs": "List the presence status for all agents/admins in an organization."
+        },
+        {
+          "info": {
+            "name": "List agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/agents",
+            "params": [
+              {
+                "name": "pageLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "The agent/admin email filter"
+              },
+              {
+                "name": "phone",
+                "value": "",
+                "type": "query",
+                "description": "The agent/admin phone number filter"
+              }
+            ]
+          },
+          "docs": "Lists all agents/admins in an organization. It is possible to filter by one of the mutually exclusive parameters: email or phone number. In case both are provided, an error is returned."
+        },
+        {
+          "info": {
+            "name": "Create agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/agents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an agent."
+        },
+        {
+          "info": {
+            "name": "Update agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dev.dixa.io/beta/agents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk update agents/admins."
+        },
+        {
+          "info": {
+            "name": "Patch agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/agents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk patch agents/admins."
+        },
+        {
+          "info": {
+            "name": "List teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/agents/:agentId/teams",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path",
+                "description": "The agent/admin id"
+              }
+            ]
+          },
+          "docs": "List the teams in which the agent/admin is a member."
+        },
+        {
+          "info": {
+            "name": "Get presence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/agents/:agentId/presence",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path",
+                "description": "The agent/admin id"
+              }
+            ]
+          },
+          "docs": "Get the presence status for an agent/admin."
+        },
+        {
+          "info": {
+            "name": "Create agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/agents/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create agents in bulk."
+        },
+        {
+          "info": {
+            "name": "Get agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/agents/:agentId",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path",
+                "description": "The agent/admin id"
+              }
+            ]
+          },
+          "docs": "Get an agent/admin by id."
+        },
+        {
+          "info": {
+            "name": "Update agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dev.dixa.io/beta/agents/:agentId",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path",
+                "description": "The agent id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an agent/admin."
+        },
+        {
+          "info": {
+            "name": "Patch agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/agents/:agentId",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path",
+                "description": "The agent/admin id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patch an agent/admin."
+        },
+        {
+          "info": {
+            "name": "Delete agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dev.dixa.io/beta/agents/:agentId",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path",
+                "description": "The agent/admin id"
+              }
+            ]
+          },
+          "docs": "Downgrade an agent/admin to become an end user."
+        },
+        {
+          "info": {
+            "name": "Updates the working channel of an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dev.dixa.io/beta/agents/:agentId/presence/working-channel",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path",
+                "description": "The agent id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the working channel of an agent"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

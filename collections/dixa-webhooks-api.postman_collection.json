@@ -1,0 +1,1742 @@
+{
+  "item": [
+    {
+      "id": "ce528edd-01d0-45a1-bd15-ea6de41ab569",
+      "name": "Webhooks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52e7e7d9-571d-44d5-ab90-55255862db2c",
+          "name": "Webhook Subscription",
+          "request": {
+            "name": "Webhook Subscription",
+            "description": {
+              "content": "Get a Webhook Subscription by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "webhooks",
+                ":webhookSubscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "webhookSubscriptionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "867b9947-fcdc-4d2a-94c1-de8d26534dab",
+              "name": "The Webhook Subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"cb452b81-6748-40ab-af85-6559b371bc5d\",\n    \"name\": \"Dashboard Integration\",\n    \"subscribedEvents\": [\n      \"ConversationCreated\",\n      \"ConversationClosed\"\n    ],\n    \"url\": \"https://example.webhook/dashboard_integration\",\n    \"headers\": {\n      \"Authorization\": \"Basic d2ViaG9va191c2VyOndlYmhvb2tfcGFzc3dvcmQ=\"\n    },\n    \"secretKey\": \"4g4h988p468g785965b780684bde5546c52gge658d76b4q33fb69c526ea4bdbc\",\n    \"enabled\": true,\n    \"createdAt\": \"2023-08-01T09:30:15Z\",\n    \"createdBy\": \"e979cc3b-17b2-4850-b049-13c758763d1c\",\n    \"updatedAt\": \"2023-08-02T15:09:30Z\",\n    \"updatedBy\": \"64b777c3-eb82-49fb-bb3e-294afb5d840c\",\n    \"filters\": {\n      \"Conversation\": {\n        \"strategy\": \"All\",\n        \"conditions\": [\n          {\n            \"field\": \"InitialChannel\",\n            \"values\": [\n              \"email\",\n              \"pstn_phone\"\n            ],\n            \"_type\": \"IsOneOf\"\n          },\n          {\n            \"field\": \"QueueId\",\n            \"values\": [\n              \"f0475e4c-64ae-4c8e-8644-4ed10dc8d752\"\n            ],\n            \"_type\": \"IsNotOneOf\"\n          },\n          {\n            \"field\": \"OperationOrigin\",\n            \"values\": [\n              \"ApiImport\"\n            ],\n            \"_type\": \"IsNotOneOf\"\n          }\n        ],\n        \"_type\": \"CombinedFilters\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3b7371f-317b-4fd5-a0af-4a3b41604f07",
+              "name": "Invalid value for: path parameter webhookSubscriptionId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f9a0934-7ef7-4f02-82bd-1a0202cd294f",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c39ed50c-00b1-4144-9bf9-85c41558262c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfee6041-4db9-4f8b-b00c-dacd09cc71f2",
+          "name": "Delete Webhook Subscription",
+          "request": {
+            "name": "Delete Webhook Subscription",
+            "description": {
+              "content": "Delete a Webhook Subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "webhooks",
+                ":webhookSubscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "webhookSubscriptionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7ec50e2-647a-4df3-b2cc-d385ab0aaa26",
+              "name": "The Webhook Subscription was successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b41f142-0d38-4a20-803c-7da5c1d8f45a",
+              "name": "Invalid value for: path parameter webhookSubscriptionId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1064907-6909-47a7-bbe5-f6619ef3733e",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daacf778-1110-4133-ad8a-cb0a4b11dfc1",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d469e97-6a10-44aa-bccf-61dc31cf6980",
+          "name": "Patch Webhook Subscription",
+          "request": {
+            "name": "Patch Webhook Subscription",
+            "description": {
+              "content": "Patch a Webhook Subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "webhooks",
+                ":webhookSubscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "webhookSubscriptionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"authorization\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"customHeaders\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"enabled\": \"<boolean>\",\n  \"filters\": {\n    \"key_0\": {\n      \"strategy\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e69ed5d-c228-4990-a354-48ea6a88ae35",
+              "name": "The patched Webhook Subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"New name\",\n  \"events\": [\n    \"ConversationNoteAdded\"\n  ],\n  \"authorization\": {\n    \"value\": \"eyDoiGciOqGYUzI1NiJ4.eyJ0eQJRUapoYXBpIiwib4JxA5lkIjoiNTVmMmE6MmItYjU4NF33MDMxLTk2NTktOTE2M.qPoOZoQYDn4rn-akaLmVFka15JAV7TF6QT8UHOUTIy0\",\n    \"_type\": \"TokenAuth\"\n  },\n  \"customHeaders\": {\n    \"X-Automation-Webhook-Token\": \"<TOKEN>\",\n    \"X-Example-Header\": \"ExampleValue\"\n  },\n  \"filters\": {\n    \"Conversation\": {\n      \"strategy\": \"All\",\n      \"conditions\": [\n        {\n          \"field\": \"InitialChannel\",\n          \"values\": [\n            \"email\",\n            \"pstn_phone\"\n          ],\n          \"_type\": \"IsOneOf\"\n        },\n        {\n          \"field\": \"QueueId\",\n          \"values\": [\n            \"f0475e4c-64ae-4c8e-8644-4ed10dc8d752\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        },\n        {\n          \"field\": \"OperationOrigin\",\n          \"values\": [\n            \"ApiImport\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        }\n      ],\n      \"_type\": \"CombinedFilters\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"cb452b81-6748-40ab-af85-6559b371bc5d\",\n    \"name\": \"New name\",\n    \"subscribedEvents\": [\n      \"ConversationNoteAdded\"\n    ],\n    \"url\": \"https://example.webhook/dashboard_integration\",\n    \"headers\": {\n      \"Authorization\": \"Bearer eyDoiGciOqGYUzI1NiJ4.eyJ0eQJRUapoYXBpIiwib4JxA5lkIjoiNTVmMmE6MmItYjU4NF33MDMxLTk2NTktOTE2M.qPoOZoQYDn4rn-akaLmVFka15JAV7TF6QT8UHOUTIy0\"\n    },\n    \"secretKey\": \"4g4h988p468g785965b780684bde5546c52gge658d76b4q33fb69c526ea4bdbc\",\n    \"enabled\": true,\n    \"createdAt\": \"2023-08-01T09:30:15Z\",\n    \"createdBy\": \"e979cc3b-17b2-4850-b049-13c758763d1c\",\n    \"updatedAt\": \"2023-08-02T15:09:30Z\",\n    \"updatedBy\": \"64b777c3-eb82-49fb-bb3e-294afb5d840c\",\n    \"filters\": {\n      \"Conversation\": {\n        \"strategy\": \"All\",\n        \"conditions\": [\n          {\n            \"field\": \"InitialChannel\",\n            \"values\": [\n              \"email\",\n              \"pstn_phone\"\n            ],\n            \"_type\": \"IsOneOf\"\n          },\n          {\n            \"field\": \"QueueId\",\n            \"values\": [\n              \"f0475e4c-64ae-4c8e-8644-4ed10dc8d752\"\n            ],\n            \"_type\": \"IsNotOneOf\"\n          },\n          {\n            \"field\": \"OperationOrigin\",\n            \"values\": [\n              \"ApiImport\"\n            ],\n            \"_type\": \"IsNotOneOf\"\n          }\n        ],\n        \"_type\": \"CombinedFilters\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7711bf25-07ef-4665-b1b2-dc7ff84591e7",
+              "name": "Invalid value for: path parameter webhookSubscriptionId, Invalid value extracted from request context, Invalid value for: body, Validation failure during Webhook Subscription patching",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"New name\",\n  \"events\": [\n    \"ConversationNoteAdded\"\n  ],\n  \"authorization\": {\n    \"value\": \"eyDoiGciOqGYUzI1NiJ4.eyJ0eQJRUapoYXBpIiwib4JxA5lkIjoiNTVmMmE6MmItYjU4NF33MDMxLTk2NTktOTE2M.qPoOZoQYDn4rn-akaLmVFka15JAV7TF6QT8UHOUTIy0\",\n    \"_type\": \"TokenAuth\"\n  },\n  \"customHeaders\": {\n    \"X-Automation-Webhook-Token\": \"<TOKEN>\",\n    \"X-Example-Header\": \"ExampleValue\"\n  },\n  \"filters\": {\n    \"Conversation\": {\n      \"strategy\": \"All\",\n      \"conditions\": [\n        {\n          \"field\": \"InitialChannel\",\n          \"values\": [\n            \"email\",\n            \"pstn_phone\"\n          ],\n          \"_type\": \"IsOneOf\"\n        },\n        {\n          \"field\": \"QueueId\",\n          \"values\": [\n            \"f0475e4c-64ae-4c8e-8644-4ed10dc8d752\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        },\n        {\n          \"field\": \"OperationOrigin\",\n          \"values\": [\n            \"ApiImport\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        }\n      ],\n      \"_type\": \"CombinedFilters\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83de3902-93db-4676-b1d5-a9a36346d5c2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"New name\",\n  \"events\": [\n    \"ConversationNoteAdded\"\n  ],\n  \"authorization\": {\n    \"value\": \"eyDoiGciOqGYUzI1NiJ4.eyJ0eQJRUapoYXBpIiwib4JxA5lkIjoiNTVmMmE6MmItYjU4NF33MDMxLTk2NTktOTE2M.qPoOZoQYDn4rn-akaLmVFka15JAV7TF6QT8UHOUTIy0\",\n    \"_type\": \"TokenAuth\"\n  },\n  \"customHeaders\": {\n    \"X-Automation-Webhook-Token\": \"<TOKEN>\",\n    \"X-Example-Header\": \"ExampleValue\"\n  },\n  \"filters\": {\n    \"Conversation\": {\n      \"strategy\": \"All\",\n      \"conditions\": [\n        {\n          \"field\": \"InitialChannel\",\n          \"values\": [\n            \"email\",\n            \"pstn_phone\"\n          ],\n          \"_type\": \"IsOneOf\"\n        },\n        {\n          \"field\": \"QueueId\",\n          \"values\": [\n            \"f0475e4c-64ae-4c8e-8644-4ed10dc8d752\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        },\n        {\n          \"field\": \"OperationOrigin\",\n          \"values\": [\n            \"ApiImport\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        }\n      ],\n      \"_type\": \"CombinedFilters\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46b2b881-7773-49ad-9463-4764676ce97a",
+          "name": "List all Webhook Subscriptions",
+          "request": {
+            "name": "List all Webhook Subscriptions",
+            "description": {
+              "content": "List of all Webhook Subscriptions in an organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46fb423a-a7e9-4cea-b8d2-4ec6fd4954a8",
+              "name": "The List of Webhook Subscriptions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"cb452b81-6748-40ab-af85-6559b371bc5d\",\n      \"name\": \"Dashboard Integration\",\n      \"subscribedEvents\": [\n        \"ConversationCreated\",\n        \"ConversationClosed\"\n      ],\n      \"url\": \"https://example.webhook/dashboard_integration\",\n      \"headers\": {\n        \"Authorization\": \"Basic d2ViaG9va191c2VyOndlYmhvb2tfcGFzc3dvcmQ=\"\n      },\n      \"secretKey\": \"4g4h988p468g785965b780684bde5546c52gge658d76b4q33fb69c526ea4bdbc\",\n      \"enabled\": true,\n      \"createdAt\": \"2023-08-01T09:30:15Z\",\n      \"createdBy\": \"e979cc3b-17b2-4850-b049-13c758763d1c\",\n      \"updatedAt\": \"2023-08-02T15:09:30Z\",\n      \"updatedBy\": \"64b777c3-eb82-49fb-bb3e-294afb5d840c\",\n      \"filters\": {\n        \"Conversation\": {\n          \"strategy\": \"All\",\n          \"conditions\": [\n            {\n              \"field\": \"InitialChannel\",\n              \"values\": [\n                \"email\",\n                \"pstn_phone\"\n              ],\n              \"_type\": \"IsOneOf\"\n            },\n            {\n              \"field\": \"QueueId\",\n              \"values\": [\n                \"f0475e4c-64ae-4c8e-8644-4ed10dc8d752\"\n              ],\n              \"_type\": \"IsNotOneOf\"\n            },\n            {\n              \"field\": \"OperationOrigin\",\n              \"values\": [\n                \"ApiImport\"\n              ],\n              \"_type\": \"IsNotOneOf\"\n            }\n          ],\n          \"_type\": \"CombinedFilters\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ceb9f616-e0b6-4539-966f-4481385b0ff7",
+              "name": "Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38516822-c802-4013-920b-7fb37b520e01",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31af8cfc-5024-4c0b-b77f-771c39a5bbea",
+          "name": "Create Webhook Subscription",
+          "request": {
+            "name": "Create Webhook Subscription",
+            "description": {
+              "content": "Create a Webhook Subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"authorization\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"customHeaders\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"enabled\": \"<boolean>\",\n  \"filters\": {\n    \"key_0\": {\n      \"strategy\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    \"key_1\": {\n      \"strategy\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    \"key_2\": {\n      \"strategy\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d87ef89a-3eb0-44c9-b428-218279663eb3",
+              "name": "The created Webhook Subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Dashboard Integration\",\n  \"events\": [\n    \"ConversationCreated\",\n    \"ConversationClosed\"\n  ],\n  \"url\": \"https://example.webhook/dashboard_integration\",\n  \"authorization\": {\n    \"username\": \"webhook_user\",\n    \"password\": \"webhook_password\",\n    \"_type\": \"BasicAuth\"\n  },\n  \"customHeaders\": {\n    \"X-Automation-Webhook-Token\": \"<TOKEN>\",\n    \"X-Example-Header\": \"ExampleValue\"\n  },\n  \"enabled\": true,\n  \"filters\": {\n    \"Conversation\": {\n      \"strategy\": \"All\",\n      \"conditions\": [\n        {\n          \"field\": \"InitialChannel\",\n          \"values\": [\n            \"email\",\n            \"pstn_phone\"\n          ],\n          \"_type\": \"IsOneOf\"\n        },\n        {\n          \"field\": \"QueueId\",\n          \"values\": [\n            \"f0475e4c-64ae-4c8e-8644-4ed10dc8d752\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        },\n        {\n          \"field\": \"OperationOrigin\",\n          \"values\": [\n            \"ApiImport\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        }\n      ],\n      \"_type\": \"CombinedFilters\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"cb452b81-6748-40ab-af85-6559b371bc5d\",\n    \"name\": \"Dashboard Integration\",\n    \"subscribedEvents\": [\n      \"ConversationCreated\",\n      \"ConversationClosed\"\n    ],\n    \"url\": \"https://example.webhook/dashboard_integration\",\n    \"headers\": {\n      \"Authorization\": \"Basic d2ViaG9va191c2VyOndlYmhvb2tfcGFzc3dvcmQ=\"\n    },\n    \"secretKey\": \"4g4h988p468g785965b780684bde5546c52gge658d76b4q33fb69c526ea4bdbc\",\n    \"enabled\": true,\n    \"createdAt\": \"2023-08-01T09:30:15Z\",\n    \"createdBy\": \"e979cc3b-17b2-4850-b049-13c758763d1c\",\n    \"updatedAt\": \"2023-08-02T15:09:30Z\",\n    \"updatedBy\": \"64b777c3-eb82-49fb-bb3e-294afb5d840c\",\n    \"filters\": {\n      \"Conversation\": {\n        \"strategy\": \"All\",\n        \"conditions\": [\n          {\n            \"field\": \"InitialChannel\",\n            \"values\": [\n              \"email\",\n              \"pstn_phone\"\n            ],\n            \"_type\": \"IsOneOf\"\n          },\n          {\n            \"field\": \"QueueId\",\n            \"values\": [\n              \"f0475e4c-64ae-4c8e-8644-4ed10dc8d752\"\n            ],\n            \"_type\": \"IsNotOneOf\"\n          },\n          {\n            \"field\": \"OperationOrigin\",\n            \"values\": [\n              \"ApiImport\"\n            ],\n            \"_type\": \"IsNotOneOf\"\n          }\n        ],\n        \"_type\": \"CombinedFilters\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f91ebe01-fc18-401e-9a1c-4c386d7a3df1",
+              "name": "Invalid value extracted from request context, Invalid value for: body, Validation failure during Webhook Subscription creation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Dashboard Integration\",\n  \"events\": [\n    \"ConversationCreated\",\n    \"ConversationClosed\"\n  ],\n  \"url\": \"https://example.webhook/dashboard_integration\",\n  \"authorization\": {\n    \"username\": \"webhook_user\",\n    \"password\": \"webhook_password\",\n    \"_type\": \"BasicAuth\"\n  },\n  \"customHeaders\": {\n    \"X-Automation-Webhook-Token\": \"<TOKEN>\",\n    \"X-Example-Header\": \"ExampleValue\"\n  },\n  \"enabled\": true,\n  \"filters\": {\n    \"Conversation\": {\n      \"strategy\": \"All\",\n      \"conditions\": [\n        {\n          \"field\": \"InitialChannel\",\n          \"values\": [\n            \"email\",\n            \"pstn_phone\"\n          ],\n          \"_type\": \"IsOneOf\"\n        },\n        {\n          \"field\": \"QueueId\",\n          \"values\": [\n            \"f0475e4c-64ae-4c8e-8644-4ed10dc8d752\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        },\n        {\n          \"field\": \"OperationOrigin\",\n          \"values\": [\n            \"ApiImport\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        }\n      ],\n      \"_type\": \"CombinedFilters\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "010484a7-0089-423d-a76f-6c7fb67cc779",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Dashboard Integration\",\n  \"events\": [\n    \"ConversationCreated\",\n    \"ConversationClosed\"\n  ],\n  \"url\": \"https://example.webhook/dashboard_integration\",\n  \"authorization\": {\n    \"username\": \"webhook_user\",\n    \"password\": \"webhook_password\",\n    \"_type\": \"BasicAuth\"\n  },\n  \"customHeaders\": {\n    \"X-Automation-Webhook-Token\": \"<TOKEN>\",\n    \"X-Example-Header\": \"ExampleValue\"\n  },\n  \"enabled\": true,\n  \"filters\": {\n    \"Conversation\": {\n      \"strategy\": \"All\",\n      \"conditions\": [\n        {\n          \"field\": \"InitialChannel\",\n          \"values\": [\n            \"email\",\n            \"pstn_phone\"\n          ],\n          \"_type\": \"IsOneOf\"\n        },\n        {\n          \"field\": \"QueueId\",\n          \"values\": [\n            \"f0475e4c-64ae-4c8e-8644-4ed10dc8d752\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        },\n        {\n          \"field\": \"OperationOrigin\",\n          \"values\": [\n            \"ApiImport\"\n          ],\n          \"_type\": \"IsNotOneOf\"\n        }\n      ],\n      \"_type\": \"CombinedFilters\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22c44cda-d13a-455d-b344-77e3d4425d42",
+          "name": "Webhook Subscription Last Delivery Statuses",
+          "request": {
+            "name": "Webhook Subscription Last Delivery Statuses",
+            "description": {
+              "content": "Get the latest delivery statuses of a Webhook Subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "webhooks",
+                ":webhookSubscriptionId",
+                "delivery-status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "webhookSubscriptionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb711577-c337-43cd-bdba-34cdd908423f",
+              "name": "The Latest Delivery Statuses of a Webhook Subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId",
+                    "delivery-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"event\": \"ConversationCreated\",\n      \"deliveryStatus\": {\n        \"deliveryTimestamp\": \"2023-09-15T12:00:00.000Z\",\n        \"success\": true,\n        \"responseCode\": 200,\n        \"responseText\": \"OK\",\n        \"_type\": \"DeliveryDetail\"\n      }\n    },\n    {\n      \"event\": \"ConversationClosed\",\n      \"deliveryStatus\": {\n        \"_type\": \"NoRecentDelivery\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59cb4454-e460-4a7f-845b-27fc3a890036",
+              "name": "Invalid value for: path parameter webhookSubscriptionId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId",
+                    "delivery-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "598feeb7-523c-4227-a8ce-5449ee8b7da6",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId",
+                    "delivery-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59bc7dfe-4b8d-4a36-9658-ec70da67e53a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId",
+                    "delivery-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29b12505-7529-472d-abec-d0dcea087816",
+          "name": "Webhook Subscription Event Logs",
+          "request": {
+            "name": "Webhook Subscription Event Logs",
+            "description": {
+              "content": "Get the latest Webhook Subscription Event logs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "webhooks",
+                ":webhookSubscriptionId",
+                "delivery-status",
+                "logs",
+                ":event"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "webhookSubscriptionId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "event",
+                  "description": "(Required) The set of events this Webhook Subscription subscribes to. Allowed values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86083a80-4b25-4600-b254-1e3ab0a7d94e",
+              "name": "The Webhook Subscription Event Logs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId",
+                    "delivery-status",
+                    "logs",
+                    ":event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event",
+                      "description": "(Required) The set of events this Webhook Subscription subscribes to. Allowed values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"deliveryDetail\": {\n        \"deliveryTimestamp\": \"2023-09-15T12:00:00.000Z\",\n        \"success\": true,\n        \"responseCode\": 200,\n        \"responseText\": \"OK\"\n      },\n      \"payload\": \"{ \\\"event_id\\\": \\\"8967e0c6-fe64-4105-bf71-14ae0c256gg4\\\", \\\"event_fqn\\\": \\\"CONVERSATION_NOTE_ADDED\\\", \\\"event_version\\\": \\\"1\\\", \\\"event_timestamp\\\": \\\"2023-09-15T12:00:00.000Z\\\", \\\"organization\\\": { \\\"id\\\": \\\"g1b15dq2-bba8-48a8-a92e-852014a166r9\\\", \\\"name\\\": \\\"Your Org Name\\\" }, \\\"data\\\": { \\\"conversation\\\": { \\\"csid\\\": 1234, \\\"channel\\\": \\\"WIDGET_CHAT\\\", \\\"status\\\": \\\"OPEN\\\", \\\"direction\\\": \\\"INBOUND\\\", \\\"queue\\\": { \\\"id\\\": \\\"b5b10483-7d28-4dea-bf8d-0d88cc3bd7cc\\\", \\\"name\\\": \\\"Your Queue\\\" }, \\\"contact_point\\\": \\\"Your Contact Point\\\", \\\"requester\\\": { \\\"id\\\": \\\"ec4a2b65-0403-42b3-b054-8998325fd8ac\\\", \\\"name\\\": \\\"Test Requester\\\", \\\"email\\\": \\\"test@example.com\\\", \\\"phone\\\": null, \\\"roles\\\": [ \\\"Enduser\\\" ] }, \\\"assignee\\\": { \\\"id\\\": \\\"cccb8520-e24f-43bf-8344-49d07665d854\\\", \\\"name\\\": \\\"An Agent\\\", \\\"email\\\": \\\"agent@yourcompany.com\\\", \\\"phone\\\": \\\"+4511223344\\\", \\\"roles\\\": [ \\\"Admin\\\", \\\"TeamLead\\\", \\\"SystemAdmin\\\", \\\"Agent\\\" ] }, \\\"subject\\\": null, \\\"tags\\\": [], \\\"created_at\\\": \\\"2023-09-01T12:00:00.000Z\\\" }, \\\"note_id\\\": \\\"ac951357-5189-4707-add7-616af55698q7\\\", \\\"text\\\": \\\"Some Note Added\\\", \\\"created_at\\\": \\\"2023-09-15T12:00:00.000Z\\\", \\\"author\\\": { \\\"id\\\": \\\"cccb8520-e24f-43bf-8344-49d07665d854\\\", \\\"name\\\": \\\"An Agent\\\", \\\"email\\\": \\\"agent@yourcompany.com\\\", \\\"phone\\\": \\\"+4511223344\\\", \\\"roles\\\": [ \\\"Admin\\\", \\\"TeamLead\\\", \\\"SystemAdmin\\\", \\\"Agent\\\" ] } } }\"\n    },\n    {\n      \"deliveryDetail\": {\n        \"deliveryTimestamp\": \"2023-09-15T08:00:00.000Z\",\n        \"success\": true,\n        \"responseCode\": 200,\n        \"responseText\": \"OK\"\n      },\n      \"payload\": \"{ \\\"event_id\\\": \\\"9963e0c6-fe64-4105-bf71-14ae0c123hh5\\\", \\\"event_fqn\\\": \\\"CONVERSATION_NOTE_ADDED\\\", \\\"event_version\\\": \\\"1\\\", \\\"event_timestamp\\\": \\\"2023-09-15T08:00:00.000Z\\\", \\\"organization\\\": { \\\"id\\\": \\\"g1b15dq2-bba8-48a8-a92e-852014a166r9\\\", \\\"name\\\": \\\"Your Org Name\\\" }, \\\"data\\\": { \\\"conversation\\\": { \\\"csid\\\": 1234, \\\"channel\\\": \\\"WIDGET_CHAT\\\", \\\"status\\\": \\\"OPEN\\\", \\\"direction\\\": \\\"INBOUND\\\", \\\"queue\\\": { \\\"id\\\": \\\"b5b10483-7d28-4dea-bf8d-0d88cc3bd7cc\\\", \\\"name\\\": \\\"Your Queue\\\" }, \\\"contact_point\\\": \\\"Your Contact Point\\\", \\\"requester\\\": { \\\"id\\\": \\\"ec4a2b65-0403-42b3-b054-8998325fd8ac\\\", \\\"name\\\": \\\"Test Requester\\\", \\\"email\\\": \\\"test@example.com\\\", \\\"phone\\\": null, \\\"roles\\\": [ \\\"Enduser\\\" ] }, \\\"assignee\\\": { \\\"id\\\": \\\"cccb8520-e24f-43bf-8344-49d07665d854\\\", \\\"name\\\": \\\"An Agent\\\", \\\"email\\\": \\\"agent@yourcompany.com\\\", \\\"phone\\\": \\\"+4511223344\\\", \\\"roles\\\": [ \\\"Admin\\\", \\\"TeamLead\\\", \\\"SystemAdmin\\\", \\\"Agent\\\" ] }, \\\"subject\\\": null, \\\"tags\\\": [], \\\"created_at\\\": \\\"2023-09-01T12:00:00.000Z\\\" }, \\\"note_id\\\": \\\"ac951357-5189-4707-add7-616af55698q7\\\", \\\"text\\\": \\\"First Note\\\", \\\"created_at\\\": \\\"2023-09-15T08:00:00.000Z\\\", \\\"author\\\": { \\\"id\\\": \\\"cccb8520-e24f-43bf-8344-49d07665d854\\\", \\\"name\\\": \\\"An Agent\\\", \\\"email\\\": \\\"agent@yourcompany.com\\\", \\\"phone\\\": \\\"+4511223344\\\", \\\"roles\\\": [ \\\"Admin\\\", \\\"TeamLead\\\", \\\"SystemAdmin\\\", \\\"Agent\\\" ] } } }\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e7a87a4-4903-4501-a726-4c1b98992af8",
+              "name": "Invalid value for: path parameter webhookSubscriptionId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId",
+                    "delivery-status",
+                    "logs",
+                    ":event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event",
+                      "description": "(Required) The set of events this Webhook Subscription subscribes to. Allowed values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c2a3eef-37fe-440d-a0dc-1a012aee4ea6",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId",
+                    "delivery-status",
+                    "logs",
+                    ":event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event",
+                      "description": "(Required) The set of events this Webhook Subscription subscribes to. Allowed values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "203339c6-8469-411f-891a-8ebd8a77ec3e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "webhooks",
+                    ":webhookSubscriptionId",
+                    "delivery-status",
+                    "logs",
+                    ":event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "webhookSubscriptionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event",
+                      "description": "(Required) The set of events this Webhook Subscription subscribes to. Allowed values: [SLAEvaluationVoided, ConversationPending, SLAEvaluationBreached, ConversationMessageAdded, ConversationCustomAttributeUpdated, SLAEvaluationAchieved, ConversationAssigned, ConversationMessageDeliveryDelivered, ConversationMessageDeliveryInfo, ConversationTransferred, ConversationEnqueued, AgentUnbannedEnduser, TypingStarted, ConversationCreated, ConversationUnassigned, ConversationOpen, ConversationAbandoned, ConversationClosed, ConversationMessageDeliveryFailed, ConversationTagAdded, ConversationNoteAdded, AgentBannedEnduser, ConversationEndUserReplaced, ConversationMessageDeliverySeen, AgentUnbannedIp, ConversationMessageDeliverySent, AgentBannedIp, ConversationTagRemoved, ConversationRated, SLAEvaluationPending, ConversationMessageDeliverySpamComplaint, ConversationPendingExpired]"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dev.dixa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "331121f4-eb0b-4490-ae57-33b7290c8dac",
+    "name": "Dixa Agents Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

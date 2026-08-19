@@ -1,0 +1,3548 @@
+{
+  "item": [
+    {
+      "id": "ab9c5c95-0a3d-483b-acfb-70e0e994b0d0",
+      "name": "Chatbots",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6e148c9f-a3ef-46d8-8197-4e05696ae8e0",
+          "name": "Create end user",
+          "request": {
+            "name": "Create end user",
+            "description": {
+              "content": "Create an end user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"additionalEmails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"middleNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"avatarUrl\": \"<string>\",\n  \"externalId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e654784-c40a-4f02-ab0c-bf43050e7ccc",
+              "name": "The created end user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"createdAt\": \"2020-12-16T09:41:43Z\",\n    \"displayName\": \"Alice Brown\",\n    \"email\": \"alice@brown.com\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [\n      \"alice@secondary.email\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"+5566778899\"\n    ],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n    \"externalId\": \"#12345678\",\n    \"customAttributes\": [\n      {\n        \"id\": \"4baa78bc-4815-4122-9c99-f71cd742d37b\",\n        \"name\": \"My Attribute\",\n        \"identifier\": \"my_attribute\",\n        \"value\": \"My Attribute Value\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6794d09-5d1a-467a-b169-8f67c6868af9",
+              "name": "Invalid value extracted from request context, Invalid value for: body, Validation failure during enduser creation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78d23b8b-8708-49c1-82e0-2fa6fb51f6c1",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a45f5bd0-c352-4aa7-b8ac-8008188e1b1f",
+          "name": "Get end user",
+          "request": {
+            "name": "Get end user",
+            "description": {
+              "content": "Get an end user by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "userId",
+                  "description": "(Required) The end user id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79471e78-4fab-4adc-8be8-5dfd370e6f9b",
+              "name": "The end user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"createdAt\": \"2020-12-16T09:41:43Z\",\n    \"displayName\": \"Alice Brown\",\n    \"email\": \"alice@brown.com\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [\n      \"alice@secondary.email\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"+5566778899\"\n    ],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n    \"externalId\": \"#12345678\",\n    \"customAttributes\": [\n      {\n        \"id\": \"4baa78bc-4815-4122-9c99-f71cd742d37b\",\n        \"name\": \"My Attribute\",\n        \"identifier\": \"my_attribute\",\n        \"value\": \"My Attribute Value\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e2a7d77-df71-4762-bee1-6f03a020251a",
+              "name": "Invalid value for: path parameter userId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "594bfe7c-ac09-4dc9-807f-4f0ef1b7f1e6",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9da2c6b8-e2f5-4aff-821a-a4fd0ae2cffd",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19a4e9d7-5728-426e-9178-8849a99c04e6",
+          "name": "List end user conversations",
+          "request": {
+            "name": "List end user conversations",
+            "description": {
+              "content": "Lists conversations requested by an end user. <br/> Note: Custom attributes are not part of the response at this point. If you need to get custom attributes for a conversation use the [GET /conversations/{conversationId}](../Conversations/#tag/Conversations/operation/getConversationsConversationid) endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers",
+                ":userId",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageLimit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>",
+                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "userId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5dad29db-cb04-4d60-9e65-cd3f5b44f85b",
+              "name": "The list of conversations requested by an EndUser",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"requesterId\": \"9deb936b-52e5-4c44-828d-4c8d48fe0c7e\",\n      \"channel\": \"WidgetChat\",\n      \"createdAt\": \"2020-12-16T09:41:43Z\",\n      \"direction\": \"Outbound\",\n      \"state\": \"Open\",\n      \"stateUpdatedAt\": \"2020-12-16T09:41:43Z\",\n      \"assignment\": {\n        \"agentId\": \"0e4d0ead-dc69-470a-9b3a-e7eb16a56453\",\n        \"assignedAt\": \"2020-12-16T11:00:34Z\"\n      },\n      \"queue\": {\n        \"id\": \"cd87b232-64c8-4ad5-b81a-6f9233352d97\",\n        \"queuedAt\": \"2020-12-16T10:40:40Z\"\n      },\n      \"browserInfo\": {\n        \"name\": \"Chrome 9\",\n        \"version\": \"91.0.4472.114\",\n        \"ipAddress\": \"127.0.0.1\",\n        \"originatingUrl\": \"http://localhost:3000/\"\n      },\n      \"language\": \"en\",\n      \"link\": {\n        \"parentId\": 1234,\n        \"_type\": \"SideConversation\"\n      },\n      \"_type\": \"ChatConversation\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8a17bc6-53cc-4c53-b334-80faeb8ab3ef",
+              "name": "Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a2d9586-2f08-45d4-b491-389db76fa83c",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82f747f6-0d3b-4b01-87a6-caaf7f7f68da",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2d479d0-7757-48da-86b5-61e19287cae2",
+          "name": "Close conversation",
+          "request": {
+            "name": "Close conversation",
+            "description": {
+              "content": "Mark a conversation as closed by providing its id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                ":conversationId",
+                "close"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "conversationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "894afffc-cb1f-4ebe-a67d-4339887c06a7",
+              "name": "The conversation was successfully closed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"5a556159-9c21-4f3e-a44f-d323deb80d16\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fedf37df-7526-4417-b617-5eda966b8603",
+              "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, User not found, User is not agent/admin",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"5a556159-9c21-4f3e-a44f-d323deb80d16\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "981b58e4-7753-4be5-9447-9d104edb874c",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"5a556159-9c21-4f3e-a44f-d323deb80d16\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "255516b4-7528-4941-9c76-424fedbcc682",
+          "name": "Followup conversation",
+          "request": {
+            "name": "Followup conversation",
+            "description": {
+              "content": "Follow up a conversation by providing its id and expiration timestamp.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                ":conversationId",
+                "followup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "conversationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"timestamp\": \"<dateTime>\",\n  \"userId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db06885d-73c5-470a-b5e1-d3535721f6a0",
+              "name": "The conversation was successfully followed up",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "followup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timestamp\": \"2025-01-08T08:31:25Z\",\n  \"userId\": \"5a556159-9c21-4f3e-a44f-d323deb80d16\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "90a56119-6dc4-4209-be30-f2454a27dd1e",
+              "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, User not found, User is not agent/admin",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "followup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timestamp\": \"2025-01-08T08:31:25Z\",\n  \"userId\": \"5a556159-9c21-4f3e-a44f-d323deb80d16\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5188827-6252-4b9a-ae3c-a6aee7043322",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "followup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timestamp\": \"2025-01-08T08:31:25Z\",\n  \"userId\": \"5a556159-9c21-4f3e-a44f-d323deb80d16\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b77109e-036a-4ae5-99a3-5e51a02c7546",
+          "name": "Transfer conversation",
+          "request": {
+            "name": "Transfer conversation",
+            "description": {
+              "content": "Transfer a conversation to a target queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                ":conversationId",
+                "transfer",
+                "queue"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "conversationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"queueId\": \"<uuid>\",\n  \"userId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c5a8069-0de0-457f-8638-f3455fb81a05",
+              "name": "The conversation was successfully transferred to the target queue",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "transfer",
+                    "queue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"queueId\": \"92f8d193-b26f-4a62-86a3-bb03ee0915e9\",\n  \"userId\": \"a53b25da-f676-4c52-acac-58c9280aa23d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b065c600-0dda-458b-b756-e09cafc8383f",
+              "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, User not found, User is not agent/admin, Queue does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "transfer",
+                    "queue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"queueId\": \"92f8d193-b26f-4a62-86a3-bb03ee0915e9\",\n  \"userId\": \"a53b25da-f676-4c52-acac-58c9280aa23d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae264c83-ac6a-464f-ae1a-4576939a6538",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "transfer",
+                    "queue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"queueId\": \"92f8d193-b26f-4a62-86a3-bb03ee0915e9\",\n  \"userId\": \"a53b25da-f676-4c52-acac-58c9280aa23d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5118b4c-550b-4d6f-bed4-79970f8948d8",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "transfer",
+                    "queue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"queueId\": \"92f8d193-b26f-4a62-86a3-bb03ee0915e9\",\n  \"userId\": \"a53b25da-f676-4c52-acac-58c9280aa23d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d178cb07-b5f9-4350-ab94-f177c2bb23d2",
+          "name": "Create conversation rating result",
+          "request": {
+            "name": "Create conversation rating result",
+            "description": {
+              "content": "Create a rating result for a specific conversation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                ":conversationId",
+                "ratings",
+                ":ratingId",
+                "submit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "conversationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ratingId",
+                  "description": "(Required) The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ratingResult\": {\n    \"value\": \"<integer>\"\n  },\n  \"userId\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"submittedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85a0e8f5-4167-4338-a6b0-adc6b5dab3e9",
+              "name": "The created conversation rating result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "ratings",
+                    ":ratingId",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ratingId",
+                      "description": "(Required) The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"d3cf6f15-1497-4e71-92f2-9b3b228352bd\",\n  \"ratingResult\": {\n    \"value\": 4,\n    \"_type\": \"Csat\"\n  },\n  \"comment\": \"Best customer service ever!\",\n  \"submittedAt\": \"2024-03-11T16:39:30Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"ratingId\": \"33cf4e5e-9ce9-461c-b668-be9b712b717c\",\n    \"userId\": \"4c5f7efa-0822-4b75-bdf5-907fa7336e0c\",\n    \"ratingResult\": {\n      \"value\": 5,\n      \"_type\": \"Csat\"\n    },\n    \"comment\": \"Excellent customer service!\",\n    \"submittedAt\": \"2024-03-11T16:39:30Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e318e521-1d4b-4bf8-b841-efda52b14f34",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "ratings",
+                    ":ratingId",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ratingId",
+                      "description": "(Required) The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"d3cf6f15-1497-4e71-92f2-9b3b228352bd\",\n  \"ratingResult\": {\n    \"value\": 4,\n    \"_type\": \"Csat\"\n  },\n  \"comment\": \"Best customer service ever!\",\n  \"submittedAt\": \"2024-03-11T16:39:30Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b64c534c-9d6a-4673-91b2-986dd1ca8d01",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "ratings",
+                    ":ratingId",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ratingId",
+                      "description": "(Required) The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"d3cf6f15-1497-4e71-92f2-9b3b228352bd\",\n  \"ratingResult\": {\n    \"value\": 4,\n    \"_type\": \"Csat\"\n  },\n  \"comment\": \"Best customer service ever!\",\n  \"submittedAt\": \"2024-03-11T16:39:30Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0192fca-d636-47c0-87bf-a1b6595eb414",
+          "name": "Create conversation rating offer",
+          "request": {
+            "name": "Create conversation rating offer",
+            "description": {
+              "content": "Create a rating offer for a specific conversation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                ":conversationId",
+                "ratings",
+                "offer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "conversationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ratingType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"agentId\": \"<string>\",\n  \"offeredAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fe416c91-a368-4bb7-8090-2ca9d25fe5fa",
+              "name": "The created conversation rating offer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "ratings",
+                    "offer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b0323b42-c428-4afa-970e-20bf5bdeeec4\",\n  \"agentId\": \"eeb3bbe5-0355-4ac1-8af5-20d42a3db24b\",\n  \"ratingType\": \"Csat\",\n  \"offeredAt\": \"2024-03-11T16:39:30Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"2f0122db-0824-44d7-b39a-e1f722b8c38c\",\n    \"userId\": \"7a65c963-b3ca-4bd4-996e-bdbcaa620219\",\n    \"agentId\": \"db7f0b41-b779-4726-a673-07b2a59a550d\",\n    \"ratingType\": \"Csat\",\n    \"offeredAt\": \"2024-03-11T16:39:30Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b58b1e0a-b8e7-4b46-9358-126658d9b4ac",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "ratings",
+                    "offer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b0323b42-c428-4afa-970e-20bf5bdeeec4\",\n  \"agentId\": \"eeb3bbe5-0355-4ac1-8af5-20d42a3db24b\",\n  \"ratingType\": \"Csat\",\n  \"offeredAt\": \"2024-03-11T16:39:30Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d735fe6-30f7-4e52-9ec5-8f7f8ce3c89e",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "ratings",
+                    "offer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b0323b42-c428-4afa-970e-20bf5bdeeec4\",\n  \"agentId\": \"eeb3bbe5-0355-4ac1-8af5-20d42a3db24b\",\n  \"ratingType\": \"Csat\",\n  \"offeredAt\": \"2024-03-11T16:39:30Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfcec3d4-12c9-47b5-bd25-7a5f3cbbfe31",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "ratings",
+                    "offer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"b0323b42-c428-4afa-970e-20bf5bdeeec4\",\n  \"agentId\": \"eeb3bbe5-0355-4ac1-8af5-20d42a3db24b\",\n  \"ratingType\": \"Csat\",\n  \"offeredAt\": \"2024-03-11T16:39:30Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4885f9c7-61d8-4b41-9835-169f719f34bc",
+          "name": "Create conversation",
+          "request": {
+            "name": "Create conversation",
+            "description": {
+              "content": "Create a conversation. For inbound messages the author is assumed to be the requester of the conversation (end user). For outbound messages the author is specified using the agentId field.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requesterId\": \"<uuid>\",\n  \"direction\": \"<string>\",\n  \"contactEndpointId\": \"<string>\",\n  \"queueId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "462d46e8-ad97-4729-808e-7dd78585828a",
+              "name": "The id of the created conversation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requesterId\": \"9c2a2cce-699f-4a72-89d9-fda5bc8dec8b\",\n  \"emailIntegrationId\": \"my-integration@email.dixa.io\",\n  \"subject\": \"order #123\",\n  \"message\": {\n    \"content\": {\n      \"value\": \"My order hasn't shipped\",\n      \"_type\": \"Text\"\n    },\n    \"attachments\": [],\n    \"_type\": \"Inbound\"\n  },\n  \"language\": \"en\",\n  \"_type\": \"Email\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc7ae2d1-ce6d-4445-91ad-e77204a7ceec",
+              "name": "Invalid value extracted from request context, Invalid value for: body, Invalid input for Message, Failure to download attachment, Duplicate externalId, Unsupported ConversationChannel",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requesterId\": \"9c2a2cce-699f-4a72-89d9-fda5bc8dec8b\",\n  \"emailIntegrationId\": \"my-integration@email.dixa.io\",\n  \"subject\": \"order #123\",\n  \"message\": {\n    \"content\": {\n      \"value\": \"My order hasn't shipped\",\n      \"_type\": \"Text\"\n    },\n    \"attachments\": [],\n    \"_type\": \"Inbound\"\n  },\n  \"language\": \"en\",\n  \"_type\": \"Email\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33f93c56-9c1d-4674-808b-f9647cacae4b",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requesterId\": \"9c2a2cce-699f-4a72-89d9-fda5bc8dec8b\",\n  \"emailIntegrationId\": \"my-integration@email.dixa.io\",\n  \"subject\": \"order #123\",\n  \"message\": {\n    \"content\": {\n      \"value\": \"My order hasn't shipped\",\n      \"_type\": \"Text\"\n    },\n    \"attachments\": [],\n    \"_type\": \"Inbound\"\n  },\n  \"language\": \"en\",\n  \"_type\": \"Email\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fab9da6-e2c4-417f-8dd9-770f57d07855",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requesterId\": \"9c2a2cce-699f-4a72-89d9-fda5bc8dec8b\",\n  \"emailIntegrationId\": \"my-integration@email.dixa.io\",\n  \"subject\": \"order #123\",\n  \"message\": {\n    \"content\": {\n      \"value\": \"My order hasn't shipped\",\n      \"_type\": \"Text\"\n    },\n    \"attachments\": [],\n    \"_type\": \"Inbound\"\n  },\n  \"language\": \"en\",\n  \"_type\": \"Email\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cdffdd2-7df7-40ab-ae0d-dd67ea02186c",
+          "name": "Import conversation",
+          "request": {
+            "name": "Import conversation",
+            "description": {
+              "content": "Import a previously created conversation into Dixa. For inbound messages the author is assumed to be the requester of the conversation (end user), unless the specific channel supports overriding the message author through its attributes. For outbound messages the author is specified using the agentId field.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"genericChannelName\": \"<string>\",\n  \"requesterId\": \"<uuid>\",\n  \"direction\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"requesterConnectionStatus\": \"<string>\",\n  \"messages\": [\n    {\n      \"content\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"attachments\": [\n        {\n          \"url\": \"<string>\",\n          \"prettyName\": \"<string>\"\n        },\n        {\n          \"url\": \"<string>\",\n          \"prettyName\": \"<string>\"\n        }\n      ],\n      \"externalId\": \"<string>\",\n      \"attributes\": {}\n    },\n    {\n      \"content\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"attachments\": [\n        {\n          \"url\": \"<string>\",\n          \"prettyName\": \"<string>\"\n        },\n        {\n          \"url\": \"<string>\",\n          \"prettyName\": \"<string>\"\n        }\n      ],\n      \"externalId\": \"<string>\",\n      \"attributes\": {}\n    }\n  ],\n  \"assignment\": {\n    \"agentId\": \"<uuid>\",\n    \"assignedAt\": \"<dateTime>\"\n  },\n  \"externalId\": \"<string>\",\n  \"closing\": {\n    \"closedAt\": \"<dateTime>\",\n    \"closedBy\": \"<uuid>\"\n  },\n  \"attributes\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20a6ac30-fb7a-44a0-8f56-f769b59f210c",
+              "name": "The id of the imported conversation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"genericChannelName\": \"genericapimessaging\",\n  \"requesterId\": \"9c2a2cce-699f-4a72-89d9-fda5bc8dec8b\",\n  \"requesterConnectionStatus\": \"Connected\",\n  \"direction\": \"Inbound\",\n  \"messages\": [\n    {\n      \"content\": {\n        \"value\": \"Hi, I need help with my order\",\n        \"_type\": \"Text\"\n      },\n      \"attachments\": [],\n      \"createdAt\": \"2021-12-01T13:00:00.003Z\",\n      \"_type\": \"InboundImport\"\n    },\n    {\n      \"content\": {\n        \"value\": \"Sure — what seems to be the problem?\",\n        \"_type\": \"Text\"\n      },\n      \"agentId\": \"cd4ceb58-bb3a-443c-9cd8-4f088feafe5b\",\n      \"attachments\": [],\n      \"createdAt\": \"2021-12-01T14:00:00.004Z\",\n      \"_type\": \"OutboundImport\"\n    }\n  ],\n  \"createdAt\": \"2021-12-01T11:00:00.001Z\",\n  \"assignment\": {\n    \"agentId\": \"cd4ceb58-bb3a-443c-9cd8-4f088feafe5b\",\n    \"assignedAt\": \"2021-12-01T12:00:00.002Z\"\n  },\n  \"_type\": \"GenericConversationImport\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 100,\n    \"partialErrors\": [\n      {\n        \"message\": \"The conversation could not be assigned\"\n      },\n      {\n        \"message\": \"Invalid attachment url in message. externalId: 42\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be6d93fa-f653-4cb5-b015-42479288ba7e",
+              "name": "Invalid value extracted from request context, Invalid value for: body, Invalid input for Message, Failure to download attachment, Unsupported ConversationChannel, Requester does not exist, Agent does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"genericChannelName\": \"genericapimessaging\",\n  \"requesterId\": \"9c2a2cce-699f-4a72-89d9-fda5bc8dec8b\",\n  \"requesterConnectionStatus\": \"Connected\",\n  \"direction\": \"Inbound\",\n  \"messages\": [\n    {\n      \"content\": {\n        \"value\": \"Hi, I need help with my order\",\n        \"_type\": \"Text\"\n      },\n      \"attachments\": [],\n      \"createdAt\": \"2021-12-01T13:00:00.003Z\",\n      \"_type\": \"InboundImport\"\n    },\n    {\n      \"content\": {\n        \"value\": \"Sure — what seems to be the problem?\",\n        \"_type\": \"Text\"\n      },\n      \"agentId\": \"cd4ceb58-bb3a-443c-9cd8-4f088feafe5b\",\n      \"attachments\": [],\n      \"createdAt\": \"2021-12-01T14:00:00.004Z\",\n      \"_type\": \"OutboundImport\"\n    }\n  ],\n  \"createdAt\": \"2021-12-01T11:00:00.001Z\",\n  \"assignment\": {\n    \"agentId\": \"cd4ceb58-bb3a-443c-9cd8-4f088feafe5b\",\n    \"assignedAt\": \"2021-12-01T12:00:00.002Z\"\n  },\n  \"_type\": \"GenericConversationImport\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26fc8abf-ebeb-41af-b64f-097e5404915a",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"genericChannelName\": \"genericapimessaging\",\n  \"requesterId\": \"9c2a2cce-699f-4a72-89d9-fda5bc8dec8b\",\n  \"requesterConnectionStatus\": \"Connected\",\n  \"direction\": \"Inbound\",\n  \"messages\": [\n    {\n      \"content\": {\n        \"value\": \"Hi, I need help with my order\",\n        \"_type\": \"Text\"\n      },\n      \"attachments\": [],\n      \"createdAt\": \"2021-12-01T13:00:00.003Z\",\n      \"_type\": \"InboundImport\"\n    },\n    {\n      \"content\": {\n        \"value\": \"Sure — what seems to be the problem?\",\n        \"_type\": \"Text\"\n      },\n      \"agentId\": \"cd4ceb58-bb3a-443c-9cd8-4f088feafe5b\",\n      \"attachments\": [],\n      \"createdAt\": \"2021-12-01T14:00:00.004Z\",\n      \"_type\": \"OutboundImport\"\n    }\n  ],\n  \"createdAt\": \"2021-12-01T11:00:00.001Z\",\n  \"assignment\": {\n    \"agentId\": \"cd4ceb58-bb3a-443c-9cd8-4f088feafe5b\",\n    \"assignedAt\": \"2021-12-01T12:00:00.002Z\"\n  },\n  \"_type\": \"GenericConversationImport\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99331778-3422-42b5-8885-4901245adf7e",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"genericChannelName\": \"genericapimessaging\",\n  \"requesterId\": \"9c2a2cce-699f-4a72-89d9-fda5bc8dec8b\",\n  \"requesterConnectionStatus\": \"Connected\",\n  \"direction\": \"Inbound\",\n  \"messages\": [\n    {\n      \"content\": {\n        \"value\": \"Hi, I need help with my order\",\n        \"_type\": \"Text\"\n      },\n      \"attachments\": [],\n      \"createdAt\": \"2021-12-01T13:00:00.003Z\",\n      \"_type\": \"InboundImport\"\n    },\n    {\n      \"content\": {\n        \"value\": \"Sure — what seems to be the problem?\",\n        \"_type\": \"Text\"\n      },\n      \"agentId\": \"cd4ceb58-bb3a-443c-9cd8-4f088feafe5b\",\n      \"attachments\": [],\n      \"createdAt\": \"2021-12-01T14:00:00.004Z\",\n      \"_type\": \"OutboundImport\"\n    }\n  ],\n  \"createdAt\": \"2021-12-01T11:00:00.001Z\",\n  \"assignment\": {\n    \"agentId\": \"cd4ceb58-bb3a-443c-9cd8-4f088feafe5b\",\n    \"assignedAt\": \"2021-12-01T12:00:00.002Z\"\n  },\n  \"_type\": \"GenericConversationImport\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43decbd0-2bc0-4497-981e-fd2d9dde8a51",
+          "name": "Claim conversation",
+          "request": {
+            "name": "Claim conversation",
+            "description": {
+              "content": "Claim a conversation for a given agent. To avoid taking over assigned conversations, set the `force` paremeter to false",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                ":conversationId",
+                "claim"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "conversationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agentId\": \"<uuid>\",\n  \"force\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1ca300ab-1c02-4f00-923b-e0cb00188e65",
+              "name": "The conversation was successfully claimed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "claim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentId\": \"5a556159-9c21-4f3e-a44f-d323deb80d16\",\n  \"force\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "63e8b04f-71ae-4465-b1fd-a9dd70ae5e1e",
+              "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "claim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentId\": \"5a556159-9c21-4f3e-a44f-d323deb80d16\",\n  \"force\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c20132f-017c-4083-a8bf-2ef4bdb86846",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "claim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentId\": \"5a556159-9c21-4f3e-a44f-d323deb80d16\",\n  \"force\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98f63e3e-ad3b-4a4a-abcb-2b6a04b92366",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "claim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentId\": \"5a556159-9c21-4f3e-a44f-d323deb80d16\",\n  \"force\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a188bc38-797a-46f5-aa86-46b2ffae8443",
+          "name": "Get queue availability",
+          "request": {
+            "name": "Get queue availability",
+            "description": {
+              "content": "Get availability of supported channels for a given queue. Currently supported channels are adachat, kindlychat, digitalgeniuschat, genericapimessaging.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "queues",
+                ":queueId",
+                "availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "queueId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5085c7f6-fb29-4a5b-aaf9-23b25de9eaf6",
+              "name": "The availability of supported channels for a given queue",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"channelAvailability\": {\n        \"genericChannelName\": \"adachat\",\n        \"availability\": \"NotAvailable\",\n        \"queueSize\": 10,\n        \"_type\": \"GenericChannel\"\n      },\n      \"_type\": \"Success\"\n    },\n    {\n      \"error\": {\n        \"channel\": \"kindlychat\",\n        \"message\": \"Could not get availability for channel\",\n        \"_type\": \"UnexpectedError\"\n      },\n      \"_type\": \"Failure\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "592f3d9a-edae-449a-bd81-48315ed55918",
+              "name": "Invalid value for: path parameter queueId, Invalid value extracted from request context ,queue does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "042ff110-501c-4e70-a6b1-b9a946f28f53",
+              "name": "The request could not be completed due to no supported channels configured for this organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d86cdc3-7e5c-40b5-8bab-a4ee8ee0de70",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    ":queueId",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "queueId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3b96703-8e36-4a7c-8a9d-33548475524e",
+          "name": "Get the position of the conversation in its current queue",
+          "request": {
+            "name": "Get the position of the conversation in its current queue",
+            "description": {
+              "content": "Get the approximate position of a given conversation in its current queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "queues",
+                "conversation-position",
+                ":csid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "csid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b01b597a-d894-451a-bf03-8bd0e036a1c1",
+              "name": "The position of the conversation in the queue",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    "conversation-position",
+                    ":csid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "csid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"position\": 10,\n    \"queuedAt\": \"2021-12-01T13:00:00.003Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7b95b32-5681-4fac-b8b6-075e589af1ea",
+              "name": "Invalid value for: path parameter csid, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    "conversation-position",
+                    ":csid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "csid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "983e3ba7-e0dd-4b8d-9791-a02644c0e53a",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    "conversation-position",
+                    ":csid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "csid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bacc271c-65ae-461a-959c-62d829de4db4",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "queues",
+                    "conversation-position",
+                    ":csid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "csid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dev.dixa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b3d67c7b-938a-418c-bb7c-ac7410eec86e",
+    "name": "Dixa Agents Chatbots API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

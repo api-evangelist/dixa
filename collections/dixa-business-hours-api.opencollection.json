@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents Business Hours API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Business Hours",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List business hours schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/business-hours/schedules"
+          },
+          "docs": "List business hours schedules in an organization with pagination."
+        },
+        {
+          "info": {
+            "name": "Get a business hours schedule definition.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/business-hours/schedules/:scheduleId/definition",
+            "params": [
+              {
+                "name": "scheduleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a business hours schedule definition in an organization by providing its ID."
+        },
+        {
+          "info": {
+            "name": "Get the upcoming business hours schedule.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/business-hours/schedules/:scheduleId/upcoming",
+            "params": [
+              {
+                "name": "scheduleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of upcoming days to include in the response. Must be between 1 and 90."
+              }
+            ]
+          },
+          "docs": "Get the resolved business hours schedule for the next number of days, applying recurring rules and exceptions."
+        },
+        {
+          "info": {
+            "name": "Check if a business is open",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/business-hours/schedules/:scheduleId/status",
+            "params": [
+              {
+                "name": "scheduleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "An optional timestamp in ISO-8601 format: yyyy-MM-dd'T'HH:mm:ss'Z' to check if the business is open at a specific time. If not specified, the current time is used."
+              }
+            ]
+          },
+          "docs": "Check if a business is open either right now or at the specified timestamp."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

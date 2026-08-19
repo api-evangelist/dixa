@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents Custom Attributes API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Patch end user custom attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/endusers/:userId/custom-attributes",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patch custom attributes of an end user"
+        },
+        {
+          "info": {
+            "name": "Patch conversation custom attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/custom-attributes",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patch custom attributes of a conversation"
+        },
+        {
+          "info": {
+            "name": "Get custom attribute definition by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/custom-attributes/:customAttributeId",
+            "params": [
+              {
+                "name": "customAttributeId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get custom attribute in an organization by id."
+        },
+        {
+          "info": {
+            "name": "List custom attributes definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/custom-attributes"
+          },
+          "docs": "List all custom attributes in an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

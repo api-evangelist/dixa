@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents Contact Endpoints API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contact Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contact endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/contact-endpoints/:contactEndpointId",
+            "params": [
+              {
+                "name": "contactEndpointId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get contact endpoint by id (email or phone number)."
+        },
+        {
+          "info": {
+            "name": "List contact endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/contact-endpoints",
+            "params": [
+              {
+                "name": "_type",
+                "value": "",
+                "type": "query",
+                "description": "An optional contact type can be specified to filter the contact endpoints. If not provided, all types are listed. Possible values: [EmailEndpoint, TelephonyEndpoint]"
+              }
+            ]
+          },
+          "docs": "List all available contact endpoints in an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

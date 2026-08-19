@@ -1,0 +1,3023 @@
+{
+  "item": [
+    {
+      "id": "ed2f6ec3-c0c2-4cd8-ad48-a9c5c707a258",
+      "name": "End Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c68e8f61-67c7-449c-92ee-8dd630f990bf",
+          "name": "List end users",
+          "request": {
+            "name": "List end users",
+            "description": {
+              "content": "Lists all end users in an organization. It is possible to filter by one of the mutually exclusive parameters: email or phone number. In case both are provided, an error is returned.<br/> <b>Note:</b> Custom attributes are not part of the response at this point. If you need to get custom attributes for a user use the [GET /endusers/{userId}](../End-Users/#tag/End-Users/operation/getEndusersUserid) endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageLimit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>",
+                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "Filter by the contact's email"
+                },
+                {
+                  "disabled": false,
+                  "key": "phone",
+                  "value": "<string>",
+                  "description": "Filter by the contact's phone number"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalId",
+                  "value": "<string>",
+                  "description": "Filter by the contact's external id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c227be69-f7a5-4cf6-aee5-94176f7d1099",
+              "name": "The list of end users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"93b885ad-fe0d-3089-8df6-34904fd59f71\",\n      \"createdAt\": \"2020-12-16T09:41:43Z\",\n      \"displayName\": \"Enduser 0\",\n      \"email\": \"enduser.0@example.org\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"middleNames\": [],\n      \"avatarUrl\": \"https://files.dixa.io/public/image_0_id\",\n      \"externalId\": \"#12345678\"\n    },\n    {\n      \"id\": \"55a54008-ad1b-3589-aa21-0d2629c1df41\",\n      \"createdAt\": \"2020-12-16T09:41:43Z\",\n      \"displayName\": \"Enduser 1\",\n      \"email\": \"enduser.1@example.org\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"middleNames\": [],\n      \"avatarUrl\": \"https://files.dixa.io/public/image_1_id\",\n      \"externalId\": \"#12345678\"\n    },\n    {\n      \"id\": \"9e688c58-a548-3b8e-af69-c9e1005ad0bf\",\n      \"createdAt\": \"2020-12-16T09:41:43Z\",\n      \"displayName\": \"Enduser 2\",\n      \"email\": \"enduser.2@example.org\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"middleNames\": [],\n      \"avatarUrl\": \"https://files.dixa.io/public/image_2_id\",\n      \"externalId\": \"#12345678\"\n    },\n    {\n      \"id\": \"86666835-06aa-3d90-8bbd-5a74ac4edf68\",\n      \"createdAt\": \"2020-12-16T09:41:43Z\",\n      \"displayName\": \"Enduser 3\",\n      \"email\": \"enduser.3@example.org\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"middleNames\": [],\n      \"avatarUrl\": \"https://files.dixa.io/public/image_3_id\",\n      \"externalId\": \"#12345678\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bcdac86-161c-4449-b32d-a72829b0ef44",
+              "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: query parameter email, Invalid value for: query parameter phone, Invalid value for: query parameter externalId, Duplicate phone number, Duplicate email address, Invalid filters: Cannot provide more than one filter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aca9989f-224b-4fdd-8a0d-239971782afe",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bb054e6-ffd5-473f-962d-a446966ab3f4",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71132ef3-3ef2-4ba0-9fb0-5b4ee50d750e",
+          "name": "Update end users",
+          "request": {
+            "name": "Update end users",
+            "description": {
+              "content": "Bulk update end users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"displayName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"middleNames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"avatarUrl\": \"<string>\",\n      \"externalId\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"displayName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"middleNames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"avatarUrl\": \"<string>\",\n      \"externalId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d1c75e9-350f-4529-95bf-473dd2da758c",
+              "name": "The updated end users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"id\": \"d4826125-559f-496f-ad71-a0340f0cae06\",\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [\n        \"alice@secondary.email\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"+5566778899\"\n      ],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [\n        \"J.\"\n      ],\n      \"avatarUrl\": \"http://avatar.url\",\n      \"externalId\": \"#12345678\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"data\": {\n        \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Alice Brown\",\n        \"email\": \"alice@brown.com\",\n        \"phoneNumber\": \"+551155256325\",\n        \"additionalEmails\": [\n          \"alice@secondary.email\"\n        ],\n        \"additionalPhoneNumbers\": [\n          \"+5566778899\"\n        ],\n        \"firstName\": \"Alice\",\n        \"lastName\": \"Brown\",\n        \"middleNames\": [\n          \"J.\"\n        ],\n        \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n        \"externalId\": \"#12345678\",\n        \"customAttributes\": [\n          {\n            \"id\": \"4baa78bc-4815-4122-9c99-f71cd742d37b\",\n            \"name\": \"My Attribute\",\n            \"identifier\": \"my_attribute\",\n            \"value\": \"My Attribute Value\"\n          }\n        ]\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"error\": {\n        \"id\": \"8fe8f4c3-7bc6-4767-924a-d9afa7ac7009\",\n        \"message\": \"Updating EndUser [id:8fe8f4c3-7bc6-4767-924a-d9afa7ac7009] failed with [errors:PhoneNumberExists]\",\n        \"_type\": \"Validation\"\n      },\n      \"_type\": \"BulkActionFailure\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "516c9d1b-8aa5-4117-8c0b-233315bfe2d7",
+              "name": "Invalid value extracted from request context, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"id\": \"d4826125-559f-496f-ad71-a0340f0cae06\",\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [\n        \"alice@secondary.email\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"+5566778899\"\n      ],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [\n        \"J.\"\n      ],\n      \"avatarUrl\": \"http://avatar.url\",\n      \"externalId\": \"#12345678\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96af0145-4fca-4e77-bdcb-f0b94c8f4dbf",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"id\": \"d4826125-559f-496f-ad71-a0340f0cae06\",\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [\n        \"alice@secondary.email\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"+5566778899\"\n      ],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [\n        \"J.\"\n      ],\n      \"avatarUrl\": \"http://avatar.url\",\n      \"externalId\": \"#12345678\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa0dacdb-a1b9-4ed8-ac45-9dc091de98ca",
+          "name": "Create end user",
+          "request": {
+            "name": "Create end user",
+            "description": {
+              "content": "Create an end user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"additionalEmails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"middleNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"avatarUrl\": \"<string>\",\n  \"externalId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e3f7c3f-bd9f-46b8-8a29-e55424df7a70",
+              "name": "The created end user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"createdAt\": \"2020-12-16T09:41:43Z\",\n    \"displayName\": \"Alice Brown\",\n    \"email\": \"alice@brown.com\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [\n      \"alice@secondary.email\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"+5566778899\"\n    ],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n    \"externalId\": \"#12345678\",\n    \"customAttributes\": [\n      {\n        \"id\": \"4baa78bc-4815-4122-9c99-f71cd742d37b\",\n        \"name\": \"My Attribute\",\n        \"identifier\": \"my_attribute\",\n        \"value\": \"My Attribute Value\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5bf09c8-a9a9-4e1b-a3d0-d207bd688106",
+              "name": "Invalid value extracted from request context, Invalid value for: body, Validation failure during enduser creation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "480d5280-fea1-4bee-8ddd-18cb251c60cf",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "300464b7-7922-4d3b-81cd-e3cd3ecbc304",
+          "name": "Patch end users",
+          "request": {
+            "name": "Patch end users",
+            "description": {
+              "content": "Bulk patch end users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"displayName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"middleNames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"avatarUrl\": \"<string>\",\n      \"externalId\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"displayName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"middleNames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"avatarUrl\": \"<string>\",\n      \"externalId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55c81aaa-bf06-463f-94ac-17a541dc72a3",
+              "name": "The patched end users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"id\": \"43b1fe06-a7c4-4f34-8e48-b0559e6acdb9\",\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [\n        \"alice@secondary.email\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"+5566778899\"\n      ],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [],\n      \"avatarUrl\": \"http://avatar.url\",\n      \"externalId\": \"#12345678\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"data\": {\n        \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Alice Brown\",\n        \"email\": \"alice@brown.com\",\n        \"phoneNumber\": \"+551155256325\",\n        \"additionalEmails\": [\n          \"alice@secondary.email\"\n        ],\n        \"additionalPhoneNumbers\": [\n          \"+5566778899\"\n        ],\n        \"firstName\": \"Alice\",\n        \"lastName\": \"Brown\",\n        \"middleNames\": [],\n        \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n        \"externalId\": \"#12345678\",\n        \"customAttributes\": [\n          {\n            \"id\": \"4baa78bc-4815-4122-9c99-f71cd742d37b\",\n            \"name\": \"My Attribute\",\n            \"identifier\": \"my_attribute\",\n            \"value\": \"My Attribute Value\"\n          }\n        ]\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"error\": {\n        \"id\": \"ace11abb-4ed0-42bd-9e3b-4ef6db58e0aa\",\n        \"message\": \"Updating EndUser [id=ace11abb-4ed0-42bd-9e3b-4ef6db58e0aa] in [org=b86a1842-437c-4c55-ac4b-0a9cd2f44dfb] failed with [errors=PhoneNumberExists]\",\n        \"_type\": \"Validation\"\n      },\n      \"_type\": \"BulkActionFailure\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f3cf319-33e7-4581-8475-d185f9169442",
+              "name": "Invalid value extracted from request context, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"id\": \"43b1fe06-a7c4-4f34-8e48-b0559e6acdb9\",\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [\n        \"alice@secondary.email\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"+5566778899\"\n      ],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [],\n      \"avatarUrl\": \"http://avatar.url\",\n      \"externalId\": \"#12345678\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11328f4f-08bb-4f76-954c-d839a1506a14",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"id\": \"43b1fe06-a7c4-4f34-8e48-b0559e6acdb9\",\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [\n        \"alice@secondary.email\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"+5566778899\"\n      ],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [],\n      \"avatarUrl\": \"http://avatar.url\",\n      \"externalId\": \"#12345678\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "732377ac-6f56-4e48-ad92-706e823b26b4",
+          "name": "Create end users",
+          "request": {
+            "name": "Create end users",
+            "description": {
+              "content": "Create multiple end users in a single bulk action",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"displayName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"middleNames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"avatarUrl\": \"<string>\",\n      \"externalId\": \"<string>\"\n    },\n    {\n      \"displayName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"additionalEmails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"additionalPhoneNumbers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"middleNames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"avatarUrl\": \"<string>\",\n      \"externalId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd27d126-8847-4a93-89fd-c1d9823f8254",
+              "name": "The created end users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [],\n      \"avatarUrl\": \"http://avatar.url\",\n      \"externalId\": \"#12345678\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"data\": {\n        \"id\": \"93b885ad-fe0d-3089-8df6-34904fd59f71\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Enduser 0\",\n        \"email\": \"enduser.0@example.org\",\n        \"additionalEmails\": [],\n        \"additionalPhoneNumbers\": [],\n        \"middleNames\": [],\n        \"avatarUrl\": \"https://files.dixa.io/public/image_0_id\",\n        \"externalId\": \"#12345678\"\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"data\": {\n        \"id\": \"55a54008-ad1b-3589-aa21-0d2629c1df41\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Enduser 1\",\n        \"email\": \"enduser.1@example.org\",\n        \"additionalEmails\": [],\n        \"additionalPhoneNumbers\": [],\n        \"middleNames\": [],\n        \"avatarUrl\": \"https://files.dixa.io/public/image_1_id\",\n        \"externalId\": \"#12345678\"\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"data\": {\n        \"id\": \"9e688c58-a548-3b8e-af69-c9e1005ad0bf\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Enduser 2\",\n        \"email\": \"enduser.2@example.org\",\n        \"additionalEmails\": [],\n        \"additionalPhoneNumbers\": [],\n        \"middleNames\": [],\n        \"avatarUrl\": \"https://files.dixa.io/public/image_2_id\",\n        \"externalId\": \"#12345678\"\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"data\": {\n        \"id\": \"86666835-06aa-3d90-8bbd-5a74ac4edf68\",\n        \"createdAt\": \"2020-12-16T09:41:43Z\",\n        \"displayName\": \"Enduser 3\",\n        \"email\": \"enduser.3@example.org\",\n        \"additionalEmails\": [],\n        \"additionalPhoneNumbers\": [],\n        \"middleNames\": [],\n        \"avatarUrl\": \"https://files.dixa.io/public/image_3_id\",\n        \"externalId\": \"#12345678\"\n      },\n      \"_type\": \"BulkActionSuccess\"\n    },\n    {\n      \"error\": {\n        \"id\": \"1b6d1e11-0626-414e-906a-b80a384cfef0\",\n        \"message\": \"Create EndUser [userId=...] in [orgId=...] failed with [errors=...]\",\n        \"_type\": \"Validation\"\n      },\n      \"_type\": \"BulkActionFailure\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "395997d2-3007-441d-a82e-5e7abe8dda1b",
+              "name": "Invalid value extracted from request context, Invalid value for: body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [],\n      \"avatarUrl\": \"http://avatar.url\",\n      \"externalId\": \"#12345678\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "776e91a4-786b-421e-8c2e-da05207589f0",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"displayName\": \"Alice Brown\",\n      \"email\": \"alice@brown.com\",\n      \"phoneNumber\": \"+551155256325\",\n      \"additionalEmails\": [],\n      \"additionalPhoneNumbers\": [],\n      \"firstName\": \"Alice\",\n      \"lastName\": \"Brown\",\n      \"middleNames\": [],\n      \"avatarUrl\": \"http://avatar.url\",\n      \"externalId\": \"#12345678\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2aa346da-e16c-4f5d-b2b7-b13fe7e56ec4",
+          "name": "Get end user",
+          "request": {
+            "name": "Get end user",
+            "description": {
+              "content": "Get an end user by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "userId",
+                  "description": "(Required) The end user id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa6716de-dd04-4b1b-833a-529e35b5792d",
+              "name": "The end user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"createdAt\": \"2020-12-16T09:41:43Z\",\n    \"displayName\": \"Alice Brown\",\n    \"email\": \"alice@brown.com\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [\n      \"alice@secondary.email\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"+5566778899\"\n    ],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n    \"externalId\": \"#12345678\",\n    \"customAttributes\": [\n      {\n        \"id\": \"4baa78bc-4815-4122-9c99-f71cd742d37b\",\n        \"name\": \"My Attribute\",\n        \"identifier\": \"my_attribute\",\n        \"value\": \"My Attribute Value\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8149c64-b2c4-48d5-a63b-39d2b2c4f42e",
+              "name": "Invalid value for: path parameter userId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ee6e026-21f1-4de3-aa17-588ece234928",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a695d4f-d0b3-4483-8948-43831bd39ffa",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "627acb39-5354-4037-a68d-df1e6795af7e",
+          "name": "Update end user",
+          "request": {
+            "name": "Update end user",
+            "description": {
+              "content": "Update an end user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "userId",
+                  "description": "(Required) The end user id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"additionalEmails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"middleNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"avatarUrl\": \"<string>\",\n  \"externalId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb77ea61-0657-4b24-a49c-17aea170ba8d",
+              "name": "The updated end user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [\n    \"J.\"\n  ],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"createdAt\": \"2020-12-16T09:41:43Z\",\n    \"displayName\": \"Alice Brown\",\n    \"email\": \"alice@brown.com\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [\n      \"alice@secondary.email\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"+5566778899\"\n    ],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [\n      \"J.\"\n    ],\n    \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n    \"externalId\": \"#12345678\",\n    \"customAttributes\": [\n      {\n        \"id\": \"4baa78bc-4815-4122-9c99-f71cd742d37b\",\n        \"name\": \"My Attribute\",\n        \"identifier\": \"my_attribute\",\n        \"value\": \"My Attribute Value\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a2836d0-b8e6-45da-a887-48f5222f6301",
+              "name": "Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: body, Validation failure during update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [\n    \"J.\"\n  ],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9238fc5d-70de-4bd0-8551-d2f2b6144f03",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [\n    \"J.\"\n  ],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ba8fc96-6acc-4b1b-87dc-4c30fd81514b",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [\n    \"J.\"\n  ],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94607dd3-e990-43c4-9640-313bfd55d8e2",
+          "name": "Patch end user",
+          "request": {
+            "name": "Patch end user",
+            "description": {
+              "content": "Patch an end user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "userId",
+                  "description": "(Required) The end user id to be patched"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"additionalEmails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"middleNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"avatarUrl\": \"<string>\",\n  \"externalId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d9e5e901-22ba-4872-be0a-9d1bd6107d0c",
+              "name": "The patched end user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id to be patched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"434ce9f5-14c8-4be1-a0a8-f755010deb9b\",\n    \"createdAt\": \"2020-12-16T09:41:43Z\",\n    \"displayName\": \"Alice Brown\",\n    \"email\": \"alice@brown.com\",\n    \"phoneNumber\": \"+551155256325\",\n    \"additionalEmails\": [\n      \"alice@secondary.email\"\n    ],\n    \"additionalPhoneNumbers\": [\n      \"+5566778899\"\n    ],\n    \"firstName\": \"Alice\",\n    \"lastName\": \"Brown\",\n    \"middleNames\": [],\n    \"avatarUrl\": \"https://files.dixa.io/public/image_id\",\n    \"externalId\": \"#12345678\",\n    \"customAttributes\": [\n      {\n        \"id\": \"4baa78bc-4815-4122-9c99-f71cd742d37b\",\n        \"name\": \"My Attribute\",\n        \"identifier\": \"my_attribute\",\n        \"value\": \"My Attribute Value\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "714c8f97-1eac-400d-a073-4fd7ad706e19",
+              "name": "Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: body, Validation failure during update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id to be patched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c06cde7e-4edd-4927-9970-b1302eb854cb",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id to be patched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c305931-b3be-4db2-a05c-dea902231123",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The end user id to be patched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Alice Brown\",\n  \"email\": \"alice@brown.com\",\n  \"phoneNumber\": \"+551155256325\",\n  \"additionalEmails\": [\n    \"alice@secondary.email\"\n  ],\n  \"additionalPhoneNumbers\": [\n    \"+5566778899\"\n  ],\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Brown\",\n  \"middleNames\": [],\n  \"avatarUrl\": \"http://avatar.url\",\n  \"externalId\": \"#12345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b9edf50-3910-46bb-ac2d-e1189a9ace1d",
+          "name": "Anonymize end user",
+          "request": {
+            "name": "Anonymize end user",
+            "description": {
+              "content": "Request the anonymization of an end user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers",
+                ":userId",
+                "anonymize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false",
+                  "description": "Whether to force close all the conversations initiated by the end user, if any are found in a non closed state."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "userId",
+                  "description": "(Required) The id of the end user to anonymize"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68a92a9c-12c3-4597-9908-c9ce7394fd8a",
+              "name": "The end user's anonymization request status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The id of the end user to anonymize"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"6bf55369-a670-4e6b-9f70-ecdb9913549f\",\n    \"entityType\": \"UserAnonymizationType\",\n    \"_type\": \"User\",\n    \"initiatedAt\": \"2021-12-01T12:46:36.581Z[GMT]\",\n    \"targetEntityId\": \"f28fafd6-2e42-4441-943c-388a8e0ef433\",\n    \"requestedBy\": \"2b01e4c9-0c3a-47d4-9462-cd5a1a4687f5\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e680187-bfe9-441f-ade4-c2c7c5b783cd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The id of the end user to anonymize"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3235729e-4ef9-4c48-b739-08458216f8f4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The id of the end user to anonymize"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fe43fb5-5846-4607-9daf-4371fb8d32a8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The id of the end user to anonymize"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "283cf103-ca4b-4028-aab0-9266ff6a1ef6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) The id of the end user to anonymize"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea855add-930a-4886-9622-a91310464ce5",
+          "name": "Patch end user custom attributes",
+          "request": {
+            "name": "Patch end user custom attributes",
+            "description": {
+              "content": "Patch custom attributes of an end user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers",
+                ":userId",
+                "custom-attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "userId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_1\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_2\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62d253fb-303a-4398-b7cd-6abd4ebcdb0f",
+              "name": "The patched end user attributes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"274e5a2c-be0d-42c0-b725-3dd533729f68\",\n      \"name\": \"End user attribute\",\n      \"identifier\": \"end_user_attribute\",\n      \"value\": \"abcdef\"\n    },\n    {\n      \"id\": \"befae0d9-9679-42b9-af76-e76f64e28429\",\n      \"name\": \"End user attribute 2\",\n      \"identifier\": \"end_user_attribute_2\",\n      \"value\": [\n        \"example1\",\n        \"example2\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7285aa47-221a-461d-815c-a4cabdc497da",
+              "name": "Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: body, Invalid input for patching",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e06dcc2-457b-4f06-a79f-eabd545cb77a",
+              "name": "The user who issued the access token used in the request is not authorized to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"User is unauthorized to perform an underlying operation\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67f21bff-a784-4b0a-af67-d07504f239de",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2fc0c8d5-019b-4c0c-ba7a-ae1c97a0fedd",
+          "name": "List end user conversations",
+          "request": {
+            "name": "List end user conversations",
+            "description": {
+              "content": "Lists conversations requested by an end user. <br/> Note: Custom attributes are not part of the response at this point. If you need to get custom attributes for a conversation use the [GET /conversations/{conversationId}](../Conversations/#tag/Conversations/operation/getConversationsConversationid) endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers",
+                ":userId",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageLimit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>",
+                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "userId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f675aa6-c3f5-4f7c-9036-d78f5401f3d4",
+              "name": "The list of conversations requested by an EndUser",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"requesterId\": \"9deb936b-52e5-4c44-828d-4c8d48fe0c7e\",\n      \"channel\": \"WidgetChat\",\n      \"createdAt\": \"2020-12-16T09:41:43Z\",\n      \"direction\": \"Outbound\",\n      \"state\": \"Open\",\n      \"stateUpdatedAt\": \"2020-12-16T09:41:43Z\",\n      \"assignment\": {\n        \"agentId\": \"0e4d0ead-dc69-470a-9b3a-e7eb16a56453\",\n        \"assignedAt\": \"2020-12-16T11:00:34Z\"\n      },\n      \"queue\": {\n        \"id\": \"cd87b232-64c8-4ad5-b81a-6f9233352d97\",\n        \"queuedAt\": \"2020-12-16T10:40:40Z\"\n      },\n      \"browserInfo\": {\n        \"name\": \"Chrome 9\",\n        \"version\": \"91.0.4472.114\",\n        \"ipAddress\": \"127.0.0.1\",\n        \"originatingUrl\": \"http://localhost:3000/\"\n      },\n      \"language\": \"en\",\n      \"link\": {\n        \"parentId\": 1234,\n        \"_type\": \"SideConversation\"\n      },\n      \"_type\": \"ChatConversation\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2623a64c-25dc-45a0-bcad-8be97f72aea1",
+              "name": "Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0923dad9-fa5a-4cd5-964a-16e1e8469597",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad9007d1-5f2f-442e-aad0-3c17c6640629",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageLimit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dev.dixa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d65490d7-bd3d-40bd-839c-7e4e899a8369",
+    "name": "Dixa Agents End Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

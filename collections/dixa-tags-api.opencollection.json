@@ -1,0 +1,221 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents Tags API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Tag conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/tags/:tagId",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Tag a conversation. You may only use active tags to tag conversations."
+        },
+        {
+          "info": {
+            "name": "Untag conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/tags/:tagId",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Untag a conversation. You may remove active or inactive tags from a conversation."
+        },
+        {
+          "info": {
+            "name": "Bulk tag conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/tags/bulk",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate bulk tag of a conversation and process it asynchronously. If a tag with corresponding name does not exist it will be created."
+        },
+        {
+          "info": {
+            "name": "List tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/tags",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the tags for a particular conversation by providing the conversation id."
+        },
+        {
+          "info": {
+            "name": "List tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/tags",
+            "params": [
+              {
+                "name": "includeDeactivated",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include deactivated tags in the response. If not provided, only active tags are listed."
+              }
+            ]
+          },
+          "docs": "List all tags in an organization. Only active tags are returned by default. To include deactivated tags use `?includeDeactivated=true`."
+        },
+        {
+          "info": {
+            "name": "Create tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/tags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a tag."
+        },
+        {
+          "info": {
+            "name": "Get tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/tags/:tagId",
+            "params": [
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a tag by id."
+        },
+        {
+          "info": {
+            "name": "Delete tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dev.dixa.io/beta/tags/:tagId",
+            "params": [
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The tag id"
+              }
+            ]
+          },
+          "docs": "Deletes the tag and all its associations. Note that this operation is irreversible."
+        },
+        {
+          "info": {
+            "name": "Deactivate tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/tags/:tagId/deactivate",
+            "params": [
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The tag id"
+              }
+            ]
+          },
+          "docs": "Deactivate a tag."
+        },
+        {
+          "info": {
+            "name": "Activate tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/tags/:tagId/activate",
+            "params": [
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The tag id"
+              }
+            ]
+          },
+          "docs": "Activate a tag."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

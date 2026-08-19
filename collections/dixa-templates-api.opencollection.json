@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents Templates API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/templates",
+            "params": [
+              {
+                "name": "pageLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+              },
+              {
+                "name": "type",
+                "value": "QuickResponse",
+                "type": "query",
+                "description": "Filter by template type"
+              }
+            ]
+          },
+          "docs": "Lists all templates belonging to an organization."
+        },
+        {
+          "info": {
+            "name": "Delete template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dev.dixa.io/beta/templates/:templateId",
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path",
+                "description": "The template id"
+              }
+            ]
+          },
+          "docs": "Deletes the template. Please make sure the template is not used in flows and automations as this operation is irreversible."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

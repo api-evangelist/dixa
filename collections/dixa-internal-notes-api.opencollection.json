@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents Internal Notes API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Internal Notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add internal notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/notes/bulk",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create internal notes in a conversation by providing the conversation id."
+        },
+        {
+          "info": {
+            "name": "List internal notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/notes",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get all internal notes for a particular conversation by providing the conversation id."
+        },
+        {
+          "info": {
+            "name": "Add internal note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/notes",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an internal note in a conversation by providing the conversation id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

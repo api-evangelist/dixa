@@ -1,0 +1,415 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents Knowledge API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knowledge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/knowledge/collections/:collectionId",
+            "params": [
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a knowledge collection by id"
+        },
+        {
+          "info": {
+            "name": "Get collection catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/knowledge/collections/:collectionId/catalog",
+            "params": [
+              {
+                "name": "collectionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Language in which the article translations will be returned. If not provided, the default language will be used."
+              }
+            ]
+          },
+          "docs": "Get collection catalog, including all categories and articles"
+        },
+        {
+          "info": {
+            "name": "Get category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/knowledge/categories/:categoryId",
+            "params": [
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Language in which the article translations will be returned. If not provided, the default language will be used."
+              }
+            ]
+          },
+          "docs": "Get a knowledge category by id"
+        },
+        {
+          "info": {
+            "name": "Get category translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/knowledge/categories/:categoryId/translations",
+            "params": [
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the knowledge category translations"
+        },
+        {
+          "info": {
+            "name": "Get article",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Language in which the article translations will be returned. If not provided, the default language will be used."
+              }
+            ]
+          },
+          "docs": "Get a knowledge article by id"
+        },
+        {
+          "info": {
+            "name": "Update article",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a knowledge article"
+        },
+        {
+          "info": {
+            "name": "Delete article",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a knowledge article"
+        },
+        {
+          "info": {
+            "name": "Get article translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId/translations",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a knowledge article translations"
+        },
+        {
+          "info": {
+            "name": "Update article translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId/translations",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update translations for a knowledge article. Supports partial success."
+        },
+        {
+          "info": {
+            "name": "Create article",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/knowledge/articles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a knowledge article"
+        },
+        {
+          "info": {
+            "name": "Publish translation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId/translations/:languageId/publish",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "languageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Publish a specific translation for search"
+        },
+        {
+          "info": {
+            "name": "Unpublish translation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId/translations/:languageId/unpublish",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "languageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Mark a specific translation as unpublished"
+        },
+        {
+          "info": {
+            "name": "Delete article translation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId/translations/:languageId",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "languageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete all versions of a knowledge article translation"
+        },
+        {
+          "info": {
+            "name": "Publish article",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId/publish",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Publish a new version of all translations for a knowledge article"
+        },
+        {
+          "info": {
+            "name": "Unpublish article",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId/unpublish",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove all translations of a knowledge article from search"
+        },
+        {
+          "info": {
+            "name": "Move article",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId/parent/:parentId",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Move a knowledge article to a new parent"
+        },
+        {
+          "info": {
+            "name": "Remove article parent",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/:articleId/parent",
+            "params": [
+              {
+                "name": "articleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a parent from a knowledge article"
+        },
+        {
+          "info": {
+            "name": "List collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/knowledge/collections",
+            "params": [
+              {
+                "name": "pageLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+              }
+            ]
+          },
+          "docs": "Paginated list knowledge collections"
+        },
+        {
+          "info": {
+            "name": "Upload article attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/knowledge/articles/attachments",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Upload one or more image files to be used as attachments in knowledge articles. Supported formats: image/png, image/jpeg, image/gif, image/webp. Maximum 5 files per request, 4 MB per file, with a total request payload limit of 10 MB. Supports partial success."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

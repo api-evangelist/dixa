@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents Analytics API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Metrics Catalogue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/analytics/metrics",
+            "params": [
+              {
+                "name": "pageLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+              }
+            ]
+          },
+          "docs": "This endpoint lists all available metric IDs that can be used to fetch data in Get Metric Data"
+        },
+        {
+          "info": {
+            "name": "Get Metric Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/analytics/metrics",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get data of a specific metric (aggregated)"
+        },
+        {
+          "info": {
+            "name": "Metric Description",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/analytics/metrics/:metricId",
+            "params": [
+              {
+                "name": "metricId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint lists all available properties of a metric to use for querying its data"
+        },
+        {
+          "info": {
+            "name": "Filter values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/analytics/filter/:filterAttribute",
+            "params": [
+              {
+                "name": "filterAttribute",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pageLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+              }
+            ]
+          },
+          "docs": "Get possible values to be used with a given filter attribute. Filter attributes are not metric or record specific, so one filter attribute can be used with multiple metrics/records. When a filter value is not relevant for a specific metric/record, it is simply ignored."
+        },
+        {
+          "info": {
+            "name": "Metric Records Catalogue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/analytics/records",
+            "params": [
+              {
+                "name": "pageLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+              }
+            ]
+          },
+          "docs": "This endpoint lists all available record IDs that can be used to fetch data in Get Metric Records Data"
+        },
+        {
+          "info": {
+            "name": "Get Metric Records Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/analytics/records",
+            "params": [
+              {
+                "name": "pageLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get data of specific metric records (unaggregated)"
+        },
+        {
+          "info": {
+            "name": "Metric Record Description",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/analytics/records/:recordId",
+            "params": [
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint lists all available properties of a record to use for querying its data"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,931 @@
+{
+  "item": [
+    {
+      "id": "18f30507-d745-4e70-a0a6-f3a7c6104f28",
+      "name": "Messages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58f51046-bce0-4c39-a037-a0c3dfa78b95",
+          "name": "Anonymize message",
+          "request": {
+            "name": "Anonymize message",
+            "description": {
+              "content": "Request the anonymization of a single message in a conversation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                ":conversationId",
+                "messages",
+                ":messageId",
+                "anonymize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "conversationId",
+                  "description": "(Required) the id of the conversation in which the message belongs"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "messageId",
+                  "description": "(Required) the id of the message to anonymize"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ad33fbc-bc46-4705-82b2-732ab617cd7b",
+              "name": "The message's anonymization request status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages",
+                    ":messageId",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) the id of the conversation in which the message belongs"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "messageId",
+                      "description": "(Required) the id of the message to anonymize"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"b165fdaa-51d6-44b0-bfcd-5f431d623fa7\",\n    \"entityType\": \"MessageAnonymizationType\",\n    \"_type\": \"Message\",\n    \"initiatedAt\": \"2021-12-01T12:46:36.581Z[GMT]\",\n    \"targetEntityId\": \"10749_1b9adc49-62f7-4056-a9c0-c18c1f25afdb\",\n    \"requestedBy\": \"4c7af391-b7fd-4560-9d82-b3464eef8776\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f750662-695a-48c9-bdf2-bb78bd4846e3",
+              "name": "Invalid value for: path parameter conversationId, Invalid value for: path parameter messageId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages",
+                    ":messageId",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) the id of the conversation in which the message belongs"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "messageId",
+                      "description": "(Required) the id of the message to anonymize"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70b9df01-0fb9-4b38-ad24-05e3940177fc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages",
+                    ":messageId",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) the id of the conversation in which the message belongs"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "messageId",
+                      "description": "(Required) the id of the message to anonymize"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46abee3f-07cd-4c86-900f-4540a89b7671",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages",
+                    ":messageId",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) the id of the conversation in which the message belongs"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "messageId",
+                      "description": "(Required) the id of the message to anonymize"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21ff350d-2e8d-4e47-82c0-2459a54fa836",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages",
+                    ":messageId",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) the id of the conversation in which the message belongs"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "messageId",
+                      "description": "(Required) the id of the message to anonymize"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37de8675-6dc7-4e9e-8516-923300596002",
+          "name": "List messages",
+          "request": {
+            "name": "List messages",
+            "description": {
+              "content": "Get all messages for a particular conversation by providing the conversation id. Note that messages in `ContactForm` conversations can have attributes of `\"_type\": \"EmailAttributes\"` if they are created through a webform, or `\"_type\": \"ContactFormAttributes\"` when created through a chat widget.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                ":conversationId",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "conversationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73300656-882a-4aba-a6fb-63c399889817",
+              "name": "List of messages for a conversation sorted from oldest to newest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"11b95893-0514-4606-a5d8-1880172b3a55\",\n      \"authorId\": \"41646d42-edc0-493e-ac7b-814d9ff40a2e\",\n      \"externalId\": \"13244\",\n      \"createdAt\": \"2021-12-01T12:46:36.581Z[GMT]\",\n      \"attributes\": {\n        \"emailContent\": {\n          \"content\": {\n            \"value\": \"Hello, this is a regular email content\",\n            \"_type\": \"Text\"\n          },\n          \"_type\": \"Regular\"\n        },\n        \"from\": {\n          \"email\": \"some-help@email.dixa.io\",\n          \"name\": \"Help\"\n        },\n        \"to\": [\n          {\n            \"email\": \"someone@somecompany.com\",\n            \"name\": \"Some One\"\n          }\n        ],\n        \"cc\": [],\n        \"bcc\": [],\n        \"isAutoReply\": false,\n        \"inlineImages\": [],\n        \"attachments\": [\n          {\n            \"url\": \"https://files.dixa.io/private/something/attachment/attachment-1\",\n            \"prettyName\": \"Picture\"\n          }\n        ],\n        \"direction\": \"Outbound\",\n        \"originalContentUrl\": {\n          \"url\": \"https://files.dixa.io/private/something/email_original_data/a1b2c3d4\"\n        },\n        \"_type\": \"EmailAttributes\"\n      }\n    },\n    {\n      \"id\": \"12c95893-0514-4606-a5d8-1880172b3a56\",\n      \"authorId\": \"41646d42-edc0-493e-ac7b-814d9ff40a2e\",\n      \"externalId\": \"13245\",\n      \"createdAt\": \"2021-12-01T12:47:36.581Z[GMT]\",\n      \"attributes\": {\n        \"emailContent\": {\n          \"file\": {\n            \"url\": \"https://files.dixa.io/private/something/email_stripped_content/large-email-content\",\n            \"prettyName\": \"Large Email Content\"\n          },\n          \"_type\": \"TooLarge\"\n        },\n        \"from\": {\n          \"email\": \"some-help@email.dixa.io\",\n          \"name\": \"Help\"\n        },\n        \"to\": [\n          {\n            \"email\": \"someone@somecompany.com\",\n            \"name\": \"Some One\"\n          }\n        ],\n        \"cc\": [\n          {\n            \"email\": \"manager@somecompany.com\",\n            \"name\": \"Manager\"\n          }\n        ],\n        \"bcc\": [\n          {\n            \"email\": \"archive@somecompany.com\"\n          }\n        ],\n        \"isAutoReply\": false,\n        \"inlineImages\": [],\n        \"attachments\": [\n          {\n            \"url\": \"https://files.dixa.io/private/something/attachment/attachment-2\",\n            \"prettyName\": \"Large Document\"\n          },\n          {\n            \"url\": \"https://files.dixa.io/private/something/attachment/attachment-3\",\n            \"prettyName\": \"Spreadsheet\"\n          }\n        ],\n        \"direction\": \"Inbound\",\n        \"originalContentUrl\": {\n          \"url\": \"https://files.dixa.io/private/something/email_original_data/b2c3d4e5\"\n        },\n        \"_type\": \"EmailAttributes\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05f8713b-6f72-4702-8756-77203cebe386",
+              "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b69d9ec-967c-4dd0-a023-fb9694af58f9",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a010326-7623-4955-a091-920181d03aed",
+          "name": "Add message",
+          "request": {
+            "name": "Add message",
+            "description": {
+              "content": "Add a message to a conversation. For inbound messages the author is assumed to be the requester of the conversation (end user). For outbound messages the author is specified using the agentId field. <br>If attachments are added to the message, they will be copied and stored in Dixa. <br> Content in outbound message is required except for Whatsapp messages. <br> Supported channels are Chat, Messenger, Contact Form, Email, Sms (outbound only), Whatsapp (outbound and Markdown only). <br><br> Supported Markdown syntax for Markdown content: bold <code>\\*\\*text\\*\\*</code>, italic <code>\\*text\\*</code>, bold & italic <code>\\*\\*\\*text\\*\\*\\*</code>, strikethrough <code>\\~text\\~</code>, blockquote <code> \\> Quoted text. \\n Message about quoted text</code>, ordered list <code>List:\\n1. Item\\n2. Item\\n3. Item</code>, unordered list <code>List:\\n\\* Item\\n\\* Item\\n\\* Item</code>, inline code <code>This is \\`code\\`</code>. <br><br> Whatsapp channel: <br> Only one attachment is allowed per WhatsApp message. <br> Supports adding a message with attachment only (no content). <br> Supports the following file types for attachments: .jpg, .jpeg, .png, .pdf, .doc, .docx, .pptx, .xlsx",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                ":conversationId",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "conversationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": {\n    \"value\": \"<string>\"\n  },\n  \"attachments\": [\n    {\n      \"url\": \"<string>\",\n      \"prettyName\": \"<string>\"\n    },\n    {\n      \"url\": \"<string>\",\n      \"prettyName\": \"<string>\"\n    }\n  ],\n  \"integrationEmail\": \"<string>\",\n  \"externalId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ade6f927-6d27-4bea-a5a8-e5bcefb74b18",
+              "name": "The added message",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": {\n    \"value\": \"I need some help!\",\n    \"_type\": \"Html\"\n  },\n  \"attachments\": [\n    {\n      \"url\": \"http://attachment.url\",\n      \"prettyName\": \"Filename\"\n    }\n  ],\n  \"_type\": \"Inbound\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"content\": {\n      \"value\": \"An amazing message\",\n      \"_type\": \"Html\"\n    },\n    \"direction\": \"Outbound\",\n    \"authorId\": \"bac5a02c-15b3-44da-ae1e-ab7b9db4aa89\",\n    \"messageId\": \"87bac308-e49f-4134-84cc-96b868f1e1e4\",\n    \"createdAt\": \"2021-06-09T08:18:37.284Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efa4fc2f-e4c6-41f2-9457-56804e92fd1c",
+              "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, Invalid input for Message, Failure to download attachment, Duplicate externalId, Unsupported ConversationChannel",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": {\n    \"value\": \"I need some help!\",\n    \"_type\": \"Html\"\n  },\n  \"attachments\": [\n    {\n      \"url\": \"http://attachment.url\",\n      \"prettyName\": \"Filename\"\n    }\n  ],\n  \"_type\": \"Inbound\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "652c5060-b03d-467d-a052-819a2a0fed71",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": {\n    \"value\": \"I need some help!\",\n    \"_type\": \"Html\"\n  },\n  \"attachments\": [\n    {\n      \"url\": \"http://attachment.url\",\n      \"prettyName\": \"Filename\"\n    }\n  ],\n  \"_type\": \"Inbound\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80fc78e3-a7f5-440c-9879-47463baabf64",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": {\n    \"value\": \"I need some help!\",\n    \"_type\": \"Html\"\n  },\n  \"attachments\": [\n    {\n      \"url\": \"http://attachment.url\",\n      \"prettyName\": \"Filename\"\n    }\n  ],\n  \"_type\": \"Inbound\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dev.dixa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "afc0c2d9-3eb2-4d82-8249-5f1c7eeb8ac9",
+    "name": "Dixa Agents Messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

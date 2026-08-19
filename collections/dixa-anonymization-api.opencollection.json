@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents Anonymization API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Anonymization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Anonymize end user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/endusers/:userId/anonymize",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the end user to anonymize"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force close all the conversations initiated by the end user, if any are found in a non closed state."
+              }
+            ]
+          },
+          "docs": "Request the anonymization of an end user."
+        },
+        {
+          "info": {
+            "name": "Anonymize conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/anonymize",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "the id of the conversation to anonymize"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force close the conversation if it is found in a non closed state."
+              }
+            ]
+          },
+          "docs": "Request the anonymization of a conversation."
+        },
+        {
+          "info": {
+            "name": "Anonymize message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/messages/:messageId/anonymize",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "the id of the conversation in which the message belongs"
+              },
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path",
+                "description": "the id of the message to anonymize"
+              }
+            ]
+          },
+          "docs": "Request the anonymization of a single message in a conversation."
+        },
+        {
+          "info": {
+            "name": "Get anonymization status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/anonymization/request/:requestId",
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an anonymization request submitted earlier (user or conversation)."
+        },
+        {
+          "info": {
+            "name": "Anonymize entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/anonymization",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Anonymize the requested entity (user or conversation). For a conversation to be successfully anonymized, it should be in the status `closed`. Otherwise, it requires `forceAnonymization` parameter set to `true` in the input body. NOTE: This endpoint is deprecated. Prefer using the anonymization endpoints of specific resources instead."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

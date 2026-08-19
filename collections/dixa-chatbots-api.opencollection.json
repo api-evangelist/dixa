@@ -1,0 +1,294 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Dixa Agents Chatbots API",
+    "version": "beta"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chatbots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create end user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/endusers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an end user."
+        },
+        {
+          "info": {
+            "name": "Get end user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/endusers/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The end user id"
+              }
+            ]
+          },
+          "docs": "Get an end user by id."
+        },
+        {
+          "info": {
+            "name": "List end user conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/endusers/:userId/conversations",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pageLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
+              }
+            ]
+          },
+          "docs": "Lists conversations requested by an end user. <br/> Note: Custom attributes are not part of the response at this point. If you need to get custom attributes for a conversation use the [GET /conversations/{conversationId}](../Conversations/#tag/Conversations/operation/getConversationsConversationid) endpoint"
+        },
+        {
+          "info": {
+            "name": "Close conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/close",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark a conversation as closed by providing its id."
+        },
+        {
+          "info": {
+            "name": "Followup conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/followup",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Follow up a conversation by providing its id and expiration timestamp."
+        },
+        {
+          "info": {
+            "name": "Transfer conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/transfer/queue",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer a conversation to a target queue."
+        },
+        {
+          "info": {
+            "name": "Create conversation rating result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/ratings/:ratingId/submit",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ratingId",
+                "value": "",
+                "type": "path",
+                "description": "The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a rating result for a specific conversation."
+        },
+        {
+          "info": {
+            "name": "Create conversation rating offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/ratings/offer",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a rating offer for a specific conversation."
+        },
+        {
+          "info": {
+            "name": "Create conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/conversations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a conversation. For inbound messages the author is assumed to be the requester of the conversation (end user). For outbound messages the author is specified using the agentId field."
+        },
+        {
+          "info": {
+            "name": "Import conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dev.dixa.io/beta/conversations/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import a previously created conversation into Dixa. For inbound messages the author is assumed to be the requester of the conversation (end user), unless the specific channel supports overriding the message author through its attributes. For outbound messages the author is specified using the agentId field."
+        },
+        {
+          "info": {
+            "name": "Claim conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dev.dixa.io/beta/conversations/:conversationId/claim",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Claim a conversation for a given agent. To avoid taking over assigned conversations, set the `force` paremeter to false"
+        },
+        {
+          "info": {
+            "name": "Get queue availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/queues/:queueId/availability",
+            "params": [
+              {
+                "name": "queueId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get availability of supported channels for a given queue. Currently supported channels are adachat, kindlychat, digitalgeniuschat, genericapimessaging."
+        },
+        {
+          "info": {
+            "name": "Get the position of the conversation in its current queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dev.dixa.io/beta/queues/conversation-position/:csid",
+            "params": [
+              {
+                "name": "csid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the approximate position of a given conversation in its current queue."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

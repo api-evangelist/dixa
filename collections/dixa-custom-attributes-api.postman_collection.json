@@ -1,0 +1,1035 @@
+{
+  "item": [
+    {
+      "id": "058808d4-2b41-45bc-a420-a61d8fe1b69e",
+      "name": "Custom Attributes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e372cc5-d447-4a24-a920-7e049d8bbed7",
+          "name": "Patch end user custom attributes",
+          "request": {
+            "name": "Patch end user custom attributes",
+            "description": {
+              "content": "Patch custom attributes of an end user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "endusers",
+                ":userId",
+                "custom-attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "userId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_1\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "64841a54-daff-48ea-a730-041734caa3a4",
+              "name": "The patched end user attributes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"274e5a2c-be0d-42c0-b725-3dd533729f68\",\n      \"name\": \"End user attribute\",\n      \"identifier\": \"end_user_attribute\",\n      \"value\": \"abcdef\"\n    },\n    {\n      \"id\": \"befae0d9-9679-42b9-af76-e76f64e28429\",\n      \"name\": \"End user attribute 2\",\n      \"identifier\": \"end_user_attribute_2\",\n      \"value\": [\n        \"example1\",\n        \"example2\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d793d4f8-2a1a-44c9-a0fe-580df36fb0ef",
+              "name": "Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: body, Invalid input for patching",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4bd2114-4868-4cd6-b6e0-fef9410835c5",
+              "name": "The user who issued the access token used in the request is not authorized to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"User is unauthorized to perform an underlying operation\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "647f5a1c-78cf-45ad-8b37-7bcae0cedbd8",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "endusers",
+                    ":userId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bea47ae-ab80-400b-8601-96cf0eb21f3c",
+          "name": "Patch conversation custom attributes",
+          "request": {
+            "name": "Patch conversation custom attributes",
+            "description": {
+              "content": "Patch custom attributes of a conversation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "conversations",
+                ":conversationId",
+                "custom-attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "conversationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_1\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9173a0ed-8901-4aaa-8b8e-368af824b480",
+              "name": "The patched conversation attributes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"2f5515b6-7e98-4f4d-9010-bfd2a27d4f35\": \"012345\",\n  \"e14708a6-eed9-495c-9d88-c72331e9e247\": [\n    \"str1\",\n    \"str2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"2f5515b6-7e98-4f4d-9010-bfd2a27d4f35\",\n      \"name\": \"Conversation attribute\",\n      \"identifier\": \"conversation_attribute\",\n      \"value\": \"012345\"\n    },\n    {\n      \"id\": \"e14708a6-eed9-495c-9d88-c72331e9e247\",\n      \"name\": \"Conversation attribute 2\",\n      \"identifier\": \"conversation_attribute_2\",\n      \"value\": [\n        \"str1\",\n        \"str2\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51fa7026-b6f5-46be-9660-81875e28209d",
+              "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, Invalid input for patching",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"2f5515b6-7e98-4f4d-9010-bfd2a27d4f35\": \"012345\",\n  \"e14708a6-eed9-495c-9d88-c72331e9e247\": [\n    \"str1\",\n    \"str2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e69add6-ceab-4e55-b5b2-9426065c2c41",
+              "name": "The user who issued the access token used in the request is not authorized to perform the operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"2f5515b6-7e98-4f4d-9010-bfd2a27d4f35\": \"012345\",\n  \"e14708a6-eed9-495c-9d88-c72331e9e247\": [\n    \"str1\",\n    \"str2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"User is unauthorized to perform an underlying operation\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cdf2cb6-6d9a-4c34-9076-6d01eeae9f76",
+              "name": "An entity in this request could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "conversations",
+                    ":conversationId",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "conversationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"2f5515b6-7e98-4f4d-9010-bfd2a27d4f35\": \"012345\",\n  \"e14708a6-eed9-495c-9d88-c72331e9e247\": [\n    \"str1\",\n    \"str2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d8fd3f9-66ed-4d52-ada3-8c169e0a5137",
+          "name": "Get custom attribute definition by id",
+          "request": {
+            "name": "Get custom attribute definition by id",
+            "description": {
+              "content": "Get custom attribute in an organization by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "custom-attributes",
+                ":customAttributeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customAttributeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e38c3253-6880-436a-9598-4ed3cf164963",
+              "name": "The configured custom attribute",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "custom-attributes",
+                    ":customAttributeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customAttributeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"db5f673b-1c40-41e7-b71f-caab342f0607\",\n    \"entityType\": \"Conversation\",\n    \"identifier\": \"contact_reason\",\n    \"label\": \"Contact Reason\",\n    \"inputDefinition\": {\n      \"options\": [\n        {\n          \"id\": \"5e2be744-cc2b-4bda-8c76-feb7b28f2970\",\n          \"label\": \"Payment\",\n          \"value\": \"payment\",\n          \"nestedOptions\": [\n            {\n              \"id\": \"666de4d5-0c6e-421c-a25e-d53073070af4\",\n              \"label\": \"Card\",\n              \"value\": \"card\",\n              \"nestedOptions\": [],\n              \"isDeactivated\": false,\n              \"orderIndex\": 2\n            },\n            {\n              \"id\": \"db26964a-5a88-4689-ad34-8a5f21cd9cd6\",\n              \"label\": \"Bank Transfer\",\n              \"value\": \"bank_transfer\",\n              \"nestedOptions\": [],\n              \"isDeactivated\": false,\n              \"orderIndex\": 3\n            }\n          ],\n          \"isDeactivated\": false,\n          \"orderIndex\": 1\n        },\n        {\n          \"id\": \"05d43b25-32a4-49e2-97c0-8723dc73f7bb\",\n          \"label\": \"Access\",\n          \"value\": \"access\",\n          \"nestedOptions\": [],\n          \"isDeactivated\": false,\n          \"orderIndex\": 4\n        }\n      ],\n      \"_type\": \"Select\"\n    },\n    \"description\": \"Reason for contacting\",\n    \"createdAt\": \"2023-01-05T06:42:31.532Z[GMT]\",\n    \"isRequired\": true,\n    \"isArchived\": false,\n    \"isDeactivated\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "902d5f47-f123-4f31-abcf-b866c01cc556",
+              "name": "Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "custom-attributes",
+                    ":customAttributeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customAttributeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba948f11-025c-4887-9a6f-282299996349",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "custom-attributes",
+                    ":customAttributeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customAttributeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5af59d7a-a3ee-4ec6-b530-8b916cdcb017",
+          "name": "List custom attributes definitions",
+          "request": {
+            "name": "List custom attributes definitions",
+            "description": {
+              "content": "List all custom attributes in an organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "beta",
+                "custom-attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "baef4ef3-b347-49d4-ae6b-b3b7af13c877",
+              "name": "The list of configured custom attributes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"c43fc767-f89b-443a-9c98-90f53f940bd7\",\n      \"entityType\": \"Conversation\",\n      \"identifier\": \"parcel_id\",\n      \"label\": \"Parcel ID\",\n      \"inputDefinition\": {\n        \"placeholder\": \"1234\",\n        \"_type\": \"Text\"\n      },\n      \"description\": \"Id of the parcel\",\n      \"createdAt\": \"2023-01-01T08:23:54.246Z[GMT]\",\n      \"updatedAt\": \"2023-01-11T12:25:23.837Z[GMT]\",\n      \"isRequired\": false,\n      \"isArchived\": false,\n      \"isDeactivated\": false\n    },\n    {\n      \"id\": \"db5f673b-1c40-41e7-b71f-caab342f0607\",\n      \"entityType\": \"Conversation\",\n      \"identifier\": \"contact_reason\",\n      \"label\": \"Contact Reason\",\n      \"inputDefinition\": {\n        \"options\": [\n          {\n            \"id\": \"5e2be744-cc2b-4bda-8c76-feb7b28f2970\",\n            \"label\": \"Payment\",\n            \"value\": \"payment\",\n            \"nestedOptions\": [\n              {\n                \"id\": \"666de4d5-0c6e-421c-a25e-d53073070af4\",\n                \"label\": \"Card\",\n                \"value\": \"card\",\n                \"nestedOptions\": [],\n                \"isDeactivated\": false,\n                \"orderIndex\": 2\n              },\n              {\n                \"id\": \"db26964a-5a88-4689-ad34-8a5f21cd9cd6\",\n                \"label\": \"Bank Transfer\",\n                \"value\": \"bank_transfer\",\n                \"nestedOptions\": [],\n                \"isDeactivated\": false,\n                \"orderIndex\": 3\n              }\n            ],\n            \"isDeactivated\": false,\n            \"orderIndex\": 1\n          },\n          {\n            \"id\": \"05d43b25-32a4-49e2-97c0-8723dc73f7bb\",\n            \"label\": \"Access\",\n            \"value\": \"access\",\n            \"nestedOptions\": [],\n            \"isDeactivated\": false,\n            \"orderIndex\": 4\n          }\n        ],\n        \"_type\": \"Select\"\n      },\n      \"description\": \"Reason for contacting\",\n      \"createdAt\": \"2023-01-05T06:42:31.532Z[GMT]\",\n      \"isRequired\": true,\n      \"isArchived\": false,\n      \"isDeactivated\": false\n    },\n    {\n      \"id\": \"66121f54-98ee-4727-a4e7-1a373d411ccf\",\n      \"entityType\": \"Contact\",\n      \"identifier\": \"location\",\n      \"label\": \"Location\",\n      \"inputDefinition\": {\n        \"options\": [\n          {\n            \"id\": \"6c5efa22-8b49-4205-bb7c-52e86af3a369\",\n            \"label\": \"Denmark\",\n            \"value\": \"denmark\",\n            \"nestedOptions\": [\n              {\n                \"id\": \"ac4e65ea-7b84-4889-a3b5-b957926178c6\",\n                \"label\": \"Copenhagen\",\n                \"value\": \"copenhagen\",\n                \"nestedOptions\": [],\n                \"isDeactivated\": false,\n                \"orderIndex\": 6\n              },\n              {\n                \"id\": \"35fa047e-c1f2-4d8d-be54-2adb7d326781\",\n                \"label\": \"Aarhus\",\n                \"value\": \"aarhus\",\n                \"nestedOptions\": [],\n                \"isDeactivated\": false,\n                \"orderIndex\": 7\n              }\n            ],\n            \"isDeactivated\": false,\n            \"orderIndex\": 5\n          }\n        ],\n        \"_type\": \"Select\"\n      },\n      \"description\": \"End user's known city\",\n      \"createdAt\": \"2023-01-01T08:25:50.246Z[GMT]\",\n      \"updatedAt\": \"2023-02-01T09:01:52.2Z[GMT]\",\n      \"isRequired\": false,\n      \"isArchived\": false,\n      \"isDeactivated\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e0a1b95-28bf-46ea-8799-697395d14623",
+              "name": "Invalid value extracted from request context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "873b2144-aca4-4580-b980-673990e90237",
+              "name": "Internal failure during request processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "beta",
+                    "custom-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dev.dixa.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "138c1b7c-9bd3-4849-ac90-367e1d02f141",
+    "name": "Dixa Agents Custom Attributes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
