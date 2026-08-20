@@ -188,6 +188,8 @@ apis:
   humanURL: https://docs.dixa.io/
   baseURL: https://dev.dixa.io/v1
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -272,6 +274,8 @@ apis:
   humanURL: https://docs.dixa.io/
   baseURL: https://dev.dixa.io/v1
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
@@ -300,6 +304,8 @@ apis:
   humanURL: https://docs.dixa.io/
   baseURL: https://dev.dixa.io/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
