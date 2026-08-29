@@ -327,6 +327,9 @@ apis:
   - type: RateLimits
     url: https://docs.dixa.io/docs/api-standards-rules
 common:
+  - type: CapabilityMap
+    url: capabilities/dixa-capability-edges.yml
+    name: Dixa Business Capability Map
   - type: AgenticAccess
     url: agentic-access/dixa-agentic-access.yml
   - type: DomainSecurity

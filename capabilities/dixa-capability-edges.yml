@@ -1,0 +1,113 @@
+slug: dixa
+provider: Dixa
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 10
+edges:
+- tag: Anonymization
+  spec_file: dixa-anonymization-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.85
+  evidence: PATCH /beta/endusers/{userId}/anonymize 'Anonymize end user'; 'Get anonymization status'
+  reason: Erasure/anonymisation of end-user, conversation and message personal data with request tracking
+    — data subject rights under privacy regulation.
+- tag: Conversations
+  spec_file: dixa-conversations-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.85
+  evidence: '"Close conversation", "Transfer conversation" (PUT /beta/conversations/{conversationId}/transfer/queue),
+    "Reopen conversation"'
+  reason: Operations manage the lifecycle of inbound customer service conversations across channels (email,
+    chat, WhatsApp, PSTN phone schemas), including transfer to queues and closure — inbound contact handling
+    and resolution.
+- tag: Ratings
+  spec_file: dixa-ratings-api-openapi.yml
+  capability_id: BC-430.50
+  capability_id_l1: BC-430
+  capability_name: Customer Feedback Management
+  confidence: 0.85
+  evidence: '"Create conversation rating offer", schemas Nps, Csat, ThumbsUpOrDown'
+  reason: Offering and capturing CSAT/NPS ratings on customer conversations — voice-of-customer survey/feedback
+    capture.
+- tag: Chatbots
+  spec_file: dixa-chatbots-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.8
+  evidence: '''Create conversation'', ''Close conversation'', ''Transfer conversation'', ''Get queue availability'''
+  reason: Despite the tag name, operations create, route, claim and close customer conversations across
+    channels — inbound contact handling and resolution.
+- tag: Queues
+  spec_file: dixa-queues-api-openapi.yml
+  capability_id: BC-430.30
+  capability_id_l1: BC-430
+  capability_name: Contact Centre Operations Management
+  confidence: 0.8
+  evidence: '"Get queue availability", "Assign agents", "Get the position of the conversation in its current
+    queue"'
+  reason: Routing queues, agent membership and channel availability for a contact-centre platform — contact
+    centre operations including routing and agent staffing of queues.
+- tag: Agents
+  spec_file: dixa-agents-api-openapi.yml
+  capability_id: BC-430.30
+  capability_id_l1: BC-430
+  capability_name: Contact Centre Operations Management
+  confidence: 0.75
+  evidence: GET /beta/agents/presence getAgentsPresence 'List presence'; 'List teams'; schema UserPresence,
+    AgentTeamsOutput
+  reason: Manages contact-centre agent records, team membership and presence/availability on a customer
+    service platform — contact centre operations / workforce management.
+- tag: Knowledge
+  spec_file: dixa-knowledge-api-openapi.yml
+  capability_id: BC-430.40
+  capability_id_l1: BC-430
+  capability_name: Self-Service Management
+  confidence: 0.75
+  evidence: '"Create article", "Get collection catalog", "Publish translation", schema ArticleContent'
+  reason: Lifecycle and publication of knowledge base articles, categories and collections in a customer
+    service platform — knowledge base / self-service content. Could alternatively be enterprise Knowledge
+    Management, but the vendor context is customer support knowledge base.
+- tag: Messages
+  spec_file: dixa-messages-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.75
+  evidence: '"Add message" POST /beta/conversations/{conversationId}/messages; schemas WhatsAppAttributes,
+    SmsAttributes, TranscriptAttributes'
+  reason: Sending and listing omnichannel messages within customer service conversations — the actual
+    inbound/outbound contact interaction handling.
+- tag: End Users
+  spec_file: dixa-end-users-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: '"Create end user", "Patch end user", "Anonymize end user", "List end user conversations"'
+  reason: CRUD and anonymisation over the end-user (customer contact) record in a customer service platform
+    — maintenance of the customer master record. Some ambiguity as it also serves the service desk, but
+    the operations are squarely customer data records.
+- tag: Teams
+  spec_file: dixa-teams-api-openapi.yml
+  capability_id: BC-430.30
+  capability_id_l1: BC-430
+  capability_name: Contact Centre Operations Management
+  confidence: 0.7
+  evidence: '"List members" GET /beta/teams/{teamId}/agents, "List presence" GET /beta/teams/{teamId}/presence,
+    schema UserPresence'
+  reason: Agent team composition and presence within a contact-centre platform — contact centre workforce/agent
+    organisation. Could be read as generic user administration, hence moderate confidence.
