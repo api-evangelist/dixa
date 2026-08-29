@@ -1,6 +1,18 @@
 aid: dixa
 name: Dixa
 description: Dixa is a conversational customer service platform with a REST API for managing conversations, queues, agents, routing, knowledge base articles, and customer satisfaction data. The API enables developers to build automated workflows, integrate external data into routing logic, export conversations and activity logs, manage users and teams, and access omnichannel messaging across phone, email, chat, and social channels.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
