@@ -1,86 +1,54 @@
-name: Dixa Plans and Pricing
-description: Dixa offers three subscription tiers for teams of all sizes, priced per agent per month. All plans include omnichannel support. Enterprise API limits are available on the Prime plan.
-url: https://www.dixa.com/pricing
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.dixa.com/pricing
+sources:
+- https://www.dixa.com/pricing
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: per-seat
+published: true
+note: Monthly/Annual toggle (Annual 'Save 20%') and EUR/GBP toggle shown; listed prices are the EUR figures
+  displayed. Add-ons (QA, Advanced Insights, Voice Transcription, SSO, Collaboration User, Seasonal Agent)
+  listed without prices. Comparison table cites Zendesk prices for context.
+plan_count: 4
+currency: EUR
 plans:
-  - name: Growth
-    description: Entry-level plan for growing customer service teams with all channels and core features included.
-    price: 89
-    currency: EUR
-    unit: agent/month
-    billing_cycles:
-      - monthly
-      - annually
-    annual_discount: 20%
-    minimum_seats: 7
-    features:
-      - All omnichannel channels (phone, email, chat, social)
-      - Intelligent routing and flow editor
-      - Real-time analytics
-      - Knowledge base
-      - Conversation history
-      - IVR, call recording, voicemail
-      - 35+ native integrations
-      - Webhooks
-    api_access: Standard
-
-  - name: Ultimate
-    description: Mid-tier plan adding AI-powered features, skills-based routing, and advanced automations.
-    price: 139
-    currency: EUR
-    unit: agent/month
-    billing_cycles:
-      - monthly
-      - annually
-    annual_discount: 20%
-    minimum_seats: 7
-    features:
-      - Everything in Growth
-      - Routing with External Data
-      - Knowledge-Centered Service with AI
-      - Standard AI Intent Detection
-      - Skills-based routing
-      - Advanced automations
-      - AI translations
-      - Sandbox access
-
-  - name: Prime
-    description: Enterprise plan with SSO, advanced AI, custom roles, and enterprise-grade API limits.
-    price: 179
-    currency: EUR
-    unit: agent/month
-    billing_cycles:
-      - monthly
-      - annually
-    annual_discount: 20%
-    minimum_seats: 7
-    features:
-      - Everything in Ultimate
-      - Single Sign-On (SSO)
-      - Advanced AI Intent Detection
-      - Advanced Insights (AI-powered)
-      - Custom user roles
-      - Multiple organizations
-      - Queue/claim restrictions
-      - Enterprise API limits
-    api_access: Enterprise
-
-addons:
-  - name: Mim AI Agent
-    description: Autonomous AI agent for handling customer conversations.
-    pricing: Contact sales
-  - name: AI Co-Pilot
-    description: AI assistant for human agents to improve response quality and speed.
-    pricing: Contact sales
-  - name: Quality Assurance
-    description: Automated QA scoring and conversation review tools.
-    pricing: Contact sales
-  - name: Advanced Insights
-    description: AI-powered analytics for deeper business intelligence.
-    pricing: Contact sales
-  - name: Voice Transcription
-    description: Automatic transcription of voice calls.
-    pricing: Contact sales
-
-overage:
-  url: https://dixa.com/legal/overage-price-list
-  description: Overage charges apply when usage exceeds permitted plan limits including API call quotas.
+- name: Growth
+  price_text: € 89 /agent/mo
+  price: 89
+  currency: EUR
+  period: month
+  unit: agent
+  included_quota: Contact Center (Phone, Email, Forms, Chat, Social), Knowledge Base, AI Agent (Mim),
+    Intelligent Routing, IVR, Call Recording, Customer Callback, Voicemail, SLAs, Agents Teams & Custom
+    Workloads, Native Shopify, Klaviyo, +35 integrations
+- name: Ultimate
+  price_text: € 139 /agent/mo
+  price: 139
+  currency: EUR
+  period: month
+  unit: agent
+  included_quota: Everything in Growth, Routing with External Data, Knowledge-Centered Service AI, Standard
+    AI Intent Detection, AI Advanced Automations, Skills-Based Routing, Sandbox Access, 3rd-party AI Integrations
+- name: Prime
+  price_text: € 179 /agent/mo
+  price: 179
+  currency: EUR
+  period: month
+  unit: agent
+  included_quota: Everything in Ultimate, SSO, Advanced AI Intent Detection, Advanced Insights, Custom
+    User Roles, Auto Redaction, Multiple Organizations, Queue & Claim Restrictions, Enterprise API Limits,
+    Outbound Email Templates
+- name: Mim AI agent (per conversation)
+  price_text: €0.35
+  price: 0.35
+  currency: EUR
+  period: per-use
+  unit: conversation
+  included_quota: usage only, with no per-seat component and no allowance cap
+rate_limit_statements:
+- Enterprise API Limits
