@@ -1,36 +1,30 @@
-name: Dixa API Rate Limits
-description: Dixa enforces rate limits per API token. Exceeding limits returns HTTP 429 Too Many Requests. Enterprise API limits are available on the Prime plan.
-url: https://docs.dixa.io/docs/api-standards-rules
-
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://docs.dixa.io/docs/api-standards-rules
+sources:
+- https://docs.dixa.io/docs/api-standards-rules
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: true
+note: Rate limits imposed per token.
+limit_count: 3
 limits:
-  - name: Requests Per Second
-    value: 10
-    unit: requests/second
-    scope: per API token
-    description: Maximum sustained request rate per API token.
-
-  - name: Burst Allowance
-    value: 4
-    unit: requests
-    scope: per API token
-    description: Additional requests allowed in a burst above the sustained rate.
-
-  - name: Daily Quota
-    value: 864000
-    unit: requests/day
-    scope: per API token
-    description: Maximum total API requests allowed per API token per day (864,000 requests/day).
-
-error_responses:
-  - code: 429
-    description: Too Many Requests — returned when rate limits are exceeded. Clients should implement exponential backoff and retry logic.
-
-authentication:
-  type: Bearer Token
-  description: API tokens are generated through the Dixa interface under Settings > Integrations > API Tokens. Tokens are passed in the Authorization header as a Bearer token or as an API key.
-  header: Authorization
-
-notes:
-  - Rate limits apply per API token, allowing more flexibility when using multiple tokens.
-  - Enterprise API limits on the Prime plan may offer higher thresholds; contact Dixa sales for details.
-  - Overage charges apply when usage exceeds permitted plan API call quotas per the overage price list.
+- name: Rate
+  limit_text: 10 requests per second
+  limit: 10
+  window: second
+  scope: api-key
+- name: Bursts
+  limit_text: 4 requests
+  limit: 4
+  scope: api-key
+  kind: burst
+- name: Quota
+  limit_text: 864.000 requests per day
+  limit: 864000
+  window: day
+  scope: api-key
+exceeded_status: 429
