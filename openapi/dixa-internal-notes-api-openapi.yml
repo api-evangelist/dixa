@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dixa Agents Internal Notes API
+  title: Dixa Internal Notes API
   version: beta
 servers:
 - url: https://dev.dixa.io
@@ -211,19 +211,14 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    BulkActionOutcome_ErrorResponse_InternalNoteData:
-      title: BulkActionOutcome_ErrorResponse_InternalNoteData
-      oneOf:
-      - $ref: '#/components/schemas/BulkActionFailure_ErrorResponse_InternalNoteData'
-      - $ref: '#/components/schemas/BulkActionSuccess_ErrorResponse_InternalNoteData'
-    BulkActionSuccess_ErrorResponse_InternalNoteData:
-      title: BulkActionSuccess_ErrorResponse_InternalNoteData
+    ServerError:
+      title: ServerError
       type: object
       required:
-      - data
+      - message
       properties:
-        data:
-          $ref: '#/components/schemas/InternalNoteData'
+        message:
+          type: string
     InternalNoteData:
       title: InternalNoteData
       type: object
@@ -248,22 +243,6 @@ components:
           format: int64
         message:
           type: string
-    ErrorResponse:
-      title: ErrorResponse
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
     BadRequest:
       title: BadRequest
       type: object
@@ -272,46 +251,19 @@ components:
       properties:
         message:
           type: string
-    BulkCreateNoteOutput:
-      title: BulkCreateNoteOutput
+    BulkCreateInternalNoteInput:
+      title: BulkCreateInternalNoteInput
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/BulkActionOutcome_ErrorResponse_InternalNoteData'
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    ListInternalNotesOutput:
-      title: ListInternalNotesOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/InternalNoteData'
-    CreateNoteOutput:
-      title: CreateNoteOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/InternalNoteData'
-    BulkActionFailure_ErrorResponse_InternalNoteData:
-      title: BulkActionFailure_ErrorResponse_InternalNoteData
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/CreateInternalNoteInput'
+    BulkActionOutcome_ErrorResponse_InternalNoteData:
+      title: BulkActionOutcome_ErrorResponse_InternalNoteData
+      oneOf:
+      - $ref: '#/components/schemas/BulkActionFailure_ErrorResponse_InternalNoteData'
+      - $ref: '#/components/schemas/BulkActionSuccess_ErrorResponse_InternalNoteData'
     CreateInternalNoteInput:
       title: CreateInternalNoteInput
       type: object
@@ -326,14 +278,62 @@ components:
         createdAt:
           type: string
           format: date-time
-    BulkCreateInternalNoteInput:
-      title: BulkCreateInternalNoteInput
+    BulkActionSuccess_ErrorResponse_InternalNoteData:
+      title: BulkActionSuccess_ErrorResponse_InternalNoteData
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/InternalNoteData'
+    CreateNoteOutput:
+      title: CreateNoteOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/InternalNoteData'
+    ListInternalNotesOutput:
+      title: ListInternalNotesOutput
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/CreateInternalNoteInput'
+            $ref: '#/components/schemas/InternalNoteData'
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BulkActionFailure_ErrorResponse_InternalNoteData:
+      title: BulkActionFailure_ErrorResponse_InternalNoteData
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BulkCreateNoteOutput:
+      title: BulkCreateNoteOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_ErrorResponse_InternalNoteData'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

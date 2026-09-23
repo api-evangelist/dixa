@@ -1,0 +1,31 @@
+# Front Door AI Index — dixa — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: dixa
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.dixa.com
+  final_host: www.dixa.com
+  ownership: own
+  owner: dixa
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 43
+  host_score: 43
+  density: 27.35
+  words: 1572
+  tiers:
+    agentic: 13
+    core: 30
+    model: 0
+  ambiguous: 18
+  top_terms:
+    AI: 30
+    agent: 15
+    agentic: 6
+    AI agent: 4
+    automation: 3
+    copilot: 2
+    prompts: 1

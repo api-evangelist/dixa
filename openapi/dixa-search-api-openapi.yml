@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dixa Agents Search API
+  title: Dixa Search API
   version: beta
 servers:
 - url: https://dev.dixa.io
@@ -327,31 +327,71 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    IsNotOneOf2:
-      title: IsNotOneOf
+    ConversationId:
+      title: ConversationId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldHasSingleValueOperator'
+    IsOneOf3:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [inbound, outbound, internal]'
+          type: array
+          items:
+            type: string
+    AgentId:
+      title: AgentId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    DurationOperator:
+      title: DurationOperator
+      oneOf:
+      - $ref: '#/components/schemas/Between1'
+      - $ref: '#/components/schemas/LongerThanOrEqualTo'
+      - $ref: '#/components/schemas/ShorterThanOrEqualTo'
+    Unauthorized:
+      title: Unauthorized
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Status1:
+      title: Status
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/StatusOperator'
+    ExcludesOne:
+      title: ExcludesOne
       type: object
       properties:
         values:
-          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
           type: array
           items:
-            type: array
-            items:
-              type: string
-    Between:
-      title: Between
-      description: 'Timestamps in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
-      type: object
-      required:
-      - timestampFrom
-      - timestampTo
-      properties:
-        timestampFrom:
-          type: string
-          format: date-time
-        timestampTo:
-          type: string
-          format: date-time
+            type: string
     LongerThanOrEqualTo:
       title: LongerThanOrEqualTo
       description: 'In milliseconds; for example: ''10800000'' (3 hours)'
@@ -362,6 +402,12 @@ components:
         duration:
           type: integer
           format: int64
+    TimestampOperator:
+      title: TimestampOperator
+      oneOf:
+      - $ref: '#/components/schemas/Between'
+      - $ref: '#/components/schemas/Since'
+      - $ref: '#/components/schemas/Until'
     Filters:
       title: Filters
       type: object
@@ -375,14 +421,241 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Condition'
-    CreationDate:
-      title: CreationDate
+    SearchParametersInput:
+      title: SearchParametersInput
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/Query'
+        filters:
+          $ref: '#/components/schemas/Filters'
+    CustomAttribute1:
+      title: CustomAttribute
+      type: object
+      required:
+      - operator
+      - attributeId
+      properties:
+        operator:
+          $ref: '#/components/schemas/CustomAttributeOperator'
+        attributeId:
+          type: string
+    FieldHasSingleValueOperator:
+      title: FieldHasSingleValueOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf'
+      - $ref: '#/components/schemas/IsOneOf'
+    IsNotOneOf3:
+      title: IsNotOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [inbound, outbound, internal]'
+          type: array
+          items:
+            type: string
+    Between1:
+      title: Between
+      description: 'min and max in milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - min
+      - max
+      properties:
+        min:
+          type: integer
+          format: int64
+        max:
+          type: integer
+          format: int64
+    ConversationSearchWithFiltersHit:
+      title: ConversationSearchWithFiltersHit
+      type: object
+      required:
+      - id
+      - highlights
+      properties:
+        id:
+          description: Identifier of a Conversation where a match was found
+          type: integer
+          format: int64
+        highlights:
+          $ref: '#/components/schemas/Map_Vector_String'
+    IsOneOf2:
+      title: IsOneOf
+      type: object
+      properties:
+        values:
+          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+    IsNotOneOf2:
+      title: IsNotOneOf
+      type: object
+      properties:
+        values:
+          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+    IsEmpty:
+      title: IsEmpty
+      type: object
+    IncludesOne:
+      title: IncludesOne
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    Duration:
+      title: Duration
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/DurationOperator'
+    IsOneOf1:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [email, contactform, chat, dixamessenger, phone, voicemail, callback, sms, facebookmessenger, whatsapp, adachat, digitalgeniuschat, kindlychat, genericapimessaging, trustpilot, yotpo]'
+          type: array
+          items:
+            type: string
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    ClosedDate:
+      title: ClosedDate
       type: object
       required:
       - operator
       properties:
         operator:
           $ref: '#/components/schemas/TimestampOperator'
+    SearchConversationsWithFiltersOutput:
+      title: SearchConversationsWithFiltersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationSearchWithFiltersHit'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    IsNotOneOf:
+      title: IsNotOneOf
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    FieldCanHaveMultipleValuesOrBeEmptyOperator:
+      title: FieldCanHaveMultipleValuesOrBeEmptyOperator
+      oneOf:
+      - $ref: '#/components/schemas/ExcludesAll'
+      - $ref: '#/components/schemas/ExcludesOne'
+      - $ref: '#/components/schemas/IncludesAll'
+      - $ref: '#/components/schemas/IncludesOne'
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
+    ContactId:
+      title: ContactId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldHasSingleValueOperator'
+    IsNotOneOf4:
+      title: IsNotOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [open, closed, pending]'
+          type: array
+          items:
+            type: string
+    ShorterThanOrEqualTo:
+      title: ShorterThanOrEqualTo
+      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - duration
+      properties:
+        duration:
+          type: integer
+          format: int64
+    Until:
+      title: Until
+      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+      type: object
+      required:
+      - timestamp
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+    Channel:
+      title: Channel
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/ChannelOperator'
+    ChannelOperator:
+      title: ChannelOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf1'
+      - $ref: '#/components/schemas/IsOneOf1'
+    AssignedDate:
+      title: AssignedDate
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    IsOneOf:
+      title: IsOneOf
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    Condition:
+      title: Condition
+      type: object
+      required:
+      - field
+      properties:
+        field:
+          $ref: '#/components/schemas/SearchField'
     SearchField:
       title: SearchField
       oneOf:
@@ -401,252 +674,19 @@ components:
       - $ref: '#/components/schemas/QueueId'
       - $ref: '#/components/schemas/Status1'
       - $ref: '#/components/schemas/TagId'
-    IsEmpty:
-      title: IsEmpty
-      type: object
-    ConversationId:
-      title: ConversationId
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/FieldHasSingleValueOperator'
-    IsOneOf4:
-      title: IsOneOf
-      type: object
-      required:
-      - values
-      properties:
-        values:
-          description: 'values: [open, closed, pending]'
-          type: array
-          items:
-            type: string
-    IncludesAll:
-      title: IncludesAll
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    ConversationSearchWithFiltersHit:
-      title: ConversationSearchWithFiltersHit
-      type: object
-      required:
-      - id
-      - highlights
-      properties:
-        id:
-          description: Identifier of a Conversation where a match was found
-          type: integer
-          format: int64
-        highlights:
-          $ref: '#/components/schemas/Map_Vector_String'
-    Duration:
-      title: Duration
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/DurationOperator'
-    IsNotEmpty:
-      title: IsNotEmpty
-      type: object
-    IsOneOf3:
-      title: IsOneOf
-      type: object
-      required:
-      - values
-      properties:
-        values:
-          description: 'values: [inbound, outbound, internal]'
-          type: array
-          items:
-            type: string
-    SearchParametersInput:
-      title: SearchParametersInput
-      type: object
-      properties:
-        query:
-          $ref: '#/components/schemas/Query'
-        filters:
-          $ref: '#/components/schemas/Filters'
-    ExcludesOne:
-      title: ExcludesOne
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    Status1:
-      title: Status
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/StatusOperator'
-    QueueId:
-      title: QueueId
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
-    Query:
-      title: Query
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-        exactMatch:
-          type: boolean
-    CustomAttribute1:
-      title: CustomAttribute
-      type: object
-      required:
-      - operator
-      - attributeId
-      properties:
-        operator:
-          $ref: '#/components/schemas/CustomAttributeOperator'
-        attributeId:
-          type: string
-    PaginationLinks:
-      title: PaginationLinks
-      type: object
-      properties:
-        previous:
-          description: url
-          type: string
-        next:
-          description: url
-          type: string
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Map_Vector_String:
-      title: Map_Vector_String
-      description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags.
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          type: string
-    SearchOutput:
-      title: SearchOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationSearchHit'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    ContactId:
-      title: ContactId
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/FieldHasSingleValueOperator'
-    CustomAttributeOperator:
-      title: CustomAttributeOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsEmpty'
-      - $ref: '#/components/schemas/IsNotEmpty'
-      - $ref: '#/components/schemas/IsNotOneOf2'
-      - $ref: '#/components/schemas/IsOneOf2'
-    AgentId:
-      title: AgentId
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
-    StatusOperator:
-      title: StatusOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf4'
-      - $ref: '#/components/schemas/IsOneOf4'
-    ShorterThanOrEqualTo:
-      title: ShorterThanOrEqualTo
-      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
-      type: object
-      required:
-      - duration
-      properties:
-        duration:
-          type: integer
-          format: int64
-    Between1:
-      title: Between
-      description: 'min and max in milliseconds; for example: ''10800000'' (3 hours)'
-      type: object
-      required:
-      - min
-      - max
-      properties:
-        min:
-          type: integer
-          format: int64
-        max:
-          type: integer
-          format: int64
-    TimestampOperator:
-      title: TimestampOperator
-      oneOf:
-      - $ref: '#/components/schemas/Between'
-      - $ref: '#/components/schemas/Since'
-      - $ref: '#/components/schemas/Until'
-    ConversationSearchInnerHit:
-      title: ConversationSearchInnerHit
-      type: object
-      required:
-      - id
-      - highlight
-      properties:
-        id:
-          description: Identifier of a sub-entity (such as a Message) where a match was found
-          type: string
-        highlight:
-          $ref: '#/components/schemas/Map_String'
-          description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags
-    AssignedDate:
-      title: AssignedDate
+    CreationDate:
+      title: CreationDate
       type: object
       required:
       - operator
       properties:
         operator:
           $ref: '#/components/schemas/TimestampOperator'
-    Map_String:
-      title: Map_String
-      type: object
-      additionalProperties:
-        type: string
+    DirectionOperator:
+      title: DirectionOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf3'
+      - $ref: '#/components/schemas/IsOneOf3'
     IsNotOneOf1:
       title: IsNotOneOf
       type: object
@@ -658,33 +698,9 @@ components:
           type: array
           items:
             type: string
-    IsNotOneOf4:
-      title: IsNotOneOf
+    IsNotEmpty:
+      title: IsNotEmpty
       type: object
-      required:
-      - values
-      properties:
-        values:
-          description: 'values: [open, closed, pending]'
-          type: array
-          items:
-            type: string
-    LastActivity:
-      title: LastActivity
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/TimestampOperator'
-    Condition:
-      title: Condition
-      type: object
-      required:
-      - field
-      properties:
-        field:
-          $ref: '#/components/schemas/SearchField'
     Since:
       title: Since
       description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
@@ -695,6 +711,40 @@ components:
         timestamp:
           type: string
           format: date-time
+    QueueId:
+      title: QueueId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
+    IncludesAll:
+      title: IncludesAll
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    SearchOutput:
+      title: SearchOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationSearchHit'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
     Direction:
       title: Direction
       type: object
@@ -703,139 +753,43 @@ components:
       properties:
         operator:
           $ref: '#/components/schemas/DirectionOperator'
-    ExcludesAll:
-      title: ExcludesAll
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    SearchConversationsWithFiltersOutput:
-      title: SearchConversationsWithFiltersOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationSearchWithFiltersHit'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    IsOneOf:
-      title: IsOneOf
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    Unauthorized:
-      title: Unauthorized
+    Between:
+      title: Between
+      description: 'Timestamps in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
       type: object
       required:
-      - message
+      - timestampFrom
+      - timestampTo
       properties:
-        message:
-          type: string
-    FieldCanHaveSingleValueOrBeEmptyOperator:
-      title: FieldCanHaveSingleValueOrBeEmptyOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsEmpty'
-      - $ref: '#/components/schemas/IsNotEmpty'
-      - $ref: '#/components/schemas/IsNotOneOf'
-      - $ref: '#/components/schemas/IsOneOf'
-    ChannelOperator:
-      title: ChannelOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf1'
-      - $ref: '#/components/schemas/IsOneOf1'
-    FieldCanHaveMultipleValuesOrBeEmptyOperator:
-      title: FieldCanHaveMultipleValuesOrBeEmptyOperator
-      oneOf:
-      - $ref: '#/components/schemas/ExcludesAll'
-      - $ref: '#/components/schemas/ExcludesOne'
-      - $ref: '#/components/schemas/IncludesAll'
-      - $ref: '#/components/schemas/IncludesOne'
-      - $ref: '#/components/schemas/IsEmpty'
-      - $ref: '#/components/schemas/IsNotEmpty'
-    IsOneOf2:
-      title: IsOneOf
-      type: object
-      properties:
-        values:
-          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
-          type: array
-          items:
-            type: array
-            items:
-              type: string
-    IncludesOne:
-      title: IncludesOne
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    IsOneOf1:
-      title: IsOneOf
-      type: object
-      required:
-      - values
-      properties:
-        values:
-          description: 'values: [email, contactform, chat, dixamessenger, phone, voicemail, callback, sms, facebookmessenger, whatsapp, adachat, digitalgeniuschat, kindlychat, genericapimessaging, trustpilot, yotpo]'
-          type: array
-          items:
-            type: string
-    Channel:
-      title: Channel
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/ChannelOperator'
-    TagId:
-      title: TagId
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/FieldCanHaveMultipleValuesOrBeEmptyOperator'
-    DurationOperator:
-      title: DurationOperator
-      oneOf:
-      - $ref: '#/components/schemas/Between1'
-      - $ref: '#/components/schemas/LongerThanOrEqualTo'
-      - $ref: '#/components/schemas/ShorterThanOrEqualTo'
-    DirectionOperator:
-      title: DirectionOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf3'
-      - $ref: '#/components/schemas/IsOneOf3'
-    Until:
-      title: Until
-      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
-      type: object
-      required:
-      - timestamp
-      properties:
-        timestamp:
+        timestampFrom:
           type: string
           format: date-time
-    IsNotOneOf3:
-      title: IsNotOneOf
+        timestampTo:
+          type: string
+          format: date-time
+    Map_String:
+      title: Map_String
+      type: object
+      additionalProperties:
+        type: string
+    Query:
+      title: Query
       type: object
       required:
-      - values
+      - value
       properties:
-        values:
-          description: 'values: [inbound, outbound, internal]'
-          type: array
-          items:
-            type: string
+        value:
+          type: string
+        exactMatch:
+          type: boolean
+    Map_Vector_String:
+      title: Map_Vector_String
+      description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags.
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
     ConversationSearchHit:
       title: ConversationSearchHit
       type: object
@@ -855,22 +809,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ConversationSearchInnerHit'
-    ClosedDate:
-      title: ClosedDate
+    ConversationSearchInnerHit:
+      title: ConversationSearchInnerHit
+      type: object
+      required:
+      - id
+      - highlight
+      properties:
+        id:
+          description: Identifier of a sub-entity (such as a Message) where a match was found
+          type: string
+        highlight:
+          $ref: '#/components/schemas/Map_String'
+          description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags
+    LastActivity:
+      title: LastActivity
       type: object
       required:
       - operator
       properties:
         operator:
           $ref: '#/components/schemas/TimestampOperator'
-    IsNotOneOf:
-      title: IsNotOneOf
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
     LastMessage:
       title: LastMessage
       type: object
@@ -879,11 +838,52 @@ components:
       properties:
         operator:
           $ref: '#/components/schemas/TimestampOperator'
-    FieldHasSingleValueOperator:
-      title: FieldHasSingleValueOperator
+    ExcludesAll:
+      title: ExcludesAll
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    StatusOperator:
+      title: StatusOperator
       oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf4'
+      - $ref: '#/components/schemas/IsOneOf4'
+    IsOneOf4:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [open, closed, pending]'
+          type: array
+          items:
+            type: string
+    CustomAttributeOperator:
+      title: CustomAttributeOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
+      - $ref: '#/components/schemas/IsNotOneOf2'
+      - $ref: '#/components/schemas/IsOneOf2'
+    FieldCanHaveSingleValueOrBeEmptyOperator:
+      title: FieldCanHaveSingleValueOrBeEmptyOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
       - $ref: '#/components/schemas/IsNotOneOf'
       - $ref: '#/components/schemas/IsOneOf'
+    TagId:
+      title: TagId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveMultipleValuesOrBeEmptyOperator'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

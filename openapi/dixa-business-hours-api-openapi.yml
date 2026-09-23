@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dixa Agents Business Hours API
+  title: Dixa Business Hours API
   version: beta
 servers:
 - url: https://dev.dixa.io
@@ -52,7 +52,7 @@ paths:
     get:
       tags:
       - Business Hours
-      summary: Get a business hours schedule definition.
+      summary: Get a business hours schedule definition
       description: Get a business hours schedule definition in an organization by providing its ID.
       operationId: getBusiness-hoursSchedulesScheduleidDefinition
       parameters:
@@ -129,7 +129,7 @@ paths:
     get:
       tags:
       - Business Hours
-      summary: Get the upcoming business hours schedule.
+      summary: Get the upcoming business hours schedule
       description: Get the resolved business hours schedule for the next number of days, applying recurring rules and exceptions.
       operationId: getBusiness-hoursSchedulesScheduleidUpcoming
       parameters:
@@ -255,6 +255,78 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
+    BusinessHourRegularType:
+      title: BusinessHourRegularType
+      oneOf:
+      - $ref: '#/components/schemas/Regular1'
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Holiday:
+      title: Holiday
+      type: object
+    Exception:
+      title: Exception
+      type: object
+    Regular1:
+      title: Regular
+      type: object
+    GetBusinessHoursScheduleDefinitionResult:
+      title: GetBusinessHoursScheduleDefinitionResult
+      type: object
+      required:
+      - schedule
+      properties:
+        schedule:
+          $ref: '#/components/schemas/BusinessHoursScheduleDefinition'
+    Recurring1:
+      title: Recurring
+      type: object
+      properties:
+        dayOfMonth:
+          type: integer
+          format: int32
+        monthOfYear:
+          type: integer
+          format: int32
+        holiday:
+          type: string
+    BusinessHourStatus1:
+      title: BusinessHourStatus
+      oneOf:
+      - $ref: '#/components/schemas/Closed1'
+      - $ref: '#/components/schemas/Open1'
+    BusinessHoursUpcomingSchedule:
+      title: BusinessHoursUpcomingSchedule
+      type: object
+      required:
+      - id
+      - name
+      - timezone
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        timezone:
+          type: string
+        businessHours:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessHour'
+    GetBusinessHoursScheduleDefinitionOutput:
+      title: GetBusinessHoursScheduleDefinitionOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/GetBusinessHoursScheduleDefinitionResult'
     BusinessHourRegular:
       title: BusinessHourRegular
       type: object
@@ -279,40 +351,40 @@ components:
             $ref: '#/components/schemas/TimeInterval'
         startDate:
           type: string
-    Exception1:
-      title: Exception
-      type: object
-    Closed1:
-      title: Closed
-      type: object
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Recurring:
-      title: Recurring
-      type: object
-      properties:
-        dayOfMonth:
-          type: integer
-          format: int32
-        monthOfYear:
-          type: integer
-          format: int32
-        holiday:
-          type: string
-    GetBusinessOpenStatusOutput:
-      title: GetBusinessOpenStatusOutput
+    ListBusinessHoursSchedulesOutput:
+      title: ListBusinessHoursSchedulesOutput
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/GetBusinessOpenStatusResult'
+          $ref: '#/components/schemas/ListBusinessHoursSchedulesResult'
+    GetBusinessOpenStatusResult:
+      title: GetBusinessOpenStatusResult
+      type: object
+      required:
+      - isOpen
+      - timestamp
+      properties:
+        isOpen:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+        opensAt:
+          type: string
+          format: date-time
+        closesAt:
+          type: string
+          format: date-time
+    GetUpcomingBusinessHoursScheduleOutput:
+      title: GetUpcomingBusinessHoursScheduleOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/GetUpcomingBusinessHoursScheduleResult'
     BusinessHoursScheduleDefinition:
       title: BusinessHoursScheduleDefinition
       type: object
@@ -335,37 +407,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BusinessHourException'
-    Holiday:
-      title: Holiday
+    Closed:
+      title: Closed
       type: object
-    BusinessHoursUpcomingSchedule:
-      title: BusinessHoursUpcomingSchedule
-      type: object
-      required:
-      - id
-      - name
-      - timezone
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        timezone:
-          type: string
-        businessHours:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessHour'
-    ServerError:
-      title: ServerError
+    GetBusinessOpenStatusOutput:
+      title: GetBusinessOpenStatusOutput
       type: object
       required:
-      - message
+      - data
       properties:
-        message:
-          type: string
-    Exception:
+        data:
+          $ref: '#/components/schemas/GetBusinessOpenStatusResult'
+    Exception1:
       title: Exception
+      type: object
+    Open1:
+      title: Open
       type: object
     GetUpcomingBusinessHoursScheduleResult:
       title: GetUpcomingBusinessHoursScheduleResult
@@ -375,174 +432,6 @@ components:
       properties:
         schedule:
           $ref: '#/components/schemas/BusinessHoursUpcomingSchedule'
-    BusinessHourStatus1:
-      title: BusinessHourStatus
-      oneOf:
-      - $ref: '#/components/schemas/Closed1'
-      - $ref: '#/components/schemas/Open1'
-    TimeInterval1:
-      title: TimeInterval
-      type: object
-      required:
-      - startTime
-      - endTime
-      properties:
-        startTime:
-          type: string
-        endTime:
-          type: string
-    BusinessHourException:
-      title: BusinessHourException
-      type: object
-      required:
-      - name
-      - businessHourType
-      - status
-      - startDate
-      properties:
-        name:
-          type: string
-        businessHourType:
-          $ref: '#/components/schemas/BusinessHourExceptionType'
-        status:
-          $ref: '#/components/schemas/BusinessHourStatus'
-        intervals:
-          type: array
-          items:
-            $ref: '#/components/schemas/TimeInterval'
-        recurring:
-          $ref: '#/components/schemas/Recurring'
-        startDate:
-          type: string
-        nextDate:
-          type: string
-    Recurring1:
-      title: Recurring
-      type: object
-      properties:
-        dayOfMonth:
-          type: integer
-          format: int32
-        monthOfYear:
-          type: integer
-          format: int32
-        holiday:
-          type: string
-    Regular1:
-      title: Regular
-      type: object
-    GetBusinessHoursScheduleDefinitionOutput:
-      title: GetBusinessHoursScheduleDefinitionOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/GetBusinessHoursScheduleDefinitionResult'
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    ListBusinessHoursSchedulesResult:
-      title: ListBusinessHoursSchedulesResult
-      type: object
-      properties:
-        schedules:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessHoursSchedule'
-    TimeInterval:
-      title: TimeInterval
-      type: object
-      required:
-      - startTime
-      - endTime
-      properties:
-        startTime:
-          type: string
-        endTime:
-          type: string
-    BusinessHourStatus:
-      title: BusinessHourStatus
-      oneOf:
-      - $ref: '#/components/schemas/Closed'
-      - $ref: '#/components/schemas/Open'
-    BusinessHourType:
-      title: BusinessHourType
-      oneOf:
-      - $ref: '#/components/schemas/Exception1'
-      - $ref: '#/components/schemas/Holiday1'
-      - $ref: '#/components/schemas/Regular2'
-    Open1:
-      title: Open
-      type: object
-    Closed:
-      title: Closed
-      type: object
-    BusinessHoursSchedule:
-      title: BusinessHoursSchedule
-      type: object
-      required:
-      - name
-      - id
-      properties:
-        name:
-          type: string
-        id:
-          type: string
-    BusinessHourExceptionType:
-      title: BusinessHourExceptionType
-      oneOf:
-      - $ref: '#/components/schemas/Exception'
-      - $ref: '#/components/schemas/Holiday'
-    GetBusinessOpenStatusResult:
-      title: GetBusinessOpenStatusResult
-      type: object
-      required:
-      - isOpen
-      - timestamp
-      properties:
-        isOpen:
-          type: boolean
-        timestamp:
-          type: string
-          format: date-time
-        opensAt:
-          type: string
-          format: date-time
-        closesAt:
-          type: string
-          format: date-time
-    GetBusinessHoursScheduleDefinitionResult:
-      title: GetBusinessHoursScheduleDefinitionResult
-      type: object
-      required:
-      - schedule
-      properties:
-        schedule:
-          $ref: '#/components/schemas/BusinessHoursScheduleDefinition'
-    Holiday1:
-      title: Holiday
-      type: object
-    ListBusinessHoursSchedulesOutput:
-      title: ListBusinessHoursSchedulesOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ListBusinessHoursSchedulesResult'
-    Regular2:
-      title: Regular
-      type: object
-    BusinessHourRegularType:
-      title: BusinessHourRegularType
-      oneOf:
-      - $ref: '#/components/schemas/Regular1'
     BusinessHour:
       title: BusinessHour
       type: object
@@ -571,16 +460,127 @@ components:
           type: string
         nextDate:
           type: string
-    GetUpcomingBusinessHoursScheduleOutput:
-      title: GetUpcomingBusinessHoursScheduleOutput
+    BusinessHourStatus:
+      title: BusinessHourStatus
+      oneOf:
+      - $ref: '#/components/schemas/Closed'
+      - $ref: '#/components/schemas/Open'
+    BusinessHourType:
+      title: BusinessHourType
+      oneOf:
+      - $ref: '#/components/schemas/Exception1'
+      - $ref: '#/components/schemas/Holiday1'
+      - $ref: '#/components/schemas/Regular2'
+    BusinessHourExceptionType:
+      title: BusinessHourExceptionType
+      oneOf:
+      - $ref: '#/components/schemas/Exception'
+      - $ref: '#/components/schemas/Holiday'
+    TimeInterval1:
+      title: TimeInterval
       type: object
       required:
-      - data
+      - startTime
+      - endTime
       properties:
-        data:
-          $ref: '#/components/schemas/GetUpcomingBusinessHoursScheduleResult'
+        startTime:
+          type: string
+        endTime:
+          type: string
+    TimeInterval:
+      title: TimeInterval
+      type: object
+      required:
+      - startTime
+      - endTime
+      properties:
+        startTime:
+          type: string
+        endTime:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Holiday1:
+      title: Holiday
+      type: object
+    BusinessHoursSchedule:
+      title: BusinessHoursSchedule
+      type: object
+      required:
+      - name
+      - id
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+    BusinessHourException:
+      title: BusinessHourException
+      type: object
+      required:
+      - name
+      - businessHourType
+      - status
+      - startDate
+      properties:
+        name:
+          type: string
+        businessHourType:
+          $ref: '#/components/schemas/BusinessHourExceptionType'
+        status:
+          $ref: '#/components/schemas/BusinessHourStatus'
+        intervals:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeInterval'
+        recurring:
+          $ref: '#/components/schemas/Recurring'
+        startDate:
+          type: string
+        nextDate:
+          type: string
+    Recurring:
+      title: Recurring
+      type: object
+      properties:
+        dayOfMonth:
+          type: integer
+          format: int32
+        monthOfYear:
+          type: integer
+          format: int32
+        holiday:
+          type: string
     Open:
       title: Open
+      type: object
+    ListBusinessHoursSchedulesResult:
+      title: ListBusinessHoursSchedulesResult
+      type: object
+      properties:
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessHoursSchedule'
+    Closed1:
+      title: Closed
+      type: object
+    Regular2:
+      title: Regular
       type: object
   securitySchemes:
     ApiKeyAuth:

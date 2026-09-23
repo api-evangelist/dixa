@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dixa Agents Teams API
+  title: Dixa Teams API
   version: beta
 servers:
 - url: https://dev.dixa.io
@@ -375,6 +375,23 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
+    AgentsToTeamInput:
+      title: AgentsToTeamInput
+      type: object
+      properties:
+        agentIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
     ListPresenceOutput:
       title: ListPresenceOutput
       type: object
@@ -385,14 +402,22 @@ components:
             $ref: '#/components/schemas/UserPresence'
         meta:
           $ref: '#/components/schemas/PaginationLinks'
-    CreateTeamInput:
-      title: CreateTeamInput
+    ListTeamsOutput:
+      title: ListTeamsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team1'
+    CreateTeamOutput:
+      title: CreateTeamOutput
       type: object
       required:
-      - name
+      - data
       properties:
-        name:
-          type: string
+        data:
+          $ref: '#/components/schemas/Team1'
     TeamMember:
       title: TeamMember
       type: object
@@ -406,6 +431,68 @@ components:
         email:
           type: string
         phoneNumber:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    Team1:
+      title: Team
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    ListTeamMembersOutput:
+      title: ListTeamMembersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamMember'
+    CreateTeamInput:
+      title: CreateTeamInput
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    DeleteAgentsFromTeamInput:
+      title: DeleteAgentsFromTeamInput
+      type: object
+      properties:
+        agentIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
           type: string
     UserPresence:
       title: UserPresence
@@ -432,93 +519,6 @@ components:
           items:
             description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
             type: string
-    Team1:
-      title: Team
-      type: object
-      required:
-      - id
-      - name
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    DeleteAgentsFromTeamInput:
-      title: DeleteAgentsFromTeamInput
-      type: object
-      properties:
-        agentIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    PaginationLinks:
-      title: PaginationLinks
-      type: object
-      properties:
-        previous:
-          description: url
-          type: string
-        next:
-          description: url
-          type: string
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    ListTeamMembersOutput:
-      title: ListTeamMembersOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TeamMember'
-    ListTeamsOutput:
-      title: ListTeamsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Team1'
-    AgentsToTeamInput:
-      title: AgentsToTeamInput
-      type: object
-      properties:
-        agentIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-    CreateTeamOutput:
-      title: CreateTeamOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Team1'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

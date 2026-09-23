@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dixa Agents Custom Attributes API
+  title: Dixa Custom Attributes API
   version: beta
 servers:
 - url: https://dev.dixa.io
@@ -335,33 +335,24 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    Text2:
-      title: Text
+    ServerError:
+      title: ServerError
       type: object
+      required:
+      - message
       properties:
-        placeholder:
+        message:
           type: string
-    PatchConversationCustomAttributesOutput:
-      title: PatchConversationCustomAttributesOutput
+    Map_UUID_Option_AttributeValue:
+      title: Map_UUID_Option_AttributeValue
       type: object
-      properties:
-        data:
-          type: array
+      additionalProperties:
+        description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+        oneOf:
+        - type: array
           items:
-            $ref: '#/components/schemas/CustomAttribute'
-    CustomAttributeInputDefinition:
-      title: CustomAttributeInputDefinition
-      oneOf:
-      - $ref: '#/components/schemas/Select1'
-      - $ref: '#/components/schemas/Text2'
-    Select1:
-      title: Select
-      type: object
-      properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/SelectOption'
+            type: string
+        - type: string
     CustomAttribute:
       title: CustomAttribute
       type: object
@@ -385,14 +376,6 @@ components:
             items:
               type: string
           - type: string
-    PatchEndUserCustomAttributesOutput:
-      title: PatchEndUserCustomAttributesOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
     ListCustomAttributesDefinitionsOutput:
       title: ListCustomAttributesDefinitionsOutput
       type: object
@@ -401,32 +384,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomAttributeDefinition'
-    Map_UUID_Option_AttributeValue:
-      title: Map_UUID_Option_AttributeValue
-      type: object
-      additionalProperties:
-        description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
-        oneOf:
-        - type: array
-          items:
-            type: string
-        - type: string
-    GetCustomAttributesDefinitionsOutput:
-      title: GetCustomAttributesDefinitionsOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CustomAttributeDefinition'
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
     BadRequest:
       title: BadRequest
       type: object
@@ -435,6 +392,44 @@ components:
       properties:
         message:
           type: string
+    GetCustomAttributesDefinitionsOutput:
+      title: GetCustomAttributesDefinitionsOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomAttributeDefinition'
+    PatchConversationCustomAttributesOutput:
+      title: PatchConversationCustomAttributesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+    Text2:
+      title: Text
+      type: object
+      properties:
+        placeholder:
+          type: string
+    Unauthorized:
+      title: Unauthorized
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Select1:
+      title: Select
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectOption'
     CustomAttributeDefinition:
       title: CustomAttributeDefinition
       type: object
@@ -475,6 +470,19 @@ components:
           type: boolean
         isDeactivated:
           type: boolean
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CustomAttributeInputDefinition:
+      title: CustomAttributeInputDefinition
+      oneOf:
+      - $ref: '#/components/schemas/Select1'
+      - $ref: '#/components/schemas/Text2'
     SelectOption:
       title: SelectOption
       type: object
@@ -501,22 +509,14 @@ components:
         orderIndex:
           type: integer
           format: int32
-    Unauthorized:
-      title: Unauthorized
+    PatchEndUserCustomAttributesOutput:
+      title: PatchEndUserCustomAttributesOutput
       type: object
-      required:
-      - message
       properties:
-        message:
-          type: string
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

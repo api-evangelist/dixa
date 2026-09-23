@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dixa Agents Anonymization API
+  title: Dixa Anonymization API
   version: beta
 servers:
 - url: https://dev.dixa.io
@@ -323,9 +323,14 @@ components:
         _type:
           description: 'values: [Conversation, Message, User]'
           type: string
-    ConversationAnonymizationType:
-      title: ConversationAnonymizationType
+    ServerError:
+      title: ServerError
       type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
     AnonymizeEntityOutput:
       title: AnonymizeEntityOutput
       type: object
@@ -334,6 +339,51 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/AnonymizationRequestStatus'
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    DeprecatedAnonymizationType:
+      title: DeprecatedAnonymizationType
+      description: Replaced by _type field
+      deprecated: true
+      oneOf:
+      - $ref: '#/components/schemas/ConversationAnonymizationType'
+      - $ref: '#/components/schemas/MessageAnonymizationType'
+      - $ref: '#/components/schemas/UnknownAnonymizationType'
+      - $ref: '#/components/schemas/UserAnonymizationType'
+    ConversationAnonymizationType:
+      title: ConversationAnonymizationType
+      type: object
+    Unauthorized:
+      title: Unauthorized
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    UserAnonymizationType:
+      title: UserAnonymizationType
+      type: object
+    UnknownAnonymizationType:
+      title: UnknownAnonymizationType
+      type: object
+    MessageAnonymizationType:
+      title: MessageAnonymizationType
+      type: object
+    Conflict:
+      title: Conflict
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
     AnonymizationRequestStatus:
       title: AnonymizationRequestStatus
       type: object
@@ -364,53 +414,6 @@ components:
         processedAt:
           type: string
           format: date-time
-    DeprecatedAnonymizationType:
-      title: DeprecatedAnonymizationType
-      description: Replaced by _type field
-      deprecated: true
-      oneOf:
-      - $ref: '#/components/schemas/ConversationAnonymizationType'
-      - $ref: '#/components/schemas/MessageAnonymizationType'
-      - $ref: '#/components/schemas/UnknownAnonymizationType'
-      - $ref: '#/components/schemas/UserAnonymizationType'
-    UserAnonymizationType:
-      title: UserAnonymizationType
-      type: object
-    Conflict:
-      title: Conflict
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    MessageAnonymizationType:
-      title: MessageAnonymizationType
-      type: object
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Unauthorized:
-      title: Unauthorized
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
     NotFound:
       title: NotFound
       type: object
@@ -419,9 +422,6 @@ components:
       properties:
         message:
           type: string
-    UnknownAnonymizationType:
-      title: UnknownAnonymizationType
-      type: object
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

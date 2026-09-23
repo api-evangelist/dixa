@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Dixa Agents API
   version: beta
@@ -832,7 +832,6 @@ paths:
       tags:
       - Agents
       summary: Updates the working channel of an agent
-      description: Updates the working channel of an agent
       operationId: putAgentsAgentidPresenceWorking-channel
       parameters:
       - name: agentId
@@ -873,133 +872,6 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    Integrity:
-      title: Integrity
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    UpdateAgentInput:
-      title: UpdateAgentInput
-      type: object
-      required:
-      - displayName
-      properties:
-        displayName:
-          description: The agent's display name
-          type: string
-        phoneNumber:
-          description: The agent's primary phone number
-          type: string
-        additionalEmails:
-          description: Additional email addresses for the agent
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        additionalPhoneNumbers:
-          description: Additional phone numbers for the agent
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        firstName:
-          description: The agent's first name
-          type: string
-        lastName:
-          description: The agent's last name
-          type: string
-        middleNames:
-          description: The agent's middle names
-          type: array
-          items:
-            type: string
-        avatarUrl:
-          description: The url from which to load the agent's avatar
-          type: string
-    BulkActionOutcome_BulkError_Agent:
-      title: BulkActionOutcome_BulkError_Agent
-      oneOf:
-      - $ref: '#/components/schemas/BulkActionFailure_BulkError_Agent'
-      - $ref: '#/components/schemas/BulkActionSuccess_BulkError_Agent'
-    Validation:
-      title: Validation
-      type: object
-      required:
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    UserPresence:
-      title: UserPresence
-      type: object
-      required:
-      - userId
-      - requestTime
-      - connectionStatus
-      properties:
-        userId:
-          type: string
-        requestTime:
-          type: string
-        lastSeen:
-          type: string
-        presenceStatus:
-          description: 'values: [Away, Working]'
-          type: string
-        connectionStatus:
-          description: 'values: [Offline, Online]'
-          type: string
-        activeChannels:
-          type: array
-          items:
-            description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-            type: string
-    ErrorResponse:
-      title: ErrorResponse
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    PaginationLinks:
-      title: PaginationLinks
-      type: object
-      properties:
-        previous:
-          description: url
-          type: string
-        next:
-          description: url
-          type: string
-    UpdateAgentPresenceChannelInput:
-      title: UpdateAgentPresenceChannelInput
-      type: object
-      required:
-      - channel
-      - working
-      properties:
-        channel:
-          description: 'values: [Email, InteractiveChat, Messaging, Speak]'
-          type: string
-        working:
-          type: boolean
     BadRequest:
       title: BadRequest
       type: object
@@ -1008,66 +880,14 @@ components:
       properties:
         message:
           type: string
-    AgentTeamsOutput:
-      title: AgentTeamsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Team'
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Team:
-      title: Team
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-    BulkActionFailure_BulkError_Agent:
-      title: BulkActionFailure_BulkError_Agent
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/BulkError'
-    AgentOutput:
-      title: AgentOutput
+    BulkActionSuccess_BulkError_Agent:
+      title: BulkActionSuccess_BulkError_Agent
       type: object
       required:
       - data
       properties:
         data:
           $ref: '#/components/schemas/Agent'
-    UserPresenceOutput:
-      title: UserPresenceOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/UserPresence'
-    Infrastructure:
-      title: Infrastructure
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
     PatchAgentInput:
       title: PatchAgentInput
       type: object
@@ -1104,6 +924,94 @@ components:
         avatarUrl:
           description: The url from which to load the agent's avatar
           type: string
+    Infrastructure:
+      title: Infrastructure
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    BulkUpdateAgentInput:
+      title: BulkUpdateAgentInput
+      type: object
+      required:
+      - id
+      - displayName
+      properties:
+        id:
+          description: Unique identifier for the agent
+          type: string
+        displayName:
+          description: The agent's display name
+          type: string
+        phoneNumber:
+          description: The agent's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The agent's first name
+          type: string
+        lastName:
+          description: The agent's last name
+          type: string
+        middleNames:
+          description: The agent's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the agent's avatar
+          type: string
+    BulkActionFailure_BulkError_Agent:
+      title: BulkActionFailure_BulkError_Agent
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/BulkError'
+    ListAgentsOutput:
+      title: ListAgentsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Agent'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    Team:
+      title: Team
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
     InvalidArgument:
       title: InvalidArgument
       type: object
@@ -1112,6 +1020,195 @@ components:
       properties:
         message:
           type: string
+    CreateAgentInput:
+      title: CreateAgentInput
+      type: object
+      required:
+      - displayName
+      - email
+      properties:
+        displayName:
+          description: The agent's display name
+          type: string
+        email:
+          description: The agent's primary email address
+          type: string
+        phoneNumber:
+          description: The agent's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The agent's first name
+          type: string
+        lastName:
+          description: The agent's last name
+          type: string
+        middleNames:
+          description: The agent's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the agent's avatar
+          type: string
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    Integrity:
+      title: Integrity
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    UserPresenceOutput:
+      title: UserPresenceOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/UserPresence'
+    EmptyPatchSet:
+      title: EmptyPatchSet
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    BulkUpdateAgentOutput:
+      title: BulkUpdateAgentOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_BulkError_Agent'
+    CreateAgentsOutput:
+      title: CreateAgentsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_BulkError_Agent'
+    BulkActionOutcome_BulkError_Agent:
+      title: BulkActionOutcome_BulkError_Agent
+      oneOf:
+      - $ref: '#/components/schemas/BulkActionFailure_BulkError_Agent'
+      - $ref: '#/components/schemas/BulkActionSuccess_BulkError_Agent'
+    BulkPatchAgentInput:
+      title: BulkPatchAgentInput
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          description: Unique identifier for the agent
+          type: string
+        displayName:
+          description: The agent's display name
+          type: string
+        phoneNumber:
+          description: The agent's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The agent's first name
+          type: string
+        lastName:
+          description: The agent's last name
+          type: string
+        middleNames:
+          description: The agent's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the agent's avatar
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    UpdateAgentPresenceChannelInput:
+      title: UpdateAgentPresenceChannelInput
+      type: object
+      required:
+      - channel
+      - working
+      properties:
+        channel:
+          description: 'values: [Email, InteractiveChat, Messaging, Speak]'
+          type: string
+        working:
+          type: boolean
+    UserPresence:
+      title: UserPresence
+      type: object
+      required:
+      - userId
+      - requestTime
+      - connectionStatus
+      properties:
+        userId:
+          type: string
+        requestTime:
+          type: string
+        lastSeen:
+          type: string
+        presenceStatus:
+          description: 'values: [Away, Working]'
+          type: string
+        connectionStatus:
+          description: 'values: [Offline, Online]'
+          type: string
+        activeChannels:
+          type: array
+          items:
+            description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+            type: string
     Agent:
       title: Agent
       type: object
@@ -1170,165 +1267,24 @@ components:
           uniqueItems: true
           items:
             type: string
-    CreateAgentsOutput:
-      title: CreateAgentsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkActionOutcome_BulkError_Agent'
-    BulkUpdateAgentOutput:
-      title: BulkUpdateAgentOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkActionOutcome_BulkError_Agent'
-    BulkPatchAgentInput:
-      title: BulkPatchAgentInput
+    ServerError:
+      title: ServerError
       type: object
       required:
-      - id
+      - message
+      properties:
+        message:
+          type: string
+    Validation:
+      title: Validation
+      type: object
+      required:
+      - message
       properties:
         id:
-          description: Unique identifier for the agent
           type: string
-        displayName:
-          description: The agent's display name
+        message:
           type: string
-        phoneNumber:
-          description: The agent's primary phone number
-          type: string
-        additionalEmails:
-          description: Additional email addresses for the agent
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        additionalPhoneNumbers:
-          description: Additional phone numbers for the agent
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        firstName:
-          description: The agent's first name
-          type: string
-        lastName:
-          description: The agent's last name
-          type: string
-        middleNames:
-          description: The agent's middle names
-          type: array
-          items:
-            type: string
-        avatarUrl:
-          description: The url from which to load the agent's avatar
-          type: string
-    CreateAgentInput:
-      title: CreateAgentInput
-      type: object
-      required:
-      - displayName
-      - email
-      properties:
-        displayName:
-          description: The agent's display name
-          type: string
-        email:
-          description: The agent's primary email address
-          type: string
-        phoneNumber:
-          description: The agent's primary phone number
-          type: string
-        additionalEmails:
-          description: Additional email addresses for the agent
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        additionalPhoneNumbers:
-          description: Additional phone numbers for the agent
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        firstName:
-          description: The agent's first name
-          type: string
-        lastName:
-          description: The agent's last name
-          type: string
-        middleNames:
-          description: The agent's middle names
-          type: array
-          items:
-            type: string
-        avatarUrl:
-          description: The url from which to load the agent's avatar
-          type: string
-    BulkUpdateAgentInput:
-      title: BulkUpdateAgentInput
-      type: object
-      required:
-      - id
-      - displayName
-      properties:
-        id:
-          description: Unique identifier for the agent
-          type: string
-        displayName:
-          description: The agent's display name
-          type: string
-        phoneNumber:
-          description: The agent's primary phone number
-          type: string
-        additionalEmails:
-          description: Additional email addresses for the agent
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        additionalPhoneNumbers:
-          description: Additional phone numbers for the agent
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        firstName:
-          description: The agent's first name
-          type: string
-        lastName:
-          description: The agent's last name
-          type: string
-        middleNames:
-          description: The agent's middle names
-          type: array
-          items:
-            type: string
-        avatarUrl:
-          description: The url from which to load the agent's avatar
-          type: string
-    BulkError:
-      title: BulkError
-      oneOf:
-      - $ref: '#/components/schemas/EmptyPatchSet'
-      - $ref: '#/components/schemas/ErrorResponse'
-      - $ref: '#/components/schemas/Infrastructure'
-      - $ref: '#/components/schemas/Integrity'
-      - $ref: '#/components/schemas/InvalidArgument'
-      - $ref: '#/components/schemas/NotFound1'
-      - $ref: '#/components/schemas/Validation'
-    CreateAgentsInput:
-      title: CreateAgentsInput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateAgentInput'
     NotFound1:
       title: NotFound
       type: object
@@ -1340,35 +1296,78 @@ components:
           type: string
         message:
           type: string
-    BulkActionSuccess_BulkError_Agent:
-      title: BulkActionSuccess_BulkError_Agent
+    AgentTeamsOutput:
+      title: AgentTeamsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+    UpdateAgentInput:
+      title: UpdateAgentInput
+      type: object
+      required:
+      - displayName
+      properties:
+        displayName:
+          description: The agent's display name
+          type: string
+        phoneNumber:
+          description: The agent's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the agent
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The agent's first name
+          type: string
+        lastName:
+          description: The agent's last name
+          type: string
+        middleNames:
+          description: The agent's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the agent's avatar
+          type: string
+    AgentOutput:
+      title: AgentOutput
       type: object
       required:
       - data
       properties:
         data:
           $ref: '#/components/schemas/Agent'
-    EmptyPatchSet:
-      title: EmptyPatchSet
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    ListAgentsOutput:
-      title: ListAgentsOutput
+    CreateAgentsInput:
+      title: CreateAgentsInput
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Agent'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
+            $ref: '#/components/schemas/CreateAgentInput'
+    BulkError:
+      title: BulkError
+      oneOf:
+      - $ref: '#/components/schemas/EmptyPatchSet'
+      - $ref: '#/components/schemas/ErrorResponse'
+      - $ref: '#/components/schemas/Infrastructure'
+      - $ref: '#/components/schemas/Integrity'
+      - $ref: '#/components/schemas/InvalidArgument'
+      - $ref: '#/components/schemas/NotFound1'
+      - $ref: '#/components/schemas/Validation'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

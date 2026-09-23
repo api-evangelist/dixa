@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dixa Agents Templates API
+  title: Dixa Templates API
   version: beta
 servers:
 - url: https://dev.dixa.io
@@ -190,31 +190,6 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    Template:
-      title: Template
-      oneOf:
-      - $ref: '#/components/schemas/EmailAutoReply'
-      - $ref: '#/components/schemas/QuickResponse'
-    ListTemplatesOutput:
-      title: ListTemplatesOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Template'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    PaginationLinks:
-      title: PaginationLinks
-      type: object
-      properties:
-        previous:
-          description: url
-          type: string
-        next:
-          description: url
-          type: string
     ServerError:
       title: ServerError
       type: object
@@ -248,8 +223,28 @@ components:
           type: boolean
         subject:
           type: string
-    QuickResponse:
-      title: QuickResponse
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    ListTemplatesOutput:
+      title: ListTemplatesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    EmailAutoReply:
+      title: EmailAutoReply
       type: object
       required:
       - id
@@ -279,6 +274,11 @@ components:
             $ref: '#/components/schemas/Translation'
         subject:
           type: string
+    Template:
+      title: Template
+      oneOf:
+      - $ref: '#/components/schemas/EmailAutoReply'
+      - $ref: '#/components/schemas/QuickResponse'
     NotFound:
       title: NotFound
       type: object
@@ -287,8 +287,8 @@ components:
       properties:
         message:
           type: string
-    EmailAutoReply:
-      title: EmailAutoReply
+    QuickResponse:
+      title: QuickResponse
       type: object
       required:
       - id
