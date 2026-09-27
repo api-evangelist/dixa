@@ -63,6 +63,14 @@ components:
       properties:
         message:
           type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
     OrganizationDetails:
       title: OrganizationDetails
       type: object
@@ -99,14 +107,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/OrganizationDetails'
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

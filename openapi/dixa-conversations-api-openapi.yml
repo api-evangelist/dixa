@@ -2505,80 +2505,163 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    ConversationTranscriptionEndedActivityType:
-      title: ConversationTranscriptionEndedActivityType
-      type: object
-    TagAddedActivityType:
-      title: TagAddedActivityType
-      type: object
-    ConversationId:
-      title: ConversationId
+    GetConversationOutput:
+      title: GetConversationOutput
       type: object
       required:
-      - operator
+      - data
       properties:
-        operator:
-          $ref: '#/components/schemas/FieldHasSingleValueOperator'
-    IsOneOf3:
-      title: IsOneOf
+        data:
+          $ref: '#/components/schemas/Conversation'
+    Map_String:
+      title: Map_String
+      type: object
+      additionalProperties:
+        type: string
+    ConversationOfferAcceptedActivityType:
+      title: ConversationOfferAcceptedActivityType
+      type: object
+    ChannelOperator:
+      title: ChannelOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf1'
+      - $ref: '#/components/schemas/IsOneOf1'
+    AnonymizationRequestStatus:
+      title: AnonymizationRequestStatus
       type: object
       required:
-      - values
+      - id
+      - entityType
+      - _type
+      - initiatedAt
+      - targetEntityId
+      - requestedBy
       properties:
-        values:
-          description: 'values: [inbound, outbound, internal]'
-          type: array
-          items:
-            type: string
-    FollowupRemovedActivityType:
-      title: FollowupRemovedActivityType
-      type: object
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
+        id:
           type: string
-    SideConversation:
-      title: SideConversation
+          format: uuid
+        entityType:
+          $ref: '#/components/schemas/DeprecatedAnonymizationType'
+        _type:
+          description: 'values: [Conversation, Message, User]'
+          type: string
+        initiatedAt:
+          type: string
+          format: date-time
+        targetEntityId:
+          type: string
+        requestedBy:
+          type: string
+          format: uuid
+        processedAt:
+          type: string
+          format: date-time
+    CustomAttribute:
+      title: CustomAttribute
       type: object
       required:
-      - parentId
+      - id
+      - name
+      - identifier
+      - value
       properties:
-        parentId:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        identifier:
+          type: string
+        value:
+          description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+          oneOf:
+          - type: array
+            items:
+              type: string
+          - type: string
+    Between1:
+      title: Between
+      description: 'min and max in milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - min
+      - max
+      properties:
+        min:
           type: integer
           format: int64
-    BulkActionOutcome_ErrorResponse_InternalNoteData:
-      title: BulkActionOutcome_ErrorResponse_InternalNoteData
-      oneOf:
-      - $ref: '#/components/schemas/BulkActionFailure_ErrorResponse_InternalNoteData'
-      - $ref: '#/components/schemas/BulkActionSuccess_ErrorResponse_InternalNoteData'
-    Unauthorized:
-      title: Unauthorized
+        max:
+          type: integer
+          format: int64
+    CloseConversationInput:
+      title: CloseConversationInput
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+    Map_FormAttributeValue:
+      title: Map_FormAttributeValue
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/FormAttributeValue'
+    ConversationAssignedAttribute:
+      title: ConversationAssignedAttribute
       type: object
       required:
-      - message
+      - agentId
       properties:
-        message:
+        agentId:
           type: string
-    UserAnonymizationType:
-      title: UserAnonymizationType
+        agentName:
+          type: string
+    ImportConversationOutput:
+      title: ImportConversationOutput
       type: object
-    ConversationLink:
-      title: ConversationLink
-      oneOf:
-      - $ref: '#/components/schemas/EmailForward'
-      - $ref: '#/components/schemas/FollowUp'
-      - $ref: '#/components/schemas/SideConversation'
-    EmailContent:
-      title: EmailContent
-      oneOf:
-      - $ref: '#/components/schemas/Regular'
-      - $ref: '#/components/schemas/TooLarge'
-    WhatsAppConversation:
-      title: WhatsAppConversation
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ImportConversationResponse'
+    ConversationClaimedAttribute:
+      title: ConversationClaimedAttribute
+      type: object
+      properties:
+        claimedFromLabel:
+          type: string
+        claimedFromType:
+          type: string
+    SearchConversationsWithFiltersOutput:
+      title: SearchConversationsWithFiltersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationSearchWithFiltersHit'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    Attachments:
+      title: Attachments
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileMeta'
+    Text1:
+      title: Text
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    ConversationRatingScheduledActivityType:
+      title: ConversationRatingScheduledActivityType
+      type: object
+    FacebookMessengerConversation:
+      title: FacebookMessengerConversation
       type: object
       required:
       - id
@@ -2620,53 +2703,6 @@ components:
         transportExpiresAt:
           type: string
           format: date-time
-    Map_AttributeValue:
-      title: Map_AttributeValue
-      type: object
-      additionalProperties:
-        description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
-        oneOf:
-        - type: array
-          items:
-            type: string
-        - type: string
-    TimestampOperator:
-      title: TimestampOperator
-      oneOf:
-      - $ref: '#/components/schemas/Between'
-      - $ref: '#/components/schemas/Since'
-      - $ref: '#/components/schemas/Until'
-    CloseConversationInput:
-      title: CloseConversationInput
-      type: object
-      properties:
-        userId:
-          type: string
-          format: uuid
-    ConversationAssignedActivityType:
-      title: ConversationAssignedActivityType
-      type: object
-    RatingOffer:
-      title: RatingOffer
-      type: object
-      required:
-      - id
-      - userId
-      - agentId
-      - ratingType
-      properties:
-        id:
-          type: string
-        userId:
-          type: string
-        agentId:
-          type: string
-        ratingType:
-          description: 'values: [Csat, Nps, ThumbsUpOrDown]'
-          type: string
-        offeredAt:
-          type: string
-          format: date-time
     IsNotOneOf3:
       title: IsNotOneOf
       type: object
@@ -2678,88 +2714,269 @@ components:
           type: array
           items:
             type: string
-    UnknownActivityType:
-      title: UnknownActivityType
-      type: object
-    TransferSuccessfulActivityType:
-      title: TransferSuccessfulActivityType
-      type: object
-    TooLarge:
-      title: TooLarge
+    ContactFormAttributes:
+      title: ContactFormAttributes
       type: object
       required:
-      - file
+      - isAutoReply
       properties:
-        file:
+        emailContent:
+          $ref: '#/components/schemas/EmailContent'
+        from:
+          $ref: '#/components/schemas/EmailContact'
+        replyDefaultToEmails:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailContact'
+        to:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailContact'
+        cc:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailContact'
+        bcc:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailContact'
+        isAutoReply:
+          type: boolean
+        inlineImages:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        deliveryFailureReason:
+          type: string
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        originalContentUrl:
           $ref: '#/components/schemas/File'
-    IsOneOf2:
-      title: IsOneOf
+    FieldCanHaveSingleValueOrBeEmptyOperator:
+      title: FieldCanHaveSingleValueOrBeEmptyOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
+      - $ref: '#/components/schemas/IsNotOneOf'
+      - $ref: '#/components/schemas/IsOneOf'
+    NoteAddedActivityType:
+      title: NoteAddedActivityType
       type: object
-      properties:
-        values:
-          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
-          type: array
-          items:
-            type: array
-            items:
-              type: string
-    NoteAddedAttribute:
-      title: NoteAddedAttribute
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-        avatarUrl:
-          type: string
-    IsEmpty:
-      title: IsEmpty
-      type: object
-    IncludesOne:
-      title: IncludesOne
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    GenericConversationImport:
-      title: GenericConversationImport
+    ConversationSearchHit:
+      title: ConversationSearchHit
       type: object
       required:
-      - genericChannelName
-      - requesterId
-      - direction
+      - id
+      - highlights
+      properties:
+        id:
+          description: Identifier of a Conversation where a match was found
+          type: integer
+          format: int64
+        highlights:
+          $ref: '#/components/schemas/Map_Vector_String'
+        innerHits:
+          description: List of sub-entities (such as Messages) where a match was found
+          deprecated: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationSearchInnerHit'
+    ShorterThanOrEqualTo:
+      title: ShorterThanOrEqualTo
+      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - duration
+      properties:
+        duration:
+          type: integer
+          format: int64
+    Conversation:
+      title: Conversation
+      oneOf:
+      - $ref: '#/components/schemas/AnonymizedConversation'
+      - $ref: '#/components/schemas/ChatConversation'
+      - $ref: '#/components/schemas/ContactFormConversation'
+      - $ref: '#/components/schemas/EmailConversation'
+      - $ref: '#/components/schemas/FacebookMessengerConversation'
+      - $ref: '#/components/schemas/GenericConversation'
+      - $ref: '#/components/schemas/MessengerConversation'
+      - $ref: '#/components/schemas/PstnPhoneConversation'
+      - $ref: '#/components/schemas/SmsConversation'
+      - $ref: '#/components/schemas/TwitterConversation'
+      - $ref: '#/components/schemas/WhatsAppConversation'
+    InboundImport:
+      title: InboundImport
+      type: object
+      required:
+      - content
       - createdAt
       properties:
-        genericChannelName:
-          description: The conversation channel. Currently supported values are 'email' and 'genericapimessaging'. See payload examples for each case.
+        content:
+          $ref: '#/components/schemas/Content'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        externalId:
           type: string
+        createdAt:
+          type: string
+          format: date-time
+        attributes:
+          description: A set of dynamic attributes that are specific to the conversation channel, but not limited to it. See channel specific examples for your use case.
+    FileMeta:
+      title: FileMeta
+      type: object
+      required:
+      - url
+      - name
+      - mediaType
+      - bytesLength
+      - checksum
+      properties:
+        url:
+          type: string
+        name:
+          type: string
+        mediaType:
+          $ref: '#/components/schemas/MimeType'
+        bytesLength:
+          type: integer
+          format: int64
+        checksum:
+          $ref: '#/components/schemas/Checksum'
+    DeprecatedActivityLogType:
+      title: DeprecatedActivityLogType
+      description: Replaced by _type field
+      deprecated: true
+      oneOf:
+      - $ref: '#/components/schemas/ConversationAssignedActivityType'
+      - $ref: '#/components/schemas/ConversationAutoreplySentActivityType'
+      - $ref: '#/components/schemas/ConversationClaimedActivityType'
+      - $ref: '#/components/schemas/ConversationClosedActivityType'
+      - $ref: '#/components/schemas/ConversationCreatedByAgentActivityType'
+      - $ref: '#/components/schemas/ConversationCreatedByCustomerActivityType'
+      - $ref: '#/components/schemas/ConversationEndUserReplacedActivityType'
+      - $ref: '#/components/schemas/ConversationLanguageUpdatedActivityType'
+      - $ref: '#/components/schemas/ConversationOfferAcceptedActivityType'
+      - $ref: '#/components/schemas/ConversationOfferRejectedActivityType'
+      - $ref: '#/components/schemas/ConversationOfferTimeoutActivityType'
+      - $ref: '#/components/schemas/ConversationOfferedActivityType'
+      - $ref: '#/components/schemas/ConversationPendingActivityType'
+      - $ref: '#/components/schemas/ConversationRatedActivityType'
+      - $ref: '#/components/schemas/ConversationRatingCancelledActivityType'
+      - $ref: '#/components/schemas/ConversationRatingOfferedActivityType'
+      - $ref: '#/components/schemas/ConversationRatingScheduledActivityType'
+      - $ref: '#/components/schemas/ConversationRatingUnscheduledActivityType'
+      - $ref: '#/components/schemas/ConversationReopenedActivityType'
+      - $ref: '#/components/schemas/ConversationReservedType'
+      - $ref: '#/components/schemas/ConversationTranscriptionEndedActivityType'
+      - $ref: '#/components/schemas/ConversationTranscriptionStartedActivityType'
+      - $ref: '#/components/schemas/ConversationUnassignedActivityType'
+      - $ref: '#/components/schemas/FollowupAddedActivityType'
+      - $ref: '#/components/schemas/FollowupExpiredActivityType'
+      - $ref: '#/components/schemas/FollowupRemovedActivityType'
+      - $ref: '#/components/schemas/MessageAddedByAgentActivityType'
+      - $ref: '#/components/schemas/MessageAddedByCustomerActivityType'
+      - $ref: '#/components/schemas/NoteAddedActivityType'
+      - $ref: '#/components/schemas/TagAddedActivityType'
+      - $ref: '#/components/schemas/TagRemovedActivityType'
+      - $ref: '#/components/schemas/TransferFailedActivityType'
+      - $ref: '#/components/schemas/TransferInitiatedActivityType'
+      - $ref: '#/components/schemas/TransferSuccessfulActivityType'
+      - $ref: '#/components/schemas/UnknownActivityType'
+    ConversationRatingScheduledAttribute:
+      title: ConversationRatingScheduledAttribute
+      type: object
+      required:
+      - ratingScheduledTime
+      properties:
+        ratingScheduledTime:
+          type: string
+    MessengerConversation:
+      title: MessengerConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
         requesterId:
           type: string
           format: uuid
-        requesterConnectionStatus:
-          description: 'values: [Connected, Disconnected]'
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
           type: string
-        direction:
-          description: 'values: [Inbound, Outbound]'
-          type: string
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImportMessageInput'
         createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
           type: string
           format: date-time
         assignment:
           $ref: '#/components/schemas/Assignment'
-        externalId:
+        queue:
+          $ref: '#/components/schemas/Queue'
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+        language:
           type: string
-        closing:
-          $ref: '#/components/schemas/Closing'
-        attributes:
-          description: A set of dynamic attributes that are specific to the conversation channel, but not limited to it. See channel specific examples for your use case.
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    Csat:
+      title: Csat
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: Numeric value between 1 and 5 representing the customer's satisfaction level.
+          type: integer
+          format: int32
+    UnknownAnonymizationType:
+      title: UnknownAnonymizationType
+      type: object
+    Until:
+      title: Until
+      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+      type: object
+      required:
+      - timestamp
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+    SearchParametersInput:
+      title: SearchParametersInput
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/Query'
+        filters:
+          $ref: '#/components/schemas/Filters'
     ConversationRating:
       title: ConversationRating
       type: object
@@ -2795,68 +3012,344 @@ components:
           type: string
         timestamps:
           $ref: '#/components/schemas/Map_String'
-    Attachments:
-      title: Attachments
+    RatingResult:
+      title: RatingResult
       type: object
+      required:
+      - ratingId
+      - ratingResult
       properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/FileMeta'
-    TransferFailedActivityType:
-      title: TransferFailedActivityType
+        ratingId:
+          type: string
+        userId:
+          type: string
+        ratingResult:
+          $ref: '#/components/schemas/SubmittedRatingResult'
+        comment:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+    StatusOperator:
+      title: StatusOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf4'
+      - $ref: '#/components/schemas/IsOneOf4'
+    TagAddedAttribute:
+      title: TagAddedAttribute
       type: object
-    ConversationRatingScheduledActivityType:
-      title: ConversationRatingScheduledActivityType
-      type: object
-    MessageAnonymizationType:
-      title: MessageAnonymizationType
-      type: object
-    AnonymizationRequestStatus:
-      title: AnonymizationRequestStatus
+      required:
+      - tag
+      properties:
+        tag:
+          type: string
+    Queue:
+      title: Queue
       type: object
       required:
       - id
-      - entityType
-      - _type
-      - initiatedAt
-      - targetEntityId
-      - requestedBy
       properties:
         id:
           type: string
           format: uuid
-        entityType:
-          $ref: '#/components/schemas/DeprecatedAnonymizationType'
-        _type:
-          description: 'values: [Conversation, Message, User]'
-          type: string
-        initiatedAt:
+        queuedAt:
           type: string
           format: date-time
-        targetEntityId:
-          type: string
-        requestedBy:
+    BulkCreateNoteOutput:
+      title: BulkCreateNoteOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_ErrorResponse_InternalNoteData'
+    LastActivity:
+      title: LastActivity
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    ConversationTranscriptionEndedActivityType:
+      title: ConversationTranscriptionEndedActivityType
+      type: object
+    TimestampOperator:
+      title: TimestampOperator
+      oneOf:
+      - $ref: '#/components/schemas/Between'
+      - $ref: '#/components/schemas/Since'
+      - $ref: '#/components/schemas/Until'
+    InternalNoteData:
+      title: InternalNoteData
+      type: object
+      required:
+      - id
+      - authorId
+      - createdAt
+      - csid
+      - message
+      properties:
+        id:
           type: string
           format: uuid
-        processedAt:
+        authorId:
+          type: string
+          format: uuid
+        createdAt:
           type: string
           format: date-time
-    PartialError:
-      title: PartialError
+        csid:
+          type: integer
+          format: int64
+        message:
+          type: string
+    NoteAddedAttribute:
+      title: NoteAddedAttribute
       type: object
       required:
       - message
       properties:
         message:
           type: string
-    MimeType:
-      title: MimeType
-      oneOf:
-      - $ref: '#/components/schemas/MimeTypeImpl'
+        avatarUrl:
+          type: string
+    ConversationCustomAttributesUpdatedAttribute:
+      title: ConversationCustomAttributesUpdatedAttribute
+      type: object
+      required:
+      - updatedAttributeValues
+      properties:
+        updatedAttributeIds:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        updatedAttributeValues:
+          $ref: '#/components/schemas/Map_AttributeValue'
+    WhatsAppAttributes:
+      title: WhatsAppAttributes
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    ConversationLanguageUpdatedAttribute:
+      title: ConversationLanguageUpdatedAttribute
+      type: object
+      required:
+      - language
+      properties:
+        language:
+          type: string
+    Map_AttributeValue:
+      title: Map_AttributeValue
+      type: object
+      additionalProperties:
+        description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+        oneOf:
+        - type: array
+          items:
+            type: string
+        - type: string
     ConversationClaimedActivityType:
       title: ConversationClaimedActivityType
       type: object
+    BulkCreateInternalNoteInput:
+      title: BulkCreateInternalNoteInput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateInternalNoteInput'
+    Select:
+      title: Select
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: string
+    ConversationPendingActivityType:
+      title: ConversationPendingActivityType
+      type: object
+    LinkConversationInput:
+      title: LinkConversationInput
+      type: object
+      required:
+      - parentId
+      - linkType
+      properties:
+        parentId:
+          type: integer
+          format: int64
+        linkType:
+          description: 'values: [Related, SideConversation]'
+          type: string
+    ConversationTransferredAttribute:
+      title: ConversationTransferredAttribute
+      type: object
+      required:
+      - transferType
+      - destinationType
+      - destinationId
+      properties:
+        transferType:
+          type: string
+        destinationType:
+          type: string
+        destinationId:
+          type: string
+        destinationLabel:
+          type: string
+        reason:
+          type: string
+    IsOneOf1:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [email, contactform, chat, dixamessenger, phone, voicemail, callback, sms, facebookmessenger, whatsapp, adachat, digitalgeniuschat, kindlychat, genericapimessaging, trustpilot, yotpo]'
+          type: array
+          items:
+            type: string
+    Filters:
+      title: Filters
+      type: object
+      required:
+      - strategy
+      properties:
+        strategy:
+          description: 'values: [All, Any]'
+          type: string
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+    ConversationUnassignedAttribute:
+      title: ConversationUnassignedAttribute
+      type: object
+      required:
+      - agent
+      properties:
+        agent:
+          $ref: '#/components/schemas/ActivityLogUser'
+    Closing:
+      title: Closing
+      description: Triggers the closing of the conversation
+      type: object
+      required:
+      - closedAt
+      - closedBy
+      properties:
+        closedAt:
+          type: string
+          format: date-time
+        closedBy:
+          type: string
+          format: uuid
+    Chat:
+      title: Chat
+      type: object
+      required:
+      - requesterId
+      - widgetId
+      - message
+      properties:
+        requesterId:
+          type: string
+          format: uuid
+        widgetId:
+          type: string
+          format: uuid
+        message:
+          $ref: '#/components/schemas/CreateMessageInput'
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+        language:
+          type: string
+    ConversationChannelChangedAttribute:
+      title: ConversationChannelChangedAttribute
+      type: object
+      required:
+      - channelReference
+      properties:
+        channelReference:
+          type: string
+    ConversationSearchInnerHit:
+      title: ConversationSearchInnerHit
+      type: object
+      required:
+      - id
+      - highlight
+      properties:
+        id:
+          description: Identifier of a sub-entity (such as a Message) where a match was found
+          type: string
+        highlight:
+          $ref: '#/components/schemas/Map_String'
+          description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags
+    IsOneOf3:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [inbound, outbound, internal]'
+          type: array
+          items:
+            type: string
+    ChatAttributes:
+      title: ChatAttributes
+      type: object
+      required:
+      - isAutomated
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        isAutomated:
+          type: boolean
+    SubmittedRatingResult:
+      title: SubmittedRatingResult
+      oneOf:
+      - $ref: '#/components/schemas/Csat'
+      - $ref: '#/components/schemas/Nps'
+      - $ref: '#/components/schemas/ThumbsUpOrDown'
+    Since:
+      title: Since
+      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+      type: object
+      required:
+      - timestamp
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+    AgentId:
+      title: AgentId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
     GenericConversation:
       title: GenericConversation
       type: object
@@ -2904,101 +3397,14 @@ components:
         transportExpiresAt:
           type: string
           format: date-time
-    IsOneOf:
-      title: IsOneOf
+    IncludesAll:
+      title: IncludesAll
       type: object
       properties:
         values:
           type: array
           items:
             type: string
-    DeprecatedAnonymizationType:
-      title: DeprecatedAnonymizationType
-      description: Replaced by _type field
-      deprecated: true
-      oneOf:
-      - $ref: '#/components/schemas/ConversationAnonymizationType'
-      - $ref: '#/components/schemas/MessageAnonymizationType'
-      - $ref: '#/components/schemas/UnknownAnonymizationType'
-      - $ref: '#/components/schemas/UserAnonymizationType'
-    ConversationLinkedAttribute:
-      title: ConversationLinkedAttribute
-      type: object
-      required:
-      - child
-      - parent
-      - linkType
-      properties:
-        child:
-          type: integer
-          format: int64
-        parent:
-          type: integer
-          format: int64
-        linkType:
-          type: string
-    UnknownAnonymizationType:
-      title: UnknownAnonymizationType
-      type: object
-    MessengerFormAttributes:
-      title: MessengerFormAttributes
-      type: object
-      required:
-      - formSubmission
-      properties:
-        formSubmission:
-          $ref: '#/components/schemas/FormSubmission'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        content:
-          $ref: '#/components/schemas/Content'
-    Html:
-      title: Html
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    IsNotOneOf1:
-      title: IsNotOneOf
-      type: object
-      required:
-      - values
-      properties:
-        values:
-          description: 'values: [email, contactform, chat, dixamessenger, phone, voicemail, callback, sms, facebookmessenger, whatsapp, adachat, digitalgeniuschat, kindlychat, genericapimessaging, trustpilot, yotpo]'
-          type: array
-          items:
-            type: string
-    EmailContact:
-      title: EmailContact
-      type: object
-      required:
-      - email
-      properties:
-        email:
-          type: string
-        name:
-          type: string
-    PhoneAttributes:
-      title: PhoneAttributes
-      type: object
-      required:
-      - from
-      - to
-      properties:
-        from:
-          type: string
-        to:
-          type: string
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        duration:
-          type: integer
-          format: int32
     TagConversationInput:
       title: TagConversationInput
       type: object
@@ -3007,83 +3413,177 @@ components:
       properties:
         name:
           type: string
-    ConversationOfferAcceptedActivityType:
-      title: ConversationOfferAcceptedActivityType
+    ConversationAutoreplySentActivityType:
+      title: ConversationAutoreplySentActivityType
       type: object
-    Since:
-      title: Since
-      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+    ListConversationRatingsOutput:
+      title: ListConversationRatingsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationRating'
+    ConversationLanguageUpdatedActivityType:
+      title: ConversationLanguageUpdatedActivityType
+      type: object
+    ConversationRatingNotOfferedAttribute:
+      title: ConversationRatingNotOfferedAttribute
+      type: object
+      properties:
+        evaluationFilters:
+          type: string
+    SearchOutput:
+      title: SearchOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationSearchHit'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    ConversationResolvedStateToggledAttribute:
+      title: ConversationResolvedStateToggledAttribute
       type: object
       required:
-      - timestamp
+      - isResolved
       properties:
-        timestamp:
-          type: string
-          format: date-time
-    TagAddedAttribute:
-      title: TagAddedAttribute
+        isResolved:
+          type: boolean
+    PatchConversationCustomAttributesOutput:
+      title: PatchConversationCustomAttributesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+    ListActivityLogOutput:
+      title: ListActivityLogOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityLogEntry'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    EmailContent:
+      title: EmailContent
+      oneOf:
+      - $ref: '#/components/schemas/Regular'
+      - $ref: '#/components/schemas/TooLarge'
+    ConversationRatingUnscheduledActivityType:
+      title: ConversationRatingUnscheduledActivityType
+      type: object
+    FollowupRemovedActivityType:
+      title: FollowupRemovedActivityType
+      type: object
+    CreateNoteOutput:
+      title: CreateNoteOutput
       type: object
       required:
-      - tag
+      - data
       properties:
-        tag:
-          type: string
-    CreateRatingOfferInput:
-      title: CreateRatingOfferInput
+        data:
+          $ref: '#/components/schemas/InternalNoteData'
+    Duration:
+      title: Duration
       type: object
       required:
-      - ratingType
+      - operator
       properties:
-        userId:
-          description: If userId is not provided, the conversation requester will be picked.
-          type: string
-        agentId:
-          description: If an agentId is not provided, the agent that is most likely to be the target will be picked. Please note that providing an agentId that is not part of the conversation may skew metrics in Intelligence.
-          type: string
-        ratingType:
-          description: 'The type of numeric rating. E.g.: ''Csat'', ''ThumbsUpOrDown'', ''Nps''.'
-          type: string
-        offeredAt:
-          type: string
-          format: date-time
-    Sms:
-      title: Sms
+        operator:
+          $ref: '#/components/schemas/DurationOperator'
+    ListInternalNotesOutput:
+      title: ListInternalNotesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InternalNoteData'
+    DurationOperator:
+      title: DurationOperator
+      oneOf:
+      - $ref: '#/components/schemas/Between1'
+      - $ref: '#/components/schemas/LongerThanOrEqualTo'
+      - $ref: '#/components/schemas/ShorterThanOrEqualTo'
+    ImportConversationResponse:
+      title: ImportConversationResponse
       type: object
       required:
-      - requesterId
-      - contactEndpointId
-      - message
+      - id
       properties:
-        requesterId:
-          type: string
-          format: uuid
-        contactEndpointId:
-          description: SMS enabled provisioned phone number in valid E.164 format
-          type: string
-        message:
-          $ref: '#/components/schemas/CreateMessageInput'
-    ConversationOfferTimeoutActivityType:
-      title: ConversationOfferTimeoutActivityType
-      type: object
-    ThumbsUpOrDown:
-      title: ThumbsUpOrDown
+        id:
+          description: The id of the newly imported conversation
+          type: integer
+          format: int64
+        partialErrors:
+          description: List of errors that do not prevent the conversation from being created
+          type: array
+          items:
+            $ref: '#/components/schemas/PartialError'
+    Html:
+      title: Html
       type: object
       required:
       - value
       properties:
         value:
-          description: One of the the numeric values 0 (thumbs down) and 1 (thumbs up).
-          type: integer
-          format: int32
-    ConversationPendingActivityType:
-      title: ConversationPendingActivityType
+          type: string
+    FieldCanHaveMultipleValuesOrBeEmptyOperator:
+      title: FieldCanHaveMultipleValuesOrBeEmptyOperator
+      oneOf:
+      - $ref: '#/components/schemas/ExcludesAll'
+      - $ref: '#/components/schemas/ExcludesOne'
+      - $ref: '#/components/schemas/IncludesAll'
+      - $ref: '#/components/schemas/IncludesOne'
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
+    ActivityLogAttribute:
+      title: ActivityLogAttribute
+      oneOf:
+      - $ref: '#/components/schemas/ConversationAssignedAttribute'
+      - $ref: '#/components/schemas/ConversationAutoReplySentAttribute'
+      - $ref: '#/components/schemas/ConversationChannelChangedAttribute'
+      - $ref: '#/components/schemas/ConversationClaimedAttribute'
+      - $ref: '#/components/schemas/ConversationCreatedAttribute'
+      - $ref: '#/components/schemas/ConversationCustomAttributesUpdatedAttribute'
+      - $ref: '#/components/schemas/ConversationEndUserReplacedAttribute'
+      - $ref: '#/components/schemas/ConversationLanguageUpdatedAttribute'
+      - $ref: '#/components/schemas/ConversationLinkedAttribute'
+      - $ref: '#/components/schemas/ConversationOfferedAttribute'
+      - $ref: '#/components/schemas/ConversationRatedAttribute'
+      - $ref: '#/components/schemas/ConversationRatingNotOfferedAttribute'
+      - $ref: '#/components/schemas/ConversationRatingOfferedAttribute'
+      - $ref: '#/components/schemas/ConversationRatingScheduledAttribute'
+      - $ref: '#/components/schemas/ConversationReservedAttribute'
+      - $ref: '#/components/schemas/ConversationResolvedStateToggledAttribute'
+      - $ref: '#/components/schemas/ConversationSubjectUpdatedAttribute'
+      - $ref: '#/components/schemas/ConversationTranscriptionEndedAttribute'
+      - $ref: '#/components/schemas/ConversationTransferredAttribute'
+      - $ref: '#/components/schemas/ConversationUnassignedAttribute'
+      - $ref: '#/components/schemas/MessageAddedAttribute'
+      - $ref: '#/components/schemas/MessageRedactedAttribute'
+      - $ref: '#/components/schemas/NoteAddedAttribute'
+      - $ref: '#/components/schemas/TagAddedAttribute'
+      - $ref: '#/components/schemas/TagRemovedAttribute'
+    CreateInternalNoteInput:
+      title: CreateInternalNoteInput
       type: object
-    ConversationRatedActivityType:
-      title: ConversationRatedActivityType
-      type: object
-    TransferInitiatedActivityType:
-      title: TransferInitiatedActivityType
-      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+        agentId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
     AnonymizedConversation:
       title: AnonymizedConversation
       type: object
@@ -3127,53 +3627,567 @@ components:
         transportExpiresAt:
           type: string
           format: date-time
-    StatusOperator:
-      title: StatusOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf4'
-      - $ref: '#/components/schemas/IsOneOf4'
-    ListInternalNotesOutput:
-      title: ListInternalNotesOutput
+    MimeTypeImpl:
+      title: MimeTypeImpl
+      type: object
+      required:
+      - primary
+      - sub
+      properties:
+        primary:
+          type: string
+        sub:
+          type: string
+    ConversationReservedType:
+      title: ConversationReservedType
+      type: object
+    ConversationRatingOfferedAttribute:
+      title: ConversationRatingOfferedAttribute
+      type: object
+      required:
+      - agent
+      - user
+      properties:
+        agent:
+          $ref: '#/components/schemas/ActivityLogUser'
+        user:
+          $ref: '#/components/schemas/ActivityLogUser'
+    TransferFailedActivityType:
+      title: TransferFailedActivityType
+      type: object
+    TransferConversationInput:
+      title: TransferConversationInput
+      type: object
+      required:
+      - queueId
+      properties:
+        queueId:
+          description: The target queue for the conversation transfer
+          type: string
+          format: uuid
+        userId:
+          description: An optional agent/admin to originate the transfer of the conversation
+          type: string
+          format: uuid
+    SideConversation:
+      title: SideConversation
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
+    ConversationClosedActivityType:
+      title: ConversationClosedActivityType
+      type: object
+    File:
+      title: File
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          description: url
+          type: string
+        prettyName:
+          type: string
+    WhatsAppConversation:
+      title: WhatsAppConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    FollowupAddedActivityType:
+      title: FollowupAddedActivityType
+      type: object
+    SmsConversation:
+      title: SmsConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        fromNumber:
+          type: string
+        toNumber:
+          type: string
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    FollowupConversationInput:
+      title: FollowupConversationInput
+      type: object
+      required:
+      - timestamp
+      properties:
+        timestamp:
+          description: A timestamp for when the followup should expire
+          type: string
+          format: date-time
+        userId:
+          description: An optional agent/admin to followup the conversation
+          type: string
+          format: uuid
+    ConversationResponse:
+      title: ConversationResponse
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int64
+    ConversationOfferedActivityType:
+      title: ConversationOfferedActivityType
+      type: object
+    ActivityLogUser:
+      title: ActivityLogUser
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+    IsNotEmpty:
+      title: IsNotEmpty
+      type: object
+    IncludesOne:
+      title: IncludesOne
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    Outbound:
+      title: Outbound
+      type: object
+      required:
+      - agentId
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        agentId:
+          type: string
+          format: uuid
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        integrationEmail:
+          type: string
+        externalId:
+          type: string
+        cc:
+          type: array
+          items:
+            type: string
+            format: uuid
+        bcc:
+          type: array
+          items:
+            type: string
+            format: uuid
+    IsEmpty:
+      title: IsEmpty
+      type: object
+    Sms:
+      title: Sms
+      type: object
+      required:
+      - requesterId
+      - contactEndpointId
+      - message
+      properties:
+        requesterId:
+          type: string
+          format: uuid
+        contactEndpointId:
+          description: SMS enabled provisioned phone number in valid E.164 format
+          type: string
+        message:
+          $ref: '#/components/schemas/CreateMessageInput'
+    ListFlowsOutput:
+      title: ListFlowsOutput
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/InternalNoteData'
-    ErrorResponse:
-      title: ErrorResponse
+            $ref: '#/components/schemas/ConversationFlow'
+    ConversationTranscriptionStartedActivityType:
+      title: ConversationTranscriptionStartedActivityType
+      type: object
+    ConversationTagsOutput:
+      title: ConversationTagsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    CallRecordingAttributes:
+      title: CallRecordingAttributes
       type: object
       required:
-      - message
+      - recording
       properties:
-        message:
+        duration:
+          type: integer
+          format: int32
+        recording:
           type: string
-    SearchField:
-      title: SearchField
+    MessageAnonymizationType:
+      title: MessageAnonymizationType
+      type: object
+    MimeType:
+      title: MimeType
       oneOf:
-      - $ref: '#/components/schemas/AgentId'
-      - $ref: '#/components/schemas/AssignedDate'
-      - $ref: '#/components/schemas/Channel'
-      - $ref: '#/components/schemas/ClosedDate'
-      - $ref: '#/components/schemas/ContactId'
-      - $ref: '#/components/schemas/ConversationId'
-      - $ref: '#/components/schemas/CreationDate'
-      - $ref: '#/components/schemas/CustomAttribute1'
-      - $ref: '#/components/schemas/Direction'
-      - $ref: '#/components/schemas/Duration'
-      - $ref: '#/components/schemas/LastActivity'
-      - $ref: '#/components/schemas/LastMessage'
-      - $ref: '#/components/schemas/QueueId'
-      - $ref: '#/components/schemas/Status1'
-      - $ref: '#/components/schemas/TagId'
-    CreateConversationOutput:
-      title: CreateConversationOutput
+      - $ref: '#/components/schemas/MimeTypeImpl'
+    IsNotOneOf2:
+      title: IsNotOneOf
+      type: object
+      properties:
+        values:
+          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+    IsOneOf4:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [open, closed, pending]'
+          type: array
+          items:
+            type: string
+    UserAnonymizationType:
+      title: UserAnonymizationType
+      type: object
+    Channel:
+      title: Channel
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/ChannelOperator'
+    FormSubmission:
+      title: FormSubmission
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          $ref: '#/components/schemas/Map_FormAttributeValue'
+    TagId:
+      title: TagId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveMultipleValuesOrBeEmptyOperator'
+    CreateConversationInput:
+      title: CreateConversationInput
+      oneOf:
+      - $ref: '#/components/schemas/Callback'
+      - $ref: '#/components/schemas/Chat'
+      - $ref: '#/components/schemas/ContactForm'
+      - $ref: '#/components/schemas/Email'
+      - $ref: '#/components/schemas/Sms'
+    ConversationEndUserReplacedAttribute:
+      title: ConversationEndUserReplacedAttribute
+      type: object
+      required:
+      - oldUser
+      - newUser
+      properties:
+        oldUser:
+          $ref: '#/components/schemas/ActivityLogUser'
+        newUser:
+          $ref: '#/components/schemas/ActivityLogUser'
+    ConversationAutoReplySentAttribute:
+      title: ConversationAutoReplySentAttribute
+      type: object
+      required:
+      - templateName
+      properties:
+        templateName:
+          type: string
+    GenericAttributes:
+      title: GenericAttributes
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    Callback:
+      title: Callback
+      type: object
+      required:
+      - requesterId
+      - direction
+      - contactEndpointId
+      - queueId
+      properties:
+        requesterId:
+          type: string
+          format: uuid
+        direction:
+          description: 'values: [Inbound, Outbound]'
+          type: string
+        contactEndpointId:
+          type: string
+        queueId:
+          type: string
+          format: uuid
+    ClosedDate:
+      title: ClosedDate
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    TooLarge:
+      title: TooLarge
+      type: object
+      required:
+      - file
+      properties:
+        file:
+          $ref: '#/components/schemas/File'
+    Direction:
+      title: Direction
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/DirectionOperator'
+    MessageAddedByCustomerActivityType:
+      title: MessageAddedByCustomerActivityType
+      type: object
+    EmailForward:
+      title: EmailForward
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
+    ContactFormConversation:
+      title: ContactFormConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - fromEmail
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        fromEmail:
+          type: string
+        toEmail:
+          type: string
+        integrationEmail:
+          type: string
+        language:
+          type: string
+        subject:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    AssignedDate:
+      title: AssignedDate
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    GenericConversationImport:
+      title: GenericConversationImport
+      type: object
+      required:
+      - genericChannelName
+      - requesterId
+      - direction
+      - createdAt
+      properties:
+        genericChannelName:
+          description: The conversation channel. Currently supported values are 'email' and 'genericapimessaging'. See payload examples for each case.
+          type: string
+        requesterId:
+          type: string
+          format: uuid
+        requesterConnectionStatus:
+          description: 'values: [Connected, Disconnected]'
+          type: string
+        direction:
+          description: 'values: [Inbound, Outbound]'
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportMessageInput'
+        createdAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        externalId:
+          type: string
+        closing:
+          $ref: '#/components/schemas/Closing'
+        attributes:
+          description: A set of dynamic attributes that are specific to the conversation channel, but not limited to it. See channel specific examples for your use case.
+    ConversationTranscriptionEndedAttribute:
+      title: ConversationTranscriptionEndedAttribute
+      type: object
+      required:
+      - isSuccessful
+      properties:
+        isSuccessful:
+          type: boolean
+        failureReason:
+          type: string
+    AnonymizeEntityOutput:
+      title: AnonymizeEntityOutput
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/ConversationResponse'
+          $ref: '#/components/schemas/AnonymizationRequestStatus'
+    ConversationCreatedAttribute:
+      title: ConversationCreatedAttribute
+      type: object
+      properties:
+        subject:
+          type: string
     Checksum:
       title: Checksum
       type: object
@@ -3185,40 +4199,472 @@ components:
           type: string
         hex:
           type: string
-    ConversationRatingNotOfferedAttribute:
-      title: ConversationRatingNotOfferedAttribute
+    ListMessagesOutput:
+      title: ListMessagesOutput
       type: object
       properties:
-        evaluationFilters:
-          type: string
-    ConversationTranscriptionEndedAttribute:
-      title: ConversationTranscriptionEndedAttribute
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+    Map_UUID_Option_AttributeValue:
+      title: Map_UUID_Option_AttributeValue
+      type: object
+      additionalProperties:
+        description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+        oneOf:
+        - type: array
+          items:
+            type: string
+        - type: string
+    ConversationRatedActivityType:
+      title: ConversationRatedActivityType
+      type: object
+    LastMessage:
+      title: LastMessage
       type: object
       required:
-      - isSuccessful
+      - operator
       properties:
-        isSuccessful:
-          type: boolean
-        failureReason:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
           type: string
+    CreationDate:
+      title: CreationDate
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    ConversationLink:
+      title: ConversationLink
+      oneOf:
+      - $ref: '#/components/schemas/EmailForward'
+      - $ref: '#/components/schemas/FollowUp'
+      - $ref: '#/components/schemas/SideConversation'
+    IsNotOneOf4:
+      title: IsNotOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [open, closed, pending]'
+          type: array
+          items:
+            type: string
+    ConversationOfferRejectedActivityType:
+      title: ConversationOfferRejectedActivityType
+      type: object
+    ReopenConversationInput:
+      title: ReopenConversationInput
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+    IsNotOneOf1:
+      title: IsNotOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [email, contactform, chat, dixamessenger, phone, voicemail, callback, sms, facebookmessenger, whatsapp, adachat, digitalgeniuschat, kindlychat, genericapimessaging, trustpilot, yotpo]'
+          type: array
+          items:
+            type: string
+    Query:
+      title: Query
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+        exactMatch:
+          type: boolean
+    TranscriptAttributes:
+      title: TranscriptAttributes
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        utterance_start_ms:
+          type: integer
+          format: int64
+        utterance_end_ms:
+          type: integer
+          format: int64
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+    TagRemovedActivityType:
+      title: TagRemovedActivityType
+      type: object
+    CreateMessageOutput:
+      title: CreateMessageOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateMessageOutputData'
+    MessengerFormAttributes:
+      title: MessengerFormAttributes
+      type: object
+      required:
+      - formSubmission
+      properties:
+        formSubmission:
+          $ref: '#/components/schemas/FormSubmission'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        content:
+          $ref: '#/components/schemas/Content'
+    OutboundImport:
+      title: OutboundImport
+      type: object
+      required:
+      - content
+      - agentId
+      - createdAt
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        agentId:
+          type: string
+          format: uuid
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        externalId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        attributes:
+          description: A set of dynamic attributes that are specific to the conversation channel, but not limited to it. See channel specific examples for your use case.
+    ContactForm:
+      title: ContactForm
+      type: object
+      required:
+      - requesterId
+      - emailIntegrationId
+      - subject
+      - message
+      properties:
+        requesterId:
+          type: string
+          format: uuid
+        emailIntegrationId:
+          type: string
+        subject:
+          type: string
+        message:
+          $ref: '#/components/schemas/CreateMessageInput'
+        language:
+          type: string
+    MessageAddedAttribute:
+      title: MessageAddedAttribute
+      type: object
+      required:
+      - messageId
+      properties:
+        messageId:
+          type: string
+        fromEndpoint:
+          type: string
+        avatarUrl:
+          type: string
+    ConversationCreatedByAgentActivityType:
+      title: ConversationCreatedByAgentActivityType
+      type: object
+    ConversationRatedAttribute:
+      title: ConversationRatedAttribute
+      type: object
+      properties:
+        agent:
+          $ref: '#/components/schemas/ActivityLogUser'
+        score:
+          type: integer
+          format: int32
+        message:
+          type: string
+    ActivityLogEntry:
+      title: ActivityLogEntry
+      type: object
+      required:
+      - id
+      - conversationId
+      - activityTimestamp
+      - activityType
+      - _type
+      properties:
+        id:
+          type: string
+          format: uuid
+        conversationId:
+          type: integer
+          format: int32
+        activityTimestamp:
+          type: string
+          format: date-time
+        activityType:
+          $ref: '#/components/schemas/DeprecatedActivityLogType'
+        _type:
+          description: 'values: [ConversationRatingScheduled, ConversationPending, ConversationRatingUnscheduled, ConversationOfferRejected, ConversationEndUserReplaced, NoteAdded, FollowupExpired, ConversationRated, TagAdded, ConversationRatingNotOffered, ConversationOfferTimeout, ConversationChannelChanged, ConversationOfferAccepted, MessageAddedByCustomer, ConversationCreatedByCustomer, ConversationCreatedByAgent, ConversationUnlinkedToParent, TransferFailed, TransferSuccessful, ConversationTranscriptionEnded, ConversationOffered, ConversationUnassigned, ConversationMessageRedacted, TagRemoved, TransferInitiated, ConversationResolvedStateToggled, ConversationClaimed, ConversationReopened, ConversationClosed, ConversationLanguageUpdated, FollowupAdded, ConversationCustomAttributesUpdated, ConversationLinkedToParent, ConversationLinkedFromChild, ConversationAutoreplySent, ConversationReserved, ConversationAssigned, ConversationRatingOffered, ConversationUnlinkedFromChild, ConversationTranscriptionStarted, ConversationRatingCancelled, MessageAddedByAgent, FollowupRemoved]'
+          type: string
+        author:
+          $ref: '#/components/schemas/ActivityLogUser'
+        attributes:
+          $ref: '#/components/schemas/ActivityLogAttribute'
+    BrowserInfo:
+      title: BrowserInfo
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        ipAddress:
+          type: string
+        originatingUrl:
+          type: string
+    ConversationOfferedAttribute:
+      title: ConversationOfferedAttribute
+      type: object
+      properties:
+        agentNames:
+          type: array
+          items:
+            type: string
+        queueLabel:
+          type: string
+    Conflict:
+      title: Conflict
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    TwitterConversation:
+      title: TwitterConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - conversationType
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        conversationType:
+          description: 'values: [DirectMessage, Tweet]'
+          type: string
+        contactPointTwitterId:
+          type: string
+        endUserTwitterId:
+          type: string
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    PstnPhoneConversation:
+      title: PstnPhoneConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    Text:
+      title: Text
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    CreateMessageOutputData:
+      title: CreateMessageOutputData
+      type: object
+      required:
+      - direction
+      - authorId
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        authorId:
+          type: string
+          format: uuid
+        externalId:
+          type: string
+        messageId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+    ConversationReopenedActivityType:
+      title: ConversationReopenedActivityType
+      type: object
+    CreateRatingOfferInput:
+      title: CreateRatingOfferInput
+      type: object
+      required:
+      - ratingType
+      properties:
+        userId:
+          description: If userId is not provided, the conversation requester will be picked.
+          type: string
+        agentId:
+          description: If an agentId is not provided, the agent that is most likely to be the target will be picked. Please note that providing an agentId that is not part of the conversation may skew metrics in Intelligence.
+          type: string
+        ratingType:
+          description: 'The type of numeric rating. E.g.: ''Csat'', ''ThumbsUpOrDown'', ''Nps''.'
+          type: string
+        offeredAt:
+          type: string
+          format: date-time
     FormAttributeValue:
       title: FormAttributeValue
       oneOf:
       - $ref: '#/components/schemas/Attachments'
       - $ref: '#/components/schemas/Select'
       - $ref: '#/components/schemas/Text1'
-    ConversationLanguageUpdatedActivityType:
-      title: ConversationLanguageUpdatedActivityType
+    ConversationRatingOfferedActivityType:
+      title: ConversationRatingOfferedActivityType
       type: object
-    FollowUp:
-      title: FollowUp
+    ConversationLinkedAttribute:
+      title: ConversationLinkedAttribute
       type: object
       required:
-      - parentId
+      - child
+      - parent
+      - linkType
       properties:
-        parentId:
+        child:
           type: integer
           format: int64
+        parent:
+          type: integer
+          format: int64
+        linkType:
+          type: string
+    Attributes:
+      title: Attributes
+      oneOf:
+      - $ref: '#/components/schemas/CallRecordingAttributes'
+      - $ref: '#/components/schemas/ChatAttributes'
+      - $ref: '#/components/schemas/ContactFormAttributes'
+      - $ref: '#/components/schemas/EmailAttributes'
+      - $ref: '#/components/schemas/FacebookMessengerAttributes'
+      - $ref: '#/components/schemas/GenericAttributes'
+      - $ref: '#/components/schemas/MessengerFormAttributes'
+      - $ref: '#/components/schemas/PhoneAttributes'
+      - $ref: '#/components/schemas/SmsAttributes'
+      - $ref: '#/components/schemas/TranscriptAttributes'
+      - $ref: '#/components/schemas/TwitterAttributes'
+      - $ref: '#/components/schemas/WhatsAppAttributes'
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    DeprecatedAnonymizationType:
+      title: DeprecatedAnonymizationType
+      description: Replaced by _type field
+      deprecated: true
+      oneOf:
+      - $ref: '#/components/schemas/ConversationAnonymizationType'
+      - $ref: '#/components/schemas/MessageAnonymizationType'
+      - $ref: '#/components/schemas/UnknownAnonymizationType'
+      - $ref: '#/components/schemas/UserAnonymizationType'
     ChatConversation:
       title: ChatConversation
       type: object
@@ -3266,62 +4712,83 @@ components:
         transportExpiresAt:
           type: string
           format: date-time
-    CreateRatingResultOutput:
-      title: CreateRatingResultOutput
+    ImportMessageInput:
+      title: ImportMessageInput
+      oneOf:
+      - $ref: '#/components/schemas/InboundImport'
+      - $ref: '#/components/schemas/OutboundImport'
+    DirectionOperator:
+      title: DirectionOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf3'
+      - $ref: '#/components/schemas/IsOneOf3'
+    ConversationEndUserReplacedActivityType:
+      title: ConversationEndUserReplacedActivityType
+      type: object
+    ConversationAssignedActivityType:
+      title: ConversationAssignedActivityType
+      type: object
+    BulkActionFailure_ErrorResponse_InternalNoteData:
+      title: BulkActionFailure_ErrorResponse_InternalNoteData
       type: object
       required:
-      - data
+      - error
       properties:
-        data:
-          $ref: '#/components/schemas/RatingResult'
-    ConversationCreatedByCustomerActivityType:
-      title: ConversationCreatedByCustomerActivityType
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    CustomAttribute1:
+      title: CustomAttribute
       type: object
-    ExcludesOne:
-      title: ExcludesOne
+      required:
+      - operator
+      - attributeId
+      properties:
+        operator:
+          $ref: '#/components/schemas/CustomAttributeOperator'
+        attributeId:
+          type: string
+    IsOneOf:
+      title: IsOneOf
       type: object
       properties:
         values:
           type: array
           items:
             type: string
-    Filters:
-      title: Filters
+    Markdown:
+      title: Markdown
       type: object
       required:
-      - strategy
+      - value
       properties:
-        strategy:
-          description: 'values: [All, Any]'
+        value:
           type: string
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Condition'
-    ClaimConversationInput:
-      title: ClaimConversationInput
+    ErrorResponse:
+      title: ErrorResponse
       type: object
       required:
-      - agentId
+      - message
       properties:
-        agentId:
-          description: The id of the agent who is claiming the conversation
+        message:
           type: string
-          format: uuid
-        force:
-          description: Set as false to avoid taking over the conversation if it is already assigned to an agent
-          type: boolean
-    ConversationUnassignedActivityType:
-      title: ConversationUnassignedActivityType
+    Inbound:
+      title: Inbound
       type: object
-    ListMessagesOutput:
-      title: ListMessagesOutput
-      type: object
+      required:
+      - content
       properties:
-        data:
+        content:
+          $ref: '#/components/schemas/Content'
+        attachments:
           type: array
           items:
-            $ref: '#/components/schemas/Message'
+            $ref: '#/components/schemas/File'
+        integrationEmail:
+          description: 'Internal email address registered for the integration with format: \<email-address\>@email.dixa.io'
+          type: string
+        externalId:
+          description: Client generated identifier for external reference
+          type: string
     ConversationSearchWithFiltersHit:
       title: ConversationSearchWithFiltersHit
       type: object
@@ -3335,20 +4802,46 @@ components:
           format: int64
         highlights:
           $ref: '#/components/schemas/Map_Vector_String'
-    IsNotEmpty:
-      title: IsNotEmpty
+    TransferInitiatedActivityType:
+      title: TransferInitiatedActivityType
       type: object
-    ConversationCreatedByAgentActivityType:
-      title: ConversationCreatedByAgentActivityType
-      type: object
-    GetConversationOutput:
-      title: GetConversationOutput
+    Tag:
+      title: Tag
       type: object
       required:
-      - data
+      - id
+      - name
+      - state
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        color:
+          type: string
+        state:
+          description: 'values: [Active, Inactive]'
+          type: string
+    BulkTagConversationInput:
+      title: BulkTagConversationInput
+      type: object
       properties:
         data:
-          $ref: '#/components/schemas/Conversation'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagConversationInput'
+    FollowupExpiredActivityType:
+      title: FollowupExpiredActivityType
+      type: object
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
     Nps:
       title: Nps
       type: object
@@ -3359,92 +4852,124 @@ components:
           description: Numeric value between 0 and 10 representing the net promoter score.
           type: integer
           format: int32
-    Callback:
-      title: Callback
+    PhoneAttributes:
+      title: PhoneAttributes
       type: object
       required:
-      - requesterId
-      - direction
-      - contactEndpointId
-      - queueId
+      - from
+      - to
       properties:
-        requesterId:
+        from:
           type: string
-          format: uuid
+        to:
+          type: string
         direction:
-          description: 'values: [Inbound, Outbound]'
+          description: 'values: [Inbound, Internal, Outbound]'
           type: string
-        contactEndpointId:
+        duration:
+          type: integer
+          format: int32
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
           type: string
-        queueId:
+    CreateMessageInput:
+      title: CreateMessageInput
+      description: Only Outbound messages are supported for Sms and Whatsapp.
+      oneOf:
+      - $ref: '#/components/schemas/Inbound'
+      - $ref: '#/components/schemas/Outbound'
+    ClaimConversationInput:
+      title: ClaimConversationInput
+      type: object
+      required:
+      - agentId
+      properties:
+        agentId:
+          description: The id of the agent who is claiming the conversation
           type: string
           format: uuid
-    Text:
-      title: Text
+        force:
+          description: Set as false to avoid taking over the conversation if it is already assigned to an agent
+          type: boolean
+    MessageRedactedAttribute:
+      title: MessageRedactedAttribute
       type: object
       required:
-      - value
+      - messageId
+      - wasTextRedacted
+      - numberOfDeletedFiles
       properties:
-        value:
+        messageId:
           type: string
-    Regular:
-      title: Regular
-      type: object
-      required:
-      - content
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-    ActivityLogAttribute:
-      title: ActivityLogAttribute
+        wasTextRedacted:
+          type: boolean
+        numberOfDeletedFiles:
+          type: integer
+          format: int32
+    CustomAttributeOperator:
+      title: CustomAttributeOperator
       oneOf:
-      - $ref: '#/components/schemas/ConversationAssignedAttribute'
-      - $ref: '#/components/schemas/ConversationAutoReplySentAttribute'
-      - $ref: '#/components/schemas/ConversationChannelChangedAttribute'
-      - $ref: '#/components/schemas/ConversationClaimedAttribute'
-      - $ref: '#/components/schemas/ConversationCreatedAttribute'
-      - $ref: '#/components/schemas/ConversationCustomAttributesUpdatedAttribute'
-      - $ref: '#/components/schemas/ConversationEndUserReplacedAttribute'
-      - $ref: '#/components/schemas/ConversationLanguageUpdatedAttribute'
-      - $ref: '#/components/schemas/ConversationLinkedAttribute'
-      - $ref: '#/components/schemas/ConversationOfferedAttribute'
-      - $ref: '#/components/schemas/ConversationRatedAttribute'
-      - $ref: '#/components/schemas/ConversationRatingNotOfferedAttribute'
-      - $ref: '#/components/schemas/ConversationRatingOfferedAttribute'
-      - $ref: '#/components/schemas/ConversationRatingScheduledAttribute'
-      - $ref: '#/components/schemas/ConversationReservedAttribute'
-      - $ref: '#/components/schemas/ConversationResolvedStateToggledAttribute'
-      - $ref: '#/components/schemas/ConversationSubjectUpdatedAttribute'
-      - $ref: '#/components/schemas/ConversationTranscriptionEndedAttribute'
-      - $ref: '#/components/schemas/ConversationTransferredAttribute'
-      - $ref: '#/components/schemas/ConversationUnassignedAttribute'
-      - $ref: '#/components/schemas/MessageAddedAttribute'
-      - $ref: '#/components/schemas/MessageRedactedAttribute'
-      - $ref: '#/components/schemas/NoteAddedAttribute'
-      - $ref: '#/components/schemas/TagAddedAttribute'
-      - $ref: '#/components/schemas/TagRemovedAttribute'
-    CreateMessageOutputData:
-      title: CreateMessageOutputData
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
+      - $ref: '#/components/schemas/IsNotOneOf2'
+      - $ref: '#/components/schemas/IsOneOf2'
+    FacebookMessengerAttributes:
+      title: FacebookMessengerAttributes
       type: object
-      required:
-      - direction
-      - authorId
       properties:
         content:
           $ref: '#/components/schemas/Content'
         direction:
           description: 'values: [Inbound, Internal, Outbound]'
           type: string
-        authorId:
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    Unauthorized:
+      title: Unauthorized
+      type: object
+      required:
+      - message
+      properties:
+        message:
           type: string
-          format: uuid
-        externalId:
+    ConversationReservedAttribute:
+      title: ConversationReservedAttribute
+      type: object
+      required:
+      - agent
+      - queueId
+      - queueName
+      - reservationType
+      - validUntil
+      properties:
+        agent:
+          $ref: '#/components/schemas/ActivityLogUser'
+        queueId:
           type: string
-        messageId:
+        queueName:
           type: string
-          format: uuid
-        createdAt:
+        reservationType:
           type: string
+        validUntil:
+          type: string
+    ConversationAnonymizationType:
+      title: ConversationAnonymizationType
+      type: object
+    CreateConversationOutput:
+      title: CreateConversationOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ConversationResponse'
     EmailConversation:
       title: EmailConversation
       type: object
@@ -3501,81 +5026,16 @@ components:
         transportExpiresAt:
           type: string
           format: date-time
-    IsNotOneOf:
-      title: IsNotOneOf
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    FieldCanHaveMultipleValuesOrBeEmptyOperator:
-      title: FieldCanHaveMultipleValuesOrBeEmptyOperator
-      oneOf:
-      - $ref: '#/components/schemas/ExcludesAll'
-      - $ref: '#/components/schemas/ExcludesOne'
-      - $ref: '#/components/schemas/IncludesAll'
-      - $ref: '#/components/schemas/IncludesOne'
-      - $ref: '#/components/schemas/IsEmpty'
-      - $ref: '#/components/schemas/IsNotEmpty'
-    ContactId:
-      title: ContactId
+    EmailContact:
+      title: EmailContact
       type: object
       required:
-      - operator
+      - email
       properties:
-        operator:
-          $ref: '#/components/schemas/FieldHasSingleValueOperator'
-    ConversationReservedAttribute:
-      title: ConversationReservedAttribute
-      type: object
-      required:
-      - agent
-      - queueId
-      - queueName
-      - reservationType
-      - validUntil
-      properties:
-        agent:
-          $ref: '#/components/schemas/ActivityLogUser'
-        queueId:
+        email:
           type: string
-        queueName:
-          type: string
-        reservationType:
-          type: string
-        validUntil:
-          type: string
-    ConversationFlow:
-      title: ConversationFlow
-      type: object
-      required:
-      - id
-      - name
-      - channel
-      - contactEndpointId
-      properties:
-        id:
-          type: string
-          format: uuid
         name:
           type: string
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        contactEndpointId:
-          type: string
-    CreateRatingOfferOutput:
-      title: CreateRatingOfferOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/RatingOffer'
-    ConversationRatingOfferedActivityType:
-      title: ConversationRatingOfferedActivityType
-      type: object
     Message:
       title: Message
       type: object
@@ -3598,837 +5058,6 @@ components:
           format: date-time
         attributes:
           $ref: '#/components/schemas/Attributes'
-    Until:
-      title: Until
-      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
-      type: object
-      required:
-      - timestamp
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-    ShorterThanOrEqualTo:
-      title: ShorterThanOrEqualTo
-      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
-      type: object
-      required:
-      - duration
-      properties:
-        duration:
-          type: integer
-          format: int64
-    ConversationReservedType:
-      title: ConversationReservedType
-      type: object
-    CreateRatingResultInput:
-      title: CreateRatingResultInput
-      type: object
-      required:
-      - ratingResult
-      properties:
-        userId:
-          description: The userId property is no longer used so it's made optional to keep backwards compatibility. A null value can be provided instead of an actual ID.
-          deprecated: true
-          type: string
-        ratingResult:
-          $ref: '#/components/schemas/SubmittedRatingResult'
-        comment:
-          type: string
-        submittedAt:
-          type: string
-          format: date-time
-    FormSubmission:
-      title: FormSubmission
-      type: object
-      required:
-      - values
-      properties:
-        values:
-          $ref: '#/components/schemas/Map_FormAttributeValue'
-    Outbound:
-      title: Outbound
-      type: object
-      required:
-      - agentId
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        agentId:
-          type: string
-          format: uuid
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        integrationEmail:
-          type: string
-        externalId:
-          type: string
-        cc:
-          type: array
-          items:
-            type: string
-            format: uuid
-        bcc:
-          type: array
-          items:
-            type: string
-            format: uuid
-    CustomAttribute:
-      title: CustomAttribute
-      type: object
-      required:
-      - id
-      - name
-      - identifier
-      - value
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        identifier:
-          type: string
-        value:
-          description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
-          oneOf:
-          - type: array
-            items:
-              type: string
-          - type: string
-    ChannelOperator:
-      title: ChannelOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf1'
-      - $ref: '#/components/schemas/IsOneOf1'
-    MessageAddedAttribute:
-      title: MessageAddedAttribute
-      type: object
-      required:
-      - messageId
-      properties:
-        messageId:
-          type: string
-        fromEndpoint:
-          type: string
-        avatarUrl:
-          type: string
-    FollowupAddedActivityType:
-      title: FollowupAddedActivityType
-      type: object
-    RatingResult:
-      title: RatingResult
-      type: object
-      required:
-      - ratingId
-      - ratingResult
-      properties:
-        ratingId:
-          type: string
-        userId:
-          type: string
-        ratingResult:
-          $ref: '#/components/schemas/SubmittedRatingResult'
-        comment:
-          type: string
-        submittedAt:
-          type: string
-          format: date-time
-    ConversationRatingOfferedAttribute:
-      title: ConversationRatingOfferedAttribute
-      type: object
-      required:
-      - agent
-      - user
-      properties:
-        agent:
-          $ref: '#/components/schemas/ActivityLogUser'
-        user:
-          $ref: '#/components/schemas/ActivityLogUser'
-    Content:
-      title: Content
-      oneOf:
-      - $ref: '#/components/schemas/Html'
-      - $ref: '#/components/schemas/Markdown'
-      - $ref: '#/components/schemas/Text'
-    IncludesAll:
-      title: IncludesAll
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    BulkTagConversationInput:
-      title: BulkTagConversationInput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TagConversationInput'
-    ListConversationRatingsOutput:
-      title: ListConversationRatingsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationRating'
-    DeprecatedActivityLogType:
-      title: DeprecatedActivityLogType
-      description: Replaced by _type field
-      deprecated: true
-      oneOf:
-      - $ref: '#/components/schemas/ConversationAssignedActivityType'
-      - $ref: '#/components/schemas/ConversationAutoreplySentActivityType'
-      - $ref: '#/components/schemas/ConversationClaimedActivityType'
-      - $ref: '#/components/schemas/ConversationClosedActivityType'
-      - $ref: '#/components/schemas/ConversationCreatedByAgentActivityType'
-      - $ref: '#/components/schemas/ConversationCreatedByCustomerActivityType'
-      - $ref: '#/components/schemas/ConversationEndUserReplacedActivityType'
-      - $ref: '#/components/schemas/ConversationLanguageUpdatedActivityType'
-      - $ref: '#/components/schemas/ConversationOfferAcceptedActivityType'
-      - $ref: '#/components/schemas/ConversationOfferRejectedActivityType'
-      - $ref: '#/components/schemas/ConversationOfferTimeoutActivityType'
-      - $ref: '#/components/schemas/ConversationOfferedActivityType'
-      - $ref: '#/components/schemas/ConversationPendingActivityType'
-      - $ref: '#/components/schemas/ConversationRatedActivityType'
-      - $ref: '#/components/schemas/ConversationRatingCancelledActivityType'
-      - $ref: '#/components/schemas/ConversationRatingOfferedActivityType'
-      - $ref: '#/components/schemas/ConversationRatingScheduledActivityType'
-      - $ref: '#/components/schemas/ConversationRatingUnscheduledActivityType'
-      - $ref: '#/components/schemas/ConversationReopenedActivityType'
-      - $ref: '#/components/schemas/ConversationReservedType'
-      - $ref: '#/components/schemas/ConversationTranscriptionEndedActivityType'
-      - $ref: '#/components/schemas/ConversationTranscriptionStartedActivityType'
-      - $ref: '#/components/schemas/ConversationUnassignedActivityType'
-      - $ref: '#/components/schemas/FollowupAddedActivityType'
-      - $ref: '#/components/schemas/FollowupExpiredActivityType'
-      - $ref: '#/components/schemas/FollowupRemovedActivityType'
-      - $ref: '#/components/schemas/MessageAddedByAgentActivityType'
-      - $ref: '#/components/schemas/MessageAddedByCustomerActivityType'
-      - $ref: '#/components/schemas/NoteAddedActivityType'
-      - $ref: '#/components/schemas/TagAddedActivityType'
-      - $ref: '#/components/schemas/TagRemovedActivityType'
-      - $ref: '#/components/schemas/TransferFailedActivityType'
-      - $ref: '#/components/schemas/TransferInitiatedActivityType'
-      - $ref: '#/components/schemas/TransferSuccessfulActivityType'
-      - $ref: '#/components/schemas/UnknownActivityType'
-    Map_String:
-      title: Map_String
-      type: object
-      additionalProperties:
-        type: string
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Queue:
-      title: Queue
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-        queuedAt:
-          type: string
-          format: date-time
-    ContactFormConversation:
-      title: ContactFormConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      - fromEmail
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        fromEmail:
-          type: string
-        toEmail:
-          type: string
-        integrationEmail:
-          type: string
-        language:
-          type: string
-        subject:
-          type: string
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    Map_FormAttributeValue:
-      title: Map_FormAttributeValue
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/FormAttributeValue'
-    Between:
-      title: Between
-      description: 'Timestamps in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
-      type: object
-      required:
-      - timestampFrom
-      - timestampTo
-      properties:
-        timestampFrom:
-          type: string
-          format: date-time
-        timestampTo:
-          type: string
-          format: date-time
-    CallRecordingAttributes:
-      title: CallRecordingAttributes
-      type: object
-      required:
-      - recording
-      properties:
-        duration:
-          type: integer
-          format: int32
-        recording:
-          type: string
-    Select:
-      title: Select
-      type: object
-      properties:
-        value:
-          type: array
-          items:
-            type: string
-    TranscriptAttributes:
-      title: TranscriptAttributes
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        utterance_start_ms:
-          type: integer
-          format: int64
-        utterance_end_ms:
-          type: integer
-          format: int64
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-    ConversationTagsOutput:
-      title: ConversationTagsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-    ConversationRatingScheduledAttribute:
-      title: ConversationRatingScheduledAttribute
-      type: object
-      required:
-      - ratingScheduledTime
-      properties:
-        ratingScheduledTime:
-          type: string
-    ConversationClaimedAttribute:
-      title: ConversationClaimedAttribute
-      type: object
-      properties:
-        claimedFromLabel:
-          type: string
-        claimedFromType:
-          type: string
-    ExcludesAll:
-      title: ExcludesAll
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    ConversationAutoreplySentActivityType:
-      title: ConversationAutoreplySentActivityType
-      type: object
-    ImportConversationResponse:
-      title: ImportConversationResponse
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          description: The id of the newly imported conversation
-          type: integer
-          format: int64
-        partialErrors:
-          description: List of errors that do not prevent the conversation from being created
-          type: array
-          items:
-            $ref: '#/components/schemas/PartialError'
-    CustomAttribute1:
-      title: CustomAttribute
-      type: object
-      required:
-      - operator
-      - attributeId
-      properties:
-        operator:
-          $ref: '#/components/schemas/CustomAttributeOperator'
-        attributeId:
-          type: string
-    SubmittedRatingResult:
-      title: SubmittedRatingResult
-      oneOf:
-      - $ref: '#/components/schemas/Csat'
-      - $ref: '#/components/schemas/Nps'
-      - $ref: '#/components/schemas/ThumbsUpOrDown'
-    ConversationUnassignedAttribute:
-      title: ConversationUnassignedAttribute
-      type: object
-      required:
-      - agent
-      properties:
-        agent:
-          $ref: '#/components/schemas/ActivityLogUser'
-    TwitterAttributes:
-      title: TwitterAttributes
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-    Csat:
-      title: Csat
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          description: Numeric value between 1 and 5 representing the customer's satisfaction level.
-          type: integer
-          format: int32
-    NoteAddedActivityType:
-      title: NoteAddedActivityType
-      type: object
-    AgentId:
-      title: AgentId
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
-    BulkCreateInternalNoteInput:
-      title: BulkCreateInternalNoteInput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateInternalNoteInput'
-    TagRemovedActivityType:
-      title: TagRemovedActivityType
-      type: object
-    MessengerConversation:
-      title: MessengerConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        browserInfo:
-          $ref: '#/components/schemas/BrowserInfo'
-        language:
-          type: string
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    DurationOperator:
-      title: DurationOperator
-      oneOf:
-      - $ref: '#/components/schemas/Between1'
-      - $ref: '#/components/schemas/LongerThanOrEqualTo'
-      - $ref: '#/components/schemas/ShorterThanOrEqualTo'
-    CreateConversationInput:
-      title: CreateConversationInput
-      oneOf:
-      - $ref: '#/components/schemas/Callback'
-      - $ref: '#/components/schemas/Chat'
-      - $ref: '#/components/schemas/ContactForm'
-      - $ref: '#/components/schemas/Email'
-      - $ref: '#/components/schemas/Sms'
-    OutboundImport:
-      title: OutboundImport
-      type: object
-      required:
-      - content
-      - agentId
-      - createdAt
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        agentId:
-          type: string
-          format: uuid
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        externalId:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        attributes:
-          description: A set of dynamic attributes that are specific to the conversation channel, but not limited to it. See channel specific examples for your use case.
-    Status1:
-      title: Status
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/StatusOperator'
-    Conflict:
-      title: Conflict
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    ConversationTranscriptionStartedActivityType:
-      title: ConversationTranscriptionStartedActivityType
-      type: object
-    SearchParametersInput:
-      title: SearchParametersInput
-      type: object
-      properties:
-        query:
-          $ref: '#/components/schemas/Query'
-        filters:
-          $ref: '#/components/schemas/Filters'
-    TwitterConversation:
-      title: TwitterConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      - conversationType
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        conversationType:
-          description: 'values: [DirectMessage, Tweet]'
-          type: string
-        contactPointTwitterId:
-          type: string
-        endUserTwitterId:
-          type: string
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    IsNotOneOf2:
-      title: IsNotOneOf
-      type: object
-      properties:
-        values:
-          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
-          type: array
-          items:
-            type: array
-            items:
-              type: string
-    IsOneOf1:
-      title: IsOneOf
-      type: object
-      required:
-      - values
-      properties:
-        values:
-          description: 'values: [email, contactform, chat, dixamessenger, phone, voicemail, callback, sms, facebookmessenger, whatsapp, adachat, digitalgeniuschat, kindlychat, genericapimessaging, trustpilot, yotpo]'
-          type: array
-          items:
-            type: string
-    ConversationCreatedAttribute:
-      title: ConversationCreatedAttribute
-      type: object
-      properties:
-        subject:
-          type: string
-    Chat:
-      title: Chat
-      type: object
-      required:
-      - requesterId
-      - widgetId
-      - message
-      properties:
-        requesterId:
-          type: string
-          format: uuid
-        widgetId:
-          type: string
-          format: uuid
-        message:
-          $ref: '#/components/schemas/CreateMessageInput'
-        browserInfo:
-          $ref: '#/components/schemas/BrowserInfo'
-        language:
-          type: string
-    ConversationCustomAttributesUpdatedAttribute:
-      title: ConversationCustomAttributesUpdatedAttribute
-      type: object
-      required:
-      - updatedAttributeValues
-      properties:
-        updatedAttributeIds:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        updatedAttributeValues:
-          $ref: '#/components/schemas/Map_AttributeValue'
-    WhatsAppAttributes:
-      title: WhatsAppAttributes
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-    BrowserInfo:
-      title: BrowserInfo
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        version:
-          type: string
-        ipAddress:
-          type: string
-        originatingUrl:
-          type: string
-    GetActivityLogOutput:
-      title: GetActivityLogOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ActivityLogEntry'
-    GenericAttributes:
-      title: GenericAttributes
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-    Channel:
-      title: Channel
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/ChannelOperator'
-    AssignedDate:
-      title: AssignedDate
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/TimestampOperator'
-    MessageRedactedAttribute:
-      title: MessageRedactedAttribute
-      type: object
-      required:
-      - messageId
-      - wasTextRedacted
-      - numberOfDeletedFiles
-      properties:
-        messageId:
-          type: string
-        wasTextRedacted:
-          type: boolean
-        numberOfDeletedFiles:
-          type: integer
-          format: int32
-    Condition:
-      title: Condition
-      type: object
-      required:
-      - field
-      properties:
-        field:
-          $ref: '#/components/schemas/SearchField'
-    ActivityLogEntry:
-      title: ActivityLogEntry
-      type: object
-      required:
-      - id
-      - conversationId
-      - activityTimestamp
-      - activityType
-      - _type
-      properties:
-        id:
-          type: string
-          format: uuid
-        conversationId:
-          type: integer
-          format: int32
-        activityTimestamp:
-          type: string
-          format: date-time
-        activityType:
-          $ref: '#/components/schemas/DeprecatedActivityLogType'
-        _type:
-          description: 'values: [ConversationRatingScheduled, ConversationPending, ConversationRatingUnscheduled, ConversationOfferRejected, ConversationEndUserReplaced, NoteAdded, FollowupExpired, ConversationRated, TagAdded, ConversationRatingNotOffered, ConversationOfferTimeout, ConversationChannelChanged, ConversationOfferAccepted, MessageAddedByCustomer, ConversationCreatedByCustomer, ConversationCreatedByAgent, ConversationUnlinkedToParent, TransferFailed, TransferSuccessful, ConversationTranscriptionEnded, ConversationOffered, ConversationUnassigned, ConversationMessageRedacted, TagRemoved, TransferInitiated, ConversationResolvedStateToggled, ConversationClaimed, ConversationReopened, ConversationClosed, ConversationLanguageUpdated, FollowupAdded, ConversationCustomAttributesUpdated, ConversationLinkedToParent, ConversationLinkedFromChild, ConversationAutoreplySent, ConversationReserved, ConversationAssigned, ConversationRatingOffered, ConversationUnlinkedFromChild, ConversationTranscriptionStarted, ConversationRatingCancelled, MessageAddedByAgent, FollowupRemoved]'
-          type: string
-        author:
-          $ref: '#/components/schemas/ActivityLogUser'
-        attributes:
-          $ref: '#/components/schemas/ActivityLogAttribute'
-    LinkConversationInput:
-      title: LinkConversationInput
-      type: object
-      required:
-      - parentId
-      - linkType
-      properties:
-        parentId:
-          type: integer
-          format: int64
-        linkType:
-          description: 'values: [Related, SideConversation]'
-          type: string
-    CreationDate:
-      title: CreationDate
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/TimestampOperator'
     Email:
       title: Email
       type: object
@@ -4449,6 +5078,361 @@ components:
           $ref: '#/components/schemas/CreateMessageInput'
         language:
           type: string
+    TagRemovedAttribute:
+      title: TagRemovedAttribute
+      type: object
+      required:
+      - tag
+      properties:
+        tag:
+          type: string
+    MessageAddedByAgentActivityType:
+      title: MessageAddedByAgentActivityType
+      type: object
+    ConversationRatingCancelledActivityType:
+      title: ConversationRatingCancelledActivityType
+      type: object
+    FieldHasSingleValueOperator:
+      title: FieldHasSingleValueOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf'
+      - $ref: '#/components/schemas/IsOneOf'
+    BulkActionOutcome_ErrorResponse_InternalNoteData:
+      title: BulkActionOutcome_ErrorResponse_InternalNoteData
+      oneOf:
+      - $ref: '#/components/schemas/BulkActionFailure_ErrorResponse_InternalNoteData'
+      - $ref: '#/components/schemas/BulkActionSuccess_ErrorResponse_InternalNoteData'
+    LongerThanOrEqualTo:
+      title: LongerThanOrEqualTo
+      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - duration
+      properties:
+        duration:
+          type: integer
+          format: int64
+    IsOneOf2:
+      title: IsOneOf
+      type: object
+      properties:
+        values:
+          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+    QueueId:
+      title: QueueId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
+    ExcludesOne:
+      title: ExcludesOne
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    CreateRatingOfferOutput:
+      title: CreateRatingOfferOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RatingOffer'
+    SmsAttributes:
+      title: SmsAttributes
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    Map_Vector_String:
+      title: Map_Vector_String
+      description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags.
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
+    PartialError:
+      title: PartialError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    ConversationSubjectUpdatedAttribute:
+      title: ConversationSubjectUpdatedAttribute
+      type: object
+      required:
+      - oldSubject
+      - newSubject
+      properties:
+        oldSubject:
+          type: string
+        newSubject:
+          type: string
+    ConversationUnassignedActivityType:
+      title: ConversationUnassignedActivityType
+      type: object
+    Content:
+      title: Content
+      oneOf:
+      - $ref: '#/components/schemas/Html'
+      - $ref: '#/components/schemas/Markdown'
+      - $ref: '#/components/schemas/Text'
+    Between:
+      title: Between
+      description: 'Timestamps in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+      type: object
+      required:
+      - timestampFrom
+      - timestampTo
+      properties:
+        timestampFrom:
+          type: string
+          format: date-time
+        timestampTo:
+          type: string
+          format: date-time
+    FollowUp:
+      title: FollowUp
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
+    SearchField:
+      title: SearchField
+      oneOf:
+      - $ref: '#/components/schemas/AgentId'
+      - $ref: '#/components/schemas/AssignedDate'
+      - $ref: '#/components/schemas/Channel'
+      - $ref: '#/components/schemas/ClosedDate'
+      - $ref: '#/components/schemas/ContactId'
+      - $ref: '#/components/schemas/ConversationId'
+      - $ref: '#/components/schemas/CreationDate'
+      - $ref: '#/components/schemas/CustomAttribute1'
+      - $ref: '#/components/schemas/Direction'
+      - $ref: '#/components/schemas/Duration'
+      - $ref: '#/components/schemas/LastActivity'
+      - $ref: '#/components/schemas/LastMessage'
+      - $ref: '#/components/schemas/QueueId'
+      - $ref: '#/components/schemas/Status1'
+      - $ref: '#/components/schemas/TagId'
+    ContactId:
+      title: ContactId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldHasSingleValueOperator'
+    ConversationId:
+      title: ConversationId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldHasSingleValueOperator'
+    RatingOffer:
+      title: RatingOffer
+      type: object
+      required:
+      - id
+      - userId
+      - agentId
+      - ratingType
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        agentId:
+          type: string
+        ratingType:
+          description: 'values: [Csat, Nps, ThumbsUpOrDown]'
+          type: string
+        offeredAt:
+          type: string
+          format: date-time
+    Regular:
+      title: Regular
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+    UnknownActivityType:
+      title: UnknownActivityType
+      type: object
+    TransferSuccessfulActivityType:
+      title: TransferSuccessfulActivityType
+      type: object
+    ConversationOfferTimeoutActivityType:
+      title: ConversationOfferTimeoutActivityType
+      type: object
+    CreateRatingResultOutput:
+      title: CreateRatingResultOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RatingResult'
+    ThumbsUpOrDown:
+      title: ThumbsUpOrDown
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: One of the the numeric values 0 (thumbs down) and 1 (thumbs up).
+          type: integer
+          format: int32
+    TwitterAttributes:
+      title: TwitterAttributes
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    Status1:
+      title: Status
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/StatusOperator'
+    CreateRatingResultInput:
+      title: CreateRatingResultInput
+      type: object
+      required:
+      - ratingResult
+      properties:
+        userId:
+          description: The userId property is no longer used so it's made optional to keep backwards compatibility. A null value can be provided instead of an actual ID.
+          deprecated: true
+          type: string
+        ratingResult:
+          $ref: '#/components/schemas/SubmittedRatingResult'
+        comment:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+    TagAddedActivityType:
+      title: TagAddedActivityType
+      type: object
+    BulkActionSuccess_ErrorResponse_InternalNoteData:
+      title: BulkActionSuccess_ErrorResponse_InternalNoteData
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/InternalNoteData'
+    Condition:
+      title: Condition
+      type: object
+      required:
+      - field
+      properties:
+        field:
+          $ref: '#/components/schemas/SearchField'
+    Assignment:
+      title: Assignment
+      type: object
+      required:
+      - agentId
+      - assignedAt
+      properties:
+        agentId:
+          type: string
+          format: uuid
+        assignedAt:
+          type: string
+          format: date-time
+    ExcludesAll:
+      title: ExcludesAll
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    ConversationFlow:
+      title: ConversationFlow
+      type: object
+      required:
+      - id
+      - name
+      - channel
+      - contactEndpointId
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        contactEndpointId:
+          type: string
+    ListLinkedConversationsOutput:
+      title: ListLinkedConversationsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
+    GetActivityLogOutput:
+      title: GetActivityLogOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityLogEntry'
+    IsNotOneOf:
+      title: IsNotOneOf
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    ConversationCreatedByCustomerActivityType:
+      title: ConversationCreatedByCustomerActivityType
+      type: object
     EmailAttributes:
       title: EmailAttributes
       type: object
@@ -4489,990 +5473,6 @@ components:
           type: string
         originalContentUrl:
           $ref: '#/components/schemas/File'
-    MessageAddedByAgentActivityType:
-      title: MessageAddedByAgentActivityType
-      type: object
-    FollowupExpiredActivityType:
-      title: FollowupExpiredActivityType
-      type: object
-    ConversationSubjectUpdatedAttribute:
-      title: ConversationSubjectUpdatedAttribute
-      type: object
-      required:
-      - oldSubject
-      - newSubject
-      properties:
-        oldSubject:
-          type: string
-        newSubject:
-          type: string
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Conversation:
-      title: Conversation
-      oneOf:
-      - $ref: '#/components/schemas/AnonymizedConversation'
-      - $ref: '#/components/schemas/ChatConversation'
-      - $ref: '#/components/schemas/ContactFormConversation'
-      - $ref: '#/components/schemas/EmailConversation'
-      - $ref: '#/components/schemas/FacebookMessengerConversation'
-      - $ref: '#/components/schemas/GenericConversation'
-      - $ref: '#/components/schemas/MessengerConversation'
-      - $ref: '#/components/schemas/PstnPhoneConversation'
-      - $ref: '#/components/schemas/SmsConversation'
-      - $ref: '#/components/schemas/TwitterConversation'
-      - $ref: '#/components/schemas/WhatsAppConversation'
-    Map_UUID_Option_AttributeValue:
-      title: Map_UUID_Option_AttributeValue
-      type: object
-      additionalProperties:
-        description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
-        oneOf:
-        - type: array
-          items:
-            type: string
-        - type: string
-    InboundImport:
-      title: InboundImport
-      type: object
-      required:
-      - content
-      - createdAt
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        externalId:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        attributes:
-          description: A set of dynamic attributes that are specific to the conversation channel, but not limited to it. See channel specific examples for your use case.
-    ConversationResponse:
-      title: ConversationResponse
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int64
-    SearchOutput:
-      title: SearchOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationSearchHit'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    BulkActionFailure_ErrorResponse_InternalNoteData:
-      title: BulkActionFailure_ErrorResponse_InternalNoteData
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    FileMeta:
-      title: FileMeta
-      type: object
-      required:
-      - url
-      - name
-      - mediaType
-      - bytesLength
-      - checksum
-      properties:
-        url:
-          type: string
-        name:
-          type: string
-        mediaType:
-          $ref: '#/components/schemas/MimeType'
-        bytesLength:
-          type: integer
-          format: int64
-        checksum:
-          $ref: '#/components/schemas/Checksum'
-    QueueId:
-      title: QueueId
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
-    Direction:
-      title: Direction
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/DirectionOperator'
-    ReopenConversationInput:
-      title: ReopenConversationInput
-      type: object
-      properties:
-        userId:
-          type: string
-          format: uuid
-    Map_Vector_String:
-      title: Map_Vector_String
-      description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags.
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          type: string
-    FacebookMessengerAttributes:
-      title: FacebookMessengerAttributes
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-    SmsConversation:
-      title: SmsConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        fromNumber:
-          type: string
-        toNumber:
-          type: string
-        queue:
-          $ref: '#/components/schemas/Queue'
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    ActivityLogUser:
-      title: ActivityLogUser
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-        phoneNumber:
-          type: string
-    ConversationSearchInnerHit:
-      title: ConversationSearchInnerHit
-      type: object
-      required:
-      - id
-      - highlight
-      properties:
-        id:
-          description: Identifier of a sub-entity (such as a Message) where a match was found
-          type: string
-        highlight:
-          $ref: '#/components/schemas/Map_String'
-          description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags
-    ConversationAutoReplySentAttribute:
-      title: ConversationAutoReplySentAttribute
-      type: object
-      required:
-      - templateName
-      properties:
-        templateName:
-          type: string
-    FacebookMessengerConversation:
-      title: FacebookMessengerConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    LastMessage:
-      title: LastMessage
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/TimestampOperator'
-    IsOneOf4:
-      title: IsOneOf
-      type: object
-      required:
-      - values
-      properties:
-        values:
-          description: 'values: [open, closed, pending]'
-          type: array
-          items:
-            type: string
-    ImportConversationOutput:
-      title: ImportConversationOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ImportConversationResponse'
-    ListActivityLogOutput:
-      title: ListActivityLogOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ActivityLogEntry'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    ConversationLanguageUpdatedAttribute:
-      title: ConversationLanguageUpdatedAttribute
-      type: object
-      required:
-      - language
-      properties:
-        language:
-          type: string
-    CustomAttributeOperator:
-      title: CustomAttributeOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsEmpty'
-      - $ref: '#/components/schemas/IsNotEmpty'
-      - $ref: '#/components/schemas/IsNotOneOf2'
-      - $ref: '#/components/schemas/IsOneOf2'
-    LongerThanOrEqualTo:
-      title: LongerThanOrEqualTo
-      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
-      type: object
-      required:
-      - duration
-      properties:
-        duration:
-          type: integer
-          format: int64
-    FieldCanHaveSingleValueOrBeEmptyOperator:
-      title: FieldCanHaveSingleValueOrBeEmptyOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsEmpty'
-      - $ref: '#/components/schemas/IsNotEmpty'
-      - $ref: '#/components/schemas/IsNotOneOf'
-      - $ref: '#/components/schemas/IsOneOf'
-    Between1:
-      title: Between
-      description: 'min and max in milliseconds; for example: ''10800000'' (3 hours)'
-      type: object
-      required:
-      - min
-      - max
-      properties:
-        min:
-          type: integer
-          format: int64
-        max:
-          type: integer
-          format: int64
-    ConversationSearchHit:
-      title: ConversationSearchHit
-      type: object
-      required:
-      - id
-      - highlights
-      properties:
-        id:
-          description: Identifier of a Conversation where a match was found
-          type: integer
-          format: int64
-        highlights:
-          $ref: '#/components/schemas/Map_Vector_String'
-        innerHits:
-          description: List of sub-entities (such as Messages) where a match was found
-          deprecated: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationSearchInnerHit'
-    ConversationReopenedActivityType:
-      title: ConversationReopenedActivityType
-      type: object
-    TagId:
-      title: TagId
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/FieldCanHaveMultipleValuesOrBeEmptyOperator'
-    AnonymizeEntityOutput:
-      title: AnonymizeEntityOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/AnonymizationRequestStatus'
-    SmsAttributes:
-      title: SmsAttributes
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-    Closing:
-      title: Closing
-      description: Triggers the closing of the conversation
-      type: object
-      required:
-      - closedAt
-      - closedBy
-      properties:
-        closedAt:
-          type: string
-          format: date-time
-        closedBy:
-          type: string
-          format: uuid
-    TransferConversationInput:
-      title: TransferConversationInput
-      type: object
-      required:
-      - queueId
-      properties:
-        queueId:
-          description: The target queue for the conversation transfer
-          type: string
-          format: uuid
-        userId:
-          description: An optional agent/admin to originate the transfer of the conversation
-          type: string
-          format: uuid
-    ConversationAssignedAttribute:
-      title: ConversationAssignedAttribute
-      type: object
-      required:
-      - agentId
-      properties:
-        agentId:
-          type: string
-        agentName:
-          type: string
-    FollowupConversationInput:
-      title: FollowupConversationInput
-      type: object
-      required:
-      - timestamp
-      properties:
-        timestamp:
-          description: A timestamp for when the followup should expire
-          type: string
-          format: date-time
-        userId:
-          description: An optional agent/admin to followup the conversation
-          type: string
-          format: uuid
-    FieldHasSingleValueOperator:
-      title: FieldHasSingleValueOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf'
-      - $ref: '#/components/schemas/IsOneOf'
-    BulkCreateNoteOutput:
-      title: BulkCreateNoteOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkActionOutcome_ErrorResponse_InternalNoteData'
-    EmailForward:
-      title: EmailForward
-      type: object
-      required:
-      - parentId
-      properties:
-        parentId:
-          type: integer
-          format: int64
-    Text1:
-      title: Text
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    ImportMessageInput:
-      title: ImportMessageInput
-      oneOf:
-      - $ref: '#/components/schemas/InboundImport'
-      - $ref: '#/components/schemas/OutboundImport'
-    Inbound:
-      title: Inbound
-      type: object
-      required:
-      - content
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        integrationEmail:
-          description: 'Internal email address registered for the integration with format: \<email-address\>@email.dixa.io'
-          type: string
-        externalId:
-          description: Client generated identifier for external reference
-          type: string
-    ConversationRatingUnscheduledActivityType:
-      title: ConversationRatingUnscheduledActivityType
-      type: object
-    ConversationOfferedAttribute:
-      title: ConversationOfferedAttribute
-      type: object
-      properties:
-        agentNames:
-          type: array
-          items:
-            type: string
-        queueLabel:
-          type: string
-    PaginationLinks:
-      title: PaginationLinks
-      type: object
-      properties:
-        previous:
-          description: url
-          type: string
-        next:
-          description: url
-          type: string
-    File:
-      title: File
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          description: url
-          type: string
-        prettyName:
-          type: string
-    CreateInternalNoteInput:
-      title: CreateInternalNoteInput
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-        agentId:
-          type: string
-          format: uuid
-        createdAt:
-          type: string
-          format: date-time
-    Duration:
-      title: Duration
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/DurationOperator'
-    ConversationRatedAttribute:
-      title: ConversationRatedAttribute
-      type: object
-      properties:
-        agent:
-          $ref: '#/components/schemas/ActivityLogUser'
-        score:
-          type: integer
-          format: int32
-        message:
-          type: string
-    ConversationChannelChangedAttribute:
-      title: ConversationChannelChangedAttribute
-      type: object
-      required:
-      - channelReference
-      properties:
-        channelReference:
-          type: string
-    Attributes:
-      title: Attributes
-      oneOf:
-      - $ref: '#/components/schemas/CallRecordingAttributes'
-      - $ref: '#/components/schemas/ChatAttributes'
-      - $ref: '#/components/schemas/ContactFormAttributes'
-      - $ref: '#/components/schemas/EmailAttributes'
-      - $ref: '#/components/schemas/FacebookMessengerAttributes'
-      - $ref: '#/components/schemas/GenericAttributes'
-      - $ref: '#/components/schemas/MessengerFormAttributes'
-      - $ref: '#/components/schemas/PhoneAttributes'
-      - $ref: '#/components/schemas/SmsAttributes'
-      - $ref: '#/components/schemas/TranscriptAttributes'
-      - $ref: '#/components/schemas/TwitterAttributes'
-      - $ref: '#/components/schemas/WhatsAppAttributes'
-    SearchConversationsWithFiltersOutput:
-      title: SearchConversationsWithFiltersOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationSearchWithFiltersHit'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    ClosedDate:
-      title: ClosedDate
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/TimestampOperator'
-    ConversationClosedActivityType:
-      title: ConversationClosedActivityType
-      type: object
-    IsNotOneOf4:
-      title: IsNotOneOf
-      type: object
-      required:
-      - values
-      properties:
-        values:
-          description: 'values: [open, closed, pending]'
-          type: array
-          items:
-            type: string
-    MimeTypeImpl:
-      title: MimeTypeImpl
-      type: object
-      required:
-      - primary
-      - sub
-      properties:
-        primary:
-          type: string
-        sub:
-          type: string
-    ConversationEndUserReplacedAttribute:
-      title: ConversationEndUserReplacedAttribute
-      type: object
-      required:
-      - oldUser
-      - newUser
-      properties:
-        oldUser:
-          $ref: '#/components/schemas/ActivityLogUser'
-        newUser:
-          $ref: '#/components/schemas/ActivityLogUser'
-    ListLinkedConversationsOutput:
-      title: ListLinkedConversationsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Conversation'
-    ConversationEndUserReplacedActivityType:
-      title: ConversationEndUserReplacedActivityType
-      type: object
-    ConversationOfferedActivityType:
-      title: ConversationOfferedActivityType
-      type: object
-    ConversationResolvedStateToggledAttribute:
-      title: ConversationResolvedStateToggledAttribute
-      type: object
-      required:
-      - isResolved
-      properties:
-        isResolved:
-          type: boolean
-    ConversationAnonymizationType:
-      title: ConversationAnonymizationType
-      type: object
-    ContactFormAttributes:
-      title: ContactFormAttributes
-      type: object
-      required:
-      - isAutoReply
-      properties:
-        emailContent:
-          $ref: '#/components/schemas/EmailContent'
-        from:
-          $ref: '#/components/schemas/EmailContact'
-        replyDefaultToEmails:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailContact'
-        to:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailContact'
-        cc:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailContact'
-        bcc:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailContact'
-        isAutoReply:
-          type: boolean
-        inlineImages:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        deliveryFailureReason:
-          type: string
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        originalContentUrl:
-          $ref: '#/components/schemas/File'
-    ChatAttributes:
-      title: ChatAttributes
-      type: object
-      required:
-      - isAutomated
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        isAutomated:
-          type: boolean
-    DirectionOperator:
-      title: DirectionOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf3'
-      - $ref: '#/components/schemas/IsOneOf3'
-    TagRemovedAttribute:
-      title: TagRemovedAttribute
-      type: object
-      required:
-      - tag
-      properties:
-        tag:
-          type: string
-    ConversationTransferredAttribute:
-      title: ConversationTransferredAttribute
-      type: object
-      required:
-      - transferType
-      - destinationType
-      - destinationId
-      properties:
-        transferType:
-          type: string
-        destinationType:
-          type: string
-        destinationId:
-          type: string
-        destinationLabel:
-          type: string
-        reason:
-          type: string
-    InternalNoteData:
-      title: InternalNoteData
-      type: object
-      required:
-      - id
-      - authorId
-      - createdAt
-      - csid
-      - message
-      properties:
-        id:
-          type: string
-          format: uuid
-        authorId:
-          type: string
-          format: uuid
-        createdAt:
-          type: string
-          format: date-time
-        csid:
-          type: integer
-          format: int64
-        message:
-          type: string
-    Query:
-      title: Query
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-        exactMatch:
-          type: boolean
-    PatchConversationCustomAttributesOutput:
-      title: PatchConversationCustomAttributesOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-    PstnPhoneConversation:
-      title: PstnPhoneConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    MessageAddedByCustomerActivityType:
-      title: MessageAddedByCustomerActivityType
-      type: object
-    LastActivity:
-      title: LastActivity
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/TimestampOperator'
-    BulkActionSuccess_ErrorResponse_InternalNoteData:
-      title: BulkActionSuccess_ErrorResponse_InternalNoteData
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/InternalNoteData'
-    Assignment:
-      title: Assignment
-      type: object
-      required:
-      - agentId
-      - assignedAt
-      properties:
-        agentId:
-          type: string
-          format: uuid
-        assignedAt:
-          type: string
-          format: date-time
-    Tag:
-      title: Tag
-      type: object
-      required:
-      - id
-      - name
-      - state
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        color:
-          type: string
-        state:
-          description: 'values: [Active, Inactive]'
-          type: string
-    CreateMessageOutput:
-      title: CreateMessageOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CreateMessageOutputData'
-    ContactForm:
-      title: ContactForm
-      type: object
-      required:
-      - requesterId
-      - emailIntegrationId
-      - subject
-      - message
-      properties:
-        requesterId:
-          type: string
-          format: uuid
-        emailIntegrationId:
-          type: string
-        subject:
-          type: string
-        message:
-          $ref: '#/components/schemas/CreateMessageInput'
-        language:
-          type: string
-    Markdown:
-      title: Markdown
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    CreateMessageInput:
-      title: CreateMessageInput
-      description: Only Outbound messages are supported for Sms and Whatsapp.
-      oneOf:
-      - $ref: '#/components/schemas/Inbound'
-      - $ref: '#/components/schemas/Outbound'
-    CreateNoteOutput:
-      title: CreateNoteOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/InternalNoteData'
-    ConversationOfferRejectedActivityType:
-      title: ConversationOfferRejectedActivityType
-      type: object
-    ListFlowsOutput:
-      title: ListFlowsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationFlow'
-    ConversationRatingCancelledActivityType:
-      title: ConversationRatingCancelledActivityType
-      type: object
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -308,82 +308,6 @@ paths:
       deprecated: true
 components:
   schemas:
-    AnonymizeEntityInput:
-      title: AnonymizeEntityInput
-      type: object
-      required:
-      - entityId
-      properties:
-        entityId:
-          type: string
-        entityType:
-          $ref: '#/components/schemas/DeprecatedAnonymizationType'
-        forceAnonymization:
-          type: boolean
-        _type:
-          description: 'values: [Conversation, Message, User]'
-          type: string
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    AnonymizeEntityOutput:
-      title: AnonymizeEntityOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/AnonymizationRequestStatus'
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    DeprecatedAnonymizationType:
-      title: DeprecatedAnonymizationType
-      description: Replaced by _type field
-      deprecated: true
-      oneOf:
-      - $ref: '#/components/schemas/ConversationAnonymizationType'
-      - $ref: '#/components/schemas/MessageAnonymizationType'
-      - $ref: '#/components/schemas/UnknownAnonymizationType'
-      - $ref: '#/components/schemas/UserAnonymizationType'
-    ConversationAnonymizationType:
-      title: ConversationAnonymizationType
-      type: object
-    Unauthorized:
-      title: Unauthorized
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    UserAnonymizationType:
-      title: UserAnonymizationType
-      type: object
-    UnknownAnonymizationType:
-      title: UnknownAnonymizationType
-      type: object
-    MessageAnonymizationType:
-      title: MessageAnonymizationType
-      type: object
-    Conflict:
-      title: Conflict
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
     AnonymizationRequestStatus:
       title: AnonymizationRequestStatus
       type: object
@@ -414,6 +338,43 @@ components:
         processedAt:
           type: string
           format: date-time
+    AnonymizeEntityOutput:
+      title: AnonymizeEntityOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/AnonymizationRequestStatus'
+    ConversationAnonymizationType:
+      title: ConversationAnonymizationType
+      type: object
+    AnonymizeEntityInput:
+      title: AnonymizeEntityInput
+      type: object
+      required:
+      - entityId
+      properties:
+        entityId:
+          type: string
+        entityType:
+          $ref: '#/components/schemas/DeprecatedAnonymizationType'
+        forceAnonymization:
+          type: boolean
+        _type:
+          description: 'values: [Conversation, Message, User]'
+          type: string
+    MessageAnonymizationType:
+      title: MessageAnonymizationType
+      type: object
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
     NotFound:
       title: NotFound
       type: object
@@ -422,6 +383,45 @@ components:
       properties:
         message:
           type: string
+    DeprecatedAnonymizationType:
+      title: DeprecatedAnonymizationType
+      description: Replaced by _type field
+      deprecated: true
+      oneOf:
+      - $ref: '#/components/schemas/ConversationAnonymizationType'
+      - $ref: '#/components/schemas/MessageAnonymizationType'
+      - $ref: '#/components/schemas/UnknownAnonymizationType'
+      - $ref: '#/components/schemas/UserAnonymizationType'
+    UserAnonymizationType:
+      title: UserAnonymizationType
+      type: object
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Unauthorized:
+      title: Unauthorized
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Conflict:
+      title: Conflict
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    UnknownAnonymizationType:
+      title: UnknownAnonymizationType
+      type: object
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
