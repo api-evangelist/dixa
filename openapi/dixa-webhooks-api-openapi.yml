@@ -522,11 +522,43 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    NoAuth:
-      title: NoAuth
+    Webhook_Headers_Map_String_String:
+      title: Webhook_Headers_Map_String_String
+      description: The headers that will be added to the webhook request
       type: object
-    IsOneOf5:
-      title: IsOneOf
+      additionalProperties:
+        type: string
+    Map_WebhookEventType_Filters:
+      title: Map_WebhookEventType_Filters
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Filters1'
+    PatchWebhookSubscriptionOutput:
+      title: PatchWebhookSubscriptionOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/WebhookSubscription'
+    CreateWebhookSubscriptionOutput:
+      title: CreateWebhookSubscriptionOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/WebhookSubscription'
+    GetWebhookEventDeliveryLogsOutput:
+      title: GetWebhookEventDeliveryLogsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventDeliveryLog'
+    IsNotOneOf5:
+      title: IsNotOneOf
       type: object
       required:
       - field
@@ -548,48 +580,11 @@ components:
       properties:
         message:
           type: string
-    NoRecentDelivery:
-      title: NoRecentDelivery
-      type: object
-    Map_WebhookEventType_Filters:
-      title: Map_WebhookEventType_Filters
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/Filters1'
-    GetWebhookLastDeliveryStatusOutput:
-      title: GetWebhookLastDeliveryStatusOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/EventDeliveryStatus'
-    TokenAuth:
-      title: TokenAuth
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          description: 'Token value. It will be added in the headers of the request as: ''Authorization'': ''Bearer \<value\>'''
-          type: string
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Filters1:
-      title: Filters
+    Condition1:
+      title: Condition
       oneOf:
-      - $ref: '#/components/schemas/CombinedFilters'
-    Map_String:
-      title: Map_String
-      type: object
-      additionalProperties:
-        type: string
+      - $ref: '#/components/schemas/IsNotOneOf5'
+      - $ref: '#/components/schemas/IsOneOf5'
     CombinedFilters:
       title: CombinedFilters
       type: object
@@ -613,6 +608,33 @@ components:
       properties:
         message:
           type: string
+    BasicAuth:
+      title: BasicAuth
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    DeliveryStatus:
+      title: DeliveryStatus
+      oneOf:
+      - $ref: '#/components/schemas/DeliveryDetail'
+      - $ref: '#/components/schemas/NoRecentDelivery'
+    GetWebhookLastDeliveryStatusOutput:
+      title: GetWebhookLastDeliveryStatusOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventDeliveryStatus'
+    NoRecentDelivery:
+      title: NoRecentDelivery
+      type: object
     ListWebhookSubscriptionsEndpointOutput:
       title: ListWebhookSubscriptionsEndpointOutput
       type: object
@@ -621,22 +643,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebhookSubscription'
-    EventDeliveryLog:
-      title: EventDeliveryLog
-      type: object
-      required:
-      - deliveryDetail
-      - payload
-      properties:
-        deliveryDetail:
-          $ref: '#/components/schemas/DeliveryDetail'
-        payload:
-          type: string
-    Condition1:
-      title: Condition
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf5'
-      - $ref: '#/components/schemas/IsOneOf5'
     DeliveryDetail:
       title: DeliveryDetail
       type: object
@@ -655,6 +661,33 @@ components:
           format: int32
         responseText:
           type: string
+    TokenAuth:
+      title: TokenAuth
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: 'Token value. It will be added in the headers of the request as: ''Authorization'': ''Bearer \<value\>'''
+          type: string
+    NoAuth:
+      title: NoAuth
+      type: object
+    WebhookAuthorization:
+      title: WebhookAuthorization
+      description: Authorization to be added as a header in the webhook request. Can be either, Basic auth, added as 'Basic base64encoded(\<username\>:\<password\>)', Token auth, added as 'Bearer \<token value\>', or no auth
+      oneOf:
+      - $ref: '#/components/schemas/BasicAuth'
+      - $ref: '#/components/schemas/NoAuth'
+      - $ref: '#/components/schemas/TokenAuth'
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
     EventDeliveryStatus:
       title: EventDeliveryStatus
       type: object
@@ -667,68 +700,6 @@ components:
           type: string
         deliveryStatus:
           $ref: '#/components/schemas/DeliveryStatus'
-    GetWebhookSubscriptionOutput:
-      title: GetWebhookSubscriptionOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/WebhookSubscription'
-    BasicAuth:
-      title: BasicAuth
-      type: object
-      required:
-      - username
-      - password
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-    CreateWebhookSubscriptionOutput:
-      title: CreateWebhookSubscriptionOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/WebhookSubscription'
-    DeliveryStatus:
-      title: DeliveryStatus
-      oneOf:
-      - $ref: '#/components/schemas/DeliveryDetail'
-      - $ref: '#/components/schemas/NoRecentDelivery'
-    WebhookAuthorization:
-      title: WebhookAuthorization
-      description: Authorization to be added as a header in the webhook request. Can be either, Basic auth, added as 'Basic base64encoded(\<username\>:\<password\>)', Token auth, added as 'Bearer \<token value\>', or no auth
-      oneOf:
-      - $ref: '#/components/schemas/BasicAuth'
-      - $ref: '#/components/schemas/NoAuth'
-      - $ref: '#/components/schemas/TokenAuth'
-    PatchWebhookSubscriptionOutput:
-      title: PatchWebhookSubscriptionOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/WebhookSubscription'
-    IsNotOneOf5:
-      title: IsNotOneOf
-      type: object
-      required:
-      - field
-      - values
-      properties:
-        field:
-          description: 'values: [InitialChannel, OperationOrigin, QueueId]'
-          type: string
-        values:
-          type: array
-          minItems: 1
-          items:
-            type: string
     CreateWebhookSubscriptionInput:
       title: CreateWebhookSubscriptionInput
       type: object
@@ -762,6 +733,10 @@ components:
         filters:
           $ref: '#/components/schemas/Map_WebhookEventType_Filters'
           description: Filters to be applied to the events of the Webhook Subscription, only filtered events will be sent out. Filters can target a conversation channel, queue...
+    Filters1:
+      title: Filters
+      oneOf:
+      - $ref: '#/components/schemas/CombinedFilters'
     WebhookSubscription:
       title: WebhookSubscription
       type: object
@@ -821,14 +796,34 @@ components:
         filters:
           $ref: '#/components/schemas/Map_WebhookEventType_Filters'
           description: Filters to be applied to the events that are sent to this Webhook Subscription
-    GetWebhookEventDeliveryLogsOutput:
-      title: GetWebhookEventDeliveryLogsOutput
+    GetWebhookSubscriptionOutput:
+      title: GetWebhookSubscriptionOutput
       type: object
+      required:
+      - data
       properties:
         data:
+          $ref: '#/components/schemas/WebhookSubscription'
+    IsOneOf5:
+      title: IsOneOf
+      type: object
+      required:
+      - field
+      - values
+      properties:
+        field:
+          description: 'values: [InitialChannel, OperationOrigin, QueueId]'
+          type: string
+        values:
           type: array
+          minItems: 1
           items:
-            $ref: '#/components/schemas/EventDeliveryLog'
+            type: string
+    Map_String:
+      title: Map_String
+      type: object
+      additionalProperties:
+        type: string
     PatchWebhookSubscriptionInput:
       title: PatchWebhookSubscriptionInput
       type: object
@@ -857,12 +852,17 @@ components:
         filters:
           $ref: '#/components/schemas/Map_WebhookEventType_Filters'
           description: Filters to be applied to the events of the Webhook Subscription, only filtered events will be sent out. Filters can target a conversation channel, queue...
-    Webhook_Headers_Map_String_String:
-      title: Webhook_Headers_Map_String_String
-      description: The headers that will be added to the webhook request
+    EventDeliveryLog:
+      title: EventDeliveryLog
       type: object
-      additionalProperties:
-        type: string
+      required:
+      - deliveryDetail
+      - payload
+      properties:
+        deliveryDetail:
+          $ref: '#/components/schemas/DeliveryDetail'
+        payload:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

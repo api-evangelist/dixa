@@ -102,19 +102,6 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    ContactEndpoint:
-      title: ContactEndpoint
-      oneOf:
-      - $ref: '#/components/schemas/EmailEndpoint'
-      - $ref: '#/components/schemas/TelephonyEndpoint'
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
     ListContactPointsOutput:
       title: ListContactPointsOutput
       type: object
@@ -123,14 +110,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ContactEndpoint'
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
     GetContactPointByIdOutput:
       title: GetContactPointByIdOutput
       type: object
@@ -139,8 +118,33 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/ContactEndpoint'
+    ContactEndpoint:
+      title: ContactEndpoint
+      oneOf:
+      - $ref: '#/components/schemas/EmailEndpoint'
+      - $ref: '#/components/schemas/TelephonyEndpoint'
+    EmailEndpoint:
+      title: EmailEndpoint
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+        senderOverride:
+          type: string
+        name:
+          type: string
     BadRequest:
       title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    ServerError:
+      title: ServerError
       type: object
       required:
       - message
@@ -162,17 +166,13 @@ components:
             type: string
         name:
           type: string
-    EmailEndpoint:
-      title: EmailEndpoint
+    NotFound:
+      title: NotFound
       type: object
       required:
-      - address
+      - message
       properties:
-        address:
-          type: string
-        senderOverride:
-          type: string
-        name:
+        message:
           type: string
   securitySchemes:
     ApiKeyAuth:

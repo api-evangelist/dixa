@@ -489,6 +489,22 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
+    CreateTagOutput:
+      title: CreateTagOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Tag'
+    ConversationTagsOutput:
+      title: ConversationTagsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
     Tag:
       title: Tag
       type: object
@@ -507,21 +523,31 @@ components:
         state:
           description: 'values: [Active, Inactive]'
           type: string
-    ConversationTagsOutput:
-      title: ConversationTagsOutput
+    CreateTagInput:
+      title: CreateTagInput
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+    ListTagsOutput:
+      title: ListTagsOutput
       type: object
       properties:
         data:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    TagConversationInput:
-      title: TagConversationInput
+    BadRequest:
+      title: BadRequest
       type: object
       required:
-      - name
+      - message
       properties:
-        name:
+        message:
           type: string
     BulkTagConversationInput:
       title: BulkTagConversationInput
@@ -547,40 +573,6 @@ components:
       properties:
         message:
           type: string
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    CreateTagOutput:
-      title: CreateTagOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Tag'
-    CreateTagInput:
-      title: CreateTagInput
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        color:
-          type: string
-    ListTagsOutput:
-      title: ListTagsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
     GetTagOutput:
       title: GetTagOutput
       type: object
@@ -589,6 +581,14 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Tag'
+    TagConversationInput:
+      title: TagConversationInput
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

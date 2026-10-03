@@ -533,46 +533,6 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    BulkActionFailure_BulkError_UUID:
-      title: BulkActionFailure_BulkError_UUID
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/BulkError'
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Integrity:
-      title: Integrity
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    BulkActionOutcome_BulkError_UUID:
-      title: BulkActionOutcome_BulkError_UUID
-      oneOf:
-      - $ref: '#/components/schemas/BulkActionFailure_BulkError_UUID'
-      - $ref: '#/components/schemas/BulkActionSuccess_BulkError_UUID'
     EmptyPatchSet:
       title: EmptyPatchSet
       type: object
@@ -584,60 +544,10 @@ components:
           type: string
         message:
           type: string
-    Failure:
-      title: Failure
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ChannelAvailabilityError'
-    GetQueueByIdOutput:
-      title: GetQueueByIdOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Queue1'
-    BulkQueueEndpointInput:
-      title: BulkQueueEndpointInput
-      type: object
-      properties:
-        agentIds:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-            format: uuid
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    QueueMembersOutput:
-      title: QueueMembersOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueueMember'
-    ChannelAvailability:
-      title: ChannelAvailability
+    ChannelAvailabilityError:
+      title: ChannelAvailabilityError
       oneOf:
-      - $ref: '#/components/schemas/GenericChannel'
-    Success:
-      title: Success
-      type: object
-      required:
-      - channelAvailability
-      properties:
-        channelAvailability:
-          $ref: '#/components/schemas/ChannelAvailability'
+      - $ref: '#/components/schemas/UnexpectedError'
     QueueAvailabilityOutput:
       title: QueueAvailabilityOutput
       type: object
@@ -646,135 +556,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChannelAvailabilityOutcome'
-    CreateQueueOutput:
-      title: CreateQueueOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Queue1'
-    QueuedConversation:
-      title: QueuedConversation
-      type: object
-      required:
-      - queuedAt
-      properties:
-        position:
-          description: Approximate position of the conversation in the current queue
-          type: integer
-          format: int32
-        queuedAt:
-          type: string
-          format: date-time
-    GetQueuedConversationPositionOutput:
-      title: GetQueuedConversationPositionOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/QueuedConversation'
-    BulkActionSuccess_BulkError_UUID:
-      title: BulkActionSuccess_BulkError_UUID
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: string
-          format: uuid
-    ChannelAvailabilityOutcome:
-      title: ChannelAvailabilityOutcome
+    BulkActionOutcome_BulkError_UUID:
+      title: BulkActionOutcome_BulkError_UUID
       oneOf:
-      - $ref: '#/components/schemas/Failure'
-      - $ref: '#/components/schemas/Success'
-    Map_QueueThreshold_Int:
-      title: Map_QueueThreshold_Int
-      description: 'values: [SlaTimeLimit, AvailableAgents, LongestWait, SlaPercentage, WaitingConversations]'
-      type: object
-      additionalProperties:
-        type: integer
-        format: int32
-    CreateQueueInput:
-      title: CreateQueueInput
-      type: object
-      required:
-      - request
-      properties:
-        request:
-          $ref: '#/components/schemas/CreateOrUpdateQueueRequest'
-    BulkError:
-      title: BulkError
-      oneOf:
-      - $ref: '#/components/schemas/EmptyPatchSet'
-      - $ref: '#/components/schemas/ErrorResponse'
-      - $ref: '#/components/schemas/Infrastructure'
-      - $ref: '#/components/schemas/Integrity'
-      - $ref: '#/components/schemas/InvalidArgument'
-      - $ref: '#/components/schemas/NotFound1'
-      - $ref: '#/components/schemas/Validation'
-    Conflict:
-      title: Conflict
+      - $ref: '#/components/schemas/BulkActionFailure_BulkError_UUID'
+      - $ref: '#/components/schemas/BulkActionSuccess_BulkError_UUID'
+    ServerError:
+      title: ServerError
       type: object
       required:
       - message
       properties:
-        message:
-          type: string
-    ListQueuesOutput:
-      title: ListQueuesOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Queue1'
-    NotFound1:
-      title: NotFound
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    InvalidArgument:
-      title: InvalidArgument
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Infrastructure:
-      title: Infrastructure
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    Map_ConversationChannel_Int:
-      title: Map_ConversationChannel_Int
-      description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-      type: object
-      additionalProperties:
-        type: integer
-        format: int32
-    Validation:
-      title: Validation
-      type: object
-      required:
-      - message
-      properties:
-        id:
-          type: string
         message:
           type: string
     QueueUsages:
@@ -788,19 +580,145 @@ components:
           type: string
         usages:
           $ref: '#/components/schemas/Map_ConversationChannel_Set_String'
-    ChannelAvailabilityError:
-      title: ChannelAvailabilityError
+    Validation:
+      title: Validation
+      type: object
+      required:
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    ChannelAvailabilityOutcome:
+      title: ChannelAvailabilityOutcome
       oneOf:
-      - $ref: '#/components/schemas/UnexpectedError'
-    Map_ConversationChannel_Set_String:
-      title: Map_ConversationChannel_Set_String
+      - $ref: '#/components/schemas/Failure'
+      - $ref: '#/components/schemas/Success'
+    BulkActionSuccess_BulkError_UUID:
+      title: BulkActionSuccess_BulkError_UUID
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: string
+          format: uuid
+    Infrastructure:
+      title: Infrastructure
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    ChannelAvailability:
+      title: ChannelAvailability
+      oneOf:
+      - $ref: '#/components/schemas/GenericChannel'
+    BulkQueueEndpointOutput:
+      title: BulkQueueEndpointOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_BulkError_UUID'
+    NotFound1:
+      title: NotFound
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    Integrity:
+      title: Integrity
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    GetQueuedConversationPositionOutput:
+      title: GetQueuedConversationPositionOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/QueuedConversation'
+    Map_QueueThreshold_Int:
+      title: Map_QueueThreshold_Int
+      description: 'values: [SlaTimeLimit, AvailableAgents, LongestWait, SlaPercentage, WaitingConversations]'
+      type: object
+      additionalProperties:
+        type: integer
+        format: int32
+    ListQueuesOutput:
+      title: ListQueuesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Queue1'
+    Map_ConversationChannel_Int:
+      title: Map_ConversationChannel_Int
       description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
       type: object
       additionalProperties:
-        type: array
-        uniqueItems: true
-        items:
+        type: integer
+        format: int32
+    Failure:
+      title: Failure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ChannelAvailabilityError'
+    UnexpectedError:
+      title: UnexpectedError
+      type: object
+      required:
+      - channel
+      - message
+      properties:
+        channel:
           type: string
+        message:
+          type: string
+    QueuedConversation:
+      title: QueuedConversation
+      type: object
+      required:
+      - queuedAt
+      properties:
+        position:
+          description: Approximate position of the conversation in the current queue
+          type: integer
+          format: int32
+        queuedAt:
+          type: string
+          format: date-time
     Queue1:
       title: Queue
       type: object
@@ -862,6 +780,44 @@ components:
           format: int32
         isRestricted:
           type: boolean
+    QueueMember:
+      title: QueueMember
+      type: object
+      required:
+      - agentId
+      properties:
+        agentId:
+          type: string
+        priority:
+          type: integer
+          format: int32
+    Map_ConversationChannel_Set_String:
+      title: Map_ConversationChannel_Set_String
+      description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+      type: object
+      additionalProperties:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+    BulkQueueEndpointInput:
+      title: BulkQueueEndpointInput
+      type: object
+      properties:
+        agentIds:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            format: uuid
+    CreateQueueInput:
+      title: CreateQueueInput
+      type: object
+      required:
+      - request
+      properties:
+        request:
+          $ref: '#/components/schemas/CreateOrUpdateQueueRequest'
     GenericChannel:
       title: GenericChannel
       type: object
@@ -878,17 +834,72 @@ components:
           description: The number of conversations currently waiting in the queue. This field will only be present if the queue availability is NotAvailable.
           type: integer
           format: int32
-    UnexpectedError:
-      title: UnexpectedError
+    BadRequest:
+      title: BadRequest
       type: object
       required:
-      - channel
       - message
       properties:
-        channel:
-          type: string
         message:
           type: string
+    InvalidArgument:
+      title: InvalidArgument
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CreateQueueOutput:
+      title: CreateQueueOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Queue1'
+    Success:
+      title: Success
+      type: object
+      required:
+      - channelAvailability
+      properties:
+        channelAvailability:
+          $ref: '#/components/schemas/ChannelAvailability'
+    Conflict:
+      title: Conflict
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    BulkActionFailure_BulkError_UUID:
+      title: BulkActionFailure_BulkError_UUID
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/BulkError'
+    BulkError:
+      title: BulkError
+      oneOf:
+      - $ref: '#/components/schemas/EmptyPatchSet'
+      - $ref: '#/components/schemas/ErrorResponse'
+      - $ref: '#/components/schemas/Infrastructure'
+      - $ref: '#/components/schemas/Integrity'
+      - $ref: '#/components/schemas/InvalidArgument'
+      - $ref: '#/components/schemas/NotFound1'
+      - $ref: '#/components/schemas/Validation'
+    QueueMembersOutput:
+      title: QueueMembersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueueMember'
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -897,6 +908,14 @@ components:
       properties:
         message:
           type: string
+    GetQueueByIdOutput:
+      title: GetQueueByIdOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Queue1'
     CreateOrUpdateQueueRequest:
       title: CreateOrUpdateQueueRequest
       type: object
@@ -944,25 +963,6 @@ components:
           format: int32
         isRestricted:
           type: boolean
-    QueueMember:
-      title: QueueMember
-      type: object
-      required:
-      - agentId
-      properties:
-        agentId:
-          type: string
-        priority:
-          type: integer
-          format: int32
-    BulkQueueEndpointOutput:
-      title: BulkQueueEndpointOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkActionOutcome_BulkError_UUID'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

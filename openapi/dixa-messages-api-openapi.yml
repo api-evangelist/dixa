@@ -446,47 +446,81 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    AnonymizationRequestStatus:
-      title: AnonymizationRequestStatus
+    EmailContact:
+      title: EmailContact
       type: object
       required:
-      - id
-      - entityType
-      - _type
-      - initiatedAt
-      - targetEntityId
-      - requestedBy
+      - email
       properties:
-        id:
+        email:
           type: string
-          format: uuid
-        entityType:
-          $ref: '#/components/schemas/DeprecatedAnonymizationType'
-        _type:
-          description: 'values: [Conversation, Message, User]'
+        name:
           type: string
-        initiatedAt:
-          type: string
-          format: date-time
-        targetEntityId:
-          type: string
-        requestedBy:
-          type: string
-          format: uuid
-        processedAt:
-          type: string
-          format: date-time
-    CallRecordingAttributes:
-      title: CallRecordingAttributes
+    FormSubmission:
+      title: FormSubmission
       type: object
       required:
-      - recording
+      - values
       properties:
-        duration:
-          type: integer
-          format: int32
-        recording:
+        values:
+          $ref: '#/components/schemas/Map_FormAttributeValue'
+    FormAttributeValue:
+      title: FormAttributeValue
+      oneOf:
+      - $ref: '#/components/schemas/Attachments'
+      - $ref: '#/components/schemas/Select'
+      - $ref: '#/components/schemas/Text1'
+    Checksum:
+      title: Checksum
+      type: object
+      required:
+      - algorithm
+      - hex
+      properties:
+        algorithm:
           type: string
+        hex:
+          type: string
+    Text:
+      title: Text
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    CreateMessageOutput:
+      title: CreateMessageOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateMessageOutputData'
+    MimeTypeImpl:
+      title: MimeTypeImpl
+      type: object
+      required:
+      - primary
+      - sub
+      properties:
+        primary:
+          type: string
+        sub:
+          type: string
+    WhatsAppAttributes:
+      title: WhatsAppAttributes
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
     ServerError:
       title: ServerError
       type: object
@@ -495,16 +529,251 @@ components:
       properties:
         message:
           type: string
+    Content:
+      title: Content
+      oneOf:
+      - $ref: '#/components/schemas/Html'
+      - $ref: '#/components/schemas/Markdown'
+      - $ref: '#/components/schemas/Text'
+    File:
+      title: File
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          description: url
+          type: string
+        prettyName:
+          type: string
+    FacebookMessengerAttributes:
+      title: FacebookMessengerAttributes
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    TranscriptAttributes:
+      title: TranscriptAttributes
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        utterance_start_ms:
+          type: integer
+          format: int64
+        utterance_end_ms:
+          type: integer
+          format: int64
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    EmailAttributes:
+      title: EmailAttributes
+      type: object
+      required:
+      - from
+      - isAutoReply
+      properties:
+        emailContent:
+          $ref: '#/components/schemas/EmailContent'
+        from:
+          $ref: '#/components/schemas/EmailContact'
+        to:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailContact'
+        cc:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailContact'
+        bcc:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailContact'
+        isAutoReply:
+          type: boolean
+        inlineImages:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        deliveryFailureReason:
+          type: string
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        originalContentUrl:
+          $ref: '#/components/schemas/File'
+    Attachments:
+      title: Attachments
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileMeta'
+    Html:
+      title: Html
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    Inbound:
+      title: Inbound
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        integrationEmail:
+          description: 'Internal email address registered for the integration with format: \<email-address\>@email.dixa.io'
+          type: string
+        externalId:
+          description: Client generated identifier for external reference
+          type: string
+    Regular:
+      title: Regular
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
     MessageAnonymizationType:
       title: MessageAnonymizationType
       type: object
-    MimeType:
-      title: MimeType
-      oneOf:
-      - $ref: '#/components/schemas/MimeTypeImpl'
-    UserAnonymizationType:
-      title: UserAnonymizationType
+    MessengerFormAttributes:
+      title: MessengerFormAttributes
       type: object
+      required:
+      - formSubmission
+      properties:
+        formSubmission:
+          $ref: '#/components/schemas/FormSubmission'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        content:
+          $ref: '#/components/schemas/Content'
+    ConversationAnonymizationType:
+      title: ConversationAnonymizationType
+      type: object
+    CreateMessageInput:
+      title: CreateMessageInput
+      description: Only Outbound messages are supported for Sms and Whatsapp.
+      oneOf:
+      - $ref: '#/components/schemas/Inbound'
+      - $ref: '#/components/schemas/Outbound'
+    Markdown:
+      title: Markdown
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    TwitterAttributes:
+      title: TwitterAttributes
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    CreateMessageOutputData:
+      title: CreateMessageOutputData
+      type: object
+      required:
+      - direction
+      - authorId
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        authorId:
+          type: string
+          format: uuid
+        externalId:
+          type: string
+        messageId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+    Map_FormAttributeValue:
+      title: Map_FormAttributeValue
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/FormAttributeValue'
+    Select:
+      title: Select
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: string
+    Outbound:
+      title: Outbound
+      type: object
+      required:
+      - agentId
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        agentId:
+          type: string
+          format: uuid
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        integrationEmail:
+          type: string
+        externalId:
+          type: string
+        cc:
+          type: array
+          items:
+            type: string
+            format: uuid
+        bcc:
+          type: array
+          items:
+            type: string
+            format: uuid
     PhoneAttributes:
       title: PhoneAttributes
       type: object
@@ -522,41 +791,22 @@ components:
         duration:
           type: integer
           format: int32
-    FormSubmission:
-      title: FormSubmission
+    CallRecordingAttributes:
+      title: CallRecordingAttributes
       type: object
       required:
-      - values
+      - recording
       properties:
-        values:
-          $ref: '#/components/schemas/Map_FormAttributeValue'
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
+        duration:
+          type: integer
+          format: int32
+        recording:
           type: string
-    Map_FormAttributeValue:
-      title: Map_FormAttributeValue
+    ChatAttributes:
+      title: ChatAttributes
       type: object
-      additionalProperties:
-        $ref: '#/components/schemas/FormAttributeValue'
-    CreateMessageInput:
-      title: CreateMessageInput
-      description: Only Outbound messages are supported for Sms and Whatsapp.
-      oneOf:
-      - $ref: '#/components/schemas/Inbound'
-      - $ref: '#/components/schemas/Outbound'
-    EmailContent:
-      title: EmailContent
-      oneOf:
-      - $ref: '#/components/schemas/Regular'
-      - $ref: '#/components/schemas/TooLarge'
-    GenericAttributes:
-      title: GenericAttributes
-      type: object
+      required:
+      - isAutomated
       properties:
         content:
           $ref: '#/components/schemas/Content'
@@ -567,78 +817,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/File'
-    FacebookMessengerAttributes:
-      title: FacebookMessengerAttributes
+        isAutomated:
+          type: boolean
+    ListMessagesOutput:
+      title: ListMessagesOutput
       type: object
       properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/File'
-    TooLarge:
-      title: TooLarge
-      type: object
-      required:
-      - file
-      properties:
-        file:
-          $ref: '#/components/schemas/File'
-    Attachments:
-      title: Attachments
-      type: object
-      properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/FileMeta'
-    Text1:
-      title: Text
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    ConversationAnonymizationType:
-      title: ConversationAnonymizationType
-      type: object
-    EmailContact:
-      title: EmailContact
-      type: object
-      required:
-      - email
-      properties:
-        email:
-          type: string
-        name:
-          type: string
-    Message:
-      title: Message
-      type: object
-      required:
-      - id
-      - authorId
-      - createdAt
-      - attributes
-      properties:
-        id:
-          type: string
-          format: uuid
-        authorId:
-          type: string
-          format: uuid
-        externalId:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        attributes:
-          $ref: '#/components/schemas/Attributes'
+            $ref: '#/components/schemas/Message'
     ContactFormAttributes:
       title: ContactFormAttributes
       type: object
@@ -682,13 +870,13 @@ components:
           type: string
         originalContentUrl:
           $ref: '#/components/schemas/File'
-    Html:
-      title: Html
+    BadRequest:
+      title: BadRequest
       type: object
       required:
-      - value
+      - message
       properties:
-        value:
+        message:
           type: string
     AnonymizeEntityOutput:
       title: AnonymizeEntityOutput
@@ -698,44 +886,147 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/AnonymizationRequestStatus'
-    NotFound:
-      title: NotFound
+    Conflict:
+      title: Conflict
       type: object
       required:
       - message
       properties:
         message:
           type: string
-    Checksum:
-      title: Checksum
+    Text1:
+      title: Text
       type: object
       required:
-      - algorithm
-      - hex
+      - value
       properties:
-        algorithm:
+        value:
           type: string
-        hex:
-          type: string
-    ListMessagesOutput:
-      title: ListMessagesOutput
+    DeprecatedAnonymizationType:
+      title: DeprecatedAnonymizationType
+      description: Replaced by _type field
+      deprecated: true
+      oneOf:
+      - $ref: '#/components/schemas/ConversationAnonymizationType'
+      - $ref: '#/components/schemas/MessageAnonymizationType'
+      - $ref: '#/components/schemas/UnknownAnonymizationType'
+      - $ref: '#/components/schemas/UserAnonymizationType'
+    Attributes:
+      title: Attributes
+      oneOf:
+      - $ref: '#/components/schemas/CallRecordingAttributes'
+      - $ref: '#/components/schemas/ChatAttributes'
+      - $ref: '#/components/schemas/ContactFormAttributes'
+      - $ref: '#/components/schemas/EmailAttributes'
+      - $ref: '#/components/schemas/FacebookMessengerAttributes'
+      - $ref: '#/components/schemas/GenericAttributes'
+      - $ref: '#/components/schemas/MessengerFormAttributes'
+      - $ref: '#/components/schemas/PhoneAttributes'
+      - $ref: '#/components/schemas/SmsAttributes'
+      - $ref: '#/components/schemas/TranscriptAttributes'
+      - $ref: '#/components/schemas/TwitterAttributes'
+      - $ref: '#/components/schemas/WhatsAppAttributes'
+    SmsAttributes:
+      title: SmsAttributes
       type: object
       properties:
-        data:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        attachments:
           type: array
           items:
-            $ref: '#/components/schemas/Message'
-    MimeTypeImpl:
-      title: MimeTypeImpl
+            $ref: '#/components/schemas/File'
+    AnonymizationRequestStatus:
+      title: AnonymizationRequestStatus
       type: object
       required:
-      - primary
-      - sub
+      - id
+      - entityType
+      - _type
+      - initiatedAt
+      - targetEntityId
+      - requestedBy
       properties:
-        primary:
+        id:
           type: string
-        sub:
+          format: uuid
+        entityType:
+          $ref: '#/components/schemas/DeprecatedAnonymizationType'
+        _type:
+          description: 'values: [Conversation, Message, User]'
           type: string
+        initiatedAt:
+          type: string
+          format: date-time
+        targetEntityId:
+          type: string
+        requestedBy:
+          type: string
+          format: uuid
+        processedAt:
+          type: string
+          format: date-time
+    EmailContent:
+      title: EmailContent
+      oneOf:
+      - $ref: '#/components/schemas/Regular'
+      - $ref: '#/components/schemas/TooLarge'
+    GenericAttributes:
+      title: GenericAttributes
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    TooLarge:
+      title: TooLarge
+      type: object
+      required:
+      - file
+      properties:
+        file:
+          $ref: '#/components/schemas/File'
+    Message:
+      title: Message
+      type: object
+      required:
+      - id
+      - authorId
+      - createdAt
+      - attributes
+      properties:
+        id:
+          type: string
+          format: uuid
+        authorId:
+          type: string
+          format: uuid
+        externalId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+    UnknownAnonymizationType:
+      title: UnknownAnonymizationType
+      type: object
+    UserAnonymizationType:
+      title: UserAnonymizationType
+      type: object
+    MimeType:
+      title: MimeType
+      oneOf:
+      - $ref: '#/components/schemas/MimeTypeImpl'
     FileMeta:
       title: FileMeta
       type: object
@@ -757,297 +1048,6 @@ components:
           format: int64
         checksum:
           $ref: '#/components/schemas/Checksum'
-    UnknownAnonymizationType:
-      title: UnknownAnonymizationType
-      type: object
-    TranscriptAttributes:
-      title: TranscriptAttributes
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        utterance_start_ms:
-          type: integer
-          format: int64
-        utterance_end_ms:
-          type: integer
-          format: int64
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-    SmsAttributes:
-      title: SmsAttributes
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-    MessengerFormAttributes:
-      title: MessengerFormAttributes
-      type: object
-      required:
-      - formSubmission
-      properties:
-        formSubmission:
-          $ref: '#/components/schemas/FormSubmission'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        content:
-          $ref: '#/components/schemas/Content'
-    CreateMessageOutput:
-      title: CreateMessageOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CreateMessageOutputData'
-    Content:
-      title: Content
-      oneOf:
-      - $ref: '#/components/schemas/Html'
-      - $ref: '#/components/schemas/Markdown'
-      - $ref: '#/components/schemas/Text'
-    File:
-      title: File
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          description: url
-          type: string
-        prettyName:
-          type: string
-    Regular:
-      title: Regular
-      type: object
-      required:
-      - content
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-    TwitterAttributes:
-      title: TwitterAttributes
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-    WhatsAppAttributes:
-      title: WhatsAppAttributes
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-    Conflict:
-      title: Conflict
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Select:
-      title: Select
-      type: object
-      properties:
-        value:
-          type: array
-          items:
-            type: string
-    Text:
-      title: Text
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    FormAttributeValue:
-      title: FormAttributeValue
-      oneOf:
-      - $ref: '#/components/schemas/Attachments'
-      - $ref: '#/components/schemas/Select'
-      - $ref: '#/components/schemas/Text1'
-    CreateMessageOutputData:
-      title: CreateMessageOutputData
-      type: object
-      required:
-      - direction
-      - authorId
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        authorId:
-          type: string
-          format: uuid
-        externalId:
-          type: string
-        messageId:
-          type: string
-          format: uuid
-        createdAt:
-          type: string
-    Attributes:
-      title: Attributes
-      oneOf:
-      - $ref: '#/components/schemas/CallRecordingAttributes'
-      - $ref: '#/components/schemas/ChatAttributes'
-      - $ref: '#/components/schemas/ContactFormAttributes'
-      - $ref: '#/components/schemas/EmailAttributes'
-      - $ref: '#/components/schemas/FacebookMessengerAttributes'
-      - $ref: '#/components/schemas/GenericAttributes'
-      - $ref: '#/components/schemas/MessengerFormAttributes'
-      - $ref: '#/components/schemas/PhoneAttributes'
-      - $ref: '#/components/schemas/SmsAttributes'
-      - $ref: '#/components/schemas/TranscriptAttributes'
-      - $ref: '#/components/schemas/TwitterAttributes'
-      - $ref: '#/components/schemas/WhatsAppAttributes'
-    DeprecatedAnonymizationType:
-      title: DeprecatedAnonymizationType
-      description: Replaced by _type field
-      deprecated: true
-      oneOf:
-      - $ref: '#/components/schemas/ConversationAnonymizationType'
-      - $ref: '#/components/schemas/MessageAnonymizationType'
-      - $ref: '#/components/schemas/UnknownAnonymizationType'
-      - $ref: '#/components/schemas/UserAnonymizationType'
-    Outbound:
-      title: Outbound
-      type: object
-      required:
-      - agentId
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        agentId:
-          type: string
-          format: uuid
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        integrationEmail:
-          type: string
-        externalId:
-          type: string
-        cc:
-          type: array
-          items:
-            type: string
-            format: uuid
-        bcc:
-          type: array
-          items:
-            type: string
-            format: uuid
-    Markdown:
-      title: Markdown
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    ChatAttributes:
-      title: ChatAttributes
-      type: object
-      required:
-      - isAutomated
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        isAutomated:
-          type: boolean
-    Inbound:
-      title: Inbound
-      type: object
-      required:
-      - content
-      properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        integrationEmail:
-          description: 'Internal email address registered for the integration with format: \<email-address\>@email.dixa.io'
-          type: string
-        externalId:
-          description: Client generated identifier for external reference
-          type: string
-    EmailAttributes:
-      title: EmailAttributes
-      type: object
-      required:
-      - from
-      - isAutoReply
-      properties:
-        emailContent:
-          $ref: '#/components/schemas/EmailContent'
-        from:
-          $ref: '#/components/schemas/EmailContact'
-        to:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailContact'
-        cc:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailContact'
-        bcc:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailContact'
-        isAutoReply:
-          type: boolean
-        inlineImages:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        deliveryFailureReason:
-          type: string
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        originalContentUrl:
-          $ref: '#/components/schemas/File'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -190,85 +190,6 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    QuickResponse:
-      title: QuickResponse
-      type: object
-      required:
-      - id
-      - name
-      - content
-      - createdBy
-      - createdAt
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        content:
-          type: string
-        createdBy:
-          type: string
-        createdAt:
-          type: string
-        lastEditedBy:
-          type: string
-        lastEditedAt:
-          type: string
-        translations:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/Translation'
-        subject:
-          type: string
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    ListTemplatesOutput:
-      title: ListTemplatesOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Template'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    Translation:
-      title: Translation
-      type: object
-      required:
-      - locale
-      - content
-      - isDeactivated
-      properties:
-        locale:
-          description: Format for locale is {language}-{script}-{country}, e.g. "en-US", "uz-Arab-AF", "da"
-          type: string
-        content:
-          type: string
-        isDeactivated:
-          type: boolean
-        subject:
-          type: string
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Template:
-      title: Template
-      oneOf:
-      - $ref: '#/components/schemas/EmailAutoReply'
-      - $ref: '#/components/schemas/QuickResponse'
     EmailAutoReply:
       title: EmailAutoReply
       type: object
@@ -318,6 +239,85 @@ components:
       properties:
         message:
           type: string
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Translation:
+      title: Translation
+      type: object
+      required:
+      - locale
+      - content
+      - isDeactivated
+      properties:
+        locale:
+          description: Format for locale is {language}-{script}-{country}, e.g. "en-US", "uz-Arab-AF", "da"
+          type: string
+        content:
+          type: string
+        isDeactivated:
+          type: boolean
+        subject:
+          type: string
+    QuickResponse:
+      title: QuickResponse
+      type: object
+      required:
+      - id
+      - name
+      - content
+      - createdBy
+      - createdAt
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        content:
+          type: string
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+        lastEditedBy:
+          type: string
+        lastEditedAt:
+          type: string
+        translations:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/Translation'
+        subject:
+          type: string
+    ListTemplatesOutput:
+      title: ListTemplatesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Template:
+      title: Template
+      oneOf:
+      - $ref: '#/components/schemas/EmailAutoReply'
+      - $ref: '#/components/schemas/QuickResponse'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
