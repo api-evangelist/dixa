@@ -533,21 +533,6 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    EmptyPatchSet:
-      title: EmptyPatchSet
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    ChannelAvailabilityError:
-      title: ChannelAvailabilityError
-      oneOf:
-      - $ref: '#/components/schemas/UnexpectedError'
     QueueAvailabilityOutput:
       title: QueueAvailabilityOutput
       type: object
@@ -556,18 +541,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChannelAvailabilityOutcome'
-    BulkActionOutcome_BulkError_UUID:
-      title: BulkActionOutcome_BulkError_UUID
+    ChannelAvailabilityError:
+      title: ChannelAvailabilityError
       oneOf:
-      - $ref: '#/components/schemas/BulkActionFailure_BulkError_UUID'
-      - $ref: '#/components/schemas/BulkActionSuccess_BulkError_UUID'
-    ServerError:
-      title: ServerError
+      - $ref: '#/components/schemas/UnexpectedError'
+    Map_ConversationChannel_Set_String:
+      title: Map_ConversationChannel_Set_String
+      description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
       type: object
-      required:
-      - message
-      properties:
-        message:
+      additionalProperties:
+        type: array
+        uniqueItems: true
+        items:
           type: string
     QueueUsages:
       title: QueueUsages
@@ -580,10 +565,19 @@ components:
           type: string
         usages:
           $ref: '#/components/schemas/Map_ConversationChannel_Set_String'
-    Validation:
-      title: Validation
+    ListQueuesOutput:
+      title: ListQueuesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Queue1'
+    Integrity:
+      title: Integrity
       type: object
       required:
+      - id
       - message
       properties:
         id:
@@ -598,22 +592,152 @@ components:
       properties:
         message:
           type: string
+    QueueMembersOutput:
+      title: QueueMembersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueueMember'
+    Conflict:
+      title: Conflict
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    GenericChannel:
+      title: GenericChannel
+      type: object
+      required:
+      - genericChannelName
+      - availability
+      properties:
+        genericChannelName:
+          type: string
+        availability:
+          description: 'values: [Available, NotAvailable]'
+          type: string
+        queueSize:
+          description: The number of conversations currently waiting in the queue. This field will only be present if the queue availability is NotAvailable.
+          type: integer
+          format: int32
+    BulkQueueEndpointInput:
+      title: BulkQueueEndpointInput
+      type: object
+      properties:
+        agentIds:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            format: uuid
     ChannelAvailabilityOutcome:
       title: ChannelAvailabilityOutcome
       oneOf:
       - $ref: '#/components/schemas/Failure'
       - $ref: '#/components/schemas/Success'
-    BulkActionSuccess_BulkError_UUID:
-      title: BulkActionSuccess_BulkError_UUID
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CreateOrUpdateQueueRequest:
+      title: CreateOrUpdateQueueRequest
+      type: object
+      required:
+      - name
+      - callFunctionality
+      - isDefault
+      - isDoNotOfferEnabled
+      properties:
+        name:
+          type: string
+        callFunctionality:
+          type: boolean
+        isDefault:
+          type: boolean
+        queueThresholds:
+          $ref: '#/components/schemas/Map_QueueThreshold_Int'
+        offerTimeout:
+          type: integer
+          format: int32
+        offerAlgorithm:
+          description: 'values: [AgentPriorityOneAtATimeRandom, AllAtOnce, AgentPriorityLongestIdle, AgentPriorityAllAtOnce, LongestIdle, OneAtATimeRandom]'
+          type: string
+        wrapupTimeout:
+          type: integer
+          format: int32
+        priority:
+          type: integer
+          format: int32
+        offerAbandonedConversations:
+          type: boolean
+        doNotOfferTimeouts:
+          $ref: '#/components/schemas/Map_ConversationChannel_Int'
+        isDoNotOfferEnabled:
+          type: boolean
+        preferredAgentTimeouts:
+          $ref: '#/components/schemas/Map_ConversationChannel_Int'
+        isPreferredAgentEnabled:
+          type: boolean
+        preferredAgentOfflineTimeout:
+          type: integer
+          format: int32
+        personalAgentOfflineTimeout:
+          type: integer
+          format: int32
+        isRestricted:
+          type: boolean
+    QueueMember:
+      title: QueueMember
+      type: object
+      required:
+      - agentId
+      properties:
+        agentId:
+          type: string
+        priority:
+          type: integer
+          format: int32
+    BulkActionOutcome_BulkError_UUID:
+      title: BulkActionOutcome_BulkError_UUID
+      oneOf:
+      - $ref: '#/components/schemas/BulkActionFailure_BulkError_UUID'
+      - $ref: '#/components/schemas/BulkActionSuccess_BulkError_UUID'
+    CreateQueueInput:
+      title: CreateQueueInput
+      type: object
+      required:
+      - request
+      properties:
+        request:
+          $ref: '#/components/schemas/CreateOrUpdateQueueRequest'
+    BulkError:
+      title: BulkError
+      oneOf:
+      - $ref: '#/components/schemas/EmptyPatchSet'
+      - $ref: '#/components/schemas/ErrorResponse'
+      - $ref: '#/components/schemas/Infrastructure'
+      - $ref: '#/components/schemas/Integrity'
+      - $ref: '#/components/schemas/InvalidArgument'
+      - $ref: '#/components/schemas/NotFound1'
+      - $ref: '#/components/schemas/Validation'
+    GetQueuedConversationPositionOutput:
+      title: GetQueuedConversationPositionOutput
       type: object
       required:
       - data
       properties:
         data:
-          type: string
-          format: uuid
-    Infrastructure:
-      title: Infrastructure
+          $ref: '#/components/schemas/QueuedConversation'
+    EmptyPatchSet:
+      title: EmptyPatchSet
       type: object
       required:
       - id
@@ -623,10 +747,6 @@ components:
           type: string
         message:
           type: string
-    ChannelAvailability:
-      title: ChannelAvailability
-      oneOf:
-      - $ref: '#/components/schemas/GenericChannel'
     BulkQueueEndpointOutput:
       title: BulkQueueEndpointOutput
       type: object
@@ -635,6 +755,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BulkActionOutcome_BulkError_UUID'
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    InvalidArgument:
+      title: InvalidArgument
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CreateQueueOutput:
+      title: CreateQueueOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Queue1'
     NotFound1:
       title: NotFound
       type: object
@@ -646,79 +790,14 @@ components:
           type: string
         message:
           type: string
-    Integrity:
-      title: Integrity
+    BadRequest:
+      title: BadRequest
       type: object
       required:
-      - id
       - message
       properties:
-        id:
-          type: string
         message:
           type: string
-    GetQueuedConversationPositionOutput:
-      title: GetQueuedConversationPositionOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/QueuedConversation'
-    Map_QueueThreshold_Int:
-      title: Map_QueueThreshold_Int
-      description: 'values: [SlaTimeLimit, AvailableAgents, LongestWait, SlaPercentage, WaitingConversations]'
-      type: object
-      additionalProperties:
-        type: integer
-        format: int32
-    ListQueuesOutput:
-      title: ListQueuesOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Queue1'
-    Map_ConversationChannel_Int:
-      title: Map_ConversationChannel_Int
-      description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-      type: object
-      additionalProperties:
-        type: integer
-        format: int32
-    Failure:
-      title: Failure
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ChannelAvailabilityError'
-    UnexpectedError:
-      title: UnexpectedError
-      type: object
-      required:
-      - channel
-      - message
-      properties:
-        channel:
-          type: string
-        message:
-          type: string
-    QueuedConversation:
-      title: QueuedConversation
-      type: object
-      required:
-      - queuedAt
-      properties:
-        position:
-          description: Approximate position of the conversation in the current queue
-          type: integer
-          format: int32
-        queuedAt:
-          type: string
-          format: date-time
     Queue1:
       title: Queue
       type: object
@@ -780,84 +859,31 @@ components:
           format: int32
         isRestricted:
           type: boolean
-    QueueMember:
-      title: QueueMember
-      type: object
-      required:
-      - agentId
-      properties:
-        agentId:
-          type: string
-        priority:
-          type: integer
-          format: int32
-    Map_ConversationChannel_Set_String:
-      title: Map_ConversationChannel_Set_String
+    Map_ConversationChannel_Int:
+      title: Map_ConversationChannel_Int
       description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
       type: object
       additionalProperties:
-        type: array
-        uniqueItems: true
-        items:
-          type: string
-    BulkQueueEndpointInput:
-      title: BulkQueueEndpointInput
-      type: object
-      properties:
-        agentIds:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-            format: uuid
-    CreateQueueInput:
-      title: CreateQueueInput
-      type: object
-      required:
-      - request
-      properties:
-        request:
-          $ref: '#/components/schemas/CreateOrUpdateQueueRequest'
-    GenericChannel:
-      title: GenericChannel
-      type: object
-      required:
-      - genericChannelName
-      - availability
-      properties:
-        genericChannelName:
-          type: string
-        availability:
-          description: 'values: [Available, NotAvailable]'
-          type: string
-        queueSize:
-          description: The number of conversations currently waiting in the queue. This field will only be present if the queue availability is NotAvailable.
-          type: integer
-          format: int32
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    InvalidArgument:
-      title: InvalidArgument
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    CreateQueueOutput:
-      title: CreateQueueOutput
+        type: integer
+        format: int32
+    GetQueueByIdOutput:
+      title: GetQueueByIdOutput
       type: object
       required:
       - data
       properties:
         data:
           $ref: '#/components/schemas/Queue1'
+    Validation:
+      title: Validation
+      type: object
+      required:
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
     Success:
       title: Success
       type: object
@@ -866,12 +892,54 @@ components:
       properties:
         channelAvailability:
           $ref: '#/components/schemas/ChannelAvailability'
-    Conflict:
-      title: Conflict
+    UnexpectedError:
+      title: UnexpectedError
       type: object
       required:
+      - channel
       - message
       properties:
+        channel:
+          type: string
+        message:
+          type: string
+    ChannelAvailability:
+      title: ChannelAvailability
+      oneOf:
+      - $ref: '#/components/schemas/GenericChannel'
+    Map_QueueThreshold_Int:
+      title: Map_QueueThreshold_Int
+      description: 'values: [SlaTimeLimit, AvailableAgents, LongestWait, SlaPercentage, WaitingConversations]'
+      type: object
+      additionalProperties:
+        type: integer
+        format: int32
+    BulkActionSuccess_BulkError_UUID:
+      title: BulkActionSuccess_BulkError_UUID
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: string
+          format: uuid
+    Failure:
+      title: Failure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ChannelAvailabilityError'
+    Infrastructure:
+      title: Infrastructure
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
         message:
           type: string
     BulkActionFailure_BulkError_UUID:
@@ -882,87 +950,19 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/BulkError'
-    BulkError:
-      title: BulkError
-      oneOf:
-      - $ref: '#/components/schemas/EmptyPatchSet'
-      - $ref: '#/components/schemas/ErrorResponse'
-      - $ref: '#/components/schemas/Infrastructure'
-      - $ref: '#/components/schemas/Integrity'
-      - $ref: '#/components/schemas/InvalidArgument'
-      - $ref: '#/components/schemas/NotFound1'
-      - $ref: '#/components/schemas/Validation'
-    QueueMembersOutput:
-      title: QueueMembersOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueueMember'
-    ErrorResponse:
-      title: ErrorResponse
+    QueuedConversation:
+      title: QueuedConversation
       type: object
       required:
-      - message
+      - queuedAt
       properties:
-        message:
+        position:
+          description: Approximate position of the conversation in the current queue
+          type: integer
+          format: int32
+        queuedAt:
           type: string
-    GetQueueByIdOutput:
-      title: GetQueueByIdOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Queue1'
-    CreateOrUpdateQueueRequest:
-      title: CreateOrUpdateQueueRequest
-      type: object
-      required:
-      - name
-      - callFunctionality
-      - isDefault
-      - isDoNotOfferEnabled
-      properties:
-        name:
-          type: string
-        callFunctionality:
-          type: boolean
-        isDefault:
-          type: boolean
-        queueThresholds:
-          $ref: '#/components/schemas/Map_QueueThreshold_Int'
-        offerTimeout:
-          type: integer
-          format: int32
-        offerAlgorithm:
-          description: 'values: [AgentPriorityOneAtATimeRandom, AllAtOnce, AgentPriorityLongestIdle, AgentPriorityAllAtOnce, LongestIdle, OneAtATimeRandom]'
-          type: string
-        wrapupTimeout:
-          type: integer
-          format: int32
-        priority:
-          type: integer
-          format: int32
-        offerAbandonedConversations:
-          type: boolean
-        doNotOfferTimeouts:
-          $ref: '#/components/schemas/Map_ConversationChannel_Int'
-        isDoNotOfferEnabled:
-          type: boolean
-        preferredAgentTimeouts:
-          $ref: '#/components/schemas/Map_ConversationChannel_Int'
-        isPreferredAgentEnabled:
-          type: boolean
-        preferredAgentOfflineTimeout:
-          type: integer
-          format: int32
-        personalAgentOfflineTimeout:
-          type: integer
-          format: int32
-        isRestricted:
-          type: boolean
+          format: date-time
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

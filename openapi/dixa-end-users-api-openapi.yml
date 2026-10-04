@@ -907,40 +907,6 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    PaginationLinks:
-      title: PaginationLinks
-      type: object
-      properties:
-        previous:
-          description: url
-          type: string
-        next:
-          description: url
-          type: string
-    BulkActionOutcome_BulkError_EndUser:
-      title: BulkActionOutcome_BulkError_EndUser
-      oneOf:
-      - $ref: '#/components/schemas/BulkActionFailure_BulkError_EndUser'
-      - $ref: '#/components/schemas/BulkActionSuccess_BulkError_EndUser'
-    PatchEndUserOutput:
-      title: PatchEndUserOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/EndUser'
-    EmptyPatchSet:
-      title: EmptyPatchSet
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
     AnonymizedConversation:
       title: AnonymizedConversation
       type: object
@@ -984,16 +950,300 @@ components:
         transportExpiresAt:
           type: string
           format: date-time
-    Map_UUID_Option_AttributeValue:
-      title: Map_UUID_Option_AttributeValue
+    AnonymizationRequestStatus:
+      title: AnonymizationRequestStatus
       type: object
-      additionalProperties:
-        description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
-        oneOf:
-        - type: array
+      required:
+      - id
+      - entityType
+      - _type
+      - initiatedAt
+      - targetEntityId
+      - requestedBy
+      properties:
+        id:
+          type: string
+          format: uuid
+        entityType:
+          $ref: '#/components/schemas/DeprecatedAnonymizationType'
+        _type:
+          description: 'values: [Conversation, Message, User]'
+          type: string
+        initiatedAt:
+          type: string
+          format: date-time
+        targetEntityId:
+          type: string
+        requestedBy:
+          type: string
+          format: uuid
+        processedAt:
+          type: string
+          format: date-time
+    BulkUpdateEndUsersInput:
+      title: BulkUpdateEndUsersInput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUpdateEndUserInput'
+    BulkPatchEndUsersInput:
+      title: BulkPatchEndUsersInput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkPatchEndUserInput'
+    ChatConversation:
+      title: ChatConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        browserInfo:
+          $ref: '#/components/schemas/BrowserInfo'
+        language:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    UpdateEndUserOutput:
+      title: UpdateEndUserOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    BrowserInfo:
+      title: BrowserInfo
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        ipAddress:
+          type: string
+        originatingUrl:
+          type: string
+    Integrity:
+      title: Integrity
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CreateEndUserOutput:
+      title: CreateEndUserOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    Assignment:
+      title: Assignment
+      type: object
+      required:
+      - agentId
+      - assignedAt
+      properties:
+        agentId:
+          type: string
+          format: uuid
+        assignedAt:
+          type: string
+          format: date-time
+    Conflict:
+      title: Conflict
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CreateEndUsersInput:
+      title: CreateEndUsersInput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateEndUserInput'
+    UnknownAnonymizationType:
+      title: UnknownAnonymizationType
+      type: object
+    PatchEndUserInput:
+      title: PatchEndUserInput
+      type: object
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        additionalEmails:
+          type: array
+          uniqueItems: true
           items:
             type: string
-        - type: string
+        additionalPhoneNumbers:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleNames:
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          type: string
+        externalId:
+          type: string
+    BulkUpdateEndUserInput:
+      title: BulkUpdateEndUserInput
+      type: object
+      required:
+      - id
+      - displayName
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        additionalEmails:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleNames:
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          type: string
+        externalId:
+          type: string
+    PatchEndUserCustomAttributesOutput:
+      title: PatchEndUserCustomAttributesOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Unauthorized:
+      title: Unauthorized
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    SideConversation:
+      title: SideConversation
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
+    AnonymizeEntityOutput:
+      title: AnonymizeEntityOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/AnonymizationRequestStatus'
+    FollowUp:
+      title: FollowUp
+      type: object
+      required:
+      - parentId
+      properties:
+        parentId:
+          type: integer
+          format: int64
     EndUser:
       title: EndUser
       type: object
@@ -1052,113 +1302,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomAttribute'
-    ContactFormConversation:
-      title: ContactFormConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      - fromEmail
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        fromEmail:
-          type: string
-        toEmail:
-          type: string
-        integrationEmail:
-          type: string
-        language:
-          type: string
-        subject:
-          type: string
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    UpdateEndUserOutput:
-      title: UpdateEndUserOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/EndUser'
-    FacebookMessengerConversation:
-      title: FacebookMessengerConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    ChatConversation:
-      title: ChatConversation
+    MessengerConversation:
+      title: MessengerConversation
       type: object
       required:
       - id
@@ -1204,316 +1349,16 @@ components:
         transportExpiresAt:
           type: string
           format: date-time
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    TwitterConversation:
-      title: TwitterConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      - conversationType
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        conversationType:
-          description: 'values: [DirectMessage, Tweet]'
-          type: string
-        contactPointTwitterId:
-          type: string
-        endUserTwitterId:
-          type: string
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    Validation:
-      title: Validation
-      type: object
-      required:
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    PstnPhoneConversation:
-      title: PstnPhoneConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    EmailForward:
-      title: EmailForward
-      type: object
-      required:
-      - parentId
-      properties:
-        parentId:
-          type: integer
-          format: int64
-    WhatsAppConversation:
-      title: WhatsAppConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    CreateEndUserOutput:
-      title: CreateEndUserOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/EndUser'
-    PatchEndUserInput:
-      title: PatchEndUserInput
-      type: object
-      properties:
-        displayName:
-          type: string
-        email:
-          type: string
-        phoneNumber:
-          type: string
-        additionalEmails:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        additionalPhoneNumbers:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        middleNames:
-          type: array
-          items:
-            type: string
-        avatarUrl:
-          type: string
-        externalId:
-          type: string
-    CreateEndUsersOutput:
-      title: CreateEndUsersOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkActionOutcome_BulkError_EndUser'
-    BulkPatchEndUsersInput:
-      title: BulkPatchEndUsersInput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkPatchEndUserInput'
-    CreateEndUserInput:
-      title: CreateEndUserInput
-      type: object
-      properties:
-        displayName:
-          description: The contact's display name
-          type: string
-        email:
-          description: The contact's primary email address
-          type: string
-        phoneNumber:
-          description: The contact's primary phone number
-          type: string
-        additionalEmails:
-          description: Additional email addresses for the contact
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        additionalPhoneNumbers:
-          description: Additional phone numbers for the contact
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        firstName:
-          description: The contact's first name
-          type: string
-        lastName:
-          description: The contact's last name
-          type: string
-        middleNames:
-          description: The contact's middle names
-          type: array
-          items:
-            type: string
-        avatarUrl:
-          description: The url from which to load the contact's avatar
-          type: string
-        externalId:
-          description: Custom external identifier for the contact
-          type: string
-    MessageAnonymizationType:
-      title: MessageAnonymizationType
-      type: object
-    Infrastructure:
-      title: Infrastructure
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    Conversation:
-      title: Conversation
+    BulkError:
+      title: BulkError
       oneOf:
-      - $ref: '#/components/schemas/AnonymizedConversation'
-      - $ref: '#/components/schemas/ChatConversation'
-      - $ref: '#/components/schemas/ContactFormConversation'
-      - $ref: '#/components/schemas/EmailConversation'
-      - $ref: '#/components/schemas/FacebookMessengerConversation'
-      - $ref: '#/components/schemas/GenericConversation'
-      - $ref: '#/components/schemas/MessengerConversation'
-      - $ref: '#/components/schemas/PstnPhoneConversation'
-      - $ref: '#/components/schemas/SmsConversation'
-      - $ref: '#/components/schemas/TwitterConversation'
-      - $ref: '#/components/schemas/WhatsAppConversation'
-    Queue:
-      title: Queue
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-        queuedAt:
-          type: string
-          format: date-time
+      - $ref: '#/components/schemas/EmptyPatchSet'
+      - $ref: '#/components/schemas/ErrorResponse'
+      - $ref: '#/components/schemas/Infrastructure'
+      - $ref: '#/components/schemas/Integrity'
+      - $ref: '#/components/schemas/InvalidArgument'
+      - $ref: '#/components/schemas/NotFound1'
+      - $ref: '#/components/schemas/Validation'
     EmailConversation:
       title: EmailConversation
       type: object
@@ -1570,70 +1415,8 @@ components:
         transportExpiresAt:
           type: string
           format: date-time
-    BulkPatchEndUserInput:
-      title: BulkPatchEndUserInput
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-        displayName:
-          type: string
-        email:
-          type: string
-        phoneNumber:
-          type: string
-        additionalEmails:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        additionalPhoneNumbers:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        middleNames:
-          type: array
-          items:
-            type: string
-        avatarUrl:
-          type: string
-        externalId:
-          type: string
-    ConversationAnonymizationType:
-      title: ConversationAnonymizationType
-      type: object
-    NotFound1:
-      title: NotFound
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    Integrity:
-      title: Integrity
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-    GenericConversation:
-      title: GenericConversation
+    FacebookMessengerConversation:
+      title: FacebookMessengerConversation
       type: object
       required:
       - id
@@ -1653,10 +1436,6 @@ components:
         createdAt:
           type: string
           format: date-time
-        fromContactPointId:
-          type: string
-        toContactPointId:
-          type: string
         direction:
           description: 'values: [Inbound, Internal, Outbound]'
           type: string
@@ -1679,6 +1458,114 @@ components:
         transportExpiresAt:
           type: string
           format: date-time
+    Conversation:
+      title: Conversation
+      oneOf:
+      - $ref: '#/components/schemas/AnonymizedConversation'
+      - $ref: '#/components/schemas/ChatConversation'
+      - $ref: '#/components/schemas/ContactFormConversation'
+      - $ref: '#/components/schemas/EmailConversation'
+      - $ref: '#/components/schemas/FacebookMessengerConversation'
+      - $ref: '#/components/schemas/GenericConversation'
+      - $ref: '#/components/schemas/MessengerConversation'
+      - $ref: '#/components/schemas/PstnPhoneConversation'
+      - $ref: '#/components/schemas/SmsConversation'
+      - $ref: '#/components/schemas/TwitterConversation'
+      - $ref: '#/components/schemas/WhatsAppConversation'
+    PatchEndUserOutput:
+      title: PatchEndUserOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    EmptyPatchSet:
+      title: EmptyPatchSet
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    ConversationAnonymizationType:
+      title: ConversationAnonymizationType
+      type: object
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    InvalidArgument:
+      title: InvalidArgument
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Map_UUID_Option_AttributeValue:
+      title: Map_UUID_Option_AttributeValue
+      type: object
+      additionalProperties:
+        description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+        oneOf:
+        - type: array
+          items:
+            type: string
+        - type: string
+    NotFound1:
+      title: NotFound
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    BulkActionSuccess_BulkError_EndUser:
+      title: BulkActionSuccess_BulkError_EndUser
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    DeprecatedAnonymizationType:
+      title: DeprecatedAnonymizationType
+      description: Replaced by _type field
+      deprecated: true
+      oneOf:
+      - $ref: '#/components/schemas/ConversationAnonymizationType'
+      - $ref: '#/components/schemas/MessageAnonymizationType'
+      - $ref: '#/components/schemas/UnknownAnonymizationType'
+      - $ref: '#/components/schemas/UserAnonymizationType'
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
     ListEndUserConversationsOutput:
       title: ListEndUserConversationsOutput
       type: object
@@ -1699,109 +1586,6 @@ components:
             $ref: '#/components/schemas/EndUser'
         meta:
           $ref: '#/components/schemas/PaginationLinks'
-    BulkActionSuccess_BulkError_EndUser:
-      title: BulkActionSuccess_BulkError_EndUser
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/EndUser'
-    PatchEndUserCustomAttributesOutput:
-      title: PatchEndUserCustomAttributesOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-    FollowUp:
-      title: FollowUp
-      type: object
-      required:
-      - parentId
-      properties:
-        parentId:
-          type: integer
-          format: int64
-    MessengerConversation:
-      title: MessengerConversation
-      type: object
-      required:
-      - id
-      - requesterId
-      - channel
-      - createdAt
-      properties:
-        id:
-          type: integer
-          format: int64
-        requesterId:
-          type: string
-          format: uuid
-        channel:
-          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        direction:
-          description: 'values: [Inbound, Internal, Outbound]'
-          type: string
-        state:
-          description: 'values: [AwaitingPending, Closed, Open, Pending]'
-          type: string
-        stateUpdatedAt:
-          type: string
-          format: date-time
-        assignment:
-          $ref: '#/components/schemas/Assignment'
-        queue:
-          $ref: '#/components/schemas/Queue'
-        browserInfo:
-          $ref: '#/components/schemas/BrowserInfo'
-        language:
-          type: string
-        link:
-          $ref: '#/components/schemas/ConversationLink'
-        customAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-        transportExpiresAt:
-          type: string
-          format: date-time
-    CreateEndUsersInput:
-      title: CreateEndUsersInput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateEndUserInput'
-    CustomAttribute:
-      title: CustomAttribute
-      type: object
-      required:
-      - id
-      - name
-      - identifier
-      - value
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        identifier:
-          type: string
-        value:
-          description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
-          oneOf:
-          - type: array
-            items:
-              type: string
-          - type: string
     SmsConversation:
       title: SmsConversation
       type: object
@@ -1849,127 +1633,64 @@ components:
         transportExpiresAt:
           type: string
           format: date-time
-    BadRequest:
-      title: BadRequest
+    MessageAnonymizationType:
+      title: MessageAnonymizationType
+      type: object
+    Validation:
+      title: Validation
       type: object
       required:
       - message
       properties:
+        id:
+          type: string
         message:
           type: string
-    InvalidArgument:
-      title: InvalidArgument
+    PstnPhoneConversation:
+      title: PstnPhoneConversation
       type: object
       required:
-      - message
+      - id
+      - requesterId
+      - channel
+      - createdAt
       properties:
-        message:
-          type: string
-    Conflict:
-      title: Conflict
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    AnonymizeEntityOutput:
-      title: AnonymizeEntityOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/AnonymizationRequestStatus'
-    BulkUpdateEndUsersOutput:
-      title: BulkUpdateEndUsersOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkActionOutcome_BulkError_EndUser'
-    Assignment:
-      title: Assignment
-      type: object
-      required:
-      - agentId
-      - assignedAt
-      properties:
-        agentId:
-          type: string
-          format: uuid
-        assignedAt:
-          type: string
-          format: date-time
-    ConversationLink:
-      title: ConversationLink
-      oneOf:
-      - $ref: '#/components/schemas/EmailForward'
-      - $ref: '#/components/schemas/FollowUp'
-      - $ref: '#/components/schemas/SideConversation'
-    DeprecatedAnonymizationType:
-      title: DeprecatedAnonymizationType
-      description: Replaced by _type field
-      deprecated: true
-      oneOf:
-      - $ref: '#/components/schemas/ConversationAnonymizationType'
-      - $ref: '#/components/schemas/MessageAnonymizationType'
-      - $ref: '#/components/schemas/UnknownAnonymizationType'
-      - $ref: '#/components/schemas/UserAnonymizationType'
-    BulkError:
-      title: BulkError
-      oneOf:
-      - $ref: '#/components/schemas/EmptyPatchSet'
-      - $ref: '#/components/schemas/ErrorResponse'
-      - $ref: '#/components/schemas/Infrastructure'
-      - $ref: '#/components/schemas/Integrity'
-      - $ref: '#/components/schemas/InvalidArgument'
-      - $ref: '#/components/schemas/NotFound1'
-      - $ref: '#/components/schemas/Validation'
-    ErrorResponse:
-      title: ErrorResponse
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    GetEndUserOutput:
-      title: GetEndUserOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/EndUser'
-    BulkUpdateEndUsersInput:
-      title: BulkUpdateEndUsersInput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkUpdateEndUserInput'
-    SideConversation:
-      title: SideConversation
-      type: object
-      required:
-      - parentId
-      properties:
-        parentId:
+        id:
           type: integer
           format: int64
-    Unauthorized:
-      title: Unauthorized
-      type: object
-      required:
-      - message
-      properties:
-        message:
+        requesterId:
           type: string
-    BulkPatchEndUsersOutput:
-      title: BulkPatchEndUsersOutput
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    BulkUpdateEndUsersOutput:
+      title: BulkUpdateEndUsersOutput
       type: object
       properties:
         data:
@@ -2010,56 +1731,349 @@ components:
           type: string
         externalId:
           type: string
-    BrowserInfo:
-      title: BrowserInfo
+    CreateEndUserInput:
+      title: CreateEndUserInput
+      type: object
+      properties:
+        displayName:
+          description: The contact's display name
+          type: string
+        email:
+          description: The contact's primary email address
+          type: string
+        phoneNumber:
+          description: The contact's primary phone number
+          type: string
+        additionalEmails:
+          description: Additional email addresses for the contact
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        additionalPhoneNumbers:
+          description: Additional phone numbers for the contact
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        firstName:
+          description: The contact's first name
+          type: string
+        lastName:
+          description: The contact's last name
+          type: string
+        middleNames:
+          description: The contact's middle names
+          type: array
+          items:
+            type: string
+        avatarUrl:
+          description: The url from which to load the contact's avatar
+          type: string
+        externalId:
+          description: Custom external identifier for the contact
+          type: string
+    EmailForward:
+      title: EmailForward
       type: object
       required:
-      - name
+      - parentId
       properties:
-        name:
-          type: string
-        version:
-          type: string
-        ipAddress:
-          type: string
-        originatingUrl:
-          type: string
-    AnonymizationRequestStatus:
-      title: AnonymizationRequestStatus
+        parentId:
+          type: integer
+          format: int64
+    GenericConversation:
+      title: GenericConversation
       type: object
       required:
       - id
-      - entityType
-      - _type
-      - initiatedAt
-      - targetEntityId
-      - requestedBy
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        fromContactPointId:
+          type: string
+        toContactPointId:
+          type: string
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    GetEndUserOutput:
+      title: GetEndUserOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EndUser'
+    BulkActionFailure_BulkError_EndUser:
+      title: BulkActionFailure_BulkError_EndUser
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/BulkError'
+    BulkActionOutcome_BulkError_EndUser:
+      title: BulkActionOutcome_BulkError_EndUser
+      oneOf:
+      - $ref: '#/components/schemas/BulkActionFailure_BulkError_EndUser'
+      - $ref: '#/components/schemas/BulkActionSuccess_BulkError_EndUser'
+    WhatsAppConversation:
+      title: WhatsAppConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    CustomAttribute:
+      title: CustomAttribute
+      type: object
+      required:
+      - id
+      - name
+      - identifier
+      - value
       properties:
         id:
           type: string
           format: uuid
-        entityType:
-          $ref: '#/components/schemas/DeprecatedAnonymizationType'
-        _type:
-          description: 'values: [Conversation, Message, User]'
+        name:
           type: string
-        initiatedAt:
+        identifier:
           type: string
-          format: date-time
-        targetEntityId:
-          type: string
-        requestedBy:
-          type: string
-          format: uuid
-        processedAt:
-          type: string
-          format: date-time
-    BulkUpdateEndUserInput:
-      title: BulkUpdateEndUserInput
+        value:
+          description: 'AttributeValue values: String[] if the type of the custom attribute is Select or String if the type of the custom attribute is Text'
+          oneOf:
+          - type: array
+            items:
+              type: string
+          - type: string
+    CreateEndUsersOutput:
+      title: CreateEndUsersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_BulkError_EndUser'
+    ConversationLink:
+      title: ConversationLink
+      oneOf:
+      - $ref: '#/components/schemas/EmailForward'
+      - $ref: '#/components/schemas/FollowUp'
+      - $ref: '#/components/schemas/SideConversation'
+    BulkPatchEndUsersOutput:
+      title: BulkPatchEndUsersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkActionOutcome_BulkError_EndUser'
+    Queue:
+      title: Queue
       type: object
       required:
       - id
-      - displayName
+      properties:
+        id:
+          type: string
+          format: uuid
+        queuedAt:
+          type: string
+          format: date-time
+    ContactFormConversation:
+      title: ContactFormConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - fromEmail
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        fromEmail:
+          type: string
+        toEmail:
+          type: string
+        integrationEmail:
+          type: string
+        language:
+          type: string
+        subject:
+          type: string
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    TwitterConversation:
+      title: TwitterConversation
+      type: object
+      required:
+      - id
+      - requesterId
+      - channel
+      - createdAt
+      - conversationType
+      properties:
+        id:
+          type: integer
+          format: int64
+        requesterId:
+          type: string
+          format: uuid
+        channel:
+          description: 'values: [WhatsApp, Voicemail, WidgetChat, FacebookMessenger, Twitter, Email, ContactForm, Callback, PstnPhone, Sms, Messenger]'
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        conversationType:
+          description: 'values: [DirectMessage, Tweet]'
+          type: string
+        contactPointTwitterId:
+          type: string
+        endUserTwitterId:
+          type: string
+        direction:
+          description: 'values: [Inbound, Internal, Outbound]'
+          type: string
+        state:
+          description: 'values: [AwaitingPending, Closed, Open, Pending]'
+          type: string
+        stateUpdatedAt:
+          type: string
+          format: date-time
+        assignment:
+          $ref: '#/components/schemas/Assignment'
+        queue:
+          $ref: '#/components/schemas/Queue'
+        link:
+          $ref: '#/components/schemas/ConversationLink'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
+        transportExpiresAt:
+          type: string
+          format: date-time
+    Infrastructure:
+      title: Infrastructure
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    UserAnonymizationType:
+      title: UserAnonymizationType
+      type: object
+    BulkPatchEndUserInput:
+      title: BulkPatchEndUserInput
+      type: object
+      required:
+      - id
       properties:
         id:
           type: string
@@ -2092,20 +2106,6 @@ components:
           type: string
         externalId:
           type: string
-    BulkActionFailure_BulkError_EndUser:
-      title: BulkActionFailure_BulkError_EndUser
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/BulkError'
-    UnknownAnonymizationType:
-      title: UnknownAnonymizationType
-      type: object
-    UserAnonymizationType:
-      title: UserAnonymizationType
-      type: object
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

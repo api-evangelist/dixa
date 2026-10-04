@@ -417,24 +417,63 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    CreateRatingOfferInput:
-      title: CreateRatingOfferInput
+    RatingResult:
+      title: RatingResult
       type: object
       required:
-      - ratingType
+      - ratingId
+      - ratingResult
       properties:
+        ratingId:
+          type: string
         userId:
-          description: If userId is not provided, the conversation requester will be picked.
           type: string
-        agentId:
-          description: If an agentId is not provided, the agent that is most likely to be the target will be picked. Please note that providing an agentId that is not part of the conversation may skew metrics in Intelligence.
+        ratingResult:
+          $ref: '#/components/schemas/SubmittedRatingResult'
+        comment:
           type: string
-        ratingType:
-          description: 'The type of numeric rating. E.g.: ''Csat'', ''ThumbsUpOrDown'', ''Nps''.'
-          type: string
-        offeredAt:
+        submittedAt:
           type: string
           format: date-time
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    CreateRatingResultOutput:
+      title: CreateRatingResultOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RatingResult'
+    ListConversationRatingsOutput:
+      title: ListConversationRatingsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationRating'
+    Map_String:
+      title: Map_String
+      type: object
+      additionalProperties:
+        type: string
+    Nps:
+      title: Nps
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: Numeric value between 0 and 10 representing the net promoter score.
+          type: integer
+          format: int32
     RatingOffer:
       title: RatingOffer
       type: object
@@ -456,75 +495,36 @@ components:
         offeredAt:
           type: string
           format: date-time
-    ListConversationRatingsOutput:
-      title: ListConversationRatingsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationRating'
-    Nps:
-      title: Nps
+    BadRequest:
+      title: BadRequest
       type: object
       required:
-      - value
+      - message
       properties:
-        value:
-          description: Numeric value between 0 and 10 representing the net promoter score.
-          type: integer
-          format: int32
-    ThumbsUpOrDown:
-      title: ThumbsUpOrDown
+        message:
+          type: string
+    SubmittedRatingResult:
+      title: SubmittedRatingResult
+      oneOf:
+      - $ref: '#/components/schemas/Csat'
+      - $ref: '#/components/schemas/Nps'
+      - $ref: '#/components/schemas/ThumbsUpOrDown'
+    CreateRatingOfferInput:
+      title: CreateRatingOfferInput
       type: object
       required:
-      - value
-      properties:
-        value:
-          description: One of the the numeric values 0 (thumbs down) and 1 (thumbs up).
-          type: integer
-          format: int32
-    CreateRatingResultOutput:
-      title: CreateRatingResultOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/RatingResult'
-    CreateRatingResultInput:
-      title: CreateRatingResultInput
-      type: object
-      required:
-      - ratingResult
+      - ratingType
       properties:
         userId:
-          description: The userId property is no longer used so it's made optional to keep backwards compatibility. A null value can be provided instead of an actual ID.
-          deprecated: true
+          description: If userId is not provided, the conversation requester will be picked.
           type: string
-        ratingResult:
-          $ref: '#/components/schemas/SubmittedRatingResult'
-        comment:
+        agentId:
+          description: If an agentId is not provided, the agent that is most likely to be the target will be picked. Please note that providing an agentId that is not part of the conversation may skew metrics in Intelligence.
           type: string
-        submittedAt:
+        ratingType:
+          description: 'The type of numeric rating. E.g.: ''Csat'', ''ThumbsUpOrDown'', ''Nps''.'
           type: string
-          format: date-time
-    RatingResult:
-      title: RatingResult
-      type: object
-      required:
-      - ratingId
-      - ratingResult
-      properties:
-        ratingId:
-          type: string
-        userId:
-          type: string
-        ratingResult:
-          $ref: '#/components/schemas/SubmittedRatingResult'
-        comment:
-          type: string
-        submittedAt:
+        offeredAt:
           type: string
           format: date-time
     ConversationRating:
@@ -562,6 +562,14 @@ components:
           type: string
         timestamps:
           $ref: '#/components/schemas/Map_String'
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
     Csat:
       title: Csat
       type: object
@@ -572,41 +580,6 @@ components:
           description: Numeric value between 1 and 5 representing the customer's satisfaction level.
           type: integer
           format: int32
-    Map_String:
-      title: Map_String
-      type: object
-      additionalProperties:
-        type: string
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    SubmittedRatingResult:
-      title: SubmittedRatingResult
-      oneOf:
-      - $ref: '#/components/schemas/Csat'
-      - $ref: '#/components/schemas/Nps'
-      - $ref: '#/components/schemas/ThumbsUpOrDown'
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
     CreateRatingOfferOutput:
       title: CreateRatingOfferOutput
       type: object
@@ -615,6 +588,33 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RatingOffer'
+    CreateRatingResultInput:
+      title: CreateRatingResultInput
+      type: object
+      required:
+      - ratingResult
+      properties:
+        userId:
+          description: The userId property is no longer used so it's made optional to keep backwards compatibility. A null value can be provided instead of an actual ID.
+          deprecated: true
+          type: string
+        ratingResult:
+          $ref: '#/components/schemas/SubmittedRatingResult'
+        comment:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+    ThumbsUpOrDown:
+      title: ThumbsUpOrDown
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: One of the the numeric values 0 (thumbs down) and 1 (thumbs up).
+          type: integer
+          format: int32
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

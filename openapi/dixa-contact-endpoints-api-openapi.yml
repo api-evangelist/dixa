@@ -102,47 +102,6 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    ListContactPointsOutput:
-      title: ListContactPointsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactEndpoint'
-    GetContactPointByIdOutput:
-      title: GetContactPointByIdOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ContactEndpoint'
-    ContactEndpoint:
-      title: ContactEndpoint
-      oneOf:
-      - $ref: '#/components/schemas/EmailEndpoint'
-      - $ref: '#/components/schemas/TelephonyEndpoint'
-    EmailEndpoint:
-      title: EmailEndpoint
-      type: object
-      required:
-      - address
-      properties:
-        address:
-          type: string
-        senderOverride:
-          type: string
-        name:
-          type: string
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
     ServerError:
       title: ServerError
       type: object
@@ -165,6 +124,47 @@ components:
             description: 'values: [Sms, VoiceInbound, VoiceOutbound]'
             type: string
         name:
+          type: string
+    ContactEndpoint:
+      title: ContactEndpoint
+      oneOf:
+      - $ref: '#/components/schemas/EmailEndpoint'
+      - $ref: '#/components/schemas/TelephonyEndpoint'
+    ListContactPointsOutput:
+      title: ListContactPointsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactEndpoint'
+    GetContactPointByIdOutput:
+      title: GetContactPointByIdOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ContactEndpoint'
+    EmailEndpoint:
+      title: EmailEndpoint
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+        senderOverride:
+          type: string
+        name:
+          type: string
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
           type: string
     NotFound:
       title: NotFound
