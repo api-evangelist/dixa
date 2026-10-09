@@ -1,102 +1,26 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/dixa-api.yaml
+source: openapi/dixa-agents-api-openapi.yml, openapi/dixa-analytics-api-openapi.yml, openapi/dixa-anonymization-api-openapi.yml,
+  openapi/dixa-business-hours-api-openapi.yml, openapi/dixa-chatbots-api-openapi.yml, openapi/dixa-contact-endpoints-api-openapi.yml,
+  openapi/dixa-conversations-api-openapi.yml, openapi/dixa-custom-attributes-api-openapi.yml,
+  openapi/dixa-end-users-api-openapi.yml, openapi/dixa-internal-notes-api-openapi.yml, openapi/dixa-knowledge-api-openapi.yml,
+  openapi/dixa-messages-api-openapi.yml, openapi/dixa-organization-api-openapi.yml, openapi/dixa-queues-api-openapi.yml,
+  openapi/dixa-ratings-api-openapi.yml, openapi/dixa-search-api-openapi.yml, openapi/dixa-tags-api-openapi.yml,
+  openapi/dixa-teams-api-openapi.yml, openapi/dixa-templates-api-openapi.yml, openapi/dixa-webhooks-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 123
+  operations: 157
   by_action_class:
-    connected: 57
-    acting: 66
+    connected: 71
+    acting: 86
   by_consequence:
-    read: 57
-    write: 65
-    physical: 1
+    read: 71
+    write: 84
+    physical: 2
   human_in_the_loop_required: 0
 operations:
-- path: /beta/analytics/metrics
-  method: get
-  operationId: getAnalyticsMetrics
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/analytics/metrics
-  method: post
-  operationId: postAnalyticsMetrics
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/analytics/metrics/{metricId}
-  method: get
-  operationId: getAnalyticsMetricsMetricid
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/analytics/filter/{filterAttribute}
-  method: get
-  operationId: getAnalyticsFilterFilterattribute
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/analytics/records
-  method: get
-  operationId: getAnalyticsRecords
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/analytics/records
-  method: post
-  operationId: postAnalyticsRecords
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/analytics/records/{recordId}
-  method: get
-  operationId: getAnalyticsRecordsRecordid
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /beta/agents/presence
   method: get
   operationId: getAgentsPresence
@@ -275,9 +199,183 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /beta/endusers
+- path: /beta/analytics/metrics
   method: get
-  operationId: getEndusers
+  operationId: getAnalyticsMetrics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/analytics/metrics
+  method: post
+  operationId: postAnalyticsMetrics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/analytics/metrics/{metricId}
+  method: get
+  operationId: getAnalyticsMetricsMetricid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/analytics/filter/{filterAttribute}
+  method: get
+  operationId: getAnalyticsFilterFilterattribute
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/analytics/records
+  method: get
+  operationId: getAnalyticsRecords
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/analytics/records
+  method: post
+  operationId: postAnalyticsRecords
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/analytics/records/{recordId}
+  method: get
+  operationId: getAnalyticsRecordsRecordid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/endusers/{userId}/anonymize
+  method: patch
+  operationId: patchEndusersUseridAnonymize
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/anonymize
+  method: patch
+  operationId: patchConversationsConversationidAnonymize
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/messages/{messageId}/anonymize
+  method: patch
+  operationId: patchConversationsConversationidMessagesMessageidAnonymize
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/anonymization/request/{requestId}
+  method: get
+  operationId: getAnonymizationRequestRequestid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/anonymization
+  method: post
+  operationId: postAnonymization
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/business-hours/schedules
+  method: get
+  operationId: getBusiness-hoursSchedules
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/business-hours/schedules/{scheduleId}/definition
+  method: get
+  operationId: getBusiness-hoursSchedulesScheduleidDefinition
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/business-hours/schedules/{scheduleId}/upcoming
+  method: get
+  operationId: getBusiness-hoursSchedulesScheduleidUpcoming
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/business-hours/schedules/{scheduleId}/status
+  method: get
+  operationId: getBusiness-hoursSchedulesScheduleidStatus
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -286,56 +384,8 @@ operations:
       max-ttl: 3600
     audit: none
 - path: /beta/endusers
-  method: put
-  operationId: putEndusers
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/endusers
   method: post
   operationId: postEndusers
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/endusers
-  method: patch
-  operationId: patchEndusers
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/endusers/bulk
-  method: post
-  operationId: postEndusersBulk
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -359,70 +409,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/endusers/{userId}
-  method: put
-  operationId: putEndusersUserid
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/endusers/{userId}
-  method: patch
-  operationId: patchEndusersUserid
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/endusers/{userId}/anonymize
-  method: patch
-  operationId: patchEndusersUseridAnonymize
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/endusers/{userId}/custom-attributes
-  method: patch
-  operationId: patchEndusersUseridCustom-attributes
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /beta/endusers/{userId}/conversations
   method: get
   operationId: getEndusersUseridConversations
@@ -433,19 +419,59 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/teams
-  method: get
-  operationId: getTeams
+- path: /beta/conversations/{conversationId}/close
+  method: put
+  operationId: putConversationsConversationidClose
   x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
     token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/teams
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/followup
+  method: put
+  operationId: putConversationsConversationidFollowup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/transfer/queue
+  method: put
+  operationId: putConversationsConversationidTransferQueue
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/ratings/{ratingId}/submit
   method: post
-  operationId: postTeams
+  operationId: postConversationsConversationidRatingsRatingidSubmit
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -459,9 +485,73 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /beta/teams/{teamId}/agents
+- path: /beta/conversations/{conversationId}/ratings/offer
+  method: post
+  operationId: postConversationsConversationidRatingsOffer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations
+  method: post
+  operationId: postConversations
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/import
+  method: post
+  operationId: postConversationsImport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/claim
+  method: put
+  operationId: putConversationsConversationidClaim
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/queues/{queueId}/availability
   method: get
-  operationId: getTeamsTeamidAgents
+  operationId: getQueuesQueueidAvailability
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -469,41 +559,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/teams/{teamId}/agents
-  method: delete
-  operationId: deleteTeamsTeamidAgents
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/teams/{teamId}/agents
-  method: patch
-  operationId: patchTeamsTeamidAgents
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/teams/{teamId}/presence
+- path: /beta/queues/conversation-position/{csid}
   method: get
-  operationId: getTeamsTeamidPresence
+  operationId: getQueuesConversation-positionCsid
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -511,9 +569,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/teams/{teamId}
+- path: /beta/contact-endpoints/{contactEndpointId}
   method: get
-  operationId: getTeamsTeamid
+  operationId: getContact-endpointsContactendpointid
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -521,22 +579,16 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/teams/{teamId}
-  method: delete
-  operationId: deleteTeamsTeamid
+- path: /beta/contact-endpoints
+  method: get
+  operationId: getContact-endpoints
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /beta/conversations/{conversationId}/anonymize
   method: patch
   operationId: patchConversationsConversationidAnonymize
@@ -943,9 +995,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/queues
+- path: /beta/search/conversations
   method: get
-  operationId: getQueues
+  operationId: getSearchConversations
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -953,25 +1005,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/queues
+- path: /beta/search/conversations
   method: post
-  operationId: postQueues
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/queues/{queueId}/members
-  method: get
-  operationId: getQueuesQueueidMembers
+  operationId: postSearchConversations
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -979,25 +1015,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/queues/{queueId}/members
-  method: delete
-  operationId: deleteQueuesQueueidMembers
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/queues/{queueId}/members
+- path: /beta/endusers/{userId}/custom-attributes
   method: patch
-  operationId: patchQueuesQueueidMembers
+  operationId: patchEndusersUseridCustom-attributes
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1011,91 +1031,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /beta/queues/{queueId}/availability
-  method: get
-  operationId: getQueuesQueueidAvailability
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/queues/{queueId}
-  method: get
-  operationId: getQueuesQueueid
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/queues/conversation-position/{csid}
-  method: get
-  operationId: getQueuesConversation-positionCsid
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/tags
-  method: get
-  operationId: getTags
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/tags
-  method: post
-  operationId: postTags
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/tags/{tagId}
-  method: get
-  operationId: getTagsTagid
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/tags/{tagId}
-  method: delete
-  operationId: deleteTagsTagid
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/tags/{tagId}/deactivate
+- path: /beta/conversations/{conversationId}/custom-attributes
   method: patch
-  operationId: patchTagsTagidDeactivate
+  operationId: patchConversationsConversationidCustom-attributes
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1109,68 +1047,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /beta/tags/{tagId}/activate
-  method: patch
-  operationId: patchTagsTagidActivate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/anonymization/request/{requestId}
-  method: get
-  operationId: getAnonymizationRequestRequestid
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/anonymization
-  method: post
-  operationId: postAnonymization
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/contact-endpoints/{contactEndpointId}
-  method: get
-  operationId: getContact-endpointsContactendpointid
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/contact-endpoints
-  method: get
-  operationId: getContact-endpoints
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /beta/custom-attributes/{customAttributeId}
   method: get
   operationId: getCustom-attributesCustomattributeid
@@ -1191,9 +1067,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/search/conversations
+- path: /beta/endusers
   method: get
-  operationId: getSearchConversations
+  operationId: getEndusers
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1201,9 +1077,25 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/search/conversations
+- path: /beta/endusers
+  method: put
+  operationId: putEndusers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/endusers
   method: post
-  operationId: postSearchConversations
+  operationId: postEndusers
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1217,35 +1109,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /beta/webhooks/{webhookSubscriptionId}
-  method: get
-  operationId: getWebhooksWebhooksubscriptionid
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/webhooks/{webhookSubscriptionId}
-  method: delete
-  operationId: deleteWebhooksWebhooksubscriptionid
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /beta/webhooks/{webhookSubscriptionId}
+- path: /beta/endusers
   method: patch
-  operationId: patchWebhooksWebhooksubscriptionid
+  operationId: patchEndusers
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1259,19 +1125,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /beta/webhooks
-  method: get
-  operationId: getWebhooks
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/webhooks
+- path: /beta/endusers/bulk
   method: post
-  operationId: postWebhooks
+  operationId: postEndusersBulk
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1285,9 +1141,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /beta/webhooks/{webhookSubscriptionId}/delivery-status
+- path: /beta/endusers/{userId}
   method: get
-  operationId: getWebhooksWebhooksubscriptionidDelivery-status
+  operationId: getEndusersUserid
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1295,29 +1151,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/webhooks/{webhookSubscriptionId}/delivery-status/logs/{event}
-  method: get
-  operationId: getWebhooksWebhooksubscriptionidDelivery-statusLogsEvent
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/templates
-  method: get
-  operationId: getTemplates
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/templates/{templateId}
-  method: delete
-  operationId: deleteTemplatesTemplateid
+- path: /beta/endusers/{userId}
+  method: put
+  operationId: putEndusersUserid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1331,9 +1167,57 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /beta/business-hours/schedules
+- path: /beta/endusers/{userId}
+  method: patch
+  operationId: patchEndusersUserid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/endusers/{userId}/anonymize
+  method: patch
+  operationId: patchEndusersUseridAnonymize
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/endusers/{userId}/custom-attributes
+  method: patch
+  operationId: patchEndusersUseridCustom-attributes
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/endusers/{userId}/conversations
   method: get
-  operationId: getBusiness-hoursSchedules
+  operationId: getEndusersUseridConversations
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1341,9 +1225,25 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/business-hours/schedules/{scheduleId}/definition
+- path: /beta/conversations/{conversationId}/notes/bulk
+  method: post
+  operationId: postConversationsConversationidNotesBulk
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/notes
   method: get
-  operationId: getBusiness-hoursSchedulesScheduleidDefinition
+  operationId: getConversationsConversationidNotes
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1351,26 +1251,22 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /beta/business-hours/schedules/{scheduleId}/upcoming
-  method: get
-  operationId: getBusiness-hoursSchedulesScheduleidUpcoming
+- path: /beta/conversations/{conversationId}/notes
+  method: post
+  operationId: postConversationsConversationidNotes
   x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
     token:
-      max-ttl: 3600
-    audit: none
-- path: /beta/business-hours/schedules/{scheduleId}/status
-  method: get
-  operationId: getBusiness-hoursSchedulesScheduleidStatus
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /beta/knowledge/collections/{collectionId}
   method: get
   operationId: getKnowledgeCollectionsCollectionid
@@ -1633,9 +1529,581 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /beta/conversations/{conversationId}/messages/{messageId}/anonymize
+  method: patch
+  operationId: patchConversationsConversationidMessagesMessageidAnonymize
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/messages
+  method: get
+  operationId: getConversationsConversationidMessages
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/conversations/{conversationId}/messages
+  method: post
+  operationId: postConversationsConversationidMessages
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /beta/organization
   method: get
   operationId: getOrganization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/queues
+  method: get
+  operationId: getQueues
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/queues
+  method: post
+  operationId: postQueues
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/queues/{queueId}/members
+  method: get
+  operationId: getQueuesQueueidMembers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/queues/{queueId}/members
+  method: delete
+  operationId: deleteQueuesQueueidMembers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/queues/{queueId}/members
+  method: patch
+  operationId: patchQueuesQueueidMembers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/queues/{queueId}/availability
+  method: get
+  operationId: getQueuesQueueidAvailability
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/queues/{queueId}
+  method: get
+  operationId: getQueuesQueueid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/queues/conversation-position/{csid}
+  method: get
+  operationId: getQueuesConversation-positionCsid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/conversations/{conversationId}/ratings/{ratingId}/submit
+  method: post
+  operationId: postConversationsConversationidRatingsRatingidSubmit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/ratings/offer
+  method: post
+  operationId: postConversationsConversationidRatingsOffer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/rating
+  method: get
+  operationId: getConversationsConversationidRating
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/conversations/{conversationId}/ratings
+  method: get
+  operationId: getConversationsConversationidRatings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/search/conversations
+  method: get
+  operationId: getSearchConversations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/search/conversations
+  method: post
+  operationId: postSearchConversations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/conversations/{conversationId}/tags/{tagId}
+  method: put
+  operationId: putConversationsConversationidTagsTagid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/tags/{tagId}
+  method: delete
+  operationId: deleteConversationsConversationidTagsTagid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/tags/bulk
+  method: post
+  operationId: postConversationsConversationidTagsBulk
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/conversations/{conversationId}/tags
+  method: get
+  operationId: getConversationsConversationidTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/tags
+  method: get
+  operationId: getTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/tags
+  method: post
+  operationId: postTags
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/tags/{tagId}
+  method: get
+  operationId: getTagsTagid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/tags/{tagId}
+  method: delete
+  operationId: deleteTagsTagid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/tags/{tagId}/deactivate
+  method: patch
+  operationId: patchTagsTagidDeactivate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/tags/{tagId}/activate
+  method: patch
+  operationId: patchTagsTagidActivate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/teams
+  method: get
+  operationId: getTeams
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/teams
+  method: post
+  operationId: postTeams
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/teams/{teamId}/agents
+  method: get
+  operationId: getTeamsTeamidAgents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/teams/{teamId}/agents
+  method: delete
+  operationId: deleteTeamsTeamidAgents
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/teams/{teamId}/agents
+  method: patch
+  operationId: patchTeamsTeamidAgents
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/teams/{teamId}/presence
+  method: get
+  operationId: getTeamsTeamidPresence
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/teams/{teamId}
+  method: get
+  operationId: getTeamsTeamid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/teams/{teamId}
+  method: delete
+  operationId: deleteTeamsTeamid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/templates
+  method: get
+  operationId: getTemplates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/templates/{templateId}
+  method: delete
+  operationId: deleteTemplatesTemplateid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/webhooks/{webhookSubscriptionId}
+  method: get
+  operationId: getWebhooksWebhooksubscriptionid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/webhooks/{webhookSubscriptionId}
+  method: delete
+  operationId: deleteWebhooksWebhooksubscriptionid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/webhooks/{webhookSubscriptionId}
+  method: patch
+  operationId: patchWebhooksWebhooksubscriptionid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/webhooks
+  method: get
+  operationId: getWebhooks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/webhooks
+  method: post
+  operationId: postWebhooks
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /beta/webhooks/{webhookSubscriptionId}/delivery-status
+  method: get
+  operationId: getWebhooksWebhooksubscriptionidDelivery-status
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /beta/webhooks/{webhookSubscriptionId}/delivery-status/logs/{event}
+  method: get
+  operationId: getWebhooksWebhooksubscriptionidDelivery-statusLogsEvent
   x-agentic-access:
     action-class: connected
     consequence: read
