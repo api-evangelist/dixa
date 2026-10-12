@@ -1,0 +1,334 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://zapier.com/apps/dixa/integrations
+checked:
+- https://composio.dev/toolkits/dixa
+- https://monid.ai/tools/dixa
+- https://n8n.io/integrations/dixa/
+- https://zapier.com/apps/dixa/integrations
+summary: null
+marketplace_apps:
+- marketplace: zapier
+  channel: ipaas-listing
+  app: dixa
+  url: https://zapier.com/apps/dixa/integrations
+  external_url: https://dixa.com/
+  partner_tier: BRONZE
+  triggers:
+  - key: csat_rated
+    label: Customer Satisfaction Rating Received
+  - key: message_added
+    label: Message Added
+  - key: new_conversation
+    label: New Conversation Created
+  - key: note_added
+    label: Internal Note Added
+  - key: status_changed
+    label: Status Changed
+  - key: tag_added
+    label: Tag Added to Conversation
+  - key: tag_removed
+    label: Tag Removed From Conversation
+  actions:
+  - key: Add_internal_note
+    label: Add Internal Note
+  - key: add_message
+    label: Add Message
+  - key: anonymize
+    label: Anonymize Data
+  - key: change_conversation_status
+    label: Change Conversation Status
+  - key: create_callback
+    label: Create Callback Request
+  - key: create_contactform
+    label: Create Conversation
+  - key: create_user
+    label: Create User
+  - key: set_contact_attributes
+    label: Set Custom Contact Attributes
+  - key: set_custom_attributes
+    label: Set Custom Conversation Attributes
+  - key: tag_conversation
+    label: Tag Conversation
+  - key: Transfer_conversation_to_queue
+    label: Transfer Conversation to Queue
+  - key: updated_user
+    label: Update End User
+  searches:
+  - key: find_conversation
+    label: Get Conversation by Id
+  - key: find_conversations_by_user
+    label: Search Conversations by User
+  - key: find_user_by_external_id
+    label: Search Enduser by External ID
+  - key: get_conversation_rating
+    label: Get Conversation Rating
+  - key: get_conversation_tags
+    label: Get Conversation Tags
+  - key: Get_Messages_In_conversation
+    label: Get Messages in Conversation
+  - key: get_user_by_id
+    label: Get User by Id
+  - key: search_conversation
+    label: Search Conversation
+  - key: Search_queue
+    label: Get Queue by Id
+  - key: search_user_by_email
+    label: Search User by Email Address
+  - key: Search_user_by_phone
+    label: Search User by Phone Number
+edges:
+- partner_name: Slack
+  partner: slack
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/slack
+  direction: third-party
+  category: Team Chat
+  partner_url: https://slack.com/
+- partner_name: Pipedrive
+  partner: pipedrive
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/pipedrive
+  direction: third-party
+  category: CRM (Customer Relationship Management)
+  partner_url: https://pipedrive.com/
+- partner_name: Pendo
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/pendo-legacy
+  direction: third-party
+  category: Analytics
+  partner_url: https://www.pendo.io/
+- partner_name: Microsoft Excel
+  partner: null
+  partner_match: null
+  partner_candidate: zapier
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/excel
+  direction: third-party
+  category: Microsoft
+  partner_url: https://zapier.com/office.com
+- partner_name: Snowflake
+  partner: snowflake
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/snowflake
+  direction: third-party
+  category: Databases
+  partner_url: https://www.snowflake.com/
+- partner_name: Bird Eats Bug
+  partner: null
+  partner_match: null
+  partner_candidate: zapier
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/bird-eats-bug
+  direction: third-party
+  category: Productivity
+  partner_url: https://zapier.com/www.birdeatsbug.com
+- partner_name: zipBoard
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/zipboard
+  direction: third-party
+  category: Project Management
+  partner_url: https://zipboard.co/
+- partner_name: Microsoft Outlook
+  partner: microsoft-outlook
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/microsoft-outlook
+  direction: third-party
+  category: Calendar
+  partner_url: https://outlook.live.com/
+- partner_name: Google Chat
+  partner: google-chat
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/google-chat
+  direction: third-party
+  category: Google
+  partner_url: https://gsuite.google.com/products/chat/
+- partner_name: Facebook Messenger
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/facebook-messenger
+  direction: third-party
+  category: Facebook
+  partner_url: https://www.messenger.com/
+- partner_name: PostgreSQL
+  partner: postgresql
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/postgresql
+  direction: third-party
+  category: Databases
+  partner_url: http://www.postgresql.org/
+- partner_name: SQL Server
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/sql-server
+  direction: third-party
+  category: Databases
+  partner_url: https://www.microsoft.com/sql-server
+- partner_name: Zapier Lead Router
+  partner: zapier
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/zapier-lead-router
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://zapier.com/l/leadrouter
+- partner_name: Magento 2.X
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/magento-v2
+  direction: third-party
+  category: eCommerce
+  partner_url: https://magento.com/
+- partner_name: Okta
+  partner: okta
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/okta
+  direction: third-party
+  category: Security & Identity Tools
+  partner_url: https://www.okta.com/
+- partner_name: FundraisingBox
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/fundraisingbox
+  direction: third-party
+  category: Fundraising
+  partner_url: https://www.fundraisingbox.com/
+- partner_name: Google Forms (Legacy)
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/google-forms-legacy
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: http://google.com/
+templates:
+- title: Create Dixa callback requests for new Google Form submissions
+  url: https://zapier.com/apps/dixa/integrations/google-forms/354473/create-dixa-callback-requests-for-new-google-form-submissions
+  apps:
+  - google-forms
+  - dixa
+- title: Create callback requests in Dixa with new Jotform submissions
+  url: https://zapier.com/apps/dixa/integrations/jotform/354617/create-callback-requests-in-dixa-with-new-jotform-submissions
+  apps:
+  - jotform
+  - dixa
+- title: Create internal notes in Dixa when new channels are added to Slack
+  url: https://zapier.com/apps/dixa/integrations/slack/1269722/create-internal-notes-in-dixa-when-new-channels-are-added-to-slack
+  apps:
+  - slack
+  - dixa
+- title: Create Dixa conversations from new Discord channel messages
+  url: https://zapier.com/apps/discord/integrations/dixa/1271336/create-dixa-conversations-from-new-discord-channel-messages
+  apps:
+  - discord
+  - dixa
+- title: Create Dixa conversations from new Slack channel messages
+  url: https://zapier.com/apps/dixa/integrations/slack/1280483/create-dixa-conversations-from-new-slack-channel-messages
+  apps:
+  - slack
+  - dixa
+- title: Send messages in Slack channels for new agent ratings of 4 or 5 in Dixa
+  url: https://zapier.com/apps/dixa/integrations/slack/1594063/send-messages-in-slack-channels-for-new-agent-ratings-of-4-or-5-in-dixa
+  apps:
+  - dixa
+  - filter
+  - slack
+- title: Record new Dixa customer satisfaction ratings in Google Sheets rows
+  url: https://zapier.com/apps/dixa/integrations/google-sheets/1597520/record-new-dixa-customer-satisfaction-ratings-in-google-sheets-rows
+  apps:
+  - dixa
+  - google-sheets
+- title: Add tags to Dixa conversations and create corresponding Google Sheets rows
+  url: https://zapier.com/apps/dixa/integrations/google-sheets/1604605/add-tags-to-dixa-conversations-and-create-corresponding-google-sheets-rows
+  apps:
+  - dixa
+  - google-sheets
+- title: Create new Dixa users for each new item in Podio
+  url: https://zapier.com/apps/dixa/integrations/podio/1606644/create-new-dixa-users-for-each-new-item-in-podio
+  apps:
+  - podio
+  - dixa
+- title: Send Microsoft Team channel messages with new Dixa conversations
+  url: https://zapier.com/apps/dixa/integrations/microsoft-teams/1620540/send-microsoft-team-channel-messages-with-new-dixa-conversations
+  apps:
+  - dixa
+  - microsoft-teams
+- title: Send Trustpilot invitations for good Dixa CSAT ratings
+  url: https://zapier.com/apps/dixa/integrations/trustpilot/1620543/send-trustpilot-invitations-for-good-dixa-csat-ratings
+  apps:
+  - dixa
+  - filter
+  - trustpilot
+- title: Send zenloop email surveys 72 hours after new Dixa conversations are closed
+  url: https://zapier.com/apps/dixa/integrations/zenloop/1620550/send-zenloop-email-surveys-72-hours-after-new-dixa-conversations-are-closed
+  apps:
+  - dixa
+  - filter
+  - delay
+  - zenloop
+template_total: 18
