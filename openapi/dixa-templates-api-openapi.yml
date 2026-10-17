@@ -190,18 +190,77 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    ListTemplatesOutput:
-      title: ListTemplatesOutput
+    BadRequest:
+      title: BadRequest
       type: object
+      required:
+      - message
       properties:
-        data:
+        message:
+          type: string
+    Translation:
+      title: Translation
+      type: object
+      required:
+      - locale
+      - content
+      - isDeactivated
+      properties:
+        locale:
+          description: Format for locale is {language}-{script}-{country}, e.g. "en-US", "uz-Arab-AF", "da"
+          type: string
+        content:
+          type: string
+        isDeactivated:
+          type: boolean
+        subject:
+          type: string
+    QuickResponse:
+      title: QuickResponse
+      type: object
+      required:
+      - id
+      - name
+      - content
+      - createdBy
+      - createdAt
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        content:
+          type: string
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+        lastEditedBy:
+          type: string
+        lastEditedAt:
+          type: string
+        translations:
           type: array
+          uniqueItems: true
           items:
-            $ref: '#/components/schemas/Template'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
+            $ref: '#/components/schemas/Translation'
+        subject:
+          type: string
+    Template:
+      title: Template
+      oneOf:
+      - $ref: '#/components/schemas/EmailAutoReply'
+      - $ref: '#/components/schemas/QuickResponse'
     ServerError:
       title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    NotFound:
+      title: NotFound
       type: object
       required:
       - message
@@ -239,67 +298,16 @@ components:
             $ref: '#/components/schemas/Translation'
         subject:
           type: string
-    QuickResponse:
-      title: QuickResponse
+    ListTemplatesOutput:
+      title: ListTemplatesOutput
       type: object
-      required:
-      - id
-      - name
-      - content
-      - createdBy
-      - createdAt
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        content:
-          type: string
-        createdBy:
-          type: string
-        createdAt:
-          type: string
-        lastEditedBy:
-          type: string
-        lastEditedAt:
-          type: string
-        translations:
+        data:
           type: array
-          uniqueItems: true
           items:
-            $ref: '#/components/schemas/Translation'
-        subject:
-          type: string
-    Translation:
-      title: Translation
-      type: object
-      required:
-      - locale
-      - content
-      - isDeactivated
-      properties:
-        locale:
-          description: Format for locale is {language}-{script}-{country}, e.g. "en-US", "uz-Arab-AF", "da"
-          type: string
-        content:
-          type: string
-        isDeactivated:
-          type: boolean
-        subject:
-          type: string
-    Template:
-      title: Template
-      oneOf:
-      - $ref: '#/components/schemas/EmailAutoReply'
-      - $ref: '#/components/schemas/QuickResponse'
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
+            $ref: '#/components/schemas/Template'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
     PaginationLinks:
       title: PaginationLinks
       type: object
@@ -309,14 +317,6 @@ components:
           type: string
         next:
           description: url
-          type: string
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
           type: string
   securitySchemes:
     ApiKeyAuth:

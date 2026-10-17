@@ -608,6 +608,197 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
+    GetMetricRecordsDataInputPeriodFilter:
+      title: GetMetricRecordsDataInputPeriodFilter
+      type: object
+      required:
+      - id
+      - periodFilter
+      - timezone
+      properties:
+        id:
+          type: string
+        periodFilter:
+          $ref: '#/components/schemas/PeriodFilter'
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        timezone:
+          type: string
+    PresenceDuration:
+      title: PresenceDuration
+      type: object
+      required:
+      - value
+      - status
+      properties:
+        value:
+          type: number
+          format: double
+        status:
+          $ref: '#/components/schemas/Status'
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    GetMetricDataInputPeriodFilter:
+      title: GetMetricDataInputPeriodFilter
+      type: object
+      required:
+      - id
+      - periodFilter
+      - timezone
+      properties:
+        id:
+          type: string
+        periodFilter:
+          $ref: '#/components/schemas/PeriodFilter'
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        aggregations:
+          type: array
+          items:
+            description: 'values: [Min, Max, Sum, Count, Percentage, AgentPresenceDuration, StdDev, Average]'
+            type: string
+        timezone:
+          type: string
+    FilterValue:
+      title: FilterValue
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+        label:
+          type: string
+    DoubleAggregateValue:
+      title: DoubleAggregateValue
+      type: object
+      required:
+      - value
+      - measure
+      properties:
+        value:
+          type: number
+          format: double
+        measure:
+          description: 'values: [Min, Max, Sum, Percentage, AgentPresenceDuration, StdDev, Average]'
+          type: string
+    AggregateMetadata:
+      title: AggregateMetadata
+      type: object
+      required:
+      - measure
+      properties:
+        measure:
+          description: 'values: [Min, Max, Sum, Count, Percentage, AgentPresenceDuration, StdDev, Average]'
+          type: string
+        description:
+          type: string
+    Interval:
+      title: Interval
+      type: object
+      required:
+      - start
+      - end
+      properties:
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+    BooleanField:
+      title: BooleanField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: boolean
+    UUIDField:
+      title: UUIDField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+          format: uuid
+        label:
+          type: string
+    GetMetricDataInput:
+      title: GetMetricDataInput
+      oneOf:
+      - $ref: '#/components/schemas/GetMetricDataInputCsidFilter'
+      - $ref: '#/components/schemas/GetMetricDataInputPeriodFilter'
+    GetMetricRecordsOutput:
+      title: GetMetricRecordsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricRecordMetadata'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    Preset:
+      title: Preset
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: 'values: [PreviousQuarter, ThisWeek, PreviousWeek, Yesterday, Today, ThisMonth, PreviousMonth, ThisQuarter, ThisYear]'
+          type: string
+    GetMetricDataInputCsidFilter:
+      title: GetMetricDataInputCsidFilter
+      type: object
+      required:
+      - id
+      - timezone
+      properties:
+        id:
+          type: string
+        csidFilter:
+          type: array
+          minItems: 1
+          items:
+            type: integer
+            format: int64
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        aggregations:
+          type: array
+          items:
+            description: 'values: [Min, Max, Sum, Count, Percentage, AgentPresenceDuration, StdDev, Average]'
+            type: string
+        timezone:
+          type: string
+    IntField:
+      title: IntField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: integer
+          format: int32
+    PeriodFilter:
+      title: PeriodFilter
+      oneOf:
+      - $ref: '#/components/schemas/Interval'
+      - $ref: '#/components/schemas/Preset'
     FieldMetadata:
       title: FieldMetadata
       type: object
@@ -622,19 +813,49 @@ components:
           type: string
         nullable:
           type: boolean
-    Interval:
-      title: Interval
+    LongField:
+      title: LongField
       type: object
       required:
-      - start
-      - end
+      - value
       properties:
-        start:
+        value:
+          type: integer
+          format: int64
+    AggregateValue:
+      title: AggregateValue
+      oneOf:
+      - $ref: '#/components/schemas/AgentPresenceDurationValue'
+      - $ref: '#/components/schemas/DoubleAggregateValue'
+      - $ref: '#/components/schemas/LongAggregateValue'
+    MetricRecordMetadata:
+      title: MetricRecordMetadata
+      type: object
+      required:
+      - id
+      - description
+      properties:
+        id:
+          description: The record ID
           type: string
-          format: date-time
-        end:
+        description:
+          description: Relevant information about the record
           type: string
-          format: date-time
+        filters:
+          description: List of available filters that can be used when fetching record data
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterMetadata'
+        relatedMetricIds:
+          description: List of metric IDs that make use of this record
+          type: array
+          items:
+            type: string
+        fieldsMetadata:
+          description: Information about the individual record fields
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldMetadata'
     MetricMetadata:
       title: MetricMetadata
       type: object
@@ -662,303 +883,6 @@ components:
           type: array
           items:
             type: string
-    GetMetricsOutput:
-      title: GetMetricsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricMetadata'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    LongAggregateValue:
-      title: LongAggregateValue
-      type: object
-      required:
-      - value
-      - measure
-      properties:
-        value:
-          type: integer
-          format: int64
-        measure:
-          description: 'values: [Count]'
-          type: string
-    PrimitiveField:
-      title: PrimitiveField
-      oneOf:
-      - $ref: '#/components/schemas/BooleanField'
-      - $ref: '#/components/schemas/DoubleField'
-      - $ref: '#/components/schemas/InstantField'
-      - $ref: '#/components/schemas/IntField'
-      - $ref: '#/components/schemas/LongField'
-      - $ref: '#/components/schemas/StringField'
-      - $ref: '#/components/schemas/UUIDField'
-    IntField:
-      title: IntField
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: integer
-          format: int32
-    PeriodFilter:
-      title: PeriodFilter
-      oneOf:
-      - $ref: '#/components/schemas/Interval'
-      - $ref: '#/components/schemas/Preset'
-    GetMetricDataInputPeriodFilter:
-      title: GetMetricDataInputPeriodFilter
-      type: object
-      required:
-      - id
-      - periodFilter
-      - timezone
-      properties:
-        id:
-          type: string
-        periodFilter:
-          $ref: '#/components/schemas/PeriodFilter'
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/Filter'
-        aggregations:
-          type: array
-          items:
-            description: 'values: [Min, Max, Sum, Count, Percentage, AgentPresenceDuration, StdDev, Average]'
-            type: string
-        timezone:
-          type: string
-    GetMetricRecordsOutput:
-      title: GetMetricRecordsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricRecordMetadata'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    Preset:
-      title: Preset
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          description: 'values: [PreviousQuarter, ThisWeek, PreviousWeek, Yesterday, Today, ThisMonth, PreviousMonth, ThisQuarter, ThisYear]'
-          type: string
-    GetMetricDataOutput:
-      title: GetMetricDataOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/MetricData'
-    GetMetricRecordOutput:
-      title: GetMetricRecordOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/MetricRecordMetadata'
-    PresenceDuration:
-      title: PresenceDuration
-      type: object
-      required:
-      - value
-      - status
-      properties:
-        value:
-          type: number
-          format: double
-        status:
-          $ref: '#/components/schemas/Status'
-    UUIDField:
-      title: UUIDField
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-          format: uuid
-        label:
-          type: string
-    Filter:
-      title: Filter
-      type: object
-      required:
-      - attribute
-      properties:
-        attribute:
-          type: string
-        values:
-          type: array
-          items:
-            type: string
-    MetricData:
-      title: MetricData
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-        aggregates:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregateValue'
-    AggregateMetadata:
-      title: AggregateMetadata
-      type: object
-      required:
-      - measure
-      properties:
-        measure:
-          description: 'values: [Min, Max, Sum, Count, Percentage, AgentPresenceDuration, StdDev, Average]'
-          type: string
-        description:
-          type: string
-    AgentPresenceDurationValue:
-      title: AgentPresenceDurationValue
-      type: object
-      properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/PresenceDuration'
-        description:
-          type: string
-    Status:
-      title: Status
-      type: object
-      required:
-      - status
-      properties:
-        status:
-          type: string
-        description:
-          type: string
-    GetMetricOutput:
-      title: GetMetricOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/MetricMetadata'
-    GetMetricRecordsDataInput:
-      title: GetMetricRecordsDataInput
-      oneOf:
-      - $ref: '#/components/schemas/GetMetricRecordsDataInputCsidFilter'
-      - $ref: '#/components/schemas/GetMetricRecordsDataInputPeriodFilter'
-    FieldType:
-      title: FieldType
-      oneOf:
-      - $ref: '#/components/schemas/BooleanField'
-      - $ref: '#/components/schemas/DoubleField'
-      - $ref: '#/components/schemas/InstantField'
-      - $ref: '#/components/schemas/IntField'
-      - $ref: '#/components/schemas/ListField'
-      - $ref: '#/components/schemas/LongField'
-      - $ref: '#/components/schemas/StringField'
-      - $ref: '#/components/schemas/TimestampField'
-      - $ref: '#/components/schemas/UUIDField'
-    Field:
-      title: Field
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        field:
-          $ref: '#/components/schemas/FieldType'
-    TimestampField:
-      title: TimestampField
-      type: object
-      required:
-      - name
-      - timestamp
-      properties:
-        name:
-          type: string
-        timestamp:
-          type: string
-          format: date-time
-    ListField:
-      title: ListField
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/PrimitiveField'
-    GetMetricRecordsDataOutput:
-      title: GetMetricRecordsDataOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricRecord'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    BadRequest:
-      title: BadRequest
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    PaginationLinks:
-      title: PaginationLinks
-      type: object
-      properties:
-        previous:
-          description: url
-          type: string
-        next:
-          description: url
-          type: string
-    MetricRecord:
-      title: MetricRecord
-      type: object
-      required:
-      - primaryTimestampField
-      properties:
-        primaryTimestampField:
-          $ref: '#/components/schemas/TimestampField'
-        value:
-          $ref: '#/components/schemas/FieldType'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-    InstantField:
-      title: InstantField
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-          format: date-time
     FilterMetadata:
       title: FilterMetadata
       type: object
@@ -990,124 +914,16 @@ components:
             $ref: '#/components/schemas/Filter'
         timezone:
           type: string
-    GetMetricRecordsDataInputPeriodFilter:
-      title: GetMetricRecordsDataInputPeriodFilter
+    Field:
+      title: Field
       type: object
       required:
-      - id
-      - periodFilter
-      - timezone
+      - name
       properties:
-        id:
+        name:
           type: string
-        periodFilter:
-          $ref: '#/components/schemas/PeriodFilter'
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/Filter'
-        timezone:
-          type: string
-    DoubleField:
-      title: DoubleField
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: number
-          format: double
-    GetMetricDataInput:
-      title: GetMetricDataInput
-      oneOf:
-      - $ref: '#/components/schemas/GetMetricDataInputCsidFilter'
-      - $ref: '#/components/schemas/GetMetricDataInputPeriodFilter'
-    LongField:
-      title: LongField
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: integer
-          format: int64
-    FilterValue:
-      title: FilterValue
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-        label:
-          type: string
-    DoubleAggregateValue:
-      title: DoubleAggregateValue
-      type: object
-      required:
-      - value
-      - measure
-      properties:
-        value:
-          type: number
-          format: double
-        measure:
-          description: 'values: [Min, Max, Sum, Percentage, AgentPresenceDuration, StdDev, Average]'
-          type: string
-    MetricRecordMetadata:
-      title: MetricRecordMetadata
-      type: object
-      required:
-      - id
-      - description
-      properties:
-        id:
-          description: The record ID
-          type: string
-        description:
-          description: Relevant information about the record
-          type: string
-        filters:
-          description: List of available filters that can be used when fetching record data
-          type: array
-          items:
-            $ref: '#/components/schemas/FilterMetadata'
-        relatedMetricIds:
-          description: List of metric IDs that make use of this record
-          type: array
-          items:
-            type: string
-        fieldsMetadata:
-          description: Information about the individual record fields
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldMetadata'
-    GetMetricDataInputCsidFilter:
-      title: GetMetricDataInputCsidFilter
-      type: object
-      required:
-      - id
-      - timezone
-      properties:
-        id:
-          type: string
-        csidFilter:
-          type: array
-          minItems: 1
-          items:
-            type: integer
-            format: int64
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/Filter'
-        aggregations:
-          type: array
-          items:
-            description: 'values: [Min, Max, Sum, Count, Percentage, AgentPresenceDuration, StdDev, Average]'
-            type: string
-        timezone:
-          type: string
+        field:
+          $ref: '#/components/schemas/FieldType'
     StringField:
       title: StringField
       type: object
@@ -1118,14 +934,195 @@ components:
           type: string
         label:
           type: string
-    BooleanField:
-      title: BooleanField
+    GetMetricRecordOutput:
+      title: GetMetricRecordOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricRecordMetadata'
+    Filter:
+      title: Filter
+      type: object
+      required:
+      - attribute
+      properties:
+        attribute:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    TimestampField:
+      title: TimestampField
+      type: object
+      required:
+      - name
+      - timestamp
+      properties:
+        name:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    GetMetricsOutput:
+      title: GetMetricsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricMetadata'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    FieldType:
+      title: FieldType
+      oneOf:
+      - $ref: '#/components/schemas/BooleanField'
+      - $ref: '#/components/schemas/DoubleField'
+      - $ref: '#/components/schemas/InstantField'
+      - $ref: '#/components/schemas/IntField'
+      - $ref: '#/components/schemas/ListField'
+      - $ref: '#/components/schemas/LongField'
+      - $ref: '#/components/schemas/StringField'
+      - $ref: '#/components/schemas/TimestampField'
+      - $ref: '#/components/schemas/UUIDField'
+    GetMetricOutput:
+      title: GetMetricOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricMetadata'
+    AgentPresenceDurationValue:
+      title: AgentPresenceDurationValue
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/PresenceDuration'
+        description:
+          type: string
+    GetMetricRecordsDataInput:
+      title: GetMetricRecordsDataInput
+      oneOf:
+      - $ref: '#/components/schemas/GetMetricRecordsDataInputCsidFilter'
+      - $ref: '#/components/schemas/GetMetricRecordsDataInputPeriodFilter'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    DoubleField:
+      title: DoubleField
       type: object
       required:
       - value
       properties:
         value:
-          type: boolean
+          type: number
+          format: double
+    LongAggregateValue:
+      title: LongAggregateValue
+      type: object
+      required:
+      - value
+      - measure
+      properties:
+        value:
+          type: integer
+          format: int64
+        measure:
+          description: 'values: [Count]'
+          type: string
+    Status:
+      title: Status
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          type: string
+        description:
+          type: string
+    MetricRecord:
+      title: MetricRecord
+      type: object
+      required:
+      - primaryTimestampField
+      properties:
+        primaryTimestampField:
+          $ref: '#/components/schemas/TimestampField'
+        value:
+          $ref: '#/components/schemas/FieldType'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+    GetMetricDataOutput:
+      title: GetMetricDataOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricData'
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    MetricData:
+      title: MetricData
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        aggregates:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregateValue'
+    GetMetricRecordsDataOutput:
+      title: GetMetricRecordsDataOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricRecord'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    PrimitiveField:
+      title: PrimitiveField
+      oneOf:
+      - $ref: '#/components/schemas/BooleanField'
+      - $ref: '#/components/schemas/DoubleField'
+      - $ref: '#/components/schemas/InstantField'
+      - $ref: '#/components/schemas/IntField'
+      - $ref: '#/components/schemas/LongField'
+      - $ref: '#/components/schemas/StringField'
+      - $ref: '#/components/schemas/UUIDField'
+    ListField:
+      title: ListField
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrimitiveField'
     GetFilterValuesOutput:
       title: GetFilterValuesOutput
       type: object
@@ -1136,12 +1133,15 @@ components:
             $ref: '#/components/schemas/FilterValue'
         meta:
           $ref: '#/components/schemas/PaginationLinks'
-    AggregateValue:
-      title: AggregateValue
-      oneOf:
-      - $ref: '#/components/schemas/AgentPresenceDurationValue'
-      - $ref: '#/components/schemas/DoubleAggregateValue'
-      - $ref: '#/components/schemas/LongAggregateValue'
+    InstantField:
+      title: InstantField
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+          format: date-time
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

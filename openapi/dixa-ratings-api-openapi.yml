@@ -417,32 +417,6 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    RatingResult:
-      title: RatingResult
-      type: object
-      required:
-      - ratingId
-      - ratingResult
-      properties:
-        ratingId:
-          type: string
-        userId:
-          type: string
-        ratingResult:
-          $ref: '#/components/schemas/SubmittedRatingResult'
-        comment:
-          type: string
-        submittedAt:
-          type: string
-          format: date-time
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
     CreateRatingResultOutput:
       title: CreateRatingResultOutput
       type: object
@@ -451,50 +425,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RatingResult'
-    ListConversationRatingsOutput:
-      title: ListConversationRatingsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationRating'
-    Map_String:
-      title: Map_String
-      type: object
-      additionalProperties:
-        type: string
-    Nps:
-      title: Nps
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          description: Numeric value between 0 and 10 representing the net promoter score.
-          type: integer
-          format: int32
-    RatingOffer:
-      title: RatingOffer
-      type: object
-      required:
-      - id
-      - userId
-      - agentId
-      - ratingType
-      properties:
-        id:
-          type: string
-        userId:
-          type: string
-        agentId:
-          type: string
-        ratingType:
-          description: 'values: [Csat, Nps, ThumbsUpOrDown]'
-          type: string
-        offeredAt:
-          type: string
-          format: date-time
     BadRequest:
       title: BadRequest
       type: object
@@ -503,30 +433,6 @@ components:
       properties:
         message:
           type: string
-    SubmittedRatingResult:
-      title: SubmittedRatingResult
-      oneOf:
-      - $ref: '#/components/schemas/Csat'
-      - $ref: '#/components/schemas/Nps'
-      - $ref: '#/components/schemas/ThumbsUpOrDown'
-    CreateRatingOfferInput:
-      title: CreateRatingOfferInput
-      type: object
-      required:
-      - ratingType
-      properties:
-        userId:
-          description: If userId is not provided, the conversation requester will be picked.
-          type: string
-        agentId:
-          description: If an agentId is not provided, the agent that is most likely to be the target will be picked. Please note that providing an agentId that is not part of the conversation may skew metrics in Intelligence.
-          type: string
-        ratingType:
-          description: 'The type of numeric rating. E.g.: ''Csat'', ''ThumbsUpOrDown'', ''Nps''.'
-          type: string
-        offeredAt:
-          type: string
-          format: date-time
     ConversationRating:
       title: ConversationRating
       type: object
@@ -562,32 +468,29 @@ components:
           type: string
         timestamps:
           $ref: '#/components/schemas/Map_String'
-    NotFound:
-      title: NotFound
+    Map_String:
+      title: Map_String
+      type: object
+      additionalProperties:
+        type: string
+    CreateRatingOfferInput:
+      title: CreateRatingOfferInput
       type: object
       required:
-      - message
+      - ratingType
       properties:
-        message:
+        userId:
+          description: If userId is not provided, the conversation requester will be picked.
           type: string
-    Csat:
-      title: Csat
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          description: Numeric value between 1 and 5 representing the customer's satisfaction level.
-          type: integer
-          format: int32
-    CreateRatingOfferOutput:
-      title: CreateRatingOfferOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/RatingOffer'
+        agentId:
+          description: If an agentId is not provided, the agent that is most likely to be the target will be picked. Please note that providing an agentId that is not part of the conversation may skew metrics in Intelligence.
+          type: string
+        ratingType:
+          description: 'The type of numeric rating. E.g.: ''Csat'', ''ThumbsUpOrDown'', ''Nps''.'
+          type: string
+        offeredAt:
+          type: string
+          format: date-time
     CreateRatingResultInput:
       title: CreateRatingResultInput
       type: object
@@ -605,6 +508,22 @@ components:
         submittedAt:
           type: string
           format: date-time
+    Csat:
+      title: Csat
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: Numeric value between 1 and 5 representing the customer's satisfaction level.
+          type: integer
+          format: int32
+    SubmittedRatingResult:
+      title: SubmittedRatingResult
+      oneOf:
+      - $ref: '#/components/schemas/Csat'
+      - $ref: '#/components/schemas/Nps'
+      - $ref: '#/components/schemas/ThumbsUpOrDown'
     ThumbsUpOrDown:
       title: ThumbsUpOrDown
       type: object
@@ -615,6 +534,87 @@ components:
           description: One of the the numeric values 0 (thumbs down) and 1 (thumbs up).
           type: integer
           format: int32
+    ListConversationRatingsOutput:
+      title: ListConversationRatingsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationRating'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    RatingOffer:
+      title: RatingOffer
+      type: object
+      required:
+      - id
+      - userId
+      - agentId
+      - ratingType
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        agentId:
+          type: string
+        ratingType:
+          description: 'values: [Csat, Nps, ThumbsUpOrDown]'
+          type: string
+        offeredAt:
+          type: string
+          format: date-time
+    Nps:
+      title: Nps
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: Numeric value between 0 and 10 representing the net promoter score.
+          type: integer
+          format: int32
+    CreateRatingOfferOutput:
+      title: CreateRatingOfferOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RatingOffer'
+    RatingResult:
+      title: RatingResult
+      type: object
+      required:
+      - ratingId
+      - ratingResult
+      properties:
+        ratingId:
+          type: string
+        userId:
+          type: string
+        ratingResult:
+          $ref: '#/components/schemas/SubmittedRatingResult'
+        comment:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -1207,162 +1207,6 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    ArticleCatalogItem:
-      title: ArticleCatalogItem
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-        title:
-          $ref: '#/components/schemas/TranslationTitle'
-    AttachmentError:
-      title: AttachmentError
-      type: object
-      required:
-      - originalFilename
-      - message
-      - code
-      properties:
-        originalFilename:
-          description: Original filename of the failed file
-          type: string
-        message:
-          description: Error message describing the failure
-          type: string
-        code:
-          description: 'HTTP-style status code: 400 for client-side errors, 500 for server-side errors'
-          type: integer
-          format: int32
-    CreateKnowledgeArticleOutput:
-      title: CreateKnowledgeArticleOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Article'
-          description: The created article
-    Restrictions:
-      title: Restrictions
-      type: object
-      required:
-      - isRestricted
-      properties:
-        isRestricted:
-          type: boolean
-        inheritedRestrictions:
-          type: array
-          items:
-            $ref: '#/components/schemas/InheritedRestriction'
-    AttachmentResult:
-      title: AttachmentResult
-      type: object
-      required:
-      - originalFilename
-      - url
-      properties:
-        originalFilename:
-          description: Original filename of the uploaded file
-          type: string
-        url:
-          description: Public URL of the uploaded file
-          type: string
-    Category:
-      title: Category
-      type: object
-      required:
-      - id
-      - isLocked
-      - restrictions
-      properties:
-        id:
-          type: string
-        title:
-          $ref: '#/components/schemas/TranslationTitle'
-        isDefaultLocation:
-          type: boolean
-        isLocked:
-          type: boolean
-        restrictions:
-          $ref: '#/components/schemas/Restrictions'
-        parentCategory:
-          type: string
-        parentCollections:
-          type: array
-          items:
-            type: string
-    NotFound:
-      title: NotFound
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    GetKnowledgeCollectionOutput:
-      title: GetKnowledgeCollectionOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Collection'
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    ListKnowledgeCollectionsOutput:
-      title: ListKnowledgeCollectionsOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
-    GetKnowledgeArticleTranslationsOutput:
-      title: GetKnowledgeArticleTranslationsOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ArticleTranslations'
-    ArticleTranslations:
-      title: ArticleTranslations
-      type: object
-      required:
-      - translations
-      properties:
-        translations:
-          $ref: '#/components/schemas/TranslationList'
-    AvailableAt:
-      title: AvailableAt
-      type: object
-      properties:
-        helpCenterLinks:
-          type: array
-          items:
-            $ref: '#/components/schemas/HelpCenterLink'
-    UploadAttachmentsOutput:
-      title: UploadAttachmentsOutput
-      type: object
-      properties:
-        data:
-          description: Successfully uploaded attachments
-          type: array
-          items:
-            $ref: '#/components/schemas/AttachmentResult'
-        partialErrors:
-          description: Errors for attachments that failed
-          type: array
-          items:
-            $ref: '#/components/schemas/AttachmentError'
     GetKnowledgeCollectionCatalogOutput:
       title: GetKnowledgeCollectionCatalogOutput
       type: object
@@ -1371,44 +1215,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/CollectionCatalogItem'
-    CollectionCatalogItem:
-      title: CollectionCatalogItem
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/CategoryCatalogItem'
-        articles:
-          type: array
-          items:
-            $ref: '#/components/schemas/ArticleCatalogItem'
-    UpdateTranslationsInput:
-      title: UpdateTranslationsInput
-      type: object
-      properties:
-        translations:
-          description: List of translations to create or update
-          type: array
-          items:
-            $ref: '#/components/schemas/TranslationInput1'
-    UpdateKnowledgeArticleOutput:
-      title: UpdateKnowledgeArticleOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Article'
-          description: The updated article
-    GetKnowledgeArticleOutput:
-      title: GetKnowledgeArticleOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Article'
     TagsUpdateInput:
       title: TagsUpdateInput
       description: Tags to add or remove
@@ -1424,58 +1230,26 @@ components:
           type: array
           items:
             type: string
-    TranslationError:
-      title: TranslationError
+    Restrictions:
+      title: Restrictions
       type: object
       required:
-      - languageId
-      - message
+      - isRestricted
       properties:
-        languageId:
-          description: Language code of the failed translation
-          type: string
-        message:
-          description: Error message describing the failure
-          type: string
-    CreateKnowledgeArticleInput:
-      title: CreateKnowledgeArticleInput
-      type: object
-      properties:
-        translations:
-          description: Initial translations for the article
-          type: array
-          items:
-            $ref: '#/components/schemas/TranslationInput'
-        parentId:
-          description: ID of the parent category
-          type: string
-        tags:
-          description: List of tag IDs to assign to the article
-          type: array
-          items:
-            type: string
-        preRelease:
-          description: Whether the article is only available in pre-release mode
+        isRestricted:
           type: boolean
-    ArticleContent:
-      title: ArticleContent
-      type: object
-      required:
-      - html
-      - plaintext
-      properties:
-        html:
-          type: string
-        plaintext:
-          type: string
-    CategoryTranslations:
-      title: CategoryTranslations
-      type: object
-      properties:
-        titles:
+        inheritedRestrictions:
           type: array
           items:
-            $ref: '#/components/schemas/TranslationTitle'
+            $ref: '#/components/schemas/InheritedRestriction'
+    GetKnowledgeArticleOutput:
+      title: GetKnowledgeArticleOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Article'
     BadRequest:
       title: BadRequest
       type: object
@@ -1484,56 +1258,6 @@ components:
       properties:
         message:
           type: string
-    TranslationList:
-      title: TranslationList
-      type: object
-      properties:
-        draft:
-          type: array
-          items:
-            $ref: '#/components/schemas/ArticleTranslation'
-        published:
-          type: array
-          items:
-            $ref: '#/components/schemas/ArticleTranslation'
-    HelpCenterLink:
-      title: HelpCenterLink
-      type: object
-      required:
-      - id
-      - name
-      - url
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        url:
-          type: string
-    TranslationInput1:
-      title: TranslationInput
-      type: object
-      required:
-      - languageId
-      - title
-      properties:
-        languageId:
-          description: ISO language code (e.g. en, da, de)
-          type: string
-        title:
-          description: Title of the translation
-          type: string
-        content:
-          description: HTML content of the translation
-          type: string
-    GetKnowledgeCategoryTranslationsOutput:
-      title: GetKnowledgeCategoryTranslationsOutput
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CategoryTranslations'
     TranslationInput:
       title: TranslationInput
       type: object
@@ -1550,20 +1274,23 @@ components:
         content:
           description: HTML content of the translation
           type: string
-    UpdateTranslationsOutput:
-      title: UpdateTranslationsOutput
+    CreateKnowledgeArticleOutput:
+      title: CreateKnowledgeArticleOutput
       type: object
+      required:
+      - data
       properties:
         data:
-          description: Successfully upserted translations
-          type: array
-          items:
-            $ref: '#/components/schemas/ArticleTranslation'
-        partialErrors:
-          description: Errors for translations that failed
-          type: array
-          items:
-            $ref: '#/components/schemas/TranslationError'
+          $ref: '#/components/schemas/Article'
+          description: The created article
+    GetKnowledgeCategoryOutput:
+      title: GetKnowledgeCategoryOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Category'
     ArticleTranslation:
       title: ArticleTranslation
       type: object
@@ -1596,6 +1323,111 @@ components:
           type: string
         updatedBy:
           type: string
+    InheritedRestriction:
+      title: InheritedRestriction
+      type: object
+      properties:
+        fromCollection:
+          type: string
+        fromCategory:
+          type: string
+    AttachmentError:
+      title: AttachmentError
+      type: object
+      required:
+      - originalFilename
+      - message
+      - code
+      properties:
+        originalFilename:
+          description: Original filename of the failed file
+          type: string
+        message:
+          description: Error message describing the failure
+          type: string
+        code:
+          description: 'HTTP-style status code: 400 for client-side errors, 500 for server-side errors'
+          type: integer
+          format: int32
+    UpdateKnowledgeArticleOutput:
+      title: UpdateKnowledgeArticleOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Article'
+          description: The updated article
+    HelpCenterLink:
+      title: HelpCenterLink
+      type: object
+      required:
+      - id
+      - name
+      - url
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+    TranslationError:
+      title: TranslationError
+      type: object
+      required:
+      - languageId
+      - message
+      properties:
+        languageId:
+          description: Language code of the failed translation
+          type: string
+        message:
+          description: Error message describing the failure
+          type: string
+    GetKnowledgeCategoryTranslationsOutput:
+      title: GetKnowledgeCategoryTranslationsOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CategoryTranslations'
+    GetKnowledgeArticleTranslationsOutput:
+      title: GetKnowledgeArticleTranslationsOutput
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ArticleTranslations'
+    AttachmentResult:
+      title: AttachmentResult
+      type: object
+      required:
+      - originalFilename
+      - url
+      properties:
+        originalFilename:
+          description: Original filename of the uploaded file
+          type: string
+        url:
+          description: Public URL of the uploaded file
+          type: string
+    UploadAttachmentsOutput:
+      title: UploadAttachmentsOutput
+      type: object
+      properties:
+        data:
+          description: Successfully uploaded attachments
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentResult'
+        partialErrors:
+          description: Errors for attachments that failed
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentError'
     UploadAttachmentsInput:
       title: UploadAttachmentsInput
       type: object
@@ -1606,14 +1438,220 @@ components:
           items:
             type: string
             format: binary
-    GetKnowledgeCategoryOutput:
-      title: GetKnowledgeCategoryOutput
+    Translation1:
+      title: Translation
+      type: object
+      required:
+      - draft
+      properties:
+        draft:
+          $ref: '#/components/schemas/ArticleTranslation'
+        published:
+          $ref: '#/components/schemas/ArticleTranslation'
+    Category:
+      title: Category
+      type: object
+      required:
+      - id
+      - isLocked
+      - restrictions
+      properties:
+        id:
+          type: string
+        title:
+          $ref: '#/components/schemas/TranslationTitle'
+        isDefaultLocation:
+          type: boolean
+        isLocked:
+          type: boolean
+        restrictions:
+          $ref: '#/components/schemas/Restrictions'
+        parentCategory:
+          type: string
+        parentCollections:
+          type: array
+          items:
+            type: string
+    UpdateKnowledgeArticleInput:
+      title: UpdateKnowledgeArticleInput
+      type: object
+      properties:
+        ownedBy:
+          description: ID of the user who owns the article
+          type: string
+        tags:
+          $ref: '#/components/schemas/TagsUpdateInput'
+        preRelease:
+          description: Whether the article is only available in pre-release mode
+          type: boolean
+    ArticleTranslations:
+      title: ArticleTranslations
+      type: object
+      required:
+      - translations
+      properties:
+        translations:
+          $ref: '#/components/schemas/TranslationList'
+    TranslationTitle:
+      title: TranslationTitle
+      type: object
+      required:
+      - languageId
+      - title
+      properties:
+        languageId:
+          type: string
+        title:
+          type: string
+    AvailableAt:
+      title: AvailableAt
+      type: object
+      properties:
+        helpCenterLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/HelpCenterLink'
+    CollectionCatalogItem:
+      title: CollectionCatalogItem
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryCatalogItem'
+        articles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleCatalogItem'
+    CategoryTranslations:
+      title: CategoryTranslations
+      type: object
+      properties:
+        titles:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslationTitle'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    NotFound:
+      title: NotFound
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Collection:
+      title: Collection
+      type: object
+      required:
+      - id
+      - title
+      - internalKbEnabled
+      - restrictions
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        internalKbEnabled:
+          type: boolean
+        restrictions:
+          $ref: '#/components/schemas/Restrictions'
+    CategoryCatalogItem:
+      title: CategoryCatalogItem
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        title:
+          $ref: '#/components/schemas/TranslationTitle'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryCatalogItem'
+        articles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleCatalogItem'
+    TranslationList:
+      title: TranslationList
+      type: object
+      properties:
+        draft:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleTranslation'
+        published:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleTranslation'
+    ArticleCatalogItem:
+      title: ArticleCatalogItem
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        title:
+          $ref: '#/components/schemas/TranslationTitle'
+    ListKnowledgeCollectionsOutput:
+      title: ListKnowledgeCollectionsOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+    GetKnowledgeCollectionOutput:
+      title: GetKnowledgeCollectionOutput
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/Category'
+          $ref: '#/components/schemas/Collection'
+    TranslationInput1:
+      title: TranslationInput
+      type: object
+      required:
+      - languageId
+      - title
+      properties:
+        languageId:
+          description: ISO language code (e.g. en, da, de)
+          type: string
+        title:
+          description: Title of the translation
+          type: string
+        content:
+          description: HTML content of the translation
+          type: string
+    UpdateTranslationsOutput:
+      title: UpdateTranslationsOutput
+      type: object
+      properties:
+        data:
+          description: Successfully upserted translations
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleTranslation'
+        partialErrors:
+          description: Errors for translations that failed
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslationError'
     Article:
       title: Article
       type: object
@@ -1658,84 +1696,46 @@ components:
           type: array
           items:
             type: string
-    Translation1:
-      title: Translation
+    CreateKnowledgeArticleInput:
+      title: CreateKnowledgeArticleInput
       type: object
-      required:
-      - draft
       properties:
-        draft:
-          $ref: '#/components/schemas/ArticleTranslation'
-        published:
-          $ref: '#/components/schemas/ArticleTranslation'
-    CategoryCatalogItem:
-      title: CategoryCatalogItem
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-        title:
-          $ref: '#/components/schemas/TranslationTitle'
-        categories:
+        translations:
+          description: Initial translations for the article
           type: array
           items:
-            $ref: '#/components/schemas/CategoryCatalogItem'
-        articles:
-          type: array
-          items:
-            $ref: '#/components/schemas/ArticleCatalogItem'
-    TranslationTitle:
-      title: TranslationTitle
-      type: object
-      required:
-      - languageId
-      - title
-      properties:
-        languageId:
-          type: string
-        title:
-          type: string
-    InheritedRestriction:
-      title: InheritedRestriction
-      type: object
-      properties:
-        fromCollection:
-          type: string
-        fromCategory:
-          type: string
-    Collection:
-      title: Collection
-      type: object
-      required:
-      - id
-      - title
-      - internalKbEnabled
-      - restrictions
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        internalKbEnabled:
-          type: boolean
-        restrictions:
-          $ref: '#/components/schemas/Restrictions'
-    UpdateKnowledgeArticleInput:
-      title: UpdateKnowledgeArticleInput
-      type: object
-      properties:
-        ownedBy:
-          description: ID of the user who owns the article
+            $ref: '#/components/schemas/TranslationInput'
+        parentId:
+          description: ID of the parent category
           type: string
         tags:
-          $ref: '#/components/schemas/TagsUpdateInput'
+          description: List of tag IDs to assign to the article
+          type: array
+          items:
+            type: string
         preRelease:
           description: Whether the article is only available in pre-release mode
           type: boolean
+    UpdateTranslationsInput:
+      title: UpdateTranslationsInput
+      type: object
+      properties:
+        translations:
+          description: List of translations to create or update
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslationInput1'
+    ArticleContent:
+      title: ArticleContent
+      type: object
+      required:
+      - html
+      - plaintext
+      properties:
+        html:
+          type: string
+        plaintext:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

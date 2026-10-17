@@ -327,25 +327,107 @@ paths:
                 message: There was an internal server error while processing the request
 components:
   schemas:
-    CustomAttribute1:
-      title: CustomAttribute
+    LastActivity:
+      title: LastActivity
       type: object
       required:
       - operator
-      - attributeId
       properties:
         operator:
-          $ref: '#/components/schemas/CustomAttributeOperator'
-        attributeId:
+          $ref: '#/components/schemas/TimestampOperator'
+    SearchConversationsWithFiltersOutput:
+      title: SearchConversationsWithFiltersOutput
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationSearchWithFiltersHit'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    BadRequest:
+      title: BadRequest
+      type: object
+      required:
+      - message
+      properties:
+        message:
           type: string
-    AgentId:
-      title: AgentId
+    SearchParametersInput:
+      title: SearchParametersInput
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/Query'
+        filters:
+          $ref: '#/components/schemas/Filters'
+    Until:
+      title: Until
+      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+      type: object
+      required:
+      - timestamp
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+    Between:
+      title: Between
+      description: 'Timestamps in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+      type: object
+      required:
+      - timestampFrom
+      - timestampTo
+      properties:
+        timestampFrom:
+          type: string
+          format: date-time
+        timestampTo:
+          type: string
+          format: date-time
+    ConversationSearchWithFiltersHit:
+      title: ConversationSearchWithFiltersHit
+      type: object
+      required:
+      - id
+      - highlights
+      properties:
+        id:
+          description: Identifier of a Conversation where a match was found
+          type: integer
+          format: int64
+        highlights:
+          $ref: '#/components/schemas/Map_Vector_String'
+    Direction:
+      title: Direction
       type: object
       required:
       - operator
       properties:
         operator:
-          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
+          $ref: '#/components/schemas/DirectionOperator'
+    IsNotOneOf:
+      title: IsNotOneOf
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    Between1:
+      title: Between
+      description: 'min and max in milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - min
+      - max
+      properties:
+        min:
+          type: integer
+          format: int64
+        max:
+          type: integer
+          format: int64
     IsNotOneOf3:
       title: IsNotOneOf
       type: object
@@ -362,6 +444,100 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IsNotOneOf1'
       - $ref: '#/components/schemas/IsOneOf1'
+    IsOneOf4:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [open, closed, pending]'
+          type: array
+          items:
+            type: string
+    IsOneOf3:
+      title: IsOneOf
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          description: 'values: [inbound, outbound, internal]'
+          type: array
+          items:
+            type: string
+    Map_Vector_String:
+      title: Map_Vector_String
+      description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags.
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
+    Channel:
+      title: Channel
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/ChannelOperator'
+    LastMessage:
+      title: LastMessage
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
+    Status1:
+      title: Status
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/StatusOperator'
+    Since:
+      title: Since
+      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
+      type: object
+      required:
+      - timestamp
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+    StatusOperator:
+      title: StatusOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf4'
+      - $ref: '#/components/schemas/IsOneOf4'
+    ContactId:
+      title: ContactId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldHasSingleValueOperator'
+    TimestampOperator:
+      title: TimestampOperator
+      oneOf:
+      - $ref: '#/components/schemas/Between'
+      - $ref: '#/components/schemas/Since'
+      - $ref: '#/components/schemas/Until'
+    Map_String:
+      title: Map_String
+      type: object
+      additionalProperties:
+        type: string
+    DurationOperator:
+      title: DurationOperator
+      oneOf:
+      - $ref: '#/components/schemas/Between1'
+      - $ref: '#/components/schemas/LongerThanOrEqualTo'
+      - $ref: '#/components/schemas/ShorterThanOrEqualTo'
     IsOneOf1:
       title: IsOneOf
       type: object
@@ -373,82 +549,25 @@ components:
           type: array
           items:
             type: string
-    LastMessage:
-      title: LastMessage
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/TimestampOperator'
-    FieldHasSingleValueOperator:
-      title: FieldHasSingleValueOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf'
-      - $ref: '#/components/schemas/IsOneOf'
-    LastActivity:
-      title: LastActivity
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/TimestampOperator'
-    ExcludesOne:
-      title: ExcludesOne
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    IsNotOneOf1:
+    IsNotOneOf2:
       title: IsNotOneOf
       type: object
-      required:
-      - values
       properties:
         values:
-          description: 'values: [email, contactform, chat, dixamessenger, phone, voicemail, callback, sms, facebookmessenger, whatsapp, adachat, digitalgeniuschat, kindlychat, genericapimessaging, trustpilot, yotpo]'
+          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
           type: array
           items:
-            type: string
-    QueueId:
-      title: QueueId
+            type: array
+            items:
+              type: string
+    ClosedDate:
+      title: ClosedDate
       type: object
       required:
       - operator
       properties:
         operator:
-          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
-    DirectionOperator:
-      title: DirectionOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf3'
-      - $ref: '#/components/schemas/IsOneOf3'
-    SearchOutput:
-      title: SearchOutput
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationSearchHit'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    Until:
-      title: Until
-      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
-      type: object
-      required:
-      - timestamp
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-    IsNotEmpty:
-      title: IsNotEmpty
-      type: object
+          $ref: '#/components/schemas/TimestampOperator'
     FieldCanHaveMultipleValuesOrBeEmptyOperator:
       title: FieldCanHaveMultipleValuesOrBeEmptyOperator
       oneOf:
@@ -458,30 +577,14 @@ components:
       - $ref: '#/components/schemas/IncludesOne'
       - $ref: '#/components/schemas/IsEmpty'
       - $ref: '#/components/schemas/IsNotEmpty'
-    IncludesOne:
-      title: IncludesOne
+    DirectionOperator:
+      title: DirectionOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf3'
+      - $ref: '#/components/schemas/IsOneOf3'
+    IsNotEmpty:
+      title: IsNotEmpty
       type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    ServerError:
-      title: ServerError
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    IsNotOneOf:
-      title: IsNotOneOf
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
     ConversationSearchHit:
       title: ConversationSearchHit
       type: object
@@ -501,28 +604,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ConversationSearchInnerHit'
-    TimestampOperator:
-      title: TimestampOperator
+    CustomAttributeOperator:
+      title: CustomAttributeOperator
       oneOf:
-      - $ref: '#/components/schemas/Between'
-      - $ref: '#/components/schemas/Since'
-      - $ref: '#/components/schemas/Until'
-    Duration:
-      title: Duration
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/DurationOperator'
-    SearchParametersInput:
-      title: SearchParametersInput
-      type: object
-      properties:
-        query:
-          $ref: '#/components/schemas/Query'
-        filters:
-          $ref: '#/components/schemas/Filters'
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
+      - $ref: '#/components/schemas/IsNotOneOf2'
+      - $ref: '#/components/schemas/IsOneOf2'
     IsOneOf:
       title: IsOneOf
       type: object
@@ -531,19 +619,135 @@ components:
           type: array
           items:
             type: string
-    Filters:
-      title: Filters
+    FieldCanHaveSingleValueOrBeEmptyOperator:
+      title: FieldCanHaveSingleValueOrBeEmptyOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsEmpty'
+      - $ref: '#/components/schemas/IsNotEmpty'
+      - $ref: '#/components/schemas/IsNotOneOf'
+      - $ref: '#/components/schemas/IsOneOf'
+    AgentId:
+      title: AgentId
       type: object
       required:
-      - strategy
+      - operator
       properties:
-        strategy:
-          description: 'values: [All, Any]'
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
+    ConversationSearchInnerHit:
+      title: ConversationSearchInnerHit
+      type: object
+      required:
+      - id
+      - highlight
+      properties:
+        id:
+          description: Identifier of a sub-entity (such as a Message) where a match was found
           type: string
-        conditions:
+        highlight:
+          $ref: '#/components/schemas/Map_String'
+          description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags
+    ConversationId:
+      title: ConversationId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldHasSingleValueOperator'
+    FieldHasSingleValueOperator:
+      title: FieldHasSingleValueOperator
+      oneOf:
+      - $ref: '#/components/schemas/IsNotOneOf'
+      - $ref: '#/components/schemas/IsOneOf'
+    ServerError:
+      title: ServerError
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    Query:
+      title: Query
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+        exactMatch:
+          type: boolean
+    ExcludesAll:
+      title: ExcludesAll
+      type: object
+      properties:
+        values:
           type: array
           items:
-            $ref: '#/components/schemas/Condition'
+            type: string
+    IncludesOne:
+      title: IncludesOne
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    IncludesAll:
+      title: IncludesAll
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    ShorterThanOrEqualTo:
+      title: ShorterThanOrEqualTo
+      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - duration
+      properties:
+        duration:
+          type: integer
+          format: int64
+    LongerThanOrEqualTo:
+      title: LongerThanOrEqualTo
+      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
+      type: object
+      required:
+      - duration
+      properties:
+        duration:
+          type: integer
+          format: int64
+    PaginationLinks:
+      title: PaginationLinks
+      type: object
+      properties:
+        previous:
+          description: url
+          type: string
+        next:
+          description: url
+          type: string
+    QueueId:
+      title: QueueId
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveSingleValueOrBeEmptyOperator'
+    AssignedDate:
+      title: AssignedDate
+      type: object
+      required:
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/TimestampOperator'
     Unauthorized:
       title: Unauthorized
       type: object
@@ -552,22 +756,21 @@ components:
       properties:
         message:
           type: string
-    ContactId:
-      title: ContactId
+    SearchOutput:
+      title: SearchOutput
       type: object
-      required:
-      - operator
       properties:
-        operator:
-          $ref: '#/components/schemas/FieldHasSingleValueOperator'
-    IsNotOneOf4:
-      title: IsNotOneOf
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationSearchHit'
+        meta:
+          $ref: '#/components/schemas/PaginationLinks'
+    ExcludesOne:
+      title: ExcludesOne
       type: object
-      required:
-      - values
       properties:
         values:
-          description: 'values: [open, closed, pending]'
           type: array
           items:
             type: string
@@ -589,65 +792,25 @@ components:
       - $ref: '#/components/schemas/QueueId'
       - $ref: '#/components/schemas/Status1'
       - $ref: '#/components/schemas/TagId'
-    ConversationSearchWithFiltersHit:
-      title: ConversationSearchWithFiltersHit
+    IsNotOneOf1:
+      title: IsNotOneOf
       type: object
       required:
-      - id
-      - highlights
-      properties:
-        id:
-          description: Identifier of a Conversation where a match was found
-          type: integer
-          format: int64
-        highlights:
-          $ref: '#/components/schemas/Map_Vector_String'
-    Between1:
-      title: Between
-      description: 'min and max in milliseconds; for example: ''10800000'' (3 hours)'
-      type: object
-      required:
-      - min
-      - max
-      properties:
-        min:
-          type: integer
-          format: int64
-        max:
-          type: integer
-          format: int64
-    IncludesAll:
-      title: IncludesAll
-      type: object
+      - values
       properties:
         values:
+          description: 'values: [email, contactform, chat, dixamessenger, phone, voicemail, callback, sms, facebookmessenger, whatsapp, adachat, digitalgeniuschat, kindlychat, genericapimessaging, trustpilot, yotpo]'
           type: array
           items:
             type: string
-    ConversationId:
-      title: ConversationId
+    Duration:
+      title: Duration
       type: object
       required:
       - operator
       properties:
         operator:
-          $ref: '#/components/schemas/FieldHasSingleValueOperator'
-    Map_Vector_String:
-      title: Map_Vector_String
-      description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags.
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          type: string
-    ExcludesAll:
-      title: ExcludesAll
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
+          $ref: '#/components/schemas/DurationOperator'
     Condition:
       title: Condition
       type: object
@@ -656,19 +819,20 @@ components:
       properties:
         field:
           $ref: '#/components/schemas/SearchField'
-    AssignedDate:
-      title: AssignedDate
+    IsEmpty:
+      title: IsEmpty
+      type: object
+    CustomAttribute1:
+      title: CustomAttribute
       type: object
       required:
       - operator
+      - attributeId
       properties:
         operator:
-          $ref: '#/components/schemas/TimestampOperator'
-    StatusOperator:
-      title: StatusOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsNotOneOf4'
-      - $ref: '#/components/schemas/IsOneOf4'
+          $ref: '#/components/schemas/CustomAttributeOperator'
+        attributeId:
+          type: string
     CreationDate:
       title: CreationDate
       type: object
@@ -677,34 +841,14 @@ components:
       properties:
         operator:
           $ref: '#/components/schemas/TimestampOperator'
-    BadRequest:
-      title: BadRequest
+    TagId:
+      title: TagId
       type: object
       required:
-      - message
+      - operator
       properties:
-        message:
-          type: string
-    Since:
-      title: Since
-      description: 'Timestamp in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
-      type: object
-      required:
-      - timestamp
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-    PaginationLinks:
-      title: PaginationLinks
-      type: object
-      properties:
-        previous:
-          description: url
-          type: string
-        next:
-          description: url
-          type: string
+        operator:
+          $ref: '#/components/schemas/FieldCanHaveMultipleValuesOrBeEmptyOperator'
     IsOneOf2:
       title: IsOneOf
       type: object
@@ -716,91 +860,21 @@ components:
             type: array
             items:
               type: string
-    LongerThanOrEqualTo:
-      title: LongerThanOrEqualTo
-      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
+    Filters:
+      title: Filters
       type: object
       required:
-      - duration
+      - strategy
       properties:
-        duration:
-          type: integer
-          format: int64
-    ShorterThanOrEqualTo:
-      title: ShorterThanOrEqualTo
-      description: 'In milliseconds; for example: ''10800000'' (3 hours)'
-      type: object
-      required:
-      - duration
-      properties:
-        duration:
-          type: integer
-          format: int64
-    SearchConversationsWithFiltersOutput:
-      title: SearchConversationsWithFiltersOutput
-      type: object
-      properties:
-        data:
+        strategy:
+          description: 'values: [All, Any]'
+          type: string
+        conditions:
           type: array
           items:
-            $ref: '#/components/schemas/ConversationSearchWithFiltersHit'
-        meta:
-          $ref: '#/components/schemas/PaginationLinks'
-    ConversationSearchInnerHit:
-      title: ConversationSearchInnerHit
-      type: object
-      required:
-      - id
-      - highlight
-      properties:
-        id:
-          description: Identifier of a sub-entity (such as a Message) where a match was found
-          type: string
-        highlight:
-          $ref: '#/components/schemas/Map_String'
-          description: Snippet of text where a match was found. Matched text will be wrapped in \<em\> tags
-    DurationOperator:
-      title: DurationOperator
-      oneOf:
-      - $ref: '#/components/schemas/Between1'
-      - $ref: '#/components/schemas/LongerThanOrEqualTo'
-      - $ref: '#/components/schemas/ShorterThanOrEqualTo'
-    Query:
-      title: Query
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-        exactMatch:
-          type: boolean
-    IsNotOneOf2:
+            $ref: '#/components/schemas/Condition'
+    IsNotOneOf4:
       title: IsNotOneOf
-      type: object
-      properties:
-        values:
-          description: 'Array of arrays of strings. Each inner array represents a possible custom attribute value.<br>If custom attribute is of type Select, either a parent value can be provided or a child value, but with a whole path to its parent value. Example: [["parent"], ["parent", "child1", "child2", "child3"], ["parent", "child1"]].<br>If custom attribute is of type Text, each search value must be wrapped in an array too. Example: [["value1"]]'
-          type: array
-          items:
-            type: array
-            items:
-              type: string
-    Channel:
-      title: Channel
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/ChannelOperator'
-    Map_String:
-      title: Map_String
-      type: object
-      additionalProperties:
-        type: string
-    IsOneOf4:
-      title: IsOneOf
       type: object
       required:
       - values
@@ -810,80 +884,6 @@ components:
           type: array
           items:
             type: string
-    Status1:
-      title: Status
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/StatusOperator'
-    CustomAttributeOperator:
-      title: CustomAttributeOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsEmpty'
-      - $ref: '#/components/schemas/IsNotEmpty'
-      - $ref: '#/components/schemas/IsNotOneOf2'
-      - $ref: '#/components/schemas/IsOneOf2'
-    Direction:
-      title: Direction
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/DirectionOperator'
-    TagId:
-      title: TagId
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/FieldCanHaveMultipleValuesOrBeEmptyOperator'
-    IsOneOf3:
-      title: IsOneOf
-      type: object
-      required:
-      - values
-      properties:
-        values:
-          description: 'values: [inbound, outbound, internal]'
-          type: array
-          items:
-            type: string
-    IsEmpty:
-      title: IsEmpty
-      type: object
-    ClosedDate:
-      title: ClosedDate
-      type: object
-      required:
-      - operator
-      properties:
-        operator:
-          $ref: '#/components/schemas/TimestampOperator'
-    FieldCanHaveSingleValueOrBeEmptyOperator:
-      title: FieldCanHaveSingleValueOrBeEmptyOperator
-      oneOf:
-      - $ref: '#/components/schemas/IsEmpty'
-      - $ref: '#/components/schemas/IsNotEmpty'
-      - $ref: '#/components/schemas/IsNotOneOf'
-      - $ref: '#/components/schemas/IsOneOf'
-    Between:
-      title: Between
-      description: 'Timestamps in ISO-8601 format: yyyy-MM-dd''T''HH:mm:ss''Z'' '
-      type: object
-      required:
-      - timestampFrom
-      - timestampTo
-      properties:
-        timestampFrom:
-          type: string
-          format: date-time
-        timestampTo:
-          type: string
-          format: date-time
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
