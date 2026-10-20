@@ -1,4 +1,4 @@
-generated: '2026-10-12'
+generated: '2026-10-20'
 method: searched
 source:
 - https://zapier.com/apps/dixa/integrations
@@ -84,193 +84,6 @@ marketplace_apps:
   - key: Search_user_by_phone
     label: Search User by Phone Number
 edges:
-- partner_name: Slack
-  partner: slack
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/slack
-  direction: third-party
-  category: Team Chat
-  partner_url: https://slack.com/
-- partner_name: Pipedrive
-  partner: pipedrive
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/pipedrive
-  direction: third-party
-  category: CRM (Customer Relationship Management)
-  partner_url: https://pipedrive.com/
-- partner_name: Pendo
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/pendo-legacy
-  direction: third-party
-  category: Analytics
-  partner_url: https://www.pendo.io/
-- partner_name: Microsoft Excel
-  partner: null
-  partner_match: null
-  partner_candidate: zapier
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/excel
-  direction: third-party
-  category: Microsoft
-  partner_url: https://zapier.com/office.com
-- partner_name: Snowflake
-  partner: snowflake
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/snowflake
-  direction: third-party
-  category: Databases
-  partner_url: https://www.snowflake.com/
-- partner_name: Bird Eats Bug
-  partner: null
-  partner_match: null
-  partner_candidate: zapier
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/bird-eats-bug
-  direction: third-party
-  category: Productivity
-  partner_url: https://zapier.com/www.birdeatsbug.com
-- partner_name: zipBoard
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/zipboard
-  direction: third-party
-  category: Project Management
-  partner_url: https://zipboard.co/
-- partner_name: Microsoft Outlook
-  partner: microsoft-outlook
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/microsoft-outlook
-  direction: third-party
-  category: Calendar
-  partner_url: https://outlook.live.com/
-- partner_name: Google Chat
-  partner: google-chat
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/google-chat
-  direction: third-party
-  category: Google
-  partner_url: https://gsuite.google.com/products/chat/
-- partner_name: Facebook Messenger
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/facebook-messenger
-  direction: third-party
-  category: Facebook
-  partner_url: https://www.messenger.com/
-- partner_name: PostgreSQL
-  partner: postgresql
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/postgresql
-  direction: third-party
-  category: Databases
-  partner_url: http://www.postgresql.org/
-- partner_name: SQL Server
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/sql-server
-  direction: third-party
-  category: Databases
-  partner_url: https://www.microsoft.com/sql-server
-- partner_name: Zapier Lead Router
-  partner: zapier
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/zapier-lead-router
-  direction: third-party
-  category: Marketing Automation
-  partner_url: https://zapier.com/l/leadrouter
-- partner_name: Magento 2.X
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/magento-v2
-  direction: third-party
-  category: eCommerce
-  partner_url: https://magento.com/
-- partner_name: Okta
-  partner: okta
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/okta
-  direction: third-party
-  category: Security & Identity Tools
-  partner_url: https://www.okta.com/
-- partner_name: FundraisingBox
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/fundraisingbox
-  direction: third-party
-  category: Fundraising
-  partner_url: https://www.fundraisingbox.com/
-- partner_name: Google Forms (Legacy)
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/google-forms-legacy
-  direction: third-party
-  category: Forms & Surveys
-  partner_url: http://google.com/
 - partner_name: Okta (own)
   partner: okta
   partner_match: mirror
@@ -377,6 +190,210 @@ edges:
     builder: 'community (Meltano Hub variant maintainers: airbyte, singer-io)'
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
+- partner_name: Slack
+  partner: slack
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/slack
+  direction: third-party
+  category: Team Chat
+  partner_url: https://slack.com/
+- partner_name: Pipedrive
+  partner: pipedrive
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/pipedrive
+  direction: third-party
+  category: CRM (Customer Relationship Management)
+  partner_url: https://pipedrive.com/
+- partner_name: Pendo
+  partner: pendoio
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/pendo-legacy
+  direction: third-party
+  category: Analytics
+  partner_url: https://www.pendo.io/
+- partner_name: Microsoft Excel
+  partner: null
+  partner_match: null
+  partner_candidate: zapier
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/excel
+  direction: third-party
+  category: Microsoft
+  partner_url: https://zapier.com/office.com
+- partner_name: Snowflake
+  partner: snowflake
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/snowflake
+  direction: third-party
+  category: Databases
+  partner_url: https://www.snowflake.com/
+- partner_name: Bird Eats Bug
+  partner: null
+  partner_match: null
+  partner_candidate: zapier
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/bird-eats-bug
+  direction: third-party
+  category: Productivity
+  partner_url: https://zapier.com/www.birdeatsbug.com
+- partner_name: zipBoard
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/zipboard
+  direction: third-party
+  category: Project Management
+  partner_url: https://zipboard.co/
+- partner_name: Microsoft Outlook
+  partner: microsoft-outlook
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/microsoft-outlook
+  direction: third-party
+  category: Calendar
+  partner_url: https://outlook.live.com/
+- partner_name: Google Chat
+  partner: google-chat
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/google-chat
+  direction: third-party
+  category: Google
+  partner_url: https://gsuite.google.com/products/chat/
+- partner_name: Facebook Messenger
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/facebook-messenger
+  direction: third-party
+  category: Facebook
+  partner_url: https://www.messenger.com/
+- partner_name: PostgreSQL
+  partner: postgresql
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/postgresql
+  direction: third-party
+  category: Databases
+  partner_url: http://www.postgresql.org/
+- partner_name: SQL Server
+  partner: microsoft-sql-server
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/sql-server
+  direction: third-party
+  category: Databases
+  partner_url: https://www.microsoft.com/sql-server
+- partner_name: Zapier Lead Router
+  partner: zapier
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/zapier-lead-router
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://zapier.com/l/leadrouter
+- partner_name: Magento 2.X
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/magento-v2
+  direction: third-party
+  category: eCommerce
+  partner_url: https://magento.com/
+- partner_name: Okta
+  partner: okta
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/okta
+  direction: third-party
+  category: Security & Identity Tools
+  partner_url: https://www.okta.com/
+- partner_name: FundraisingBox
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/fundraisingbox
+  direction: third-party
+  category: Fundraising
+  partner_url: https://www.fundraisingbox.com/
+- partner_name: Google Forms (Legacy)
+  partner: google-forms
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/dixa/integrations/google-forms-legacy
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: http://google.com/
 templates:
 - title: Create Dixa callback requests for new Google Form submissions
   url: https://zapier.com/apps/dixa/integrations/google-forms/354473/create-dixa-callback-requests-for-new-google-form-submissions

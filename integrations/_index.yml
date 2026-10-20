@@ -15,6 +15,7 @@
   evidence: https://zapier.com/apps/dixa/integrations/slack/1269722/create-internal-notes-in-dixa-when-new-channels-are-added-to-slack
   template: https://zapier.com/apps/dixa/integrations/slack/1269722/create-internal-notes-in-dixa-when-new-channels-are-added-to-slack
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: dixa-create-dixa-conversations-from-new-slack-channel-messages
@@ -29,6 +30,7 @@
   evidence: https://zapier.com/apps/dixa/integrations/slack/1280483/create-dixa-conversations-from-new-slack-channel-messages
   template: https://zapier.com/apps/dixa/integrations/slack/1280483/create-dixa-conversations-from-new-slack-channel-messages
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: dixa-send-messages-in-slack-channels-for-new-agent-ratings-of-4-or-5-in-dixa
@@ -43,190 +45,8 @@
   evidence: https://zapier.com/apps/dixa/integrations/slack/1594063/send-messages-in-slack-channels-for-new-agent-ratings-of-4-or-5-in-dixa
   template: https://zapier.com/apps/dixa/integrations/slack/1594063/send-messages-in-slack-channels-for-new-agent-ratings-of-4-or-5-in-dixa
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
-  arazzo: null
-- slug: dixa-pipedrive
-  label: Pipedrive
-  partner: pipedrive
-  partner_name: Pipedrive
-  category: CRM (Customer Relationship Management)
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/pipedrive
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: dixa-pendo
-  label: Pendo
-  partner_name: Pendo
-  category: Analytics
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/pendo-legacy
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: dixa-microsoft-excel
-  label: Microsoft Excel
-  partner_name: Microsoft Excel
-  category: Microsoft
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/excel
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: dixa-snowflake
-  label: Snowflake
-  partner: snowflake
-  partner_name: Snowflake
-  category: Databases
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/snowflake
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: dixa-bird-eats-bug
-  label: Bird Eats Bug
-  partner_name: Bird Eats Bug
-  category: Productivity
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/bird-eats-bug
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: dixa-zipboard
-  label: zipBoard
-  partner_name: zipBoard
-  category: Project Management
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/zipboard
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: dixa-microsoft-outlook
-  label: Microsoft Outlook
-  partner: microsoft-outlook
-  partner_name: Microsoft Outlook
-  category: Calendar
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/microsoft-outlook
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: dixa-google-chat
-  label: Google Chat
-  partner: google-chat
-  partner_name: Google Chat
-  category: Google
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/google-chat
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: dixa-facebook-messenger
-  label: Facebook Messenger
-  partner_name: Facebook Messenger
-  category: Facebook
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/facebook-messenger
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: dixa-postgresql
-  label: PostgreSQL
-  partner: postgresql
-  partner_name: PostgreSQL
-  category: Databases
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/postgresql
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: dixa-sql-server
-  label: SQL Server
-  partner_name: SQL Server
-  category: Databases
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/sql-server
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: dixa-zapier-lead-router
-  label: Zapier Lead Router
-  partner: zapier
-  partner_name: Zapier Lead Router
-  category: Marketing Automation
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/zapier-lead-router
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: dixa-magento-2-x
-  label: Magento 2.X
-  partner_name: Magento 2.X
-  category: eCommerce
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/magento-v2
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: dixa-okta
-  label: Okta
-  partner: okta
-  partner_name: Okta
-  category: Security & Identity Tools
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/okta
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: dixa-fundraisingbox
-  label: FundraisingBox
-  partner_name: FundraisingBox
-  category: Fundraising
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/fundraisingbox
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: dixa-google-forms-legacy
-  label: Google Forms (Legacy)
-  partner_name: Google Forms (Legacy)
-  category: Forms & Surveys
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/dixa/integrations/google-forms-legacy
-  source: edge
-  status: pending-partner-spec
   arazzo: null
 - slug: dixa-okta-own
   label: Okta (own)
@@ -322,4 +142,206 @@
     - bronze
     builder: 'community (Meltano Hub variant maintainers: airbyte, singer-io)'
   status: not-a-workflow
+  arazzo: null
+- slug: dixa-pipedrive
+  label: Pipedrive
+  partner: pipedrive
+  partner_name: Pipedrive
+  category: CRM (Customer Relationship Management)
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/pipedrive
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: dixa-pendo
+  label: Pendo
+  partner: pendoio
+  partner_name: Pendo
+  category: Analytics
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/pendo-legacy
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: dixa-microsoft-excel
+  label: Microsoft Excel
+  partner_name: Microsoft Excel
+  category: Microsoft
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/excel
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: dixa-snowflake
+  label: Snowflake
+  partner: snowflake
+  partner_name: Snowflake
+  category: Databases
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/snowflake
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: dixa-bird-eats-bug
+  label: Bird Eats Bug
+  partner_name: Bird Eats Bug
+  category: Productivity
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/bird-eats-bug
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: dixa-zipboard
+  label: zipBoard
+  partner_name: zipBoard
+  category: Project Management
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/zipboard
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: dixa-microsoft-outlook
+  label: Microsoft Outlook
+  partner: microsoft-outlook
+  partner_name: Microsoft Outlook
+  category: Calendar
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/microsoft-outlook
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: dixa-google-chat
+  label: Google Chat
+  partner: google-chat
+  partner_name: Google Chat
+  category: Google
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/google-chat
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: dixa-facebook-messenger
+  label: Facebook Messenger
+  partner_name: Facebook Messenger
+  category: Facebook
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/facebook-messenger
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: dixa-postgresql
+  label: PostgreSQL
+  partner: postgresql
+  partner_name: PostgreSQL
+  category: Databases
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/postgresql
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: dixa-sql-server
+  label: SQL Server
+  partner: microsoft-sql-server
+  partner_name: SQL Server
+  category: Databases
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/sql-server
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: dixa-zapier-lead-router
+  label: Zapier Lead Router
+  partner: zapier
+  partner_name: Zapier Lead Router
+  category: Marketing Automation
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/zapier-lead-router
+  source: edge
+  relationship: ipaas-bridge
+  status: not-a-workflow
+  arazzo: null
+- slug: dixa-magento-2-x
+  label: Magento 2.X
+  partner_name: Magento 2.X
+  category: eCommerce
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/magento-v2
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: dixa-okta
+  label: Okta
+  partner: okta
+  partner_name: Okta
+  category: Security & Identity Tools
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/okta
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: dixa-fundraisingbox
+  label: FundraisingBox
+  partner_name: FundraisingBox
+  category: Fundraising
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/fundraisingbox
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: dixa-google-forms-legacy
+  label: Google Forms (Legacy)
+  partner: google-forms
+  partner_name: Google Forms (Legacy)
+  category: Forms & Surveys
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/dixa/integrations/google-forms-legacy
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
   arazzo: null
