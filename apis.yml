@@ -339,6 +339,8 @@ apis:
   - type: RateLimits
     url: https://docs.dixa.io/docs/api-standards-rules
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/dixa/overview
   - type: CapabilityMap
     url: capabilities/dixa-capability-edges.yml
     name: Dixa Business Capability Map
