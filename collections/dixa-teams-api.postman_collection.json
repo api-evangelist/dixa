@@ -1,1800 +1,1775 @@
 {
+  "info": {
+    "_postman_id": "350ecd8c-9200-4b4d-99f1-0fc589199c0c",
+    "name": "Dixa Teams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:25:41.000Z",
+    "updatedAt": "2026-10-22T01:25:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-350ecd8c-9200-4b4d-99f1-0fc589199c0c"
+  },
   "item": [
     {
-      "id": "b431de3b-e50d-4cf5-9aa9-9a46ef8d12ad",
-      "name": "Teams",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "beta",
       "item": [
         {
-          "id": "751179e4-3862-4d45-ad26-02520a044b6d",
-          "name": "List teams",
-          "request": {
-            "name": "List teams",
-            "description": {
-              "content": "Lists all teams in an organization.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "teams"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "teams",
+          "item": [
             {
-              "id": "5257ca13-d55f-4728-a0e5-99a18d1438e7",
-              "name": "The list of teams in an organization",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{teamId}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"005e7108-c85c-41d1-a945-4a8dc58c4399\",\n      \"name\": \"Team A\"\n    },\n    {\n      \"id\": \"83cc3c21-9d28-4250-b6ea-b3a6333c5c73\",\n      \"name\": \"Team B\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e0970b80-0efb-42c9-88aa-ef2c2c9463d2",
-              "name": "Invalid value extracted from request context",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+                  "name": "agents",
+                  "item": [
+                    {
+                      "name": "List members",
+                      "id": "8e5df8ea-634e-49f8-bd4b-e516da039472",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "teams",
+                            ":teamId",
+                            "agents"
+                          ],
+                          "variable": [
+                            {
+                              "id": "71a962c5-23ed-47fb-9cfe-58e5274adf8d",
+                              "key": "teamId",
+                              "value": "<uuid>",
+                              "description": "(Required) The team id"
+                            }
+                          ]
+                        },
+                        "description": "Lists all agents/admins in a team."
+                      },
+                      "response": [
+                        {
+                          "id": "d69167b3-5bcc-46cb-962c-916dc5b9ab6b",
+                          "name": "List of agents/admins in the specified team",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "agents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phoneNumber\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phoneNumber\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-d69167b3-5bcc-46cb-962c-916dc5b9ab6b"
+                        },
+                        {
+                          "id": "a9123a80-33cb-49d9-80b4-50ce989b76b2",
+                          "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "agents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-a9123a80-33cb-49d9-80b4-50ce989b76b2"
+                        },
+                        {
+                          "id": "1ffd06b6-53f4-4d3d-9c94-7c0258029e16",
+                          "name": "Internal failure during request processing",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "agents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-1ffd06b6-53f4-4d3d-9c94-7c0258029e16"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:25:42.000Z",
+                      "updatedAt": "2026-10-22T01:25:42.000Z",
+                      "uid": "35240-8e5df8ea-634e-49f8-bd4b-e516da039472"
                     },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+                    {
+                      "name": "Remove members",
+                      "id": "775a063c-b5c7-492c-9b62-216e0ca36ef7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "teams",
+                            ":teamId",
+                            "agents"
+                          ],
+                          "variable": [
+                            {
+                              "id": "dca21d43-a6ba-4db0-a063-51b3aa957f2b",
+                              "key": "teamId",
+                              "value": "<uuid>",
+                              "description": "(Required) The team id"
+                            }
+                          ]
+                        },
+                        "description": "Remove agents/admins from a team."
+                      },
+                      "response": [
+                        {
+                          "id": "857c5b62-807b-4a39-9060-4dea9296e4dc",
+                          "name": "The agents/admins were successfully removed from the team",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "agents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-857c5b62-807b-4a39-9060-4dea9296e4dc"
+                        },
+                        {
+                          "id": "2817ea70-a29b-4a54-ae0a-b6a40fd854a6",
+                          "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context, Invalid value for: body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "agents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-2817ea70-a29b-4a54-ae0a-b6a40fd854a6"
+                        },
+                        {
+                          "id": "dc27dc4c-fd4c-48ff-8e51-9c8cee250174",
+                          "name": "Internal failure during request processing",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "agents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-dc27dc4c-fd4c-48ff-8e51-9c8cee250174"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:25:42.000Z",
+                      "updatedAt": "2026-10-22T01:25:42.000Z",
+                      "uid": "35240-775a063c-b5c7-492c-9b62-216e0ca36ef7"
+                    },
+                    {
+                      "name": "Add members",
+                      "id": "7d3be0bb-9e6b-4790-b9c9-c5e1d867bd58",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "teams",
+                            ":teamId",
+                            "agents"
+                          ],
+                          "variable": [
+                            {
+                              "id": "be430f0c-8aba-4597-8faa-1984e58178d4",
+                              "key": "teamId",
+                              "value": "<uuid>",
+                              "description": "(Required) The team id"
+                            }
+                          ]
+                        },
+                        "description": "Add agents/admins to a team."
+                      },
+                      "response": [
+                        {
+                          "id": "7cb591cc-dbec-4963-a18a-c9bba2165187",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "agents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-7cb591cc-dbec-4963-a18a-c9bba2165187"
+                        },
+                        {
+                          "id": "8c0c72fa-3a09-4fa7-b9fd-2200b93bd1f4",
+                          "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context, Invalid value for: body",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "agents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-8c0c72fa-3a09-4fa7-b9fd-2200b93bd1f4"
+                        },
+                        {
+                          "id": "08ff904b-16f1-4e5d-a9b4-d8d1bfd2eb2d",
+                          "name": "Internal failure during request processing",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/agents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "agents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-08ff904b-16f1-4e5d-a9b4-d8d1bfd2eb2d"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:25:42.000Z",
+                      "updatedAt": "2026-10-22T01:25:42.000Z",
+                      "uid": "35240-7d3be0bb-9e6b-4790-b9c9-c5e1d867bd58"
+                    }
+                  ],
+                  "id": "eacc4c99-0a2e-4f58-9786-bda3318e0340",
+                  "createdAt": "2026-10-22T01:25:42.000Z",
+                  "updatedAt": "2026-10-22T01:25:42.000Z",
+                  "uid": "35240-eacc4c99-0a2e-4f58-9786-bda3318e0340"
+                },
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a925bbf7-fee6-4af1-94a7-69cd1f5507b5",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams"
+                  "name": "presence",
+                  "item": [
+                    {
+                      "name": "List presence",
+                      "id": "a97e732d-3650-4447-98a5-8dafcf4dfa0f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/teams/:teamId/presence?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "teams",
+                            ":teamId",
+                            "presence"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "4fbc802e-7644-4dff-a14e-553974fc3abd",
+                              "key": "teamId",
+                              "value": "<uuid>",
+                              "description": "(Required) The team id"
+                            }
+                          ]
+                        },
+                        "description": "List the presence status of all agents/admins in a team."
+                      },
+                      "response": [
+                        {
+                          "id": "55feb3fb-888b-44db-af4e-9e1190d58912",
+                          "name": "List of agents/admins presence status in the specified team",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/presence?pageLimit=<integer>&pageKey=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "presence"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                                  "key": "pageLimit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                                  "key": "pageKey",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"userId\": \"<string>\",\n      \"requestTime\": \"<string>\",\n      \"connectionStatus\": \"<string>\",\n      \"lastSeen\": \"<string>\",\n      \"presenceStatus\": \"<string>\",\n      \"activeChannels\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"userId\": \"<string>\",\n      \"requestTime\": \"<string>\",\n      \"connectionStatus\": \"<string>\",\n      \"lastSeen\": \"<string>\",\n      \"presenceStatus\": \"<string>\",\n      \"activeChannels\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"meta\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-55feb3fb-888b-44db-af4e-9e1190d58912"
+                        },
+                        {
+                          "id": "6d4fe884-e0b9-404e-af62-686d84cd3fa4",
+                          "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/presence?pageLimit=<integer>&pageKey=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "presence"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                                  "key": "pageLimit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                                  "key": "pageKey",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-6d4fe884-e0b9-404e-af62-686d84cd3fa4"
+                        },
+                        {
+                          "id": "4e283473-057e-470e-8e7a-e1fbf3da5ad7",
+                          "name": "An entity in this request could not be found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/presence?pageLimit=<integer>&pageKey=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "presence"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                                  "key": "pageLimit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                                  "key": "pageKey",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-4e283473-057e-470e-8e7a-e1fbf3da5ad7"
+                        },
+                        {
+                          "id": "e3f8409c-0032-4f36-a5a9-44b5137dc646",
+                          "name": "Internal failure during request processing",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/teams/:teamId/presence?pageLimit=<integer>&pageKey=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "teams",
+                                ":teamId",
+                                "presence"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                                  "key": "pageLimit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                                  "key": "pageKey",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "teamId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:42.000Z",
+                          "updatedAt": "2026-10-22T01:25:42.000Z",
+                          "uid": "35240-e3f8409c-0032-4f36-a5a9-44b5137dc646"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:25:42.000Z",
+                      "updatedAt": "2026-10-22T01:25:42.000Z",
+                      "uid": "35240-a97e732d-3650-4447-98a5-8dafcf4dfa0f"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  "id": "2cccc0f9-3b1b-4589-9f97-9725e445af2c",
+                  "createdAt": "2026-10-22T01:25:42.000Z",
+                  "updatedAt": "2026-10-22T01:25:42.000Z",
+                  "uid": "35240-2cccc0f9-3b1b-4589-9f97-9725e445af2c"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "43bc40ed-5996-47c9-b05e-9bfc24c8fbeb",
-          "name": "Create team",
-          "request": {
-            "name": "Create team",
-            "description": {
-              "content": "Create a team.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "teams"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "af34c45a-c5b7-427a-a370-3c730452e2ab",
-              "name": "The created team",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                  "name": "Get team",
+                  "id": "48eff803-2b6c-49d8-92d1-ee11fd606ba4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/teams/:teamId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "teams",
+                        ":teamId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e167e321-b4fc-4594-91ef-8274545a297b",
+                          "key": "teamId",
+                          "value": "<uuid>",
+                          "description": "(Required) The team id"
+                        }
+                      ]
+                    },
+                    "description": "Get a team by id."
+                  },
+                  "response": [
+                    {
+                      "id": "30219858-a6d0-470c-8528-a7cc6021e7c3",
+                      "name": "The team",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/teams/:teamId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "teams",
+                            ":teamId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "teamId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:25:42.000Z",
+                      "updatedAt": "2026-10-22T01:25:42.000Z",
+                      "uid": "35240-30219858-a6d0-470c-8528-a7cc6021e7c3"
+                    },
+                    {
+                      "id": "1c556103-1fc2-45c2-8bb0-4baf55dd0c4d",
+                      "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/teams/:teamId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "teams",
+                            ":teamId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "teamId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:25:42.000Z",
+                      "updatedAt": "2026-10-22T01:25:42.000Z",
+                      "uid": "35240-1c556103-1fc2-45c2-8bb0-4baf55dd0c4d"
+                    },
+                    {
+                      "id": "9c3d1998-f842-4fdf-b1a1-be7e6d4f0614",
+                      "name": "An entity in this request could not be found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/teams/:teamId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "teams",
+                            ":teamId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "teamId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:25:42.000Z",
+                      "updatedAt": "2026-10-22T01:25:42.000Z",
+                      "uid": "35240-9c3d1998-f842-4fdf-b1a1-be7e6d4f0614"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:25:42.000Z",
+                  "updatedAt": "2026-10-22T01:25:42.000Z",
+                  "uid": "35240-48eff803-2b6c-49d8-92d1-ee11fd606ba4"
+                },
+                {
+                  "name": "Delete team",
+                  "id": "64b261bd-060a-47ec-a0f6-c6f8d2ff2f81",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/teams/:teamId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "teams",
+                        ":teamId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "896b5ded-4b3a-4fad-ad42-529e5aa80399",
+                          "key": "teamId",
+                          "value": "<uuid>",
+                          "description": "(Required) The team id"
+                        }
+                      ]
+                    },
+                    "description": "Delete a team."
+                  },
+                  "response": [
+                    {
+                      "id": "0bf751cd-a0b8-4292-930d-2c1e14996710",
+                      "name": "The team was successfully deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/teams/:teamId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "teams",
+                            ":teamId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "teamId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:25:42.000Z",
+                      "updatedAt": "2026-10-22T01:25:42.000Z",
+                      "uid": "35240-0bf751cd-a0b8-4292-930d-2c1e14996710"
+                    },
+                    {
+                      "id": "dfd64cde-3a2a-45f0-a97d-5139b7e9462e",
+                      "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/teams/:teamId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "teams",
+                            ":teamId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "teamId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:25:42.000Z",
+                      "updatedAt": "2026-10-22T01:25:42.000Z",
+                      "uid": "35240-dfd64cde-3a2a-45f0-a97d-5139b7e9462e"
+                    },
+                    {
+                      "id": "0669c69e-962f-4e98-b718-6b9eb4e9db2b",
+                      "name": "Internal failure during request processing",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/teams/:teamId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "teams",
+                            ":teamId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "teamId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:25:42.000Z",
+                      "updatedAt": "2026-10-22T01:25:42.000Z",
+                      "uid": "35240-0669c69e-962f-4e98-b718-6b9eb4e9db2b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:25:42.000Z",
+                  "updatedAt": "2026-10-22T01:25:42.000Z",
+                  "uid": "35240-64b261bd-060a-47ec-a0f6-c6f8d2ff2f81"
+                }
+              ],
+              "id": "52b1f6db-45a3-4981-8afa-c5cdbafae449",
+              "createdAt": "2026-10-22T01:25:42.000Z",
+              "updatedAt": "2026-10-22T01:25:42.000Z",
+              "uid": "35240-52b1f6db-45a3-4981-8afa-c5cdbafae449"
+            },
+            {
+              "name": "List teams",
+              "id": "9dba6af6-c6ac-4be8-afdb-04b6599c7508",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
+                "url": {
+                  "raw": "{{baseUrl}}/beta/teams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "beta",
+                    "teams"
+                  ]
+                },
+                "description": "Lists all teams in an organization."
+              },
+              "response": [
+                {
+                  "id": "d379189c-0505-45a9-b839-7cff2adc05ca",
+                  "name": "The list of teams in an organization",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/teams",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "teams"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T01:25:42.000Z",
+                  "updatedAt": "2026-10-22T01:25:42.000Z",
+                  "uid": "35240-d379189c-0505-45a9-b839-7cff2adc05ca"
+                },
+                {
+                  "id": "19e90d72-fc47-4044-b59b-fa8aab30267c",
+                  "name": "Invalid value extracted from request context",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/teams",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "teams"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:25:42.000Z",
+                  "updatedAt": "2026-10-22T01:25:42.000Z",
+                  "uid": "35240-19e90d72-fc47-4044-b59b-fa8aab30267c"
+                },
+                {
+                  "id": "e20594e2-1f74-4256-bca0-12b327eb7190",
+                  "name": "Internal failure during request processing",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/teams",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "teams"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:25:42.000Z",
+                  "updatedAt": "2026-10-22T01:25:42.000Z",
+                  "uid": "35240-e20594e2-1f74-4256-bca0-12b327eb7190"
+                }
+              ],
+              "createdAt": "2026-10-22T01:25:42.000Z",
+              "updatedAt": "2026-10-22T01:25:42.000Z",
+              "uid": "35240-9dba6af6-c6ac-4be8-afdb-04b6599c7508"
+            },
+            {
+              "name": "Create team",
+              "id": "21593381-8706-496b-830b-d0a27c0ad75d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Team A\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": \"005e7108-c85c-41d1-a945-4a8dc58c4399\",\n    \"name\": \"Team A\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d7f3811d-992e-41c2-aba1-8756fe6bda16",
-              "name": "Invalid value extracted from request context, Invalid value for: body",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/beta/teams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "beta",
                     "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Team A\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Create a team."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "7fc8fae9-4f7f-4cc7-9ccc-c573c5b72a94",
+                  "name": "The created team",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/teams",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "teams"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:25:42.000Z",
+                  "updatedAt": "2026-10-22T01:25:42.000Z",
+                  "uid": "35240-7fc8fae9-4f7f-4cc7-9ccc-c573c5b72a94"
+                },
+                {
+                  "id": "03b7b28e-f080-4be9-b0fe-e0e210dbceb8",
+                  "name": "Invalid value extracted from request context, Invalid value for: body",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/teams",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "teams"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:25:42.000Z",
+                  "updatedAt": "2026-10-22T01:25:42.000Z",
+                  "uid": "35240-03b7b28e-f080-4be9-b0fe-e0e210dbceb8"
+                },
+                {
+                  "id": "3d9bea3b-d3a5-44d7-80b4-8d73dfa36f85",
+                  "name": "Internal failure during request processing",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/teams",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "teams"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:25:42.000Z",
+                  "updatedAt": "2026-10-22T01:25:42.000Z",
+                  "uid": "35240-3d9bea3b-d3a5-44d7-80b4-8d73dfa36f85"
                 }
               ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3c022054-2de3-43d8-a031-96a8b9ebb64d",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Team A\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:25:42.000Z",
+              "updatedAt": "2026-10-22T01:25:42.000Z",
+              "uid": "35240-21593381-8706-496b-830b-d0a27c0ad75d"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "dfabe1d8-17e4-4653-a872-1cdc6b665e98",
-          "name": "List members",
-          "request": {
-            "name": "List members",
-            "description": {
-              "content": "Lists all agents/admins in a team.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "teams",
-                ":teamId",
-                "agents"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "teamId",
-                  "description": "(Required) The team id"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "2d14cb79-8609-436c-91ae-903fc0cb0b61",
-              "name": "List of agents/admins in the specified team",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"e8333378-62ed-4062-93b5-fadae6f41175\",\n      \"name\": \"Agent A\",\n      \"email\": \"aa@example.org\"\n    },\n    {\n      \"id\": \"40735745-9fde-4b6d-8941-e82e4e6d5001\",\n      \"name\": \"Agent B\",\n      \"email\": \"ab@example.org\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3b102b8f-a82e-4620-b8ee-a8f3d70a3d31",
-              "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ce79d8c0-af98-4c1e-b502-ed5427193aaa",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "75461b24-2d0d-42b0-99b4-d39c31063e4e",
-          "name": "Remove members",
-          "request": {
-            "name": "Remove members",
-            "description": {
-              "content": "Remove agents/admins from a team.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "teams",
-                ":teamId",
-                "agents"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "teamId",
-                  "description": "(Required) The team id"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "c9b3537a-42f2-4b30-864f-5d21b674511e",
-              "name": "The agents/admins were successfully removed from the team",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"agentIds\": [\n    \"a8080cf3-9d55-41dd-a8ef-b02414399e7a\",\n    \"d53dbec1-e79c-4736-b9a1-15f6dce71ed4\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "2a2317d7-99d6-4604-8eda-3f142ae8dd55",
-              "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context, Invalid value for: body",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"agentIds\": [\n    \"a8080cf3-9d55-41dd-a8ef-b02414399e7a\",\n    \"d53dbec1-e79c-4736-b9a1-15f6dce71ed4\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1ff1cb21-aa23-4d26-8a45-23fb33d90d57",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"agentIds\": [\n    \"a8080cf3-9d55-41dd-a8ef-b02414399e7a\",\n    \"d53dbec1-e79c-4736-b9a1-15f6dce71ed4\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "89809b3d-2bf4-4b2f-9bc9-f262599399fb",
-          "name": "Add members",
-          "request": {
-            "name": "Add members",
-            "description": {
-              "content": "Add agents/admins to a team.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "teams",
-                ":teamId",
-                "agents"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "teamId",
-                  "description": "(Required) The team id"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"agentIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "734ee799-e11b-4f57-b35f-3c25a38a1522",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"agentIds\": [\n    \"912d5148-6918-4420-b23a-8584b896c8ae\",\n    \"a8080cf3-9d55-41dd-a8ef-b02414399e7a\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "dd262d0c-638a-4e28-932d-ddfb5e016072",
-              "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context, Invalid value for: body",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"agentIds\": [\n    \"912d5148-6918-4420-b23a-8584b896c8ae\",\n    \"a8080cf3-9d55-41dd-a8ef-b02414399e7a\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7d769a23-d67e-4b80-92bb-ffa35b4d8b40",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"agentIds\": [\n    \"912d5148-6918-4420-b23a-8584b896c8ae\",\n    \"a8080cf3-9d55-41dd-a8ef-b02414399e7a\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0ef7f671-a3e1-4c29-8e9d-ad1636df5ddb",
-          "name": "List presence",
-          "request": {
-            "name": "List presence",
-            "description": {
-              "content": "List the presence status of all agents/admins in a team.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "teams",
-                ":teamId",
-                "presence"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "pageLimit",
-                  "value": "<integer>",
-                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
-                },
-                {
-                  "disabled": false,
-                  "key": "pageKey",
-                  "value": "<string>",
-                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "teamId",
-                  "description": "(Required) The team id"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "3ceeca0d-6fca-43b0-a32b-596243ae186c",
-              "name": "List of agents/admins presence status in the specified team",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "presence"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"userId\": \"d53dbec1-e79c-4736-b9a1-15f6dce71ed4\",\n      \"requestTime\": \"2021-12-01T12:46:35.935\",\n      \"lastSeen\": \"2021-12-01T12:46:35.935\",\n      \"presenceStatus\": \"Working\",\n      \"connectionStatus\": \"Online\",\n      \"activeChannels\": [\n        \"Email\",\n        \"FacebookMessenger\"\n      ]\n    },\n    {\n      \"userId\": \"e8ecd53b-2f6c-4471-a3a0-34d94caff8c8\",\n      \"requestTime\": \"2021-12-01T12:46:35.935\",\n      \"lastSeen\": \"2021-12-01T12:46:35.935\",\n      \"presenceStatus\": \"Working\",\n      \"connectionStatus\": \"Online\",\n      \"activeChannels\": [\n        \"Email\",\n        \"FacebookMessenger\"\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e2189d0e-1cdd-4f6e-ac24-788bd384d4c0",
-              "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "presence"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "47b67e51-c219-4fa2-86f9-9b17c42a2095",
-              "name": "An entity in this request could not be found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "presence"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "16ce3045-3965-409e-9184-8e55f33d3d9e",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId",
-                    "presence"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b8734848-40a8-4efb-90d5-858acf7974df",
-          "name": "Get team",
-          "request": {
-            "name": "Get team",
-            "description": {
-              "content": "Get a team by id.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "teams",
-                ":teamId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "teamId",
-                  "description": "(Required) The team id"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "fb6d47f0-0e30-455b-90c4-62b1c1b56076",
-              "name": "The team",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": \"005e7108-c85c-41d1-a945-4a8dc58c4399\",\n    \"name\": \"Team A\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "604b4caf-e9e4-4613-9bf2-6f6ef5e2351c",
-              "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dd6a1f1c-aa12-45a4-9039-88bc824626f6",
-              "name": "An entity in this request could not be found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6a79cd4e-2bbb-4b13-9dc1-63138f3e7573",
-          "name": "Delete team",
-          "request": {
-            "name": "Delete team",
-            "description": {
-              "content": "Delete a team.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "teams",
-                ":teamId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "teamId",
-                  "description": "(Required) The team id"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b22ad961-b600-4a98-89a3-b00df978f38a",
-              "name": "The team was successfully deleted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "95002e9d-a6ab-44a0-907f-0410a27fde31",
-              "name": "Invalid value for: path parameter teamId, Invalid value extracted from request context",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0c26ea88-1877-4b67-82d0-4e62209cd733",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "teams",
-                    ":teamId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "teamId",
-                      "description": "(Required) The team id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "1884a0d6-0d1e-4041-b965-c75d80935607",
+          "createdAt": "2026-10-22T01:25:42.000Z",
+          "updatedAt": "2026-10-22T01:25:42.000Z",
+          "uid": "35240-1884a0d6-0d1e-4041-b965-c75d80935607"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://dev.dixa.io",
-      "key": "baseUrl"
+      "id": "f7f1167a-bcde-457a-915e-eda23aec08ba",
+      "createdAt": "2026-10-22T01:25:42.000Z",
+      "updatedAt": "2026-10-22T01:25:42.000Z",
+      "uid": "35240-f7f1167a-bcde-457a-915e-eda23aec08ba"
     }
   ],
   "auth": {
@@ -1802,25 +1777,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "3541509a-dbd4-497f-81fb-4a264110e1b2",
-    "name": "Dixa Agents Teams API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://dev.dixa.io"
     }
-  }
+  ]
 }

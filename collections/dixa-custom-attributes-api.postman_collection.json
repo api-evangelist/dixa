@@ -1,1009 +1,1067 @@
 {
+  "info": {
+    "_postman_id": "e329ae7d-fa23-4ea0-8087-d2fb4655b38b",
+    "name": "Dixa Custom Attributes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:24:54.000Z",
+    "updatedAt": "2026-10-22T01:24:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e329ae7d-fa23-4ea0-8087-d2fb4655b38b"
+  },
   "item": [
     {
-      "id": "058808d4-2b41-45bc-a420-a61d8fe1b69e",
-      "name": "Custom Attributes",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "beta",
       "item": [
         {
-          "id": "0e372cc5-d447-4a24-a920-7e049d8bbed7",
-          "name": "Patch end user custom attributes",
-          "request": {
-            "name": "Patch end user custom attributes",
-            "description": {
-              "content": "Patch custom attributes of an end user",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "endusers",
-                ":userId",
-                "custom-attributes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "userId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"key_0\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_1\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "endusers",
+          "item": [
             {
-              "id": "64841a54-daff-48ea-a730-041734caa3a4",
-              "name": "The patched end user attributes",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "endusers",
-                    ":userId",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "userId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{userId}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "custom-attributes",
+                  "item": [
+                    {
+                      "name": "Patch end user custom attributes",
+                      "id": "5800ac5d-419f-4985-85dc-0567c674147e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"do3dd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quid\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labore_b44\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/endusers/:userId/custom-attributes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "endusers",
+                            ":userId",
+                            "custom-attributes"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3d2a13f9-003f-40fb-896f-7bbba05891f6",
+                              "key": "userId",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Patch custom attributes of an end user"
+                      },
+                      "response": [
+                        {
+                          "id": "30adf39c-f106-43eb-b768-1a54cfd14af3",
+                          "name": "The patched end user attributes",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"do3dd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quid\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labore_b44\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/endusers/:userId/custom-attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "endusers",
+                                ":userId",
+                                "custom-attributes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"value\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"value\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T01:24:54.000Z",
+                          "updatedAt": "2026-10-22T01:24:54.000Z",
+                          "uid": "35240-30adf39c-f106-43eb-b768-1a54cfd14af3"
+                        },
+                        {
+                          "id": "b3e388e8-7fd7-4e68-826b-4c24e5762966",
+                          "name": "Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: body, Invalid input for patching",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"do3dd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quid\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labore_b44\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/endusers/:userId/custom-attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "endusers",
+                                ":userId",
+                                "custom-attributes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:54.000Z",
+                          "updatedAt": "2026-10-22T01:24:54.000Z",
+                          "uid": "35240-b3e388e8-7fd7-4e68-826b-4c24e5762966"
+                        },
+                        {
+                          "id": "cc160083-6d44-444b-a35f-ba0be84c83db",
+                          "name": "The user who issued the access token used in the request is not authorized to perform the operation",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"do3dd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quid\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labore_b44\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/endusers/:userId/custom-attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "endusers",
+                                ":userId",
+                                "custom-attributes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:54.000Z",
+                          "updatedAt": "2026-10-22T01:24:54.000Z",
+                          "uid": "35240-cc160083-6d44-444b-a35f-ba0be84c83db"
+                        },
+                        {
+                          "id": "4db6c495-3d5c-474a-a4d7-0672b270ccc0",
+                          "name": "An entity in this request could not be found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"do3dd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quid\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labore_b44\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/endusers/:userId/custom-attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "endusers",
+                                ":userId",
+                                "custom-attributes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:54.000Z",
+                          "updatedAt": "2026-10-22T01:24:54.000Z",
+                          "uid": "35240-4db6c495-3d5c-474a-a4d7-0672b270ccc0"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:24:54.000Z",
+                      "updatedAt": "2026-10-22T01:24:54.000Z",
+                      "uid": "35240-5800ac5d-419f-4985-85dc-0567c674147e"
+                    }
+                  ],
+                  "id": "42b0f549-d67d-4f38-97b8-e4a94d8a084b",
+                  "createdAt": "2026-10-22T01:24:54.000Z",
+                  "updatedAt": "2026-10-22T01:24:54.000Z",
+                  "uid": "35240-42b0f549-d67d-4f38-97b8-e4a94d8a084b"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"274e5a2c-be0d-42c0-b725-3dd533729f68\",\n      \"name\": \"End user attribute\",\n      \"identifier\": \"end_user_attribute\",\n      \"value\": \"abcdef\"\n    },\n    {\n      \"id\": \"befae0d9-9679-42b9-af76-e76f64e28429\",\n      \"name\": \"End user attribute 2\",\n      \"identifier\": \"end_user_attribute_2\",\n      \"value\": [\n        \"example1\",\n        \"example2\"\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d793d4f8-2a1a-44c9-a0fe-580df36fb0ef",
-              "name": "Invalid value for: path parameter userId, Invalid value extracted from request context, Invalid value for: body, Invalid input for patching",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "endusers",
-                    ":userId",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "userId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e4bd2114-4868-4cd6-b6e0-fef9410835c5",
-              "name": "The user who issued the access token used in the request is not authorized to perform the operation",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "endusers",
-                    ":userId",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "userId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"User is unauthorized to perform an underlying operation\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "647f5a1c-78cf-45ad-8b37-7bcae0cedbd8",
-              "name": "An entity in this request could not be found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "endusers",
-                    ":userId",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "userId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"274e5a2c-be0d-42c0-b725-3dd533729f68\": \"abcdef\",\n  \"befae0d9-9679-42b9-af76-e76f64e28429\": [\n    \"example1\",\n    \"example2\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "afda6de8-50ce-4e4d-bb3c-47eac897dabe",
+              "createdAt": "2026-10-22T01:24:54.000Z",
+              "updatedAt": "2026-10-22T01:24:54.000Z",
+              "uid": "35240-afda6de8-50ce-4e4d-bb3c-47eac897dabe"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "887073cc-0418-459d-b953-7a7ea1fb8d46",
+          "createdAt": "2026-10-22T01:24:54.000Z",
+          "updatedAt": "2026-10-22T01:24:54.000Z",
+          "uid": "35240-887073cc-0418-459d-b953-7a7ea1fb8d46"
         },
         {
-          "id": "2bea47ae-ab80-400b-8601-96cf0eb21f3c",
-          "name": "Patch conversation custom attributes",
-          "request": {
-            "name": "Patch conversation custom attributes",
-            "description": {
-              "content": "Patch custom attributes of a conversation",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "conversations",
-                ":conversationId",
-                "custom-attributes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<long>",
-                  "key": "conversationId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"key_0\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_1\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "conversations",
+          "item": [
             {
-              "id": "9173a0ed-8901-4aaa-8b8e-368af824b480",
-              "name": "The patched conversation attributes",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"2f5515b6-7e98-4f4d-9010-bfd2a27d4f35\": \"012345\",\n  \"e14708a6-eed9-495c-9d88-c72331e9e247\": [\n    \"str1\",\n    \"str2\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{conversationId}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "custom-attributes",
+                  "item": [
+                    {
+                      "name": "Patch conversation custom attributes",
+                      "id": "f166e540-0eb9-4160-9710-b89c17f8f8c0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"do3dd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quid\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labore_b44\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/conversations/:conversationId/custom-attributes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "conversations",
+                            ":conversationId",
+                            "custom-attributes"
+                          ],
+                          "variable": [
+                            {
+                              "id": "248089e3-cd6e-4deb-a913-36cc66e083e9",
+                              "key": "conversationId",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Patch custom attributes of a conversation"
+                      },
+                      "response": [
+                        {
+                          "id": "b69d83dd-fa49-4c5f-9a04-edcbdb964876",
+                          "name": "The patched conversation attributes",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"do3dd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quid\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labore_b44\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/custom-attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "custom-attributes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"value\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"value\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T01:24:54.000Z",
+                          "updatedAt": "2026-10-22T01:24:54.000Z",
+                          "uid": "35240-b69d83dd-fa49-4c5f-9a04-edcbdb964876"
+                        },
+                        {
+                          "id": "742e54f2-297f-474b-ac86-f07a1b332e72",
+                          "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, Invalid input for patching",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"do3dd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quid\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labore_b44\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/custom-attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "custom-attributes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:54.000Z",
+                          "updatedAt": "2026-10-22T01:24:54.000Z",
+                          "uid": "35240-742e54f2-297f-474b-ac86-f07a1b332e72"
+                        },
+                        {
+                          "id": "d1fc1169-58bf-4b2e-8da9-7a2fc069c5a5",
+                          "name": "The user who issued the access token used in the request is not authorized to perform the operation",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"do3dd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quid\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labore_b44\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/custom-attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "custom-attributes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:54.000Z",
+                          "updatedAt": "2026-10-22T01:24:54.000Z",
+                          "uid": "35240-d1fc1169-58bf-4b2e-8da9-7a2fc069c5a5"
+                        },
+                        {
+                          "id": "02e1c743-ca78-4c64-b24f-b2ae44bc6d84",
+                          "name": "An entity in this request could not be found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"do3dd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"quid\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labore_b44\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/custom-attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "custom-attributes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:54.000Z",
+                          "updatedAt": "2026-10-22T01:24:54.000Z",
+                          "uid": "35240-02e1c743-ca78-4c64-b24f-b2ae44bc6d84"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:24:54.000Z",
+                      "updatedAt": "2026-10-22T01:24:54.000Z",
+                      "uid": "35240-f166e540-0eb9-4160-9710-b89c17f8f8c0"
+                    }
+                  ],
+                  "id": "b3ad3bb2-269d-4205-9b01-25462937f7b3",
+                  "createdAt": "2026-10-22T01:24:54.000Z",
+                  "updatedAt": "2026-10-22T01:24:54.000Z",
+                  "uid": "35240-b3ad3bb2-269d-4205-9b01-25462937f7b3"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"2f5515b6-7e98-4f4d-9010-bfd2a27d4f35\",\n      \"name\": \"Conversation attribute\",\n      \"identifier\": \"conversation_attribute\",\n      \"value\": \"012345\"\n    },\n    {\n      \"id\": \"e14708a6-eed9-495c-9d88-c72331e9e247\",\n      \"name\": \"Conversation attribute 2\",\n      \"identifier\": \"conversation_attribute_2\",\n      \"value\": [\n        \"str1\",\n        \"str2\"\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "51fa7026-b6f5-46be-9660-81875e28209d",
-              "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context, Invalid value for: body, Invalid input for patching",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"2f5515b6-7e98-4f4d-9010-bfd2a27d4f35\": \"012345\",\n  \"e14708a6-eed9-495c-9d88-c72331e9e247\": [\n    \"str1\",\n    \"str2\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1e69add6-ceab-4e55-b5b2-9426065c2c41",
-              "name": "The user who issued the access token used in the request is not authorized to perform the operation",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"2f5515b6-7e98-4f4d-9010-bfd2a27d4f35\": \"012345\",\n  \"e14708a6-eed9-495c-9d88-c72331e9e247\": [\n    \"str1\",\n    \"str2\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"User is unauthorized to perform an underlying operation\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4cdf2cb6-6d9a-4c34-9076-6d01eeae9f76",
-              "name": "An entity in this request could not be found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"2f5515b6-7e98-4f4d-9010-bfd2a27d4f35\": \"012345\",\n  \"e14708a6-eed9-495c-9d88-c72331e9e247\": [\n    \"str1\",\n    \"str2\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "e79878eb-90b3-4ba1-a236-839bf431c3f6",
+              "createdAt": "2026-10-22T01:24:54.000Z",
+              "updatedAt": "2026-10-22T01:24:54.000Z",
+              "uid": "35240-e79878eb-90b3-4ba1-a236-839bf431c3f6"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "39be926a-be2b-4f14-9956-d91d7ffba02e",
+          "createdAt": "2026-10-22T01:24:54.000Z",
+          "updatedAt": "2026-10-22T01:24:54.000Z",
+          "uid": "35240-39be926a-be2b-4f14-9956-d91d7ffba02e"
         },
         {
-          "id": "9d8fd3f9-66ed-4d52-ada3-8c169e0a5137",
-          "name": "Get custom attribute definition by id",
-          "request": {
-            "name": "Get custom attribute definition by id",
-            "description": {
-              "content": "Get custom attribute in an organization by id.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "custom-attributes",
-                ":customAttributeId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "customAttributeId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "custom-attributes",
+          "item": [
             {
-              "id": "e38c3253-6880-436a-9598-4ed3cf164963",
-              "name": "The configured custom attribute",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "custom-attributes",
-                    ":customAttributeId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "customAttributeId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+              "name": "{customAttributeId}",
+              "item": [
+                {
+                  "name": "Get custom attribute definition by id",
+                  "id": "62783488-7b7b-494e-9eef-9cc6c88906e5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/custom-attributes/:customAttributeId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "custom-attributes",
+                        ":customAttributeId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5f7338e1-a611-4eb3-b515-6f127290c5f8",
+                          "key": "customAttributeId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Get custom attribute in an organization by id."
+                  },
+                  "response": [
+                    {
+                      "id": "18859401-71a0-4fd2-9cb7-9869fa87d439",
+                      "name": "The configured custom attribute",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/custom-attributes/:customAttributeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "custom-attributes",
+                            ":customAttributeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customAttributeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"entityType\": \"<string>\",\n    \"identifier\": \"<string>\",\n    \"label\": \"<string>\",\n    \"inputDefinition\": {\n      \"options\": [\n        {\n          \"id\": \"<uuid>\",\n          \"label\": \"<string>\",\n          \"value\": \"<string>\",\n          \"isDeactivated\": \"<boolean>\",\n          \"orderIndex\": \"<integer>\",\n          \"nestedOptions\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n            }\n          ]\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"label\": \"<string>\",\n          \"value\": \"<string>\",\n          \"isDeactivated\": \"<boolean>\",\n          \"orderIndex\": \"<integer>\",\n          \"nestedOptions\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"isRequired\": \"<boolean>\",\n    \"isArchived\": \"<boolean>\",\n    \"isDeactivated\": \"<boolean>\",\n    \"description\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:24:54.000Z",
+                      "updatedAt": "2026-10-22T01:24:54.000Z",
+                      "uid": "35240-18859401-71a0-4fd2-9cb7-9869fa87d439"
+                    },
+                    {
+                      "id": "501da339-910d-42e7-844c-b5ec8b2e7231",
+                      "name": "Invalid value extracted from request context",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/custom-attributes/:customAttributeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "custom-attributes",
+                            ":customAttributeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customAttributeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:54.000Z",
+                      "updatedAt": "2026-10-22T01:24:54.000Z",
+                      "uid": "35240-501da339-910d-42e7-844c-b5ec8b2e7231"
+                    },
+                    {
+                      "id": "16f3d590-d29b-41c0-8645-36b99996c1a7",
+                      "name": "Internal failure during request processing",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/custom-attributes/:customAttributeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "custom-attributes",
+                            ":customAttributeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customAttributeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:54.000Z",
+                      "updatedAt": "2026-10-22T01:24:54.000Z",
+                      "uid": "35240-16f3d590-d29b-41c0-8645-36b99996c1a7"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:24:54.000Z",
+                  "updatedAt": "2026-10-22T01:24:54.000Z",
+                  "uid": "35240-62783488-7b7b-494e-9eef-9cc6c88906e5"
+                }
+              ],
+              "id": "b9b4b8e9-f168-4471-b376-bf424fd7b03d",
+              "createdAt": "2026-10-22T01:24:54.000Z",
+              "updatedAt": "2026-10-22T01:24:54.000Z",
+              "uid": "35240-b9b4b8e9-f168-4471-b376-bf424fd7b03d"
+            },
+            {
+              "name": "List custom attributes definitions",
+              "id": "8cae1baf-1cf0-48ce-9dc4-9cb7b1fc9cb4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": \"db5f673b-1c40-41e7-b71f-caab342f0607\",\n    \"entityType\": \"Conversation\",\n    \"identifier\": \"contact_reason\",\n    \"label\": \"Contact Reason\",\n    \"inputDefinition\": {\n      \"options\": [\n        {\n          \"id\": \"5e2be744-cc2b-4bda-8c76-feb7b28f2970\",\n          \"label\": \"Payment\",\n          \"value\": \"payment\",\n          \"nestedOptions\": [\n            {\n              \"id\": \"666de4d5-0c6e-421c-a25e-d53073070af4\",\n              \"label\": \"Card\",\n              \"value\": \"card\",\n              \"nestedOptions\": [],\n              \"isDeactivated\": false,\n              \"orderIndex\": 2\n            },\n            {\n              \"id\": \"db26964a-5a88-4689-ad34-8a5f21cd9cd6\",\n              \"label\": \"Bank Transfer\",\n              \"value\": \"bank_transfer\",\n              \"nestedOptions\": [],\n              \"isDeactivated\": false,\n              \"orderIndex\": 3\n            }\n          ],\n          \"isDeactivated\": false,\n          \"orderIndex\": 1\n        },\n        {\n          \"id\": \"05d43b25-32a4-49e2-97c0-8723dc73f7bb\",\n          \"label\": \"Access\",\n          \"value\": \"access\",\n          \"nestedOptions\": [],\n          \"isDeactivated\": false,\n          \"orderIndex\": 4\n        }\n      ],\n      \"_type\": \"Select\"\n    },\n    \"description\": \"Reason for contacting\",\n    \"createdAt\": \"2023-01-05T06:42:31.532Z[GMT]\",\n    \"isRequired\": true,\n    \"isArchived\": false,\n    \"isDeactivated\": false\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "902d5f47-f123-4f31-abcf-b866c01cc556",
-              "name": "Invalid value extracted from request context",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "beta",
-                    "custom-attributes",
-                    ":customAttributeId"
-                  ],
+                  "raw": "{{baseUrl}}/beta/custom-attributes",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "customAttributeId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ba948f11-025c-4887-9a6f-282299996349",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "beta",
-                    "custom-attributes",
-                    ":customAttributeId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "customAttributeId",
-                      "description": "(Required) "
-                    }
+                    "custom-attributes"
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "List all custom attributes in an organization."
               },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "edfb4de7-4675-4868-8eac-8e647cdac57e",
+                  "name": "The list of configured custom attributes",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/custom-attributes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "custom-attributes"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"entityType\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"label\": \"<string>\",\n      \"inputDefinition\": {\n        \"options\": [\n          {\n            \"id\": \"<uuid>\",\n            \"label\": \"<string>\",\n            \"value\": \"<string>\",\n            \"isDeactivated\": \"<boolean>\",\n            \"orderIndex\": \"<integer>\",\n            \"nestedOptions\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n              }\n            ]\n          },\n          {\n            \"id\": \"<uuid>\",\n            \"label\": \"<string>\",\n            \"value\": \"<string>\",\n            \"isDeactivated\": \"<boolean>\",\n            \"orderIndex\": \"<integer>\",\n            \"nestedOptions\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"isRequired\": \"<boolean>\",\n      \"isArchived\": \"<boolean>\",\n      \"isDeactivated\": \"<boolean>\",\n      \"description\": \"<string>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"entityType\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"label\": \"<string>\",\n      \"inputDefinition\": {\n        \"options\": [\n          {\n            \"id\": \"<uuid>\",\n            \"label\": \"<string>\",\n            \"value\": \"<string>\",\n            \"isDeactivated\": \"<boolean>\",\n            \"orderIndex\": \"<integer>\",\n            \"nestedOptions\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n              }\n            ]\n          },\n          {\n            \"id\": \"<uuid>\",\n            \"label\": \"<string>\",\n            \"value\": \"<string>\",\n            \"isDeactivated\": \"<boolean>\",\n            \"orderIndex\": \"<integer>\",\n            \"nestedOptions\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/SelectOption detected>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"isRequired\": \"<boolean>\",\n      \"isArchived\": \"<boolean>\",\n      \"isDeactivated\": \"<boolean>\",\n      \"description\": \"<string>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T01:24:54.000Z",
+                  "updatedAt": "2026-10-22T01:24:54.000Z",
+                  "uid": "35240-edfb4de7-4675-4868-8eac-8e647cdac57e"
+                },
+                {
+                  "id": "6181b3f2-4694-4b68-b99b-6e6254620be8",
+                  "name": "Invalid value extracted from request context",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/custom-attributes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "custom-attributes"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:24:54.000Z",
+                  "updatedAt": "2026-10-22T01:24:54.000Z",
+                  "uid": "35240-6181b3f2-4694-4b68-b99b-6e6254620be8"
+                },
+                {
+                  "id": "ddd359cf-1b07-415f-9f70-66a379eaa02b",
+                  "name": "Internal failure during request processing",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/custom-attributes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "custom-attributes"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:24:54.000Z",
+                  "updatedAt": "2026-10-22T01:24:54.000Z",
+                  "uid": "35240-ddd359cf-1b07-415f-9f70-66a379eaa02b"
                 }
               ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:24:54.000Z",
+              "updatedAt": "2026-10-22T01:24:54.000Z",
+              "uid": "35240-8cae1baf-1cf0-48ce-9dc4-9cb7b1fc9cb4"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5af59d7a-a3ee-4ec6-b530-8b916cdcb017",
-          "name": "List custom attributes definitions",
-          "request": {
-            "name": "List custom attributes definitions",
-            "description": {
-              "content": "List all custom attributes in an organization.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "custom-attributes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "baef4ef3-b347-49d4-ae6b-b3b7af13c877",
-              "name": "The list of configured custom attributes",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"c43fc767-f89b-443a-9c98-90f53f940bd7\",\n      \"entityType\": \"Conversation\",\n      \"identifier\": \"parcel_id\",\n      \"label\": \"Parcel ID\",\n      \"inputDefinition\": {\n        \"placeholder\": \"1234\",\n        \"_type\": \"Text\"\n      },\n      \"description\": \"Id of the parcel\",\n      \"createdAt\": \"2023-01-01T08:23:54.246Z[GMT]\",\n      \"updatedAt\": \"2023-01-11T12:25:23.837Z[GMT]\",\n      \"isRequired\": false,\n      \"isArchived\": false,\n      \"isDeactivated\": false\n    },\n    {\n      \"id\": \"db5f673b-1c40-41e7-b71f-caab342f0607\",\n      \"entityType\": \"Conversation\",\n      \"identifier\": \"contact_reason\",\n      \"label\": \"Contact Reason\",\n      \"inputDefinition\": {\n        \"options\": [\n          {\n            \"id\": \"5e2be744-cc2b-4bda-8c76-feb7b28f2970\",\n            \"label\": \"Payment\",\n            \"value\": \"payment\",\n            \"nestedOptions\": [\n              {\n                \"id\": \"666de4d5-0c6e-421c-a25e-d53073070af4\",\n                \"label\": \"Card\",\n                \"value\": \"card\",\n                \"nestedOptions\": [],\n                \"isDeactivated\": false,\n                \"orderIndex\": 2\n              },\n              {\n                \"id\": \"db26964a-5a88-4689-ad34-8a5f21cd9cd6\",\n                \"label\": \"Bank Transfer\",\n                \"value\": \"bank_transfer\",\n                \"nestedOptions\": [],\n                \"isDeactivated\": false,\n                \"orderIndex\": 3\n              }\n            ],\n            \"isDeactivated\": false,\n            \"orderIndex\": 1\n          },\n          {\n            \"id\": \"05d43b25-32a4-49e2-97c0-8723dc73f7bb\",\n            \"label\": \"Access\",\n            \"value\": \"access\",\n            \"nestedOptions\": [],\n            \"isDeactivated\": false,\n            \"orderIndex\": 4\n          }\n        ],\n        \"_type\": \"Select\"\n      },\n      \"description\": \"Reason for contacting\",\n      \"createdAt\": \"2023-01-05T06:42:31.532Z[GMT]\",\n      \"isRequired\": true,\n      \"isArchived\": false,\n      \"isDeactivated\": false\n    },\n    {\n      \"id\": \"66121f54-98ee-4727-a4e7-1a373d411ccf\",\n      \"entityType\": \"Contact\",\n      \"identifier\": \"location\",\n      \"label\": \"Location\",\n      \"inputDefinition\": {\n        \"options\": [\n          {\n            \"id\": \"6c5efa22-8b49-4205-bb7c-52e86af3a369\",\n            \"label\": \"Denmark\",\n            \"value\": \"denmark\",\n            \"nestedOptions\": [\n              {\n                \"id\": \"ac4e65ea-7b84-4889-a3b5-b957926178c6\",\n                \"label\": \"Copenhagen\",\n                \"value\": \"copenhagen\",\n                \"nestedOptions\": [],\n                \"isDeactivated\": false,\n                \"orderIndex\": 6\n              },\n              {\n                \"id\": \"35fa047e-c1f2-4d8d-be54-2adb7d326781\",\n                \"label\": \"Aarhus\",\n                \"value\": \"aarhus\",\n                \"nestedOptions\": [],\n                \"isDeactivated\": false,\n                \"orderIndex\": 7\n              }\n            ],\n            \"isDeactivated\": false,\n            \"orderIndex\": 5\n          }\n        ],\n        \"_type\": \"Select\"\n      },\n      \"description\": \"End user's known city\",\n      \"createdAt\": \"2023-01-01T08:25:50.246Z[GMT]\",\n      \"updatedAt\": \"2023-02-01T09:01:52.2Z[GMT]\",\n      \"isRequired\": false,\n      \"isArchived\": false,\n      \"isDeactivated\": false\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0e0a1b95-28bf-46ea-8799-697395d14623",
-              "name": "Invalid value extracted from request context",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "873b2144-aca4-4580-b980-673990e90237",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "custom-attributes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ef519774-2524-4d19-b4ca-d3946a15c0c3",
+          "createdAt": "2026-10-22T01:24:54.000Z",
+          "updatedAt": "2026-10-22T01:24:54.000Z",
+          "uid": "35240-ef519774-2524-4d19-b4ca-d3946a15c0c3"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://dev.dixa.io",
-      "key": "baseUrl"
+      "id": "2d2eabfe-dcda-4346-be7d-bbca0b231a49",
+      "createdAt": "2026-10-22T01:24:54.000Z",
+      "updatedAt": "2026-10-22T01:24:54.000Z",
+      "uid": "35240-2d2eabfe-dcda-4346-be7d-bbca0b231a49"
     }
   ],
   "auth": {
@@ -1011,25 +1069,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "138c1b7c-9bd3-4849-ac90-367e1d02f141",
-    "name": "Dixa Agents Custom Attributes API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://dev.dixa.io"
     }
-  }
+  ]
 }

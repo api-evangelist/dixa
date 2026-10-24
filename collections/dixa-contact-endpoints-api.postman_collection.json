@@ -1,417 +1,417 @@
 {
+  "info": {
+    "_postman_id": "60bf35a7-f543-48ec-832d-f368b460ba32",
+    "name": "Dixa Contact Endpoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:24:37.000Z",
+    "updatedAt": "2026-10-22T01:24:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-60bf35a7-f543-48ec-832d-f368b460ba32"
+  },
   "item": [
     {
-      "id": "f68a5fcf-9f33-4d4e-bcb7-2b678be72278",
-      "name": "Contact Endpoints",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "beta",
       "item": [
         {
-          "id": "77e95b46-c8a8-48f4-9cf1-0716a9108cb1",
-          "name": "Get contact endpoint",
-          "request": {
-            "name": "Get contact endpoint",
-            "description": {
-              "content": "Get contact endpoint by id (email or phone number).",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "contact-endpoints",
-                ":contactEndpointId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "contactEndpointId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "contact-endpoints",
+          "item": [
             {
-              "id": "650e6d23-c78e-47db-8754-e586560420b8",
-              "name": "The requested contact endpoint",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "contact-endpoints",
-                    ":contactEndpointId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "contactEndpointId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+              "name": "{contactEndpointId}",
+              "item": [
+                {
+                  "name": "Get contact endpoint",
+                  "id": "9a3dace8-b5d7-4790-a649-9bd8e5a8a0bc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/contact-endpoints/:contactEndpointId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "contact-endpoints",
+                        ":contactEndpointId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "df059cac-cbb8-4634-9074-2cd5a1d09b95",
+                          "key": "contactEndpointId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Get contact endpoint by id (email or phone number)."
+                  },
+                  "response": [
+                    {
+                      "id": "438f9869-612c-475c-bacd-9cf34d4fbbf3",
+                      "name": "The requested contact endpoint",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/contact-endpoints/:contactEndpointId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "contact-endpoints",
+                            ":contactEndpointId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "contactEndpointId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"address\": \"<string>\",\n    \"senderOverride\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:24:38.000Z",
+                      "updatedAt": "2026-10-22T01:24:38.000Z",
+                      "uid": "35240-438f9869-612c-475c-bacd-9cf34d4fbbf3"
+                    },
+                    {
+                      "id": "ead4eb0d-98ee-4a76-948a-5dbb31e68e1b",
+                      "name": "Invalid value extracted from request context, The contactEndpointId is neither a valid email nor a valid E.164 phone number",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/contact-endpoints/:contactEndpointId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "contact-endpoints",
+                            ":contactEndpointId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "contactEndpointId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:38.000Z",
+                      "updatedAt": "2026-10-22T01:24:38.000Z",
+                      "uid": "35240-ead4eb0d-98ee-4a76-948a-5dbb31e68e1b"
+                    },
+                    {
+                      "id": "1c7f331c-5715-47be-9254-26f271c31c8f",
+                      "name": "An entity in this request could not be found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/contact-endpoints/:contactEndpointId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "contact-endpoints",
+                            ":contactEndpointId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "contactEndpointId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:38.000Z",
+                      "updatedAt": "2026-10-22T01:24:38.000Z",
+                      "uid": "35240-1c7f331c-5715-47be-9254-26f271c31c8f"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:24:38.000Z",
+                  "updatedAt": "2026-10-22T01:24:38.000Z",
+                  "uid": "35240-9a3dace8-b5d7-4790-a649-9bd8e5a8a0bc"
+                }
+              ],
+              "id": "6cb23af2-34dd-4eef-98d7-bba7cb331fb1",
+              "createdAt": "2026-10-22T01:24:38.000Z",
+              "updatedAt": "2026-10-22T01:24:38.000Z",
+              "uid": "35240-6cb23af2-34dd-4eef-98d7-bba7cb331fb1"
+            },
+            {
+              "name": "List contact endpoints",
+              "id": "1c211753-d858-4456-a551-c7428d96982f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"address\": \"some@email.com\",\n    \"senderOverride\": \"otheremail@mail.dk\",\n    \"name\": \"Special email flow\",\n    \"_type\": \"EmailEndpoint\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a4929113-770a-41ee-8c23-b4519f6eaa2f",
-              "name": "Invalid value extracted from request context, The contactEndpointId is neither a valid email nor a valid E.164 phone number",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "beta",
-                    "contact-endpoints",
-                    ":contactEndpointId"
-                  ],
+                  "raw": "{{baseUrl}}/beta/contact-endpoints?_type=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "contactEndpointId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "edf3b83f-b927-4cf8-b325-7788d65f1c19",
-              "name": "An entity in this request could not be found",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "beta",
-                    "contact-endpoints",
-                    ":contactEndpointId"
+                    "contact-endpoints"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "query": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "contactEndpointId",
-                      "description": "(Required) "
+                      "description": "An optional contact type can be specified to filter the contact endpoints. If not provided, all types are listed. Possible values: [EmailEndpoint, TelephonyEndpoint]",
+                      "key": "_type",
+                      "value": "<string>"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "List all available contact endpoints in an organization."
               },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "d9f7f1c8-b729-4b9f-a2a1-b70ea8895de5",
+                  "name": "The list of available contact endpoints",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/contact-endpoints?_type=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "contact-endpoints"
+                      ],
+                      "query": [
+                        {
+                          "description": "An optional contact type can be specified to filter the contact endpoints. If not provided, all types are listed. Possible values: [EmailEndpoint, TelephonyEndpoint]",
+                          "key": "_type",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"address\": \"<string>\",\n      \"senderOverride\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"address\": \"<string>\",\n      \"senderOverride\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T01:24:38.000Z",
+                  "updatedAt": "2026-10-22T01:24:38.000Z",
+                  "uid": "35240-d9f7f1c8-b729-4b9f-a2a1-b70ea8895de5"
+                },
+                {
+                  "id": "2b8e6ca7-37de-4896-8b0b-c222bde13c82",
+                  "name": "Invalid value extracted from request context, Invalid value for: query parameter _type",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/contact-endpoints?_type=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "contact-endpoints"
+                      ],
+                      "query": [
+                        {
+                          "description": "An optional contact type can be specified to filter the contact endpoints. If not provided, all types are listed. Possible values: [EmailEndpoint, TelephonyEndpoint]",
+                          "key": "_type",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:24:38.000Z",
+                  "updatedAt": "2026-10-22T01:24:38.000Z",
+                  "uid": "35240-2b8e6ca7-37de-4896-8b0b-c222bde13c82"
+                },
+                {
+                  "id": "6f374589-dca3-4786-adba-80021a3c8c9a",
+                  "name": "Internal failure during request processing",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/contact-endpoints?_type=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "contact-endpoints"
+                      ],
+                      "query": [
+                        {
+                          "description": "An optional contact type can be specified to filter the contact endpoints. If not provided, all types are listed. Possible values: [EmailEndpoint, TelephonyEndpoint]",
+                          "key": "_type",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:24:38.000Z",
+                  "updatedAt": "2026-10-22T01:24:38.000Z",
+                  "uid": "35240-6f374589-dca3-4786-adba-80021a3c8c9a"
                 }
               ],
-              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:24:38.000Z",
+              "updatedAt": "2026-10-22T01:24:38.000Z",
+              "uid": "35240-1c211753-d858-4456-a551-c7428d96982f"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ced1a796-d389-452d-8c34-3c42dae5c3a4",
-          "name": "List contact endpoints",
-          "request": {
-            "name": "List contact endpoints",
-            "description": {
-              "content": "List all available contact endpoints in an organization.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "contact-endpoints"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "_type",
-                  "value": "<string>",
-                  "description": "An optional contact type can be specified to filter the contact endpoints. If not provided, all types are listed. Possible values: [EmailEndpoint, TelephonyEndpoint]"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "8667210c-192b-406a-9427-4e5d729c8ab0",
-              "name": "The list of available contact endpoints",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "contact-endpoints"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "_type",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"number\": \"+4531434343\",\n      \"functionality\": [\n        \"VoiceInbound\",\n        \"VoiceOutbound\"\n      ],\n      \"name\": \"DK Sms\",\n      \"_type\": \"TelephonyEndpoint\"\n    },\n    {\n      \"address\": \"some@email.com\",\n      \"senderOverride\": \"otheremail@mail.dk\",\n      \"name\": \"Special email flow\",\n      \"_type\": \"EmailEndpoint\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "eb7d8abc-35e4-43ae-ad02-0d9fea5a217f",
-              "name": "Invalid value extracted from request context, Invalid value for: query parameter _type",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "contact-endpoints"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "_type",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ec34dbca-2baa-41ac-bdfd-eb2802a8d52e",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "contact-endpoints"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "_type",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "b5521bd6-eecd-4cc0-a3f2-a02de4e615e4",
+          "createdAt": "2026-10-22T01:24:38.000Z",
+          "updatedAt": "2026-10-22T01:24:38.000Z",
+          "uid": "35240-b5521bd6-eecd-4cc0-a3f2-a02de4e615e4"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://dev.dixa.io",
-      "key": "baseUrl"
+      "id": "31842f56-401c-4b91-ace7-49c37d4b5f17",
+      "createdAt": "2026-10-22T01:24:38.000Z",
+      "updatedAt": "2026-10-22T01:24:38.000Z",
+      "uid": "35240-31842f56-401c-4b91-ace7-49c37d4b5f17"
     }
   ],
   "auth": {
@@ -419,25 +419,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "d1c9fb70-0c50-4fd7-a2eb-dc6149cfdccb",
-    "name": "Dixa Agents Contact Endpoints API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://dev.dixa.io"
     }
-  }
+  ]
 }

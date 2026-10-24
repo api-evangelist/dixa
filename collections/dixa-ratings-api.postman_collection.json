@@ -1,1138 +1,1157 @@
 {
+  "info": {
+    "_postman_id": "973fe8df-6c16-40c5-975d-0434f5afd43a",
+    "name": "Dixa Ratings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:25:26.000Z",
+    "updatedAt": "2026-10-22T01:25:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-973fe8df-6c16-40c5-975d-0434f5afd43a"
+  },
   "item": [
     {
-      "id": "5fc25b1e-ebb5-432f-82d2-9ca844021d6a",
-      "name": "Ratings",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "beta",
       "item": [
         {
-          "id": "1329c358-d542-43d6-aac7-3ae14e10716d",
-          "name": "Create conversation rating result",
-          "request": {
-            "name": "Create conversation rating result",
-            "description": {
-              "content": "Create a rating result for a specific conversation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "conversations",
-                ":conversationId",
-                "ratings",
-                ":ratingId",
-                "submit"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<long>",
-                  "key": "conversationId",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ratingId",
-                  "description": "(Required) The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ratingResult\": {\n    \"value\": \"<integer>\"\n  },\n  \"userId\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"submittedAt\": \"<dateTime>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "conversations",
+          "item": [
             {
-              "id": "bd076a0b-1cbb-48d2-964b-231ca568fc9d",
-              "name": "The created conversation rating result",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings",
-                    ":ratingId",
-                    "submit"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ratingId",
-                      "description": "(Required) The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"userId\": \"d3cf6f15-1497-4e71-92f2-9b3b228352bd\",\n  \"ratingResult\": {\n    \"value\": 4,\n    \"_type\": \"Csat\"\n  },\n  \"comment\": \"Best customer service ever!\",\n  \"submittedAt\": \"2024-03-11T16:39:30Z\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
+              "name": "{conversationId}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "ratings",
+                  "item": [
+                    {
+                      "name": "{ratingId}",
+                      "item": [
+                        {
+                          "name": "submit",
+                          "item": [
+                            {
+                              "name": "Create conversation rating result",
+                              "id": "4aa28979-9205-440f-93f3-dfe4bcde319e",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"ratingResult\": {\n    \"value\": \"<integer>\"\n  },\n  \"userId\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"submittedAt\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings/:ratingId/submit",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "beta",
+                                    "conversations",
+                                    ":conversationId",
+                                    "ratings",
+                                    ":ratingId",
+                                    "submit"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "4b8cba63-0762-4064-848f-0db9f0f238ed",
+                                      "key": "conversationId",
+                                      "value": "<long>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "791914c2-cba6-4917-8b38-ff4b3a4fb262",
+                                      "key": "ratingId",
+                                      "value": "<string>",
+                                      "description": "(Required) The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint."
+                                    }
+                                  ]
+                                },
+                                "description": "Create a rating result for a specific conversation."
+                              },
+                              "response": [
+                                {
+                                  "id": "e9d2f0b1-5154-4089-86ad-ba4bea51171d",
+                                  "name": "The created conversation rating result",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"ratingResult\": {\n    \"value\": \"<integer>\"\n  },\n  \"userId\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"submittedAt\": \"<dateTime>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings/:ratingId/submit",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "beta",
+                                        "conversations",
+                                        ":conversationId",
+                                        "ratings",
+                                        ":ratingId",
+                                        "submit"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "conversationId"
+                                        },
+                                        {
+                                          "key": "ratingId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": {\n    \"ratingId\": \"<string>\",\n    \"ratingResult\": {\n      \"value\": \"<integer>\"\n    },\n    \"userId\": \"<string>\",\n    \"comment\": \"<string>\",\n    \"submittedAt\": \"<dateTime>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T01:25:27.000Z",
+                                  "updatedAt": "2026-10-22T01:25:27.000Z",
+                                  "uid": "35240-e9d2f0b1-5154-4089-86ad-ba4bea51171d"
+                                },
+                                {
+                                  "id": "3a0ba659-ef18-4a32-be97-3b03053ff3d6",
+                                  "name": "New Response",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"ratingResult\": {\n    \"value\": \"<integer>\"\n  },\n  \"userId\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"submittedAt\": \"<dateTime>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings/:ratingId/submit",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "beta",
+                                        "conversations",
+                                        ":conversationId",
+                                        "ratings",
+                                        ":ratingId",
+                                        "submit"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "conversationId"
+                                        },
+                                        {
+                                          "key": "ratingId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-10-22T01:25:27.000Z",
+                                  "updatedAt": "2026-10-22T01:25:27.000Z",
+                                  "uid": "35240-3a0ba659-ef18-4a32-be97-3b03053ff3d6"
+                                },
+                                {
+                                  "id": "e0a239e5-7346-4288-9181-fffe9afba32b",
+                                  "name": "Internal failure during request processing",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"ratingResult\": {\n    \"value\": \"<integer>\"\n  },\n  \"userId\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"submittedAt\": \"<dateTime>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings/:ratingId/submit",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "beta",
+                                        "conversations",
+                                        ":conversationId",
+                                        "ratings",
+                                        ":ratingId",
+                                        "submit"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "conversationId"
+                                        },
+                                        {
+                                          "key": "ratingId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Internal Server Error",
+                                  "code": 500,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-10-22T01:25:27.000Z",
+                                  "updatedAt": "2026-10-22T01:25:27.000Z",
+                                  "uid": "35240-e0a239e5-7346-4288-9181-fffe9afba32b"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T01:25:27.000Z",
+                              "updatedAt": "2026-10-22T01:25:27.000Z",
+                              "uid": "35240-4aa28979-9205-440f-93f3-dfe4bcde319e"
+                            }
+                          ],
+                          "id": "a3eeb8f9-4345-443f-b79d-f60ff527d87a",
+                          "createdAt": "2026-10-22T01:25:27.000Z",
+                          "updatedAt": "2026-10-22T01:25:27.000Z",
+                          "uid": "35240-a3eeb8f9-4345-443f-b79d-f60ff527d87a"
+                        }
+                      ],
+                      "id": "b9283256-6a1b-4a34-842e-7fcaba5c54d4",
+                      "createdAt": "2026-10-22T01:25:27.000Z",
+                      "updatedAt": "2026-10-22T01:25:27.000Z",
+                      "uid": "35240-b9283256-6a1b-4a34-842e-7fcaba5c54d4"
+                    },
+                    {
+                      "name": "offer",
+                      "item": [
+                        {
+                          "name": "Create conversation rating offer",
+                          "id": "192a0829-87b2-422b-b8b7-8d5ed7730d8a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"ratingType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"agentId\": \"<string>\",\n  \"offeredAt\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings/offer",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "ratings",
+                                "offer"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "56c2dc86-0f05-4be5-94d5-651a61ea7a23",
+                                  "key": "conversationId",
+                                  "value": "<long>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Create a rating offer for a specific conversation."
+                          },
+                          "response": [
+                            {
+                              "id": "ff293409-74f6-403b-a3ff-fe1030b79305",
+                              "name": "The created conversation rating offer",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"ratingType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"agentId\": \"<string>\",\n  \"offeredAt\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings/offer",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "beta",
+                                    "conversations",
+                                    ":conversationId",
+                                    "ratings",
+                                    "offer"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "conversationId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"userId\": \"<string>\",\n    \"agentId\": \"<string>\",\n    \"ratingType\": \"<string>\",\n    \"offeredAt\": \"<dateTime>\"\n  }\n}",
+                              "createdAt": "2026-10-22T01:25:27.000Z",
+                              "updatedAt": "2026-10-22T01:25:27.000Z",
+                              "uid": "35240-ff293409-74f6-403b-a3ff-fe1030b79305"
+                            },
+                            {
+                              "id": "0dc3c3d8-989d-4ab8-a64a-beeba9076817",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"ratingType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"agentId\": \"<string>\",\n  \"offeredAt\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings/offer",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "beta",
+                                    "conversations",
+                                    ":conversationId",
+                                    "ratings",
+                                    "offer"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "conversationId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T01:25:27.000Z",
+                              "updatedAt": "2026-10-22T01:25:27.000Z",
+                              "uid": "35240-0dc3c3d8-989d-4ab8-a64a-beeba9076817"
+                            },
+                            {
+                              "id": "3993a590-e1a0-466d-ae61-58e0c4550a2a",
+                              "name": "An entity in this request could not be found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"ratingType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"agentId\": \"<string>\",\n  \"offeredAt\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings/offer",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "beta",
+                                    "conversations",
+                                    ":conversationId",
+                                    "ratings",
+                                    "offer"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "conversationId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T01:25:27.000Z",
+                              "updatedAt": "2026-10-22T01:25:27.000Z",
+                              "uid": "35240-3993a590-e1a0-466d-ae61-58e0c4550a2a"
+                            },
+                            {
+                              "id": "8988dd9b-16dc-4735-a3fe-d701e22a6955",
+                              "name": "Internal failure during request processing",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"ratingType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"agentId\": \"<string>\",\n  \"offeredAt\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings/offer",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "beta",
+                                    "conversations",
+                                    ":conversationId",
+                                    "ratings",
+                                    "offer"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "conversationId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T01:25:27.000Z",
+                              "updatedAt": "2026-10-22T01:25:27.000Z",
+                              "uid": "35240-8988dd9b-16dc-4735-a3fe-d701e22a6955"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T01:25:27.000Z",
+                          "updatedAt": "2026-10-22T01:25:27.000Z",
+                          "uid": "35240-192a0829-87b2-422b-b8b7-8d5ed7730d8a"
+                        }
+                      ],
+                      "id": "f5e07569-2ede-4b9a-9888-59e12581af93",
+                      "createdAt": "2026-10-22T01:25:27.000Z",
+                      "updatedAt": "2026-10-22T01:25:27.000Z",
+                      "uid": "35240-f5e07569-2ede-4b9a-9888-59e12581af93"
+                    },
+                    {
+                      "name": "List ratings for a conversation",
+                      "id": "a8cb0cba-83b0-40df-8270-dcea63de71f1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "conversations",
+                            ":conversationId",
+                            "ratings"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1872d682-9c8f-490e-add9-69981bfdfe99",
+                              "key": "conversationId",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Lists latest ratings statuses for a particular conversation by providing the conversation ID. For surveys with multiple questions, rating status will be reported for each individual question of the survey. For example, a response for a 3 question survey that was answered will be 3 elements with status \"Rated\". Additionally, a multiple question survey can be partially answered, therefore a response of such case will be a mix of \"Offered\" and \"Rated\" statuses. Note that the IDs of multiple questions response elements will be the same, because they are part of the same survey."
+                      },
+                      "response": [
+                        {
+                          "id": "0b9f81e9-98d3-4cab-94d3-fdf076203535",
+                          "name": "List of ratings for a conversation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "ratings"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"ratingType\": \"<string>\",\n      \"conversationChannel\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"ratingStatus\": \"<string>\",\n      \"timestamps\": {\n        \"aliquip_6c\": \"<string>\"\n      },\n      \"ratingScore\": \"<integer>\",\n      \"ratingComment\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"language\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"ratingType\": \"<string>\",\n      \"conversationChannel\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"ratingStatus\": \"<string>\",\n      \"timestamps\": {\n        \"minim3\": \"<string>\",\n        \"irure_3\": \"<string>\",\n        \"excba\": \"<string>\",\n        \"qui__b\": \"<string>\"\n      },\n      \"ratingScore\": \"<integer>\",\n      \"ratingComment\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"language\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T01:25:27.000Z",
+                          "updatedAt": "2026-10-22T01:25:27.000Z",
+                          "uid": "35240-0b9f81e9-98d3-4cab-94d3-fdf076203535"
+                        },
+                        {
+                          "id": "17febb09-c8e4-4bbb-bced-e402a8049886",
+                          "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "ratings"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:27.000Z",
+                          "updatedAt": "2026-10-22T01:25:27.000Z",
+                          "uid": "35240-17febb09-c8e4-4bbb-bced-e402a8049886"
+                        },
+                        {
+                          "id": "cf990c73-b29e-4719-8cb4-1a7fd4e8f1b7",
+                          "name": "An entity in this request could not be found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "ratings"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:27.000Z",
+                          "updatedAt": "2026-10-22T01:25:27.000Z",
+                          "uid": "35240-cf990c73-b29e-4719-8cb4-1a7fd4e8f1b7"
+                        },
+                        {
+                          "id": "56498638-610b-4cea-a60b-8fc93b191155",
+                          "name": "Internal failure during request processing",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/ratings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "ratings"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:27.000Z",
+                          "updatedAt": "2026-10-22T01:25:27.000Z",
+                          "uid": "35240-56498638-610b-4cea-a60b-8fc93b191155"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:25:27.000Z",
+                      "updatedAt": "2026-10-22T01:25:27.000Z",
+                      "uid": "35240-a8cb0cba-83b0-40df-8270-dcea63de71f1"
+                    }
+                  ],
+                  "id": "f8def792-60a6-4a4d-b5c7-c70818590ee1",
+                  "createdAt": "2026-10-22T01:25:27.000Z",
+                  "updatedAt": "2026-10-22T01:25:27.000Z",
+                  "uid": "35240-f8def792-60a6-4a4d-b5c7-c70818590ee1"
+                },
+                {
+                  "name": "rating",
+                  "item": [
+                    {
+                      "name": "List rating",
+                      "id": "f781b618-ad3e-4108-8b7a-74f4b8f8695c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/conversations/:conversationId/rating",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "conversations",
+                            ":conversationId",
+                            "rating"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fa68c205-beeb-46f0-8eb4-d34752b12561",
+                              "key": "conversationId",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Deprecated rating endpoint. Use '/ratings'."
+                      },
+                      "response": [
+                        {
+                          "id": "00a696f4-af9a-445c-ae43-a873d0803ecf",
+                          "name": "List of ratings for a conversation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/rating",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "rating"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"ratingType\": \"<string>\",\n      \"conversationChannel\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"ratingStatus\": \"<string>\",\n      \"timestamps\": {\n        \"aliquip_6c\": \"<string>\"\n      },\n      \"ratingScore\": \"<integer>\",\n      \"ratingComment\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"language\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"ratingType\": \"<string>\",\n      \"conversationChannel\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"ratingStatus\": \"<string>\",\n      \"timestamps\": {\n        \"minim3\": \"<string>\",\n        \"irure_3\": \"<string>\",\n        \"excba\": \"<string>\",\n        \"qui__b\": \"<string>\"\n      },\n      \"ratingScore\": \"<integer>\",\n      \"ratingComment\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"language\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T01:25:27.000Z",
+                          "updatedAt": "2026-10-22T01:25:27.000Z",
+                          "uid": "35240-00a696f4-af9a-445c-ae43-a873d0803ecf"
+                        },
+                        {
+                          "id": "82d4d7c9-d0c1-487e-bb89-e061d842792b",
+                          "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/rating",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "rating"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:27.000Z",
+                          "updatedAt": "2026-10-22T01:25:27.000Z",
+                          "uid": "35240-82d4d7c9-d0c1-487e-bb89-e061d842792b"
+                        },
+                        {
+                          "id": "e44da80c-fad0-4335-9493-d70c83422d0a",
+                          "name": "An entity in this request could not be found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/rating",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "rating"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:27.000Z",
+                          "updatedAt": "2026-10-22T01:25:27.000Z",
+                          "uid": "35240-e44da80c-fad0-4335-9493-d70c83422d0a"
+                        },
+                        {
+                          "id": "2a463163-cb98-4c32-be52-0767bd03bb50",
+                          "name": "Internal failure during request processing",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/conversations/:conversationId/rating",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "conversations",
+                                ":conversationId",
+                                "rating"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "conversationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:25:27.000Z",
+                          "updatedAt": "2026-10-22T01:25:27.000Z",
+                          "uid": "35240-2a463163-cb98-4c32-be52-0767bd03bb50"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:25:27.000Z",
+                      "updatedAt": "2026-10-22T01:25:27.000Z",
+                      "uid": "35240-f781b618-ad3e-4108-8b7a-74f4b8f8695c"
+                    }
+                  ],
+                  "id": "7d4c2a4a-8d9e-451f-b3f5-a3ce5e274662",
+                  "createdAt": "2026-10-22T01:25:27.000Z",
+                  "updatedAt": "2026-10-22T01:25:27.000Z",
+                  "uid": "35240-7d4c2a4a-8d9e-451f-b3f5-a3ce5e274662"
                 }
               ],
-              "body": "{\n  \"data\": {\n    \"ratingId\": \"33cf4e5e-9ce9-461c-b668-be9b712b717c\",\n    \"userId\": \"4c5f7efa-0822-4b75-bdf5-907fa7336e0c\",\n    \"ratingResult\": {\n      \"value\": 5,\n      \"_type\": \"Csat\"\n    },\n    \"comment\": \"Excellent customer service!\",\n    \"submittedAt\": \"2024-03-11T16:39:30Z\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "84149c7b-1ceb-4f96-b9ec-b3af075e945a",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings",
-                    ":ratingId",
-                    "submit"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ratingId",
-                      "description": "(Required) The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"userId\": \"d3cf6f15-1497-4e71-92f2-9b3b228352bd\",\n  \"ratingResult\": {\n    \"value\": 4,\n    \"_type\": \"Csat\"\n  },\n  \"comment\": \"Best customer service ever!\",\n  \"submittedAt\": \"2024-03-11T16:39:30Z\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "06a62caa-803b-40a8-8f7d-2660791f2360",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings",
-                    ":ratingId",
-                    "submit"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ratingId",
-                      "description": "(Required) The ratingId parameter has to be the ID of the offer created via invoking the /conversations/{conversationId}/ratings/offer endpoint."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"userId\": \"d3cf6f15-1497-4e71-92f2-9b3b228352bd\",\n  \"ratingResult\": {\n    \"value\": 4,\n    \"_type\": \"Csat\"\n  },\n  \"comment\": \"Best customer service ever!\",\n  \"submittedAt\": \"2024-03-11T16:39:30Z\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "69711265-9290-49e7-bb87-f086f67d6cfd",
+              "createdAt": "2026-10-22T01:25:27.000Z",
+              "updatedAt": "2026-10-22T01:25:27.000Z",
+              "uid": "35240-69711265-9290-49e7-bb87-f086f67d6cfd"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7f65c57e-5cba-48bc-ab7c-5db948a8ef82",
-          "name": "Create conversation rating offer",
-          "request": {
-            "name": "Create conversation rating offer",
-            "description": {
-              "content": "Create a rating offer for a specific conversation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "conversations",
-                ":conversationId",
-                "ratings",
-                "offer"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<long>",
-                  "key": "conversationId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ratingType\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"agentId\": \"<string>\",\n  \"offeredAt\": \"<dateTime>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "33046b2a-25c5-4923-bb4f-e0c48d5cfc55",
-              "name": "The created conversation rating offer",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings",
-                    "offer"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"userId\": \"b0323b42-c428-4afa-970e-20bf5bdeeec4\",\n  \"agentId\": \"eeb3bbe5-0355-4ac1-8af5-20d42a3db24b\",\n  \"ratingType\": \"Csat\",\n  \"offeredAt\": \"2024-03-11T16:39:30Z\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": \"2f0122db-0824-44d7-b39a-e1f722b8c38c\",\n    \"userId\": \"7a65c963-b3ca-4bd4-996e-bdbcaa620219\",\n    \"agentId\": \"db7f0b41-b779-4726-a673-07b2a59a550d\",\n    \"ratingType\": \"Csat\",\n    \"offeredAt\": \"2024-03-11T16:39:30Z\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "310f7efa-5123-4c31-b47a-8e7fd659157a",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings",
-                    "offer"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"userId\": \"b0323b42-c428-4afa-970e-20bf5bdeeec4\",\n  \"agentId\": \"eeb3bbe5-0355-4ac1-8af5-20d42a3db24b\",\n  \"ratingType\": \"Csat\",\n  \"offeredAt\": \"2024-03-11T16:39:30Z\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Decoding failure in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e1f03cfc-25a1-45e9-b71a-51b9fdb73884",
-              "name": "An entity in this request could not be found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings",
-                    "offer"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"userId\": \"b0323b42-c428-4afa-970e-20bf5bdeeec4\",\n  \"agentId\": \"eeb3bbe5-0355-4ac1-8af5-20d42a3db24b\",\n  \"ratingType\": \"Csat\",\n  \"offeredAt\": \"2024-03-11T16:39:30Z\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5ca54430-abe7-4dc0-863f-38bef644127c",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings",
-                    "offer"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"userId\": \"b0323b42-c428-4afa-970e-20bf5bdeeec4\",\n  \"agentId\": \"eeb3bbe5-0355-4ac1-8af5-20d42a3db24b\",\n  \"ratingType\": \"Csat\",\n  \"offeredAt\": \"2024-03-11T16:39:30Z\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "251f5679-b725-4c27-acdb-7e654278ef2a",
-          "name": "List rating",
-          "request": {
-            "name": "List rating",
-            "description": {
-              "content": "Deprecated rating endpoint. Use '/ratings'.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "conversations",
-                ":conversationId",
-                "rating"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<long>",
-                  "key": "conversationId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "fe36850f-2e24-44a6-92de-1096a4fd5555",
-              "name": "List of ratings for a conversation",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "rating"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"33cf4e5e-9ce9-461c-b668-be9b712b717c\",\n      \"ratingScore\": 4,\n      \"ratingType\": \"Csat\",\n      \"ratingComment\": \"Super good!\",\n      \"conversationChannel\": \"PstnPhone\",\n      \"agentId\": \"a53b25da-f676-4c52-acac-58c9280aa23d\",\n      \"userId\": \"6d0c5791-e40a-46d4-bba1-1364ce4578ed\",\n      \"ratingStatus\": \"Offered\",\n      \"language\": \"English\",\n      \"timestamps\": {}\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "951fa216-c1d6-455e-b500-43f1b801ac51",
-              "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "rating"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4c7c57c6-5a32-42d0-8721-16ad9bd4972c",
-              "name": "An entity in this request could not be found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "rating"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2df3df0b-44b7-49cc-ab61-97167c7f231d",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "rating"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e1b23a3c-4361-4cc2-a24c-d2dde623ab8d",
-          "name": "List ratings for a conversation",
-          "request": {
-            "name": "List ratings for a conversation",
-            "description": {
-              "content": "Lists latest ratings statuses for a particular conversation by providing the conversation ID. For surveys with multiple questions, rating status will be reported for each individual question of the survey. For example, a response for a 3 question survey that was answered will be 3 elements with status \"Rated\". Additionally, a multiple question survey can be partially answered, therefore a response of such case will be a mix of \"Offered\" and \"Rated\" statuses. Note that the IDs of multiple questions response elements will be the same, because they are part of the same survey.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "conversations",
-                ":conversationId",
-                "ratings"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<long>",
-                  "key": "conversationId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "8d3f8ffd-6fde-4eb9-9601-bcc4c7ab5875",
-              "name": "List of ratings for a conversation",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"33cf4e5e-9ce9-461c-b668-be9b712b717c\",\n      \"ratingScore\": 5,\n      \"ratingType\": \"Csat\",\n      \"ratingComment\": \"Super good!\",\n      \"conversationChannel\": \"PstnPhone\",\n      \"agentId\": \"a53b25da-f676-4c52-acac-58c9280aa23d\",\n      \"userId\": \"6d0c5791-e40a-46d4-bba1-1364ce4578ed\",\n      \"ratingStatus\": \"Offered\",\n      \"language\": \"en\",\n      \"timestamps\": {\n        \"offered_at\": \"2025-09-25T14:35:53Z\",\n        \"modified_at\": \"2025-09-25T14:36:27Z\",\n        \"scheduled_for\": \"2025-09-25T14:35:52Z\",\n        \"created_at\": \"2025-09-25T14:34:52Z\",\n        \"scheduled_at\": \"2025-09-25T14:34:52Z\"\n      }\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "38153bc5-9038-45e3-b537-20678d6e0e39",
-              "name": "Invalid value for: path parameter conversationId, Invalid value extracted from request context",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "21b5327d-b814-468e-bbb8-d43c420bae9f",
-              "name": "An entity in this request could not be found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9a912a96-e9d9-4812-ab34-b304024cc86f",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "conversations",
-                    ":conversationId",
-                    "ratings"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "conversationId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "aceeb72b-141d-47ab-ad7b-2cdb88676c1d",
+          "createdAt": "2026-10-22T01:25:27.000Z",
+          "updatedAt": "2026-10-22T01:25:27.000Z",
+          "uid": "35240-aceeb72b-141d-47ab-ad7b-2cdb88676c1d"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://dev.dixa.io",
-      "key": "baseUrl"
+      "id": "591eac46-a323-4eef-8060-d2499140649f",
+      "createdAt": "2026-10-22T01:25:27.000Z",
+      "updatedAt": "2026-10-22T01:25:27.000Z",
+      "uid": "35240-591eac46-a323-4eef-8060-d2499140649f"
     }
   ],
   "auth": {
@@ -1140,25 +1159,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "302da4f1-484a-4e3c-9ee8-10d3beb4c538",
-    "name": "Dixa Agents Ratings API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://dev.dixa.io"
     }
-  }
+  ]
 }

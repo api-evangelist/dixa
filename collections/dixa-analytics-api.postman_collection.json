@@ -1,1569 +1,1625 @@
 {
+  "info": {
+    "_postman_id": "1ca24884-5a1c-4b0c-9bad-c981cc408120",
+    "name": "Dixa Analytics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:24:13.000Z",
+    "updatedAt": "2026-10-22T01:24:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1ca24884-5a1c-4b0c-9bad-c981cc408120"
+  },
   "item": [
     {
-      "id": "fc8f4c8c-bafa-49bb-9412-a07bb6abc7d3",
-      "name": "Analytics",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "beta",
       "item": [
         {
-          "id": "7204a9cf-b50e-4891-9b1c-d8ba6f9160b8",
-          "name": "Metrics Catalogue",
-          "request": {
-            "name": "Metrics Catalogue",
-            "description": {
-              "content": "This endpoint lists all available metric IDs that can be used to fetch data in Get Metric Data",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "analytics",
-                "metrics"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "pageLimit",
-                  "value": "<integer>",
-                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
-                },
-                {
-                  "disabled": false,
-                  "key": "pageKey",
-                  "value": "<string>",
-                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "analytics",
+          "item": [
             {
-              "id": "1d3c7c92-673c-4543-91f9-549b80ff5d9a",
-              "name": "The catalogue of metrics",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+              "name": "metrics",
+              "item": [
+                {
+                  "name": "{metricId}",
+                  "item": [
                     {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
+                      "name": "Metric Description",
+                      "id": "cc2b414c-3733-4193-a829-b1e3554f31b1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/metrics/:metricId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "metrics",
+                            ":metricId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "bf324ab6-a4a6-45a8-ad49-1c328e732224",
+                              "key": "metricId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "This endpoint lists all available properties of a metric to use for querying its data"
+                      },
+                      "response": [
+                        {
+                          "id": "21e6c820-dd23-47d8-9b4e-4a22adffa8ed",
+                          "name": "The metric properties",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/analytics/metrics/:metricId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "analytics",
+                                "metrics",
+                                ":metricId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "metricId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"description\": \"<string>\",\n    \"filters\": [\n      {\n        \"filterAttribute\": \"<string>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"filterAttribute\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"aggregations\": [\n      {\n        \"measure\": \"<string>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"measure\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"relatedRecordIds\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-10-22T01:24:14.000Z",
+                          "updatedAt": "2026-10-22T01:24:14.000Z",
+                          "uid": "35240-21e6c820-dd23-47d8-9b4e-4a22adffa8ed"
+                        },
+                        {
+                          "id": "4a24d27a-0521-4f8e-961f-e7c17cbe659d",
+                          "name": "Invalid value extracted from request context",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/analytics/metrics/:metricId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "analytics",
+                                "metrics",
+                                ":metricId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "metricId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:14.000Z",
+                          "updatedAt": "2026-10-22T01:24:14.000Z",
+                          "uid": "35240-4a24d27a-0521-4f8e-961f-e7c17cbe659d"
+                        },
+                        {
+                          "id": "f01751bc-f905-47fb-8e3d-ddd0b69212c7",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/analytics/metrics/:metricId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "analytics",
+                                "metrics",
+                                ":metricId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "metricId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:14.000Z",
+                          "updatedAt": "2026-10-22T01:24:14.000Z",
+                          "uid": "35240-f01751bc-f905-47fb-8e3d-ddd0b69212c7"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-cc2b414c-3733-4193-a829-b1e3554f31b1"
                     }
                   ],
-                  "variable": []
+                  "id": "cdd0130a-393e-41a7-b052-7a07751fbb27",
+                  "createdAt": "2026-10-22T01:24:14.000Z",
+                  "updatedAt": "2026-10-22T01:24:14.000Z",
+                  "uid": "35240-cdd0130a-393e-41a7-b052-7a07751fbb27"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"csat\",\n      \"description\": \"(Number of satisfied customers (4 and 5)/ Number of survey responses) x 100 = % of satisfied customers\",\n      \"filters\": [\n        {\n          \"filterAttribute\": \"agent_id\",\n          \"description\": \"Used to filter by the agent_id\"\n        },\n        {\n          \"filterAttribute\": \"queue_id\",\n          \"description\": \"Used to filter by the queue_id\"\n        },\n        {\n          \"filterAttribute\": \"channel\",\n          \"description\": \"Used to filter by the channel\"\n        },\n        {\n          \"filterAttribute\": \"initial_direction\",\n          \"description\": \"Used to filter by the initial_direction\"\n        },\n        {\n          \"filterAttribute\": \"tag_id\",\n          \"description\": \"Used to filter by the tag_id\"\n        },\n        {\n          \"filterAttribute\": \"contact_point\",\n          \"description\": \"Used to filter by the contact_point\"\n        }\n      ],\n      \"aggregations\": [\n        {\n          \"measure\": \"Percentage\",\n          \"description\": \"Calculated Percentage\"\n        }\n      ],\n      \"relatedRecordIds\": [\n        \"ratings\"\n      ]\n    },\n    {\n      \"id\": \"closed_conversations\",\n      \"description\": \"Closed conversation data\",\n      \"filters\": [\n        {\n          \"filterAttribute\": \"queue_id\",\n          \"description\": \"Used to filter by the queue_id\"\n        },\n        {\n          \"filterAttribute\": \"channel\",\n          \"description\": \"Used to filter by the channel\"\n        },\n        {\n          \"filterAttribute\": \"initial_direction\",\n          \"description\": \"Used to filter by the initial_direction\"\n        },\n        {\n          \"filterAttribute\": \"tag_id\",\n          \"description\": \"Used to filter by the tag_id\"\n        },\n        {\n          \"filterAttribute\": \"contact_point\",\n          \"description\": \"Used to filter by the contact_point\"\n        }\n      ],\n      \"aggregations\": [\n        {\n          \"measure\": \"Count\",\n          \"description\": \"Conversation closed count\"\n        }\n      ],\n      \"relatedRecordIds\": [\n        \"closed_conversations\"\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "69ab74eb-e1c3-4b32-8aff-675f4fd9f34a",
-              "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "name": "Metrics Catalogue",
+                  "id": "518f74de-a1c0-4940-b4ea-d4723b64a72b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/analytics/metrics?pageLimit=<integer>&pageKey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "analytics",
+                        "metrics"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                          "key": "pageLimit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                          "key": "pageKey",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "This endpoint lists all available metric IDs that can be used to fetch data in Get Metric Data"
+                  },
+                  "response": [
                     {
-                      "key": "pageLimit",
-                      "value": "<integer>"
+                      "id": "6fd7220c-610f-4e8f-ad62-cc7daaf6fcab",
+                      "name": "The catalogue of metrics",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/metrics?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "metrics"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"description\": \"<string>\",\n      \"filters\": [\n        {\n          \"filterAttribute\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"filterAttribute\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"aggregations\": [\n        {\n          \"measure\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"measure\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"relatedRecordIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"description\": \"<string>\",\n      \"filters\": [\n        {\n          \"filterAttribute\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"filterAttribute\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"aggregations\": [\n        {\n          \"measure\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"measure\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"relatedRecordIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"meta\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-6fd7220c-610f-4e8f-ad62-cc7daaf6fcab"
                     },
                     {
-                      "key": "pageKey",
-                      "value": "<string>"
+                      "id": "612ef39f-ac91-45ae-8c7c-2a5e4856f271",
+                      "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/metrics?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "metrics"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-612ef39f-ac91-45ae-8c7c-2a5e4856f271"
+                    },
+                    {
+                      "id": "33a85810-29a2-447f-811c-e71d40a56e04",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/metrics?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "metrics"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-33a85810-29a2-447f-811c-e71d40a56e04"
                     }
                   ],
-                  "variable": []
+                  "createdAt": "2026-10-22T01:24:14.000Z",
+                  "updatedAt": "2026-10-22T01:24:14.000Z",
+                  "uid": "35240-518f74de-a1c0-4940-b4ea-d4723b64a72b"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "11a1d513-2b13-4563-a6da-59781a231c75",
-              "name": "Internal Server Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "name": "Get Metric Data",
+                  "id": "a6b695a1-f815-4c04-a23d-d27905b62626",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"csidFilter\": [\n    \"<long>\"\n  ],\n  \"filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"aggregations\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/analytics/metrics",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "analytics",
+                        "metrics"
+                      ]
+                    },
+                    "description": "Get data of a specific metric (aggregated)"
+                  },
+                  "response": [
                     {
-                      "key": "pageLimit",
-                      "value": "<integer>"
+                      "id": "834e9966-d70f-4313-b9b4-bbfff9b5d48f",
+                      "name": "The metric data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"csidFilter\": [\n    \"<long>\"\n  ],\n  \"filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"aggregations\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/metrics",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "metrics"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"aggregates\": [\n      {\n        \"value\": [\n          {\n            \"value\": \"<double>\",\n            \"status\": {\n              \"status\": \"<string>\",\n              \"description\": \"<string>\"\n            }\n          },\n          {\n            \"value\": \"<double>\",\n            \"status\": {\n              \"status\": \"<string>\",\n              \"description\": \"<string>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\"\n      },\n      {\n        \"value\": [\n          {\n            \"value\": \"<double>\",\n            \"status\": {\n              \"status\": \"<string>\",\n              \"description\": \"<string>\"\n            }\n          },\n          {\n            \"value\": \"<double>\",\n            \"status\": {\n              \"status\": \"<string>\",\n              \"description\": \"<string>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-834e9966-d70f-4313-b9b4-bbfff9b5d48f"
                     },
                     {
-                      "key": "pageKey",
-                      "value": "<string>"
+                      "id": "3b19d030-8f5a-49f0-8b3a-9b72ea643370",
+                      "name": "Invalid value extracted from request context, Invalid value for: body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"csidFilter\": [\n    \"<long>\"\n  ],\n  \"filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"aggregations\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/metrics",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "metrics"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-3b19d030-8f5a-49f0-8b3a-9b72ea643370"
+                    },
+                    {
+                      "id": "f4a8adf6-d3ad-4e99-87ae-7770ce43f56c",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"csidFilter\": [\n    \"<long>\"\n  ],\n  \"filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"aggregations\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/metrics",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "metrics"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-f4a8adf6-d3ad-4e99-87ae-7770ce43f56c"
                     }
                   ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "createdAt": "2026-10-22T01:24:14.000Z",
+                  "updatedAt": "2026-10-22T01:24:14.000Z",
+                  "uid": "35240-a6b695a1-f815-4c04-a23d-d27905b62626"
                 }
               ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "e6cb95bd-ed49-45b2-bf46-0480012d1bf4",
+              "createdAt": "2026-10-22T01:24:14.000Z",
+              "updatedAt": "2026-10-22T01:24:14.000Z",
+              "uid": "35240-e6cb95bd-ed49-45b2-bf46-0480012d1bf4"
+            },
+            {
+              "name": "filter",
+              "item": [
+                {
+                  "name": "{filterAttribute}",
+                  "item": [
+                    {
+                      "name": "Filter values",
+                      "id": "cefbb3c4-ef13-49b1-ad4b-7f962d16a7a4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/filter/:filterAttribute?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "filter",
+                            ":filterAttribute"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "7965deae-813c-4b69-b710-8851cf89aef5",
+                              "key": "filterAttribute",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Get possible values to be used with a given filter attribute. Filter attributes are not metric or record specific, so one filter attribute can be used with multiple metrics/records. When a filter value is not relevant for a specific metric/record, it is simply ignored."
+                      },
+                      "response": [
+                        {
+                          "id": "3b6771b9-f8e3-4eb3-b81b-c2c72aa61851",
+                          "name": "The possible filter values to be used when fetching metrics or records",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/analytics/filter/:filterAttribute?pageLimit=<integer>&pageKey=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "analytics",
+                                "filter",
+                                ":filterAttribute"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                                  "key": "pageLimit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                                  "key": "pageKey",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "filterAttribute"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:24:14.000Z",
+                          "updatedAt": "2026-10-22T01:24:14.000Z",
+                          "uid": "35240-3b6771b9-f8e3-4eb3-b81b-c2c72aa61851"
+                        },
+                        {
+                          "id": "f7196383-5a79-430e-aac2-9599fc6078f6",
+                          "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/analytics/filter/:filterAttribute?pageLimit=<integer>&pageKey=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "analytics",
+                                "filter",
+                                ":filterAttribute"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                                  "key": "pageLimit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                                  "key": "pageKey",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "filterAttribute"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:14.000Z",
+                          "updatedAt": "2026-10-22T01:24:14.000Z",
+                          "uid": "35240-f7196383-5a79-430e-aac2-9599fc6078f6"
+                        },
+                        {
+                          "id": "feb4cf43-c56f-453c-adb1-2994a6126b62",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/analytics/filter/:filterAttribute?pageLimit=<integer>&pageKey=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "analytics",
+                                "filter",
+                                ":filterAttribute"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                                  "key": "pageLimit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                                  "key": "pageKey",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "filterAttribute"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:14.000Z",
+                          "updatedAt": "2026-10-22T01:24:14.000Z",
+                          "uid": "35240-feb4cf43-c56f-453c-adb1-2994a6126b62"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-cefbb3c4-ef13-49b1-ad4b-7f962d16a7a4"
+                    }
+                  ],
+                  "id": "aef10ff3-f468-4dac-b9d2-c59f8f6a54a2",
+                  "createdAt": "2026-10-22T01:24:14.000Z",
+                  "updatedAt": "2026-10-22T01:24:14.000Z",
+                  "uid": "35240-aef10ff3-f468-4dac-b9d2-c59f8f6a54a2"
+                }
+              ],
+              "id": "2606298f-c4f7-4ebb-87af-83d10f2295fc",
+              "createdAt": "2026-10-22T01:24:14.000Z",
+              "updatedAt": "2026-10-22T01:24:14.000Z",
+              "uid": "35240-2606298f-c4f7-4ebb-87af-83d10f2295fc"
+            },
+            {
+              "name": "records",
+              "item": [
+                {
+                  "name": "{recordId}",
+                  "item": [
+                    {
+                      "name": "Metric Record Description",
+                      "id": "d753abf0-e220-438e-ba40-ef3270ac9174",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/records/:recordId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "records",
+                            ":recordId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "abf610ac-a87b-45cb-ac5e-a95a380f1ed7",
+                              "key": "recordId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "This endpoint lists all available properties of a record to use for querying its data"
+                      },
+                      "response": [
+                        {
+                          "id": "c14aebba-a9a4-4b46-aea2-c4596929142d",
+                          "name": "The metric record properties",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/analytics/records/:recordId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "analytics",
+                                "records",
+                                ":recordId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recordId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"description\": \"<string>\",\n    \"filters\": [\n      {\n        \"filterAttribute\": \"<string>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"filterAttribute\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"relatedMetricIds\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"fieldsMetadata\": [\n      {\n        \"field\": \"<string>\",\n        \"description\": \"<string>\",\n        \"nullable\": \"<boolean>\"\n      },\n      {\n        \"field\": \"<string>\",\n        \"description\": \"<string>\",\n        \"nullable\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-10-22T01:24:14.000Z",
+                          "updatedAt": "2026-10-22T01:24:14.000Z",
+                          "uid": "35240-c14aebba-a9a4-4b46-aea2-c4596929142d"
+                        },
+                        {
+                          "id": "de7e6811-bbe8-4a78-b448-ed273b5a684b",
+                          "name": "Invalid value extracted from request context",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/analytics/records/:recordId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "analytics",
+                                "records",
+                                ":recordId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recordId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:14.000Z",
+                          "updatedAt": "2026-10-22T01:24:14.000Z",
+                          "uid": "35240-de7e6811-bbe8-4a78-b448-ed273b5a684b"
+                        },
+                        {
+                          "id": "b4f3793b-87f3-4fa2-ac55-732a977f321e",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/beta/analytics/records/:recordId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "beta",
+                                "analytics",
+                                "records",
+                                ":recordId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recordId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:24:14.000Z",
+                          "updatedAt": "2026-10-22T01:24:14.000Z",
+                          "uid": "35240-b4f3793b-87f3-4fa2-ac55-732a977f321e"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-d753abf0-e220-438e-ba40-ef3270ac9174"
+                    }
+                  ],
+                  "id": "86d271c9-eae4-4821-b871-8dcfd59cf5da",
+                  "createdAt": "2026-10-22T01:24:14.000Z",
+                  "updatedAt": "2026-10-22T01:24:14.000Z",
+                  "uid": "35240-86d271c9-eae4-4821-b871-8dcfd59cf5da"
+                },
+                {
+                  "name": "Metric Records Catalogue",
+                  "id": "79b60b15-f895-4190-87cd-5a8514fedd49",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/analytics/records?pageLimit=<integer>&pageKey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "analytics",
+                        "records"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                          "key": "pageLimit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                          "key": "pageKey",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "This endpoint lists all available record IDs that can be used to fetch data in Get Metric Records Data"
+                  },
+                  "response": [
+                    {
+                      "id": "2f3daa9d-1ded-4127-bd93-56840403580d",
+                      "name": "The catalogue of metric records",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/records?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "records"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"description\": \"<string>\",\n      \"filters\": [\n        {\n          \"filterAttribute\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"filterAttribute\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"relatedMetricIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"fieldsMetadata\": [\n        {\n          \"field\": \"<string>\",\n          \"description\": \"<string>\",\n          \"nullable\": \"<boolean>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"description\": \"<string>\",\n          \"nullable\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"description\": \"<string>\",\n      \"filters\": [\n        {\n          \"filterAttribute\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"filterAttribute\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"relatedMetricIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"fieldsMetadata\": [\n        {\n          \"field\": \"<string>\",\n          \"description\": \"<string>\",\n          \"nullable\": \"<boolean>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"description\": \"<string>\",\n          \"nullable\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"meta\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-2f3daa9d-1ded-4127-bd93-56840403580d"
+                    },
+                    {
+                      "id": "f8a13125-157a-4711-886f-412384fa1889",
+                      "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/records?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "records"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-f8a13125-157a-4711-886f-412384fa1889"
+                    },
+                    {
+                      "id": "4969b8fb-7fe4-4bd7-a99b-7abd0912307b",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/records?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "records"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-4969b8fb-7fe4-4bd7-a99b-7abd0912307b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:24:14.000Z",
+                  "updatedAt": "2026-10-22T01:24:14.000Z",
+                  "uid": "35240-79b60b15-f895-4190-87cd-5a8514fedd49"
+                },
+                {
+                  "name": "Get Metric Records Data",
+                  "id": "b4315d87-ccf5-41c8-8e90-5a2a881dc067",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"csidFilter\": [\n    \"<long>\"\n  ],\n  \"filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/analytics/records?pageLimit=<integer>&pageKey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "analytics",
+                        "records"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                          "key": "pageLimit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                          "key": "pageKey",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Get data of specific metric records (unaggregated)"
+                  },
+                  "response": [
+                    {
+                      "id": "c39a70d5-7727-4493-95c1-fc04c9477c3d",
+                      "name": "The metric records data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"csidFilter\": [\n    \"<long>\"\n  ],\n  \"filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/records?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "records"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"primaryTimestampField\": {\n        \"name\": \"<string>\",\n        \"timestamp\": \"<dateTime>\"\n      },\n      \"value\": {\n        \"value\": \"<boolean>\"\n      },\n      \"fields\": [\n        {\n          \"name\": \"<string>\",\n          \"field\": {\n            \"value\": \"<boolean>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"field\": {\n            \"value\": \"<boolean>\"\n          }\n        }\n      ]\n    },\n    {\n      \"primaryTimestampField\": {\n        \"name\": \"<string>\",\n        \"timestamp\": \"<dateTime>\"\n      },\n      \"value\": {\n        \"value\": \"<boolean>\"\n      },\n      \"fields\": [\n        {\n          \"name\": \"<string>\",\n          \"field\": {\n            \"value\": \"<boolean>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"field\": {\n            \"value\": \"<boolean>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"meta\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-c39a70d5-7727-4493-95c1-fc04c9477c3d"
+                    },
+                    {
+                      "id": "a08002c8-7c76-4bee-9dcd-5b08bb10b1c1",
+                      "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"csidFilter\": [\n    \"<long>\"\n  ],\n  \"filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/records?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "records"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-a08002c8-7c76-4bee-9dcd-5b08bb10b1c1"
+                    },
+                    {
+                      "id": "6bebe9d2-011d-4ebd-b60e-5debcf8e8ae2",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"csidFilter\": [\n    \"<long>\"\n  ],\n  \"filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/analytics/records?pageLimit=<integer>&pageKey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "analytics",
+                            "records"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                              "key": "pageLimit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                              "key": "pageKey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:24:14.000Z",
+                      "updatedAt": "2026-10-22T01:24:14.000Z",
+                      "uid": "35240-6bebe9d2-011d-4ebd-b60e-5debcf8e8ae2"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:24:14.000Z",
+                  "updatedAt": "2026-10-22T01:24:14.000Z",
+                  "uid": "35240-b4315d87-ccf5-41c8-8e90-5a2a881dc067"
+                }
+              ],
+              "id": "c32e0b15-4f4e-44b2-88df-556bb8b85490",
+              "createdAt": "2026-10-22T01:24:14.000Z",
+              "updatedAt": "2026-10-22T01:24:14.000Z",
+              "uid": "35240-c32e0b15-4f4e-44b2-88df-556bb8b85490"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "2fc3fa15-262a-4fc5-b381-cbd53548732e",
-          "name": "Get Metric Data",
-          "request": {
-            "name": "Get Metric Data",
-            "description": {
-              "content": "Get data of a specific metric (aggregated)",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "analytics",
-                "metrics"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"csidFilter\": [\n    \"<long>\"\n  ],\n  \"filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"aggregations\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "0fa23ff5-00bf-4639-af5d-f103b0209925",
-              "name": "The metric data",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": \"closed_conversations\",\n  \"periodFilter\": {\n    \"value\": {\n      \"_type\": \"PreviousWeek\"\n    },\n    \"_type\": \"Preset\"\n  },\n  \"filters\": [\n    {\n      \"attribute\": \"channel\",\n      \"values\": [\n        \"email\"\n      ]\n    }\n  ],\n  \"aggregations\": [\n    \"Count\"\n  ],\n  \"timezone\": \"Europe/Copenhagen\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": \"closed_conversations\",\n    \"aggregates\": [\n      {\n        \"value\": 42,\n        \"measure\": \"Count\",\n        \"_type\": \"LongAggregateValue\"\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4df78a74-3c19-467f-999c-2b2116a4d179",
-              "name": "Invalid value extracted from request context, Invalid value for: body",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": \"closed_conversations\",\n  \"periodFilter\": {\n    \"value\": {\n      \"_type\": \"PreviousWeek\"\n    },\n    \"_type\": \"Preset\"\n  },\n  \"filters\": [\n    {\n      \"attribute\": \"channel\",\n      \"values\": [\n        \"email\"\n      ]\n    }\n  ],\n  \"aggregations\": [\n    \"Count\"\n  ],\n  \"timezone\": \"Europe/Copenhagen\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "365afcc9-b326-4c92-ad85-3feccd33004f",
-              "name": "Internal Server Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": \"closed_conversations\",\n  \"periodFilter\": {\n    \"value\": {\n      \"_type\": \"PreviousWeek\"\n    },\n    \"_type\": \"Preset\"\n  },\n  \"filters\": [\n    {\n      \"attribute\": \"channel\",\n      \"values\": [\n        \"email\"\n      ]\n    }\n  ],\n  \"aggregations\": [\n    \"Count\"\n  ],\n  \"timezone\": \"Europe/Copenhagen\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "16a70f6b-5a95-4ec0-a1ea-2a817e513a09",
-          "name": "Metric Description",
-          "request": {
-            "name": "Metric Description",
-            "description": {
-              "content": "This endpoint lists all available properties of a metric to use for querying its data",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "analytics",
-                "metrics",
-                ":metricId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "metricId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "52eec8de-4186-4f46-93f9-de044894a190",
-              "name": "The metric properties",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "metrics",
-                    ":metricId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "metricId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": \"csat\",\n    \"description\": \"(Number of satisfied customers (4 and 5)/ Number of survey responses) x 100 = % of satisfied customers\",\n    \"filters\": [\n      {\n        \"filterAttribute\": \"agent_id\",\n        \"description\": \"Used to filter by the agent_id\"\n      },\n      {\n        \"filterAttribute\": \"queue_id\",\n        \"description\": \"Used to filter by the queue_id\"\n      },\n      {\n        \"filterAttribute\": \"channel\",\n        \"description\": \"Used to filter by the channel\"\n      },\n      {\n        \"filterAttribute\": \"initial_direction\",\n        \"description\": \"Used to filter by the initial_direction\"\n      },\n      {\n        \"filterAttribute\": \"tag_id\",\n        \"description\": \"Used to filter by the tag_id\"\n      },\n      {\n        \"filterAttribute\": \"contact_point\",\n        \"description\": \"Used to filter by the contact_point\"\n      }\n    ],\n    \"aggregations\": [\n      {\n        \"measure\": \"Percentage\",\n        \"description\": \"Calculated Percentage\"\n      }\n    ],\n    \"relatedRecordIds\": [\n      \"ratings\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b99487a0-4427-4e22-bff7-721186e87dd4",
-              "name": "Invalid value extracted from request context",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "metrics",
-                    ":metricId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "metricId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "26941257-7b8d-4113-9d9f-ed004e4fb0aa",
-              "name": "Internal Server Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "metrics",
-                    ":metricId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "metricId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b54f0e0d-ceea-482a-8fb7-82c545dd2c71",
-          "name": "Filter values",
-          "request": {
-            "name": "Filter values",
-            "description": {
-              "content": "Get possible values to be used with a given filter attribute. Filter attributes are not metric or record specific, so one filter attribute can be used with multiple metrics/records. When a filter value is not relevant for a specific metric/record, it is simply ignored.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "analytics",
-                "filter",
-                ":filterAttribute"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "pageLimit",
-                  "value": "<integer>",
-                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
-                },
-                {
-                  "disabled": false,
-                  "key": "pageKey",
-                  "value": "<string>",
-                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "filterAttribute",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "1d1c4416-4f6f-4818-8591-8009b6b104eb",
-              "name": "The possible filter values to be used when fetching metrics or records",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "filter",
-                    ":filterAttribute"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "filterAttribute",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"value\": \"CALLBACK\",\n      \"label\": \"Callback\"\n    },\n    {\n      \"value\": \"CONTACT_FORM\",\n      \"label\": \"Contact Form\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "53f26253-dbc1-4421-b332-025a876605d4",
-              "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "filter",
-                    ":filterAttribute"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "filterAttribute",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "708ea58b-bcfa-45d9-87e2-25013111ed46",
-              "name": "Internal Server Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "filter",
-                    ":filterAttribute"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "filterAttribute",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "acb6e2dc-33bf-4c87-8647-f4c811ac2756",
-          "name": "Metric Records Catalogue",
-          "request": {
-            "name": "Metric Records Catalogue",
-            "description": {
-              "content": "This endpoint lists all available record IDs that can be used to fetch data in Get Metric Records Data",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "analytics",
-                "records"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "pageLimit",
-                  "value": "<integer>",
-                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
-                },
-                {
-                  "disabled": false,
-                  "key": "pageKey",
-                  "value": "<string>",
-                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ffccd44c-a902-4f2c-ade4-1781d32e32ee",
-              "name": "The catalogue of metric records",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "records"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"ratings\",\n      \"description\": \"Conversation Ratings\",\n      \"filters\": [\n        {\n          \"filterAttribute\": \"agent_id\",\n          \"description\": \"Used to filter by the agent_id\"\n        },\n        {\n          \"filterAttribute\": \"queue_id\",\n          \"description\": \"Used to filter by the queue_id\"\n        },\n        {\n          \"filterAttribute\": \"channel\",\n          \"description\": \"Used to filter by the channel\"\n        },\n        {\n          \"filterAttribute\": \"initial_direction\",\n          \"description\": \"Used to filter by the initial_direction\"\n        },\n        {\n          \"filterAttribute\": \"tag_id\",\n          \"description\": \"Used to filter by the tag_id\"\n        },\n        {\n          \"filterAttribute\": \"contact_point\",\n          \"description\": \"Used to filter by the contact_point\"\n        }\n      ],\n      \"relatedMetricIds\": [\n        \"csat\"\n      ],\n      \"fieldsMetadata\": [\n        {\n          \"field\": \"conversation_id\",\n          \"description\": \"Conversation ID\",\n          \"nullable\": false\n        },\n        {\n          \"field\": \"agent_id\",\n          \"description\": \"The agent assigned to the conversation\",\n          \"nullable\": true\n        },\n        {\n          \"field\": \"queue_id\",\n          \"description\": \"The queue which the conversation was part of when the conversation was offered\",\n          \"nullable\": true\n        }\n      ]\n    },\n    {\n      \"id\": \"closed_conversations\",\n      \"description\": \"Closed conversation data\",\n      \"filters\": [\n        {\n          \"filterAttribute\": \"queue_id\",\n          \"description\": \"Used to filter by the queue_id\"\n        },\n        {\n          \"filterAttribute\": \"channel\",\n          \"description\": \"Used to filter by the channel\"\n        },\n        {\n          \"filterAttribute\": \"initial_direction\",\n          \"description\": \"Used to filter by the initial_direction\"\n        },\n        {\n          \"filterAttribute\": \"tag_id\",\n          \"description\": \"Used to filter by the tag_id\"\n        },\n        {\n          \"filterAttribute\": \"contact_point\",\n          \"description\": \"Used to filter by the contact_point\"\n        }\n      ],\n      \"relatedMetricIds\": [\n        \"closed_conversations\"\n      ],\n      \"fieldsMetadata\": [\n        {\n          \"field\": \"closed_at\",\n          \"description\": \"Timestamp of when the conversation was closed\",\n          \"nullable\": false\n        },\n        {\n          \"field\": \"conversation_id\",\n          \"description\": \"Conversation ID\",\n          \"nullable\": false\n        },\n        {\n          \"field\": \"agent_id\",\n          \"description\": \"The agent closing the conversation\",\n          \"nullable\": true\n        },\n        {\n          \"field\": \"queue_id\",\n          \"description\": \"The queue which the conversation was part of when the conversation was closed\",\n          \"nullable\": true\n        },\n        {\n          \"field\": \"closed_by\",\n          \"description\": \"User closing the conversation (Agent, Enduser or Unknown)\",\n          \"nullable\": false\n        }\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3948b32d-747a-4a35-83c1-aca215a7beef",
-              "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "records"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6e7cc94b-e721-4e3c-8534-199fe50d56bf",
-              "name": "Internal Server Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "records"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "acfb9129-64fa-4585-80aa-352b8cea0af8",
-          "name": "Get Metric Records Data",
-          "request": {
-            "name": "Get Metric Records Data",
-            "description": {
-              "content": "Get data of specific metric records (unaggregated)",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "analytics",
-                "records"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "pageLimit",
-                  "value": "<integer>",
-                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
-                },
-                {
-                  "disabled": false,
-                  "key": "pageKey",
-                  "value": "<string>",
-                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"csidFilter\": [\n    \"<long>\"\n  ],\n  \"filters\": [\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "cf1f1557-e055-4cae-9ded-9e13e111a292",
-              "name": "The metric records data",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "records"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": \"closed_conversations\",\n  \"periodFilter\": {\n    \"value\": {\n      \"_type\": \"PreviousWeek\"\n    },\n    \"_type\": \"Preset\"\n  },\n  \"filters\": [\n    {\n      \"attribute\": \"initial_direction\",\n      \"values\": [\n        \"INBOUND\"\n      ]\n    }\n  ],\n  \"timezone\": \"Europe/Copenhagen\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"primaryTimestampField\": {\n        \"name\": \"created_at\",\n        \"timestamp\": \"2023-04-21T10:23:14.293Z\"\n      },\n      \"fields\": [\n        {\n          \"name\": \"csid\",\n          \"field\": {\n            \"value\": 184472,\n            \"_type\": \"LongField\"\n          }\n        },\n        {\n          \"name\": \"initial_direction\",\n          \"field\": {\n            \"value\": \"INBOUND\",\n            \"label\": \"Inbound\",\n            \"_type\": \"StringField\"\n          }\n        },\n        {\n          \"name\": \"initial_channel\",\n          \"field\": {\n            \"value\": \"PSTN_PHONE\",\n            \"label\": \"Phone\",\n            \"_type\": \"StringField\"\n          }\n        },\n        {\n          \"name\": \"contact_point\",\n          \"field\": {\n            \"value\": \"+4511223344\",\n            \"label\": \"+4511223344\",\n            \"_type\": \"StringField\"\n          }\n        }\n      ]\n    },\n    {\n      \"primaryTimestampField\": {\n        \"name\": \"created_at\",\n        \"timestamp\": \"2023-04-21T10:24:04.259Z\"\n      },\n      \"fields\": [\n        {\n          \"name\": \"csid\",\n          \"field\": {\n            \"value\": 184473,\n            \"_type\": \"LongField\"\n          }\n        },\n        {\n          \"name\": \"initial_direction\",\n          \"field\": {\n            \"value\": \"INBOUND\",\n            \"label\": \"Inbound\",\n            \"_type\": \"StringField\"\n          }\n        },\n        {\n          \"name\": \"initial_channel\",\n          \"field\": {\n            \"value\": \"EMAIL\",\n            \"label\": \"Email\",\n            \"_type\": \"StringField\"\n          }\n        },\n        {\n          \"name\": \"contact_point\",\n          \"field\": {\n            \"value\": \"dixa@email.com\",\n            \"label\": \"dixa@email.com\",\n            \"_type\": \"StringField\"\n          }\n        }\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3ab9bb41-de84-4612-ba13-42ef164dd98b",
-              "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: body",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "records"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": \"closed_conversations\",\n  \"periodFilter\": {\n    \"value\": {\n      \"_type\": \"PreviousWeek\"\n    },\n    \"_type\": \"Preset\"\n  },\n  \"filters\": [\n    {\n      \"attribute\": \"initial_direction\",\n      \"values\": [\n        \"INBOUND\"\n      ]\n    }\n  ],\n  \"timezone\": \"Europe/Copenhagen\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4adb3eab-d2c5-47aa-ad7c-9e1ae44e6380",
-              "name": "Internal Server Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "records"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": \"closed_conversations\",\n  \"periodFilter\": {\n    \"value\": {\n      \"_type\": \"PreviousWeek\"\n    },\n    \"_type\": \"Preset\"\n  },\n  \"filters\": [\n    {\n      \"attribute\": \"initial_direction\",\n      \"values\": [\n        \"INBOUND\"\n      ]\n    }\n  ],\n  \"timezone\": \"Europe/Copenhagen\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8c3c6c08-3729-4d12-8f0c-85fc18876633",
-          "name": "Metric Record Description",
-          "request": {
-            "name": "Metric Record Description",
-            "description": {
-              "content": "This endpoint lists all available properties of a record to use for querying its data",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "analytics",
-                "records",
-                ":recordId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "recordId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "8aae1409-2e8a-4e7f-82ac-4c2d8ecaff9b",
-              "name": "The metric record properties",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "records",
-                    ":recordId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "recordId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": \"ratings\",\n    \"description\": \"Conversation Ratings\",\n    \"filters\": [\n      {\n        \"filterAttribute\": \"agent_id\",\n        \"description\": \"Used to filter by the agent_id\"\n      },\n      {\n        \"filterAttribute\": \"queue_id\",\n        \"description\": \"Used to filter by the queue_id\"\n      },\n      {\n        \"filterAttribute\": \"channel\",\n        \"description\": \"Used to filter by the channel\"\n      },\n      {\n        \"filterAttribute\": \"initial_direction\",\n        \"description\": \"Used to filter by the initial_direction\"\n      },\n      {\n        \"filterAttribute\": \"tag_id\",\n        \"description\": \"Used to filter by the tag_id\"\n      },\n      {\n        \"filterAttribute\": \"contact_point\",\n        \"description\": \"Used to filter by the contact_point\"\n      }\n    ],\n    \"relatedMetricIds\": [\n      \"csat\"\n    ],\n    \"fieldsMetadata\": [\n      {\n        \"field\": \"conversation_id\",\n        \"description\": \"Conversation ID\",\n        \"nullable\": false\n      },\n      {\n        \"field\": \"agent_id\",\n        \"description\": \"The agent assigned to the conversation\",\n        \"nullable\": true\n      },\n      {\n        \"field\": \"queue_id\",\n        \"description\": \"The queue which the conversation was part of when the conversation was offered\",\n        \"nullable\": true\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "30bcf84e-3cec-4339-bc23-6f92ac615a8c",
-              "name": "Invalid value extracted from request context",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "records",
-                    ":recordId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "recordId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "42340208-a057-495d-8409-a375fb4d1f32",
-              "name": "Internal Server Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "analytics",
-                    "records",
-                    ":recordId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "recordId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "efa89963-e845-43b8-af5d-8848e16b3c50",
+          "createdAt": "2026-10-22T01:24:14.000Z",
+          "updatedAt": "2026-10-22T01:24:14.000Z",
+          "uid": "35240-efa89963-e845-43b8-af5d-8848e16b3c50"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://dev.dixa.io",
-      "key": "baseUrl"
+      "id": "f407509a-d190-45cb-a89e-665ae797ee07",
+      "createdAt": "2026-10-22T01:24:14.000Z",
+      "updatedAt": "2026-10-22T01:24:14.000Z",
+      "uid": "35240-f407509a-d190-45cb-a89e-665ae797ee07"
     }
   ],
   "auth": {
@@ -1571,25 +1627,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "4e93bbb9-f740-4550-92e6-8687432bc531",
-    "name": "Dixa Agents Analytics API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://dev.dixa.io"
     }
-  }
+  ]
 }

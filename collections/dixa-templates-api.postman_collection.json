@@ -1,502 +1,497 @@
 {
+  "info": {
+    "_postman_id": "2c408ef5-1f09-437c-a338-717392f262d8",
+    "name": "Dixa Templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:25:44.000Z",
+    "updatedAt": "2026-10-22T01:25:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2c408ef5-1f09-437c-a338-717392f262d8"
+  },
   "item": [
     {
-      "id": "a413ecc6-8ff3-468f-9475-361c528da57d",
-      "name": "Templates",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "beta",
       "item": [
         {
-          "id": "d73fc141-fa1a-4ec7-8336-c5c7b2aabd22",
-          "name": "List templates",
-          "request": {
-            "name": "List templates",
-            "description": {
-              "content": "Lists all templates belonging to an organization.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "templates"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "pageLimit",
-                  "value": "<integer>",
-                  "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests."
-                },
-                {
-                  "disabled": false,
-                  "key": "pageKey",
-                  "value": "<string>",
-                  "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice."
-                },
-                {
-                  "disabled": false,
-                  "key": "type",
-                  "value": "<string>",
-                  "description": "Filter by template type"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "templates",
+          "item": [
             {
-              "id": "1d89ed3f-0760-4744-a7c3-5026b06b6cab",
-              "name": "The list of templates in an organization",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+              "name": "{templateId}",
+              "item": [
+                {
+                  "name": "Delete template",
+                  "id": "5004f231-a5b4-478b-9074-b1af114d673c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/templates/:templateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "templates",
+                        ":templateId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "81c20820-0cf1-4091-b5c2-cfd2fc08379c",
+                          "key": "templateId",
+                          "value": "<uuid>",
+                          "description": "(Required) The template id"
+                        }
+                      ]
+                    },
+                    "description": "Deletes the template. Please make sure the template is not used in flows and automations as this operation is irreversible."
+                  },
+                  "response": [
                     {
-                      "key": "pageLimit",
-                      "value": "<integer>"
+                      "id": "eafc071b-2518-4f6f-af76-881b6fc85c25",
+                      "name": "The template was successfully deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/templates/:templateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "templates",
+                            ":templateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:25:45.000Z",
+                      "updatedAt": "2026-10-22T01:25:45.000Z",
+                      "uid": "35240-eafc071b-2518-4f6f-af76-881b6fc85c25"
                     },
                     {
-                      "key": "pageKey",
-                      "value": "<string>"
+                      "id": "090df0d2-8137-4813-a137-3570337a1adf",
+                      "name": "Invalid value for: path parameter templateId, Invalid value extracted from request context",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/templates/:templateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "templates",
+                            ":templateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:25:45.000Z",
+                      "updatedAt": "2026-10-22T01:25:45.000Z",
+                      "uid": "35240-090df0d2-8137-4813-a137-3570337a1adf"
                     },
                     {
-                      "key": "type",
-                      "value": "QuickResponse"
+                      "id": "4950616a-df1e-489a-82f1-eeac96a8f5d7",
+                      "name": "An entity in this request could not be found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/templates/:templateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "templates",
+                            ":templateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:25:45.000Z",
+                      "updatedAt": "2026-10-22T01:25:45.000Z",
+                      "uid": "35240-4950616a-df1e-489a-82f1-eeac96a8f5d7"
+                    },
+                    {
+                      "id": "05907268-e397-42c4-b746-6f4e1b5b217b",
+                      "name": "Internal failure during request processing",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/beta/templates/:templateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "beta",
+                            "templates",
+                            ":templateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:25:45.000Z",
+                      "updatedAt": "2026-10-22T01:25:45.000Z",
+                      "uid": "35240-05907268-e397-42c4-b746-6f4e1b5b217b"
                     }
                   ],
-                  "variable": []
-                },
+                  "createdAt": "2026-10-22T01:25:45.000Z",
+                  "updatedAt": "2026-10-22T01:25:45.000Z",
+                  "uid": "35240-5004f231-a5b4-478b-9074-b1af114d673c"
+                }
+              ],
+              "id": "9ae4165d-02e9-4316-8b7f-fe198a79f942",
+              "createdAt": "2026-10-22T01:25:45.000Z",
+              "updatedAt": "2026-10-22T01:25:45.000Z",
+              "uid": "35240-9ae4165d-02e9-4316-8b7f-fe198a79f942"
+            },
+            {
+              "name": "List templates",
+              "id": "1ef87ee7-e0e4-40a4-af88-70713f6df9d6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"f8e20c27-c63c-4877-b95a-09a367660578\",\n      \"name\": \"30-days return policyy\",\n      \"content\": \"Hi {{requester_firstname}},\\n\\nWhen you shop at Company Name we offer a 30 day no-hassle return policy\\n\\nYou're welcome!!!!\\n\\n{{csid}}\\n\\nregards,\\n{{agent_firstname}}\",\n      \"createdBy\": \"80466b45-2de8-4693-a62e-6ebacaac58d0\",\n      \"createdAt\": \"2017-09-27T14:27:54.371+00:00\",\n      \"lastEditedBy\": \"5e8e95e3-60d3-4350-b6d7-b750728af080\",\n      \"lastEditedAt\": \"2024-06-21T11:43:29.877+00:00\",\n      \"translations\": [\n        {\n          \"locale\": \"da\",\n          \"content\": \"Hej {{requester_firstname}},\\n\\nNår du handler hos Company Name, tilbyder vi en 30 dages returpolitik uden besvær\\n\\nDu er velkommen!!!!\\n\\n{{csid}}\\n\\nvenlig hilsen,\\n{{agent_firstname}}\",\n          \"isDeactivated\": false,\n          \"subject\": \"30-dages returpolitik hos Company Name csid:{{csid}} agent_firstname:{{agent_firstname}} requester_firstname:{{requester_firstname}}\"\n        },\n        {\n          \"locale\": \"de-AT\",\n          \"content\": \"Hallo {{requester_firstname}},\\n\\nWenn Sie bei Company Name einkaufen, bieten wir Ihnen ein 30-tägiges Rückgaberecht ohne Aufwand\\n\\nWillkommen!!!!\\n\\n{{csid}}\\n\\nmit freundlichen Grüßen,\\n{{agent_firstname}}\",\n          \"isDeactivated\": false,\n          \"subject\": \"30-Tage-Rückgaberecht bei Company Name csid:{{csid}} agent_firstname:{{agent_firstname}} requester_firstname:{{requester_firstname}}\"\n        },\n        {\n          \"locale\": \"uz-Arab-AF\",\n          \"content\": \"ياخشى {{requester_firstname}},\\\\n\\\\nسزنىڭ دوكانىمىزدا سودا قلگانىڭىز ئۈچۈن، 30 كۇنلىك قىينىقسىز قايتارىش سىياسىتى تەقدىم قىلامىز\\\\n\\\\nخۇش كەپسىز!!!!\\\\n\\\\n{{csid}}\\\\n\\\\nھۆرمەت بىلەن,\\\\n{{agent_firstname}}\",\n          \"isDeactivated\": false,\n          \"subject\": \"30-روزه قايتارىش سىياسىتى بۇلادى Company Name csid:{{csid}} agent_firstname:{{agent_firstname}} requester_firstname:{{requester_firstname}}\"\n        }\n      ],\n      \"subject\": \"30-days return policy at Company Name csid:{{csid}} agent_firstname:{{agent_firstname}} requester_firstname:{{requester_firstname}}\",\n      \"_type\": \"QuickResponse\"\n    },\n    {\n      \"id\": \"08ee5fe1-11c8-4365-87c8-70da0ffd6fb4\",\n      \"name\": \"Welcome message\",\n      \"content\": \"Hi {{requester_firstname}},\\n\\nWelcome to Company Name! We're excited to have you as a customer\\n\\n{{csid}}\\n\\nBest,\\n{{agent_firstname}}\",\n      \"createdBy\": \"80466b45-2de8-4693-a62e-6ebacaac58d0\",\n      \"createdAt\": \"2017-09-27T14:27:54.371+00:00\",\n      \"_type\": \"EmailAutoReply\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "788428b6-c8d4-46f5-9282-cef35dd71200",
-              "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: query parameter type",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/beta/templates?pageLimit=<integer>&pageKey=<string>&type=EmailAutoReply",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "beta",
                     "templates"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
                       "key": "pageLimit",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
                       "key": "pageKey",
                       "value": "<string>"
                     },
                     {
+                      "description": "Filter by template type",
                       "key": "type",
-                      "value": "QuickResponse"
+                      "value": "EmailAutoReply"
+                    }
+                  ]
+                },
+                "description": "Lists all templates belonging to an organization."
+              },
+              "response": [
+                {
+                  "id": "c24a559b-7fff-48d1-8e64-082949fc128d",
+                  "name": "The list of templates in an organization",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/templates?pageLimit=<integer>&pageKey=<string>&type=EmailAutoReply",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "templates"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                          "key": "pageLimit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                          "key": "pageKey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by template type",
+                          "key": "type",
+                          "value": "EmailAutoReply"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"content\": \"<string>\",\n      \"createdBy\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"lastEditedBy\": \"<string>\",\n      \"lastEditedAt\": \"<string>\",\n      \"translations\": [\n        {\n          \"locale\": \"<string>\",\n          \"content\": \"<string>\",\n          \"isDeactivated\": \"<boolean>\",\n          \"subject\": \"<string>\"\n        },\n        {\n          \"locale\": \"<string>\",\n          \"content\": \"<string>\",\n          \"isDeactivated\": \"<boolean>\",\n          \"subject\": \"<string>\"\n        }\n      ],\n      \"subject\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"content\": \"<string>\",\n      \"createdBy\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"lastEditedBy\": \"<string>\",\n      \"lastEditedAt\": \"<string>\",\n      \"translations\": [\n        {\n          \"locale\": \"<string>\",\n          \"content\": \"<string>\",\n          \"isDeactivated\": \"<boolean>\",\n          \"subject\": \"<string>\"\n        },\n        {\n          \"locale\": \"<string>\",\n          \"content\": \"<string>\",\n          \"isDeactivated\": \"<boolean>\",\n          \"subject\": \"<string>\"\n        }\n      ],\n      \"subject\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"previous\": \"<string>\",\n    \"next\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:25:45.000Z",
+                  "updatedAt": "2026-10-22T01:25:45.000Z",
+                  "uid": "35240-c24a559b-7fff-48d1-8e64-082949fc128d"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6153ac7f-d586-4067-8b84-ce24bff9d5ee",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "edc12df7-f32d-41f2-9c12-0106948a53ca",
+                  "name": "Invalid value extracted from request context, Invalid value for: query parameter pageLimit, Invalid value for: query parameter pageKey, Invalid value for: query parameter type",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/templates?pageLimit=<integer>&pageKey=<string>&type=EmailAutoReply",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "templates"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                          "key": "pageLimit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                          "key": "pageKey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by template type",
+                          "key": "type",
+                          "value": "EmailAutoReply"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "pageLimit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageKey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "type",
-                      "value": "QuickResponse"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:25:45.000Z",
+                  "updatedAt": "2026-10-22T01:25:45.000Z",
+                  "uid": "35240-edc12df7-f32d-41f2-9c12-0106948a53ca"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "84bbbcc5-cc9e-4c19-b4c4-695e8388d237",
+                  "name": "Internal failure during request processing",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/beta/templates?pageLimit=<integer>&pageKey=<string>&type=EmailAutoReply",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "beta",
+                        "templates"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results per page. May be used in combination with pageKey to change the number of results in between page requests.",
+                          "key": "pageLimit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Base64 encoded form of pagination query parameters. Do not try to construct or change programmatically as the internal structure may change without notice.",
+                          "key": "pageKey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by template type",
+                          "key": "type",
+                          "value": "EmailAutoReply"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T01:25:45.000Z",
+                  "updatedAt": "2026-10-22T01:25:45.000Z",
+                  "uid": "35240-84bbbcc5-cc9e-4c19-b4c4-695e8388d237"
                 }
               ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:25:45.000Z",
+              "updatedAt": "2026-10-22T01:25:45.000Z",
+              "uid": "35240-1ef87ee7-e0e4-40a4-af88-70713f6df9d6"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "bfc5c729-624d-4f19-8d43-44b7c7319205",
-          "name": "Delete template",
-          "request": {
-            "name": "Delete template",
-            "description": {
-              "content": "Deletes the template. Please make sure the template is not used in flows and automations as this operation is irreversible.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "beta",
-                "templates",
-                ":templateId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "templateId",
-                  "description": "(Required) The template id"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ca691b63-d846-4bd4-8298-c9f313d629b4",
-              "name": "The template was successfully deleted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "templates",
-                    ":templateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "templateId",
-                      "description": "(Required) The template id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "a332f4a7-1458-4b50-a2a9-1758ce50bad0",
-              "name": "Invalid value for: path parameter templateId, Invalid value extracted from request context",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "templates",
-                    ":templateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "templateId",
-                      "description": "(Required) The template id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"Invalid value in request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "076b7f92-3e2f-4f0a-95a3-ab9c435d2989",
-              "name": "An entity in this request could not be found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "templates",
-                    ":templateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "templateId",
-                      "description": "(Required) The template id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"The requested resource could not be found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ab294a87-b489-4bdb-8051-7b1a38b2fc70",
-              "name": "Internal failure during request processing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "beta",
-                    "templates",
-                    ":templateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "templateId",
-                      "description": "(Required) The template id"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"There was an internal server error while processing the request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "7ae3691c-8d46-4d23-b7ad-655a5ddd744b",
+          "createdAt": "2026-10-22T01:25:45.000Z",
+          "updatedAt": "2026-10-22T01:25:45.000Z",
+          "uid": "35240-7ae3691c-8d46-4d23-b7ad-655a5ddd744b"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://dev.dixa.io",
-      "key": "baseUrl"
+      "id": "2f450523-c4b3-422e-963b-af9eddc764a1",
+      "createdAt": "2026-10-22T01:25:45.000Z",
+      "updatedAt": "2026-10-22T01:25:45.000Z",
+      "uid": "35240-2f450523-c4b3-422e-963b-af9eddc764a1"
     }
   ],
   "auth": {
@@ -504,25 +499,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "50d2f1fb-8170-4120-9b25-a6630e2b0b2d",
-    "name": "Dixa Agents Templates API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://dev.dixa.io"
     }
-  }
+  ]
 }
